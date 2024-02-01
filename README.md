@@ -5,8 +5,9 @@ Members:
 - Pedro Limeres Granado -> uo282763@uniovi.es
 - Alberto Guerra Rodas -> UO282421@uniovi.es
 - Ángel Macías Rodríguez -> uo289362@uniovi.es
-- Rita Fernández-Catuxo Ortiz -> uo284185@univoi.es
+- Rita Fernández-Catuxo Ortiz -> uo284185@uniovi.es
 - Vira Terletska -> viraterletska2005@gmail.com
+- Sergio Llenderrozos Piñera -> uo283367@uniovi.es
 
 [![Deploy on release](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
