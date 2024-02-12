@@ -105,6 +105,7 @@ Important Interfaces::
 | **Name** | **Description**
 | Frontend <-> User Management  | This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.
 | Question Generator <-> Frontend | This interface defines how the Question Generator Service delivers processed questions to the frontend for display.
+| Question Generator <-> Wikidata API | This interface represents the service fetching data from the Wikidata API.
 |===
 
 
