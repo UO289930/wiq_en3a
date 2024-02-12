@@ -29,6 +29,10 @@ In a microservices architecture, each service typically represents a specific bu
 
 === Team Organization
 
+For developing this project we are using Github as the control version systems. 
+The master branch contains the final version of the product, so that every accepted pull request to master branch will be considered as a new release.
+The production branch contains the work in production right now, from where everybody should create their own branch for their specific code development. 
+
 * *Documentation*: it must be always updated for making our work valuable and consistent.
 * *Weekly meetings*: Weekly discussions about what has been done and what needs to be done will be key for our team success. 
 * *Github*: this control version systems not only allows us to share and collabortively write code, but also provides other resources such as issues and project management (kanban board) tools for organizing the work to be done. Also, wiki section allows us to save all of our minutes from each scheduled meeting.
