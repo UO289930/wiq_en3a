@@ -34,9 +34,7 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 |===
 |Term |Definition
 
-|<Term-1>
-|<definition-1>
+|API (Application programming interface)
+|Set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications can use to request and exchange information. They enable developers to access the functionality of other software components or services without having to understand their internal workings. APIs are commonly used to integrate third-party services, access data from remote servers, and build modular and interoperable software systems.
 
-|<Term-2>
-|<definition-2>
 |===
