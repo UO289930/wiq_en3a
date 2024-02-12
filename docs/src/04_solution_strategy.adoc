@@ -37,6 +37,6 @@ The production branch contains the work in production right now, from where ever
 * *Weekly meetings*: Weekly discussions about what has been done and what needs to be done will be key for our team success. 
 * *Github*: this control version systems not only allows us to share and collabortively write code, but also provides other resources such as issues and project management (kanban board) tools for organizing the work to be done. Also, wiki section allows us to save all of our minutes from each scheduled meeting.
 * *Whatsapp*: will allow us to be in constant communication for helping each other out whenever needed. 
-* *Discord*: useful for making unofficial meetings and making decisions whenever is imopssible for all of us to be present in an specific place.
+* *Discord*: useful for making unofficial meetings and making decisions whenever is impossible for all of us to be present in an specific place.
 
 ****
