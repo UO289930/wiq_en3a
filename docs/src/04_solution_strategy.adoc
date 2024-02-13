@@ -39,4 +39,3 @@ The production branch contains the work in production right now, from where ever
 * *Whatsapp*: will allow us to be in constant communication for helping each other out whenever needed. 
 * *Discord*: useful for making unofficial meetings and making decisions whenever is impossible for all of us to be present in an specific place.
 
-****
