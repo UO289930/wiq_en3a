@@ -3,7 +3,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-runtime-view]]
 == Runtime View
 
-=== <User's Login>
+=== User's Login
 
 
 Sequence diagram for showing the process of a user logging in:
@@ -20,7 +20,7 @@ UsersService -> UsersService: login()
 UsersService -> FrontEnd: Confirm login
 ----
 
-=== <User's sign up>
+=== User's sign up
 
 Sequence diagram for showing the process of a user creating an account:
 
