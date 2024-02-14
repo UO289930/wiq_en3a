@@ -71,12 +71,12 @@ together with a mapping table showing the relationships between channels and inp
 **<Diagram or Table>**
 [cols="2,2"]
 |===
-| **Componente** | **Tecnologías Utilizadas**
+| **Component** | **Technologies Used**
 | Front-end      | HTML, CSS, JavaScript (Svelte)
 | Back-end       | PHP, API de Wikidata
-| Base de Datos  | MongoDB
-| Arquitectura | Microservicios
-| Despliegue y Mantenimiento | Docker
+| Database  | MongoDB
+| Arquitectura | Microservices
+| Deployment and Maintenance | Docker
 |===
 
 **<optionally: Explanation of technical interfaces>**
@@ -84,15 +84,15 @@ together with a mapping table showing the relationships between channels and inp
 **<Mapping Input/Output to Channels>**
 [cols="2,2,2"]
 |===
-| **Componente** | **Función**
-| Front-end | Interacción con el usuario, visualización de resultados
-| Back-end | Procesamiento lógico, comunicación con API externa y base de datos
-| Base de Datos | Almacenamiento de datos
-| API Externa | Consulta de datos desde Wikidata
+| **Component** | **Functionality**
+| Front-end | User interaction and results display.
+| Back-end | Logical processing, communication with external API and database.
+| Database | Data storage.
+| External API | Data query from Wikidata.
 |===
 
-En este flujo:
-- El usuario interactúa con la interfaz de usuario (front-end) mediante clics y respuestas.
-- El back-end procesa las solicitudes, consulta la API de Wikidata y actualiza la pantalla.
-- Los canales son las conexiones HTTP entre los componentes.
-- El mapeo evalúa las respuestas del usuario en tiempo real para proporcionar una respuesta adecuada.
+In this flow:
+- The user interacts with the user interface (front-end) through clicks and responses.
+- The back-end processes the requests, consults the Wikidata API, and updates the screen.
+- The channels are the HTTP connections between the components.
+- The mapping evaluates the user’s responses in real time to provide an appropriate response.
