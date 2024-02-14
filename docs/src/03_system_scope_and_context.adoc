@@ -73,16 +73,16 @@ together with a mapping table showing the relationships between channels and inp
 |===
 | **Component** | **Technologies Used**
 | Front-end      | HTML, CSS, JavaScript (Svelte)
-| Back-end       | PHP, API de Wikidata
+| Back-end       | .NET, API de Wikidata
 | Database  | MongoDB
-| Arquitectura | Microservices
+| Arquitechture | Microservices
 | Deployment and Maintenance | Docker
 |===
 
 **<optionally: Explanation of technical interfaces>**
 
 **<Mapping Input/Output to Channels>**
-[cols="2,2,2"]
+[cols="2,2"]
 |===
 | **Component** | **Functionality**
 | Front-end | User interaction and results display.
