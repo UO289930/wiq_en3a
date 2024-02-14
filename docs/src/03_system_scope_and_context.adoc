@@ -69,7 +69,30 @@ together with a mapping table showing the relationships between channels and inp
 ****
 
 **<Diagram or Table>**
+[cols="2,2"]
+|===
+| **Component** | **Technologies Used**
+| Front-end      | HTML, CSS, JavaScript (Svelte/React)
+| Back-end       | .NET/node.js, API de Wikidata
+| Database  | MongoDB
+| Arquitechture | Microservices
+| Deployment and Maintenance | Docker
+|===
 
 **<optionally: Explanation of technical interfaces>**
 
 **<Mapping Input/Output to Channels>**
+[cols="2,2"]
+|===
+| **Component** | **Functionality**
+| Front-end | User interaction and results display.
+| Back-end | Logical processing, communication with external API and database.
+| Database | Data storage.
+| External API | Data query from Wikidata.
+|===
+
+In this flow:
+- The user interacts with the user interface (front-end) through clicks and responses.
+- The back-end processes the requests, consults the Wikidata API, and updates the screen.
+- The channels are the HTTP connections between the components.
+- The mapping evaluates the user’s responses in real time to provide an appropriate response. 
