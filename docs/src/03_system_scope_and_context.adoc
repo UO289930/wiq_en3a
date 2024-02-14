@@ -69,7 +69,30 @@ together with a mapping table showing the relationships between channels and inp
 ****
 
 **<Diagram or Table>**
+[cols="2,2"]
+|===
+| **Componente** | **Tecnologías Utilizadas**
+| Front-end      | HTML, CSS, JavaScript (Svelte)
+| Back-end       | PHP, API de Wikidata
+| Base de Datos  | MongoDB
+| Arquitectura | Microservicios
+| Despliegue y Mantenimiento | Docker
+|===
 
 **<optionally: Explanation of technical interfaces>**
 
 **<Mapping Input/Output to Channels>**
+[cols="2,2,2"]
+|===
+| **Componente** | **Función**
+| Front-end | Interacción con el usuario, visualización de resultados
+| Back-end | Procesamiento lógico, comunicación con API externa y base de datos
+| Base de Datos | Almacenamiento de datos
+| API Externa | Consulta de datos desde Wikidata
+|===
+
+En este flujo:
+- El usuario interactúa con la interfaz de usuario (front-end) mediante clics y respuestas.
+- El back-end procesa las solicitudes, consulta la API de Wikidata y actualiza la pantalla.
+- Los canales son las conexiones HTTP entre los componentes.
+- El mapeo evalúa las respuestas del usuario en tiempo real para proporcionar una respuesta adecuada.
