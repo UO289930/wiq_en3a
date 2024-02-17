@@ -4,6 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Glossary
 
 [role="arc42help"]
+
 ****
 .Contents
 The most important domain and technical terms that your stakeholders use when discussing the system.
@@ -66,5 +67,8 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 
 |Svelte
 |A modern JavaScript framework for building user interfaces. Unlike traditional frameworks that require the runtime presence of a virtual DOM, Svelte shifts the work to compile-time, resulting in highly optimized and efficient code with smaller bundle sizes.
+
+|API (Application programming interface)
+|Set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications can use to request and exchange information. They enable developers to access the functionality of other software components or services without having to understand their internal workings. APIs are commonly used to integrate third-party services, access data from remote servers, and build modular and interoperable software systems.
 
 |===
