@@ -32,15 +32,57 @@ Using your Azure account:
 ** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
 ** Use the public IP address and the local .pem file for making the connection.
 ** Run the following commands for preparing the virtual machine:
++
+[listing]
 ----
 sudo apt update
+----
+
++
+[listing]
+----
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
+----
+
++
+[listing]
+----
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+----
+
++
+[listing]
+----
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+----
+
++
+[listing]
+----
 sudo apt update
+----
+
++
+[listing]
+----
 sudo apt install docker-ce
+----
+
++
+[listing]
+----
 sudo usermod -aG docker ${USER}
+----
+
++
+[listing]
+----
 sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+----
+
++
+[listing]
+----
 sudo chmod +x /usr/local/bin/docker-compose
 ----
 
