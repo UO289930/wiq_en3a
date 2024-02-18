@@ -5,6 +5,51 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Deployment View
 
+Our project is configurated using GitHub actions in such a way that every release that is made will trigger some unitary and end to end test, and an attempt to deploy the application over a server.
+This will allow our team to achieve continuous deployment and delivery.
+
+=== Quick deployment guide
+
+Using your Azure account:
+
+* Create an Ubuntu-20.04 virtual machine from Azure link:https://www.portal.azure.com[www.portal.azure.com]
+** Select an available location (usually Switzerland North, Zone 1, is available)
+** Select the virtual machine "Standard B1s (1 vcpu, 1GiB of memory)"
+** Set the username to `azureuser`
+** Allow SSH on port 22
+
+* Configure GitHub repository secrets with the server's information:
+** Download the private key (.pem file) and paste all of its textual content over `DEPLOY_KEY`. Save the file for later configurations over SSH at the virtual machine.
+** Check the public IP at Azure and paste it over `DEPLOY_HOST`.
+** `DEPLOY_USER` does not need to be changed
+
+* Once the virtual machine is created and the repository is configured, go to Network Settings and add extra rules:
+** Open port number 3000 for user services
+** Open port number 8000 for accessing the web application
+*** More services will be available in the future, so discussions will be made for additional ports supporting our services.
+
+* Configure the virtual machine connecting through SSH for using Docker:
+** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
+** Use the public IP address and the local .pem file for making the connection.
+** Run the following commands for preparing the virtual machine:
+----
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+sudo apt install docker-ce
+sudo usermod -aG docker ${USER}
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+----
+
+* Make a release in GitHub:
+** On the right-hand side of the main Code section of our repository, there is a section called Releases. It will be needed to add a new version following the version naming convention.
+** Once the release is made, some GitHub actions will be triggered, and the containers will be tested and running once everything finishes.
+** If some test fails during the process, deployment will be automatically aborted.
+
+
 [role="arc42help"]
 ****
 .Content
@@ -92,3 +137,5 @@ _<diagram + explanation>_
 ==== _<Infrastructure Element n>_
 
 _<diagram + explanation>_
+
+
