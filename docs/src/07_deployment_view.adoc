@@ -32,6 +32,7 @@ Using your Azure account:
 ** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
 ** Use the public IP address and the local .pem file for making the connection.
 ** Run the following commands for preparing the virtual machine:
+
 +
 [listing]
 ----
@@ -90,6 +91,34 @@ sudo chmod +x /usr/local/bin/docker-compose
 ** On the right-hand side of the main Code section of our repository, there is a section called Releases. It will be needed to add a new version following the version naming convention.
 ** Once the release is made, some GitHub actions will be triggered, and the containers will be tested and running once everything finishes.
 ** If some test fails during the process, deployment will be automatically aborted.
+
+
+=== Infrastructure Level 1 - Azure Ubuntu Server
+
+The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
+Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.
+
+
+=== Infrastructure Level 2 - Docker
+
+Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
+Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
+Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.
+
+The virtual machine will contain as many containers as services in the application.
+
+For now, the project contains:
+** Web application service running on port 3000
+*** Gateway (middleware) service running on port 8000
+*** Users and authentication services running on ports 8001 and 8002 respectively
+** Mongo DB server running on port 27017
+** Prometheus running on port 9090 for monitoring
+** Grafana running on port 9091 for analytics and monitoring
+
+
+=== Infrastructure Level 3 - GitHub actions
+
+GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.
 
 
 [role="arc42help"]
