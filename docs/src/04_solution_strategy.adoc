@@ -4,6 +4,33 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Solution Strategy
 This section will cover all the technological, architectural, design and organizational decisions made along the project for its appropiate development
 
+[role="arc42help"]
+****
+.Contents
+A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
+
+* technology decisions
+* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
+* decisions on how to achieve key quality goals
+* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+
+.Motivation
+These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
+
+.Form
+Keep the explanations of such key decisions short.
+
+Motivate what was decided and why it was decided that way,
+based upon problem statement, quality goals and key constraints.
+Refer to details in the following sections.
+
+
+.Further Information
+
+See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
+
+****
+
 === Technologies
 * *React*: JavaScript library for web and native user interfaces. It allows developers to create interactive web applications by breaking down the UI into reusable components. React uses a declarative approach to efficiently update and render components, resulting in faster and more maintainable code. It's widely adopted in the industry due to its simplicity, performance, and robustness.
 * *Svelte*: modern JavaScript framework that compiles code at build time for efficient updates to the DOM. It emphasizes smaller bundle sizes and better performance, offering a simpler approach to building dynamic web applications compared to traditional frameworks like React or Vue.
