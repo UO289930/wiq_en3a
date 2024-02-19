@@ -322,24 +322,38 @@ skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
 rectangle "User Management" as UserManagement
-database "MongoDB Database" as MongoDB
+database "Users MongoDB Database" as MongoDB
 
 ' Define connections
 UserManagement --> MongoDB
+
 @enduml
 ----
 
 ==== White Box Question Generation Service
 
 
-_<white box template>_
+[role="arc42help"]
+****
+...describes the internal structure of the Question Generation Service.
+****
 
-...
+[plantuml, format="png"]
+----
+@startuml
+' Define custom style for components
+skinparam componentStyle uml2
 
-==== White Box _<building block m>_
+' Define components as rectangles without default stereotypes
+rectangle "Question Generation" as QuestionGeneration
+database "Questions MongoDB Database" as MongoDB
+cloud "Wikidata API" as WikidataAPI
 
-
-_<white box template>_
+' Define connections
+QuestionGeneration --> MongoDB
+QuestionGeneration --> WikidataAPI
+@enduml
+----
 
 
 === Level 3
