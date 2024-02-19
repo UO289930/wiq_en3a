@@ -36,6 +36,6 @@ UsersService  -> DB: CreateUserData()
 DB -> UsersService: Confirm data
 UsersService -> UsersService: signUp()
 UsersService -> FrontEnd: Redirect to login page
+@enduml
 ----
-
 === <Runtime Scenario n>
