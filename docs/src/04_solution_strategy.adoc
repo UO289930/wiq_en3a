@@ -2,7 +2,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-solution-strategy]]
 == Solution Strategy
-
+This section will cover all the technological, architectural, design and organizational decisions made along the project for its appropiate development
 
 [role="arc42help"]
 ****
@@ -30,3 +30,39 @@ Refer to details in the following sections.
 See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
 
 ****
+
+=== Technologies
+* *React*: JavaScript library for web and native user interfaces. It allows developers to create interactive web applications by breaking down the UI into reusable components. React uses a declarative approach to efficiently update and render components, resulting in faster and more maintainable code. It's widely adopted in the industry due to its simplicity, performance, and robustness.
+* *Svelte*: modern JavaScript framework that compiles code at build time for efficient updates to the DOM. It emphasizes smaller bundle sizes and better performance, offering a simpler approach to building dynamic web applications compared to traditional frameworks like React or Vue.
+* *Node.js*: JavaScript runtime that enables running JavaScript code outside of web browsers. It's renowned for its event-driven architecture and extensive collection of packages, making it ideal for building scalable server-side applications.
+    + *Express.js*: Express.js, often simply called Express, is a minimalist web application framework for Node.js. It simplifies the process of building web applications by providing a robust set of features, including middleware support, routing, and templating engines. Express is known for its flexibility, simplicity, and performance, making it a popular choice for developing web applications and APIs in Node.js.
+* *.NET*: versatile developer platform for creating web, mobile, desktop, and cloud applications. It supports multiple programming languages and provides a rich set of libraries and tools for building software solutions. With built-in support for creating APIs and consuming web services, .NET makes it simple to develop and integrate with backend systems and services.
+* *Wikidata*: Wikidata provides a REST API for retrieving information related to any topic. It helps us to dynamically generate questions for our game using it from any programming language. 
+* *MongoDB*: popular NoSQL database known for its flexibility and scalability. It stores data in flexible JSON-like documents and is widely used in modern web development for its simplicity and ability to handle large volumes of data.
+* *Cucumber*: Testing tool that supports Behavior Driven Development (BDD) and allows us also to comply testability quality attribute.
+* *Arc42*: framework (template) used for documenting and communicating software architectures. It provides a template for describing the architecture of a software system, covering aspects such as stakeholders, requirements, architecture decisions, components, interfaces, and quality attributes. arc42 helps teams create consistent and comprehensible architecture documentation, enabling better communication, understanding, and maintenance of software systems throughout their lifecycle.
+* *npm*: default package manager for Node.js, providing a command-line interface to install, manage, and publish JavaScript packages. With over a million packages available in its registry, npm simplifies adding functionality to Node.js projects by handling dependencies and providing tools for versioning and publishing packages.
+* *Docker*: platform that will be used for deploying our services inside containers. Containers are lightweight, portable, and self-sufficient units that contain everything needed to run an application, including the code, runtime, system tools, libraries, and settings. Docker enables developers to package their applications along with all dependencies into containers, ensuring consistency across different environments, such as development, testing, and production.
+
+=== Architecture & Design
+
+* *Microservices*: is an architectural style that structures an application as a collection of loosely coupled services. Each service is independently deployable, scalable, and can be developed using different programming languages, frameworks, or databases.
+In a microservices architecture, each service typically represents a specific business function or capability and communicates with other services through well-defined APIs. This enables teams to work independently on different parts of the application, allowing us to divide the work into different teams avoiding bottlenecks during production.
+* *APIs*: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services independance, but also team members independecance since nobody will need to wait for others for starting working themselves.  
+
+--------------------(This could be another option if we eventually decide not to use microservices architecture)--------------------
+
+* *MVC (Model-View-Controller)*: is a software architectural pattern which divides an application into three interconnected components: the Model, which represents the data and business logic; the View, responsible for the presentation layer and user interface; and the Controller, acting as an intermediary between the Model and View. MVC promotes separation of concerns, making it easier to manage and maintain complex web applications by enabling developers to work on different components independently. This pattern enhances code reuse, improves testability, and facilitates scalability, contributing to the development of robust and maintainable web applications across various frameworks and programming languages.
+
+=== Team Organization
+
+For developing this project we are using Github as the control version systems. 
+The master branch contains the final version of the product, so that every accepted pull request to master branch will be considered as a new release.
+The production branch contains the work in production right now, from where everybody should create their own branch for their specific code development. 
+
+* *Documentation*: it must be always updated for making our work valuable and consistent.
+* *Weekly meetings*: Weekly discussions about what has been done and what needs to be done will be key for our team success. 
+* *Github*: this control version systems not only allows us to share and collabortively write code, but also provides other resources such as issues and project management (kanban board) tools for organizing the work to be done. Also, wiki section allows us to save all of our minutes from each scheduled meeting.
+* *Whatsapp*: will allow us to be in constant communication for helping each other out whenever needed. 
+* *Discord*: useful for making unofficial meetings and making decisions whenever is impossible for all of us to be present in an specific place.
+
