@@ -4,6 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Architecture Constraints
 
 When designing the WIQ application, there are several constraints that must be taken into consideration, as they will have a significant impact on the overall design of the application and the architectural decisions. These constraints must be considered in order to ensure that the final product meets the needs and expectations of the users and stakeholders. The following table summarizes these constraints and provides a brief explanation for each one divided into technical, organizational and political constraints.
+
 === Technical constraints
 |===
 |Constraint|Explanation

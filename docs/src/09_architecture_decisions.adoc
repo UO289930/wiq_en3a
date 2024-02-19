@@ -11,7 +11,7 @@ The following table contains some of the design decisions that were imposed to u
 |===
 |Code|Decision|Advantages|Disadvantages
 |ID1| React.js or Svelte | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.|Not all of us know about its usage
-|ID2| MongoDB | It does not need to be started manually. Free and easy to understand|e are quite new with MongoDB.
+|ID2| MongoDB | It does not need to be started manually. Free and easy to understand|We are quite new with MongoDB.
 |ID3| Docker | Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example|We do not have much experience using Docker
 |ID4| PlantUML | Allows drawing diagrams very easily, with a simple syntax.|Does not allow as much control over the exact layout of the elements in the diagram as other tools.
 |===
