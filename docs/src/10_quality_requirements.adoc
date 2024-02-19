@@ -26,6 +26,7 @@ See https://docs.arc42.org/section-10/[Quality Requirements] in the arc42 docume
 ****
 
 === Quality Tree
+image::10-Quality-Tree-EN.png["Quality Tree"]
 
 [role="arc42help"]
 ****
@@ -42,6 +43,7 @@ The quality tree is a high-level overview of the quality goals and requirements:
 * a mind map with quality categories as main branches
 
 In any case the tree should include links to the scenarios of the following section.
+
 
 
 ****
@@ -71,3 +73,64 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 .Form
 Tabular or free form text.
 ****
+
+*Usage scenarios*
+
+[options="header", cols="1,1,1,1"]
+|===
+| Quality goal | Motivation | Usage scenario | Priority
+
+| *Reliability* 
+| The application must provide users with constistent performance and predictable results. 
+| When users access the web it must behave the same every time giving the almost equal results and response times.
+| Very high
+
+| *Performance*
+| The application must have a reasonable response time. Slow applications are not positively popular in society.
+| The application must be able to give a fast response time to the users so the game is dynamic and entertaining.
+| Very high
+
+| *Security*
+| Our web must be secure not only to protect data but to provide a realiable solution to our users. If we can't assure our clients the web is secure, no one will use it.
+| Data will be only accessible by its owner. If a user tries to access other people's information, the system will deny the operation, as data will be stored in a secure system.
+| Very high
+
+| *Portability* 
+| To reach the maximum number of users the application must work in the maximum number of infrastructures. 
+| When users access the web from different browsers and devices, it must work and provide all the possible functionalities.
+| Very high
+
+| *Usability* 
+| To make the website stand out from the competition, it must be easy to use, attract attention and be aestethic.
+| When the user wants to do something in the application, he/she should be able to do it without difficulty, guided by the interface elements.
+| Very high
+
+| *Testability* 
+| All features of the application must be testable in order to verify that the web built was the one asked for.
+| The unit tests passed by the developers must generate an observable output.
+| High
+
+| *Availability* 
+| The application must be available 24 hours a day all weeks. 
+| The user must be able to play at any time because it will be its free time.
+| High
+
+|===
+
+
+*Change scenarios*
+
+[options="header", cols="1,1,1,1"]
+|===
+| Quality goal | Motivation | Change scenario | Priority
+| *Maintainability*
+| An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.
+| When developers must introduce a new feature to the web, they should be able to do it without changing the software architecture.
+| High
+
+| *Maintainability*
+| An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.
+| When fixing errors and bugs on the system, developers should be able to do it without major consequences on the system.
+| High
+
+|===
