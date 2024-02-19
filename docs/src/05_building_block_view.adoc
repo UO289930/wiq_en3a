@@ -63,6 +63,7 @@ In the best case you will get away with examples or simple signatures.
 
 ****
 
+
 [plantuml, format="png"]
 ----
 @startuml
@@ -81,6 +82,7 @@ User --> WIQ
 WIQ --> WikidataAPI
 @enduml
 ----
+
 
 
 Motivation::
@@ -177,28 +179,22 @@ Leave out normal, simple, boring or standardized parts of your system
 
 ****
 
-[plantuml, format="png"]
-----
-@startuml
-title Main App
+[plantuml, format=png]
+....
+actor user as "User browser"
+frame WIQ {
+    node Frontend
+    node UserManagement
+    node QuestionGeneration
+}
+cloud Wikidata as "Wikidata"
 
-' Define custom style for components
-skinparam componentStyle uml2
+user -- Frontend
+Frontend -- UserManagement
+Frontend -- QuestionGeneration
+QuestionGeneration -- Wikidata
+....
 
-' Define components as rectangles without default stereotypes
-rectangle Frontend
-rectangle "User Management" as UserManagement
-rectangle "Question Generation" as QuestionGeneration
-cloud "Wikidata API" as WikidataAPI
-actor "User" as User
-
-' Define connections
-User --> Frontend
-Frontend --> UserManagement
-Frontend --> QuestionGeneration
-QuestionGeneration --> WikidataAPI
-@enduml
-----
 
 
 Motivation::
