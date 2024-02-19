@@ -93,6 +93,55 @@ sudo chmod +x /usr/local/bin/docker-compose
 ** If some test fails during the process, deployment will be automatically aborted.
 
 
+=== Infrastructure
+General view of system's infrastructure
+[plantuml, target=deployment-diagram, format=png]
+....
+actor client as "Client"
+frame UbuntuServer {
+    frame Docker {
+
+
+        frame WebAPP {
+            node React
+        }
+
+        frame NodeJSGateway {
+            node Authentication
+
+            node Users
+        }
+
+        frame MongoDB {
+            node UsersDatabase
+
+            node ResultsDatabase
+        }
+
+        frame .NET {
+            node RestAPI
+        }
+    }
+
+    frame GitHub{
+
+        frame GitHubActions{
+            node dockerCompose
+        }
+
+    }
+}
+
+.NET -- ResultsDatabase : MongoDB (port 27017)
+NodeJSGateway -- UsersDatabase : MongoDB (port 27017)
+WebAPP -- NodeJSGateway : (port 8000:8002)
+WebAPP -- .NET : .NET (port TBD)
+client -- WebAPP : Web Browser (port 3000)
+
+Docker -- GitHubActions : on release
+....
+
+
 === Infrastructure Level 1 - Azure Ubuntu Server
 
 The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
