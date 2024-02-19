@@ -451,33 +451,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_stakeholders">1.3. Stakeholders</a></li>
 </ul>
 </li>
-<li><a href="#section-architecture-constraints">2. Architecture Constraints</a></li>
+<li><a href="#section-architecture-constraints">2. Architecture Constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_technical_constraints">2.1. Technical constraints</a></li>
+<li><a href="#_organizational_constraints">2.2. Organizational constraints</a></li>
+<li><a href="#_political_constraints">2.3. Political constraints</a></li>
+</ul>
+</li>
 <li><a href="#section-system-scope-and-context">3. System Scope and Context</a>
 <ul class="sectlevel2">
 <li><a href="#_business_context">3.1. Business Context</a></li>
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_technologies">4.1. Technologies</a></li>
+<li><a href="#_architecture_design">4.2. Architecture &amp; Design</a></li>
+<li><a href="#_team_organization">4.3. Team Organization</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_level_1">5.2. Level 1</a></li>
+<li><a href="#_level_2">5.3. Level 2</a></li>
+<li><a href="#_level_3">5.4. Level 3</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
 <ul class="sectlevel2">
-<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_users_login">6.1. User&#8217;s Login</a></li>
+<li><a href="#_users_sign_up">6.2. User&#8217;s sign up</a></li>
+<li><a href="#_runtime_scenario_n">6.3. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
 <ul class="sectlevel2">
-<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
+<li><a href="#_quick_deployment_guide">7.1. Quick deployment guide</a></li>
+<li><a href="#_infrastructure">7.2. Infrastructure</a></li>
+<li><a href="#_infrastructure_level_1_azure_ubuntu_server">7.3. Infrastructure Level 1 - Azure Ubuntu Server</a></li>
+<li><a href="#_infrastructure_level_2_docker">7.4. Infrastructure Level 2 - Docker</a></li>
+<li><a href="#_infrastructure_level_3_github_actions">7.5. Infrastructure Level 3 - GitHub actions</a></li>
+<li><a href="#_infrastructure_level_1">7.6. Infrastructure Level 1</a></li>
+<li><a href="#_infrastructure_level_2">7.7. Infrastructure Level 2</a></li>
 </ul>
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
@@ -494,7 +511,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
+<li><a href="#section-technical-risks">11. Risks and Technical Debts</a>
+<ul class="sectlevel2">
+<li><a href="#_risks">11.1. Risks</a></li>
+<li><a href="#_technical_debts">11.2. Technical Debts</a></li>
+</ul>
+</li>
 <li><a href="#section-glossary">12. Glossary</a></li>
 </ul>
 </div>
@@ -551,35 +573,54 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect1">
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The WIQ web application is developed by HappySw for RTVE to create an experimental version of the Saber y Ganar quiz show.
+The primary goal of WIQ is to provide users with an engaging platform where they can participate in quiz games,
+answer questions generated from Wikidata, and win prizes.</p>
+</div>
+<div class="paragraph">
+<p>This document outlines the essential requirements guiding the software architects and development team in creating WIQ.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
-<p>Describes the relevant requirements and the driving forces that software architects and development team must consider.
-These include</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>underlying business goals,</p>
-</li>
-<li>
-<p>essential features,</p>
-</li>
-<li>
-<p>essential functional requirements,</p>
-</li>
-<li>
-<p>quality goals for the architecture and</p>
-</li>
-<li>
-<p>relevant stakeholders and their expectations</p>
-</li>
-</ul>
+<p>Describes the relevant requirements that software architects and development team must consider.
+These include
+* underlying business goals,
+* essential features,
+* essential functional requirements,
+* quality goals for the architecture and
+* relevant stakeholders and their expectations</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
+<div class="paragraph">
+<p>The system aims to fulfill the following essential requirements:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Users can register and login to participate in quiz games.</p>
+</li>
+<li>
+<p>Questions are automatically generated from data available in Wikidata.</p>
+</li>
+<li>
+<p>Users receive historical data of their participation, including the number of games played, questions passed and failed, and timestamps.</p>
+</li>
+<li>
+<p>Each question must be answered within a specific time limit.</p>
+</li>
+<li>
+<p>Questions consist of one correct answer and several distractors, all automatically generated.</p>
+</li>
+<li>
+<p>Access to user information and generated questions is available through an API.</p>
+</li>
+</ol>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -610,6 +651,30 @@ If requirements documents exist this overview should refer to these documents.</
 </div>
 <div class="sect2">
 <h3 id="_quality_goals">1.2. Quality Goals</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quality Goal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reliability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure consistent and accurate question generation and user data management.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize system response times and capacity to handle multiple user interactions simultaneously.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement robust security measures to protect user data and prevent unauthorized access.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -693,14 +758,19 @@ These stakeholders determine the extent and the level of detail of your work and
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intuitive and enjoyable quiz experience</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RTVE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Project Manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reliable and engaging platform for users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HappySw Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear documentation and reliable system performance</p></td>
 </tr>
 </tbody>
 </table>
@@ -711,6 +781,101 @@ These stakeholders determine the extent and the level of detail of your work and
 <div class="sect1">
 <h2 id="section-architecture-constraints">2. Architecture Constraints</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>When designing the WIQ application, there are several constraints that must be taken into consideration, as they will have a significant impact on the overall design of the application and the architectural decisions. These constraints must be considered in order to ensure that the final product meets the needs and expectations of the users and stakeholders. The following table summarizes these constraints and provides a brief explanation for each one divided into technical, organizational and political constraints.</p>
+</div>
+<div class="sect2">
+<h3 id="_technical_constraints">2.1. Technical constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WikiData</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Our application must generate questions automatically getting data from WikiData</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We are using docker for the deployment.It&#8217;s a platform that allows you to package Our application and its dependencies into a standardized unit called a container.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure is a cloud computing platform where we are going to host our WIQ application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version control and monitoring (GitHub)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For the WIQ application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Experience</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The design of the application must make its use friendly and easy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test coverage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code must meet a good test quality and coverage to ensure the expected outcome.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_organizational_constraints">2.2. Organizational constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project will be done in a team composed of 7 students, so work must be assigned accordingly.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git-based development</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project will be built around the Git workflow, so all tools used must be able to closely interact with this system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meetings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project’s development process must be reflected in the minutes of each meeting that happens.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delivery deadlines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There are 4 deliverables every 3 weeks that should be followed accordingly before the deployment of the application</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_political_constraints">2.3. Political constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We are going to use AsciiDoc and follow the Arc42 template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The documentation and application will be developed in English.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -736,6 +901,7 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </div>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -798,12 +964,47 @@ The title of the table is the name of your system, the three columns contain the
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><strong>&lt;Diagram or Table&gt;</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/03_business_context.png" alt="Business Context Diagram">
 </div>
-<div class="paragraph">
-<p><strong>&lt;optionally: Explanation of external domain interfaces&gt;</strong></p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Partner</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Input</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> The user interacts with the WIQ web application using the front-end of the application.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The display of a page of the application with the questions and statistics.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Stores relevant information of the application (users, number of games, questions passed/failed, times…).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the information that the application requires.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question generation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Questions generated from Wikidata.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These generated questions are sent to the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Receives a query linked to the question to be asked.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the necessary information to formulate the question.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_technical_context">3.2. Technical Context</h3>
@@ -827,11 +1028,78 @@ together with a mapping table showing the relationships between channels and inp
 <div class="paragraph">
 <p><strong>&lt;Diagram or Table&gt;</strong></p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Component</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Technologies Used</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Front-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTML, CSS, JavaScript (Svelte/React)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.NET/node.js, API de Wikidata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arquitechture</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Microservices</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deployment and Maintenance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><strong>&lt;optionally: Explanation of technical interfaces&gt;</strong></p>
 </div>
 <div class="paragraph">
 <p><strong>&lt;Mapping Input/Output to Channels&gt;</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Component</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Functionality</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Front-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User interaction and results display.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logical processing, communication with external API and database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data storage.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">External API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data query from Wikidata.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In this flow:
+- The user interacts with the user interface (front-end) through clicks and responses.
+- The back-end processes the requests, consults the Wikidata API, and updates the screen.
+- The channels are the HTTP connections between the components.
+- The mapping evaluates the user’s responses in real time to provide an appropriate response.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -840,6 +1108,9 @@ together with a mapping table showing the relationships between channels and inp
 <div class="sect1">
 <h2 id="section-solution-strategy">4. Solution Strategy</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section will cover all the technological, architectural, design and organizational decisions made along the project for its appropiate development</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -881,7 +1152,96 @@ Refer to details in the following sections.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_technologies">4.1. Technologies</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>React</strong>: JavaScript library for web and native user interfaces. It allows developers to create interactive web applications by breaking down the UI into reusable components. React uses a declarative approach to efficiently update and render components, resulting in faster and more maintainable code. It&#8217;s widely adopted in the industry due to its simplicity, performance, and robustness.</p>
+</li>
+<li>
+<p><strong>Svelte</strong>: modern JavaScript framework that compiles code at build time for efficient updates to the DOM. It emphasizes smaller bundle sizes and better performance, offering a simpler approach to building dynamic web applications compared to traditional frameworks like React or Vue.</p>
+</li>
+<li>
+<p><strong>Node.js</strong>: JavaScript runtime that enables running JavaScript code outside of web browsers. It&#8217;s renowned for its event-driven architecture and extensive collection of packages, making it ideal for building scalable server-side applications.
++ <strong>Express.js</strong>: Express.js, often simply called Express, is a minimalist web application framework for Node.js. It simplifies the process of building web applications by providing a robust set of features, including middleware support, routing, and templating engines. Express is known for its flexibility, simplicity, and performance, making it a popular choice for developing web applications and APIs in Node.js.</p>
+</li>
+<li>
+<p><strong>.NET</strong>: versatile developer platform for creating web, mobile, desktop, and cloud applications. It supports multiple programming languages and provides a rich set of libraries and tools for building software solutions. With built-in support for creating APIs and consuming web services, .NET makes it simple to develop and integrate with backend systems and services.</p>
+</li>
+<li>
+<p><strong>Wikidata</strong>: Wikidata provides a REST API for retrieving information related to any topic. It helps us to dynamically generate questions for our game using it from any programming language.</p>
+</li>
+<li>
+<p><strong>MongoDB</strong>: popular NoSQL database known for its flexibility and scalability. It stores data in flexible JSON-like documents and is widely used in modern web development for its simplicity and ability to handle large volumes of data.</p>
+</li>
+<li>
+<p><strong>Cucumber</strong>: Testing tool that supports Behavior Driven Development (BDD) and allows us also to comply testability quality attribute.</p>
+</li>
+<li>
+<p><strong>Arc42</strong>: framework (template) used for documenting and communicating software architectures. It provides a template for describing the architecture of a software system, covering aspects such as stakeholders, requirements, architecture decisions, components, interfaces, and quality attributes. arc42 helps teams create consistent and comprehensible architecture documentation, enabling better communication, understanding, and maintenance of software systems throughout their lifecycle.</p>
+</li>
+<li>
+<p><strong>npm</strong>: default package manager for Node.js, providing a command-line interface to install, manage, and publish JavaScript packages. With over a million packages available in its registry, npm simplifies adding functionality to Node.js projects by handling dependencies and providing tools for versioning and publishing packages.</p>
+</li>
+<li>
+<p><strong>Docker</strong>: platform that will be used for deploying our services inside containers. Containers are lightweight, portable, and self-sufficient units that contain everything needed to run an application, including the code, runtime, system tools, libraries, and settings. Docker enables developers to package their applications along with all dependencies into containers, ensuring consistency across different environments, such as development, testing, and production.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_architecture_design">4.2. Architecture &amp; Design</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Microservices</strong>: is an architectural style that structures an application as a collection of loosely coupled services. Each service is independently deployable, scalable, and can be developed using different programming languages, frameworks, or databases.
+In a microservices architecture, each service typically represents a specific business function or capability and communicates with other services through well-defined APIs. This enables teams to work independently on different parts of the application, allowing us to divide the work into different teams avoiding bottlenecks during production.</p>
+</li>
+<li>
+<p><strong>APIs</strong>: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services independance, but also team members independecance since nobody will need to wait for others for starting working themselves.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>--------------------(This could be another option if we eventually decide not to use microservices architecture)--------------------</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MVC (Model-View-Controller)</strong>: is a software architectural pattern which divides an application into three interconnected components: the Model, which represents the data and business logic; the View, responsible for the presentation layer and user interface; and the Controller, acting as an intermediary between the Model and View. MVC promotes separation of concerns, making it easier to manage and maintain complex web applications by enabling developers to work on different components independently. This pattern enhances code reuse, improves testability, and facilitates scalability, contributing to the development of robust and maintainable web applications across various frameworks and programming languages.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_team_organization">4.3. Team Organization</h3>
+<div class="paragraph">
+<p>For developing this project we are using Github as the control version systems.
+The master branch contains the final version of the product, so that every accepted pull request to master branch will be considered as a new release.
+The production branch contains the work in production right now, from where everybody should create their own branch for their specific code development.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Documentation</strong>: it must be always updated for making our work valuable and consistent.</p>
+</li>
+<li>
+<p><strong>Weekly meetings</strong>: Weekly discussions about what has been done and what needs to be done will be key for our team success.</p>
+</li>
+<li>
+<p><strong>Github</strong>: this control version systems not only allows us to share and collabortively write code, but also provides other resources such as issues and project management (kanban board) tools for organizing the work to be done. Also, wiki section allows us to save all of our minutes from each scheduled meeting.</p>
+</li>
+<li>
+<p><strong>Whatsapp</strong>: will allow us to be in constant communication for helping each other out whenever needed.</p>
+</li>
+<li>
+<p><strong>Discord</strong>: useful for making unofficial meetings and making decisions whenever is impossible for all of us to be present in an specific place.</p>
+</li>
+</ul>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -972,25 +1332,42 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="319" height="126">
+</div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p><em>&lt;text explanation&gt;</em></p>
+<p>This is a basic introduction to the app, highlighting the external services it uses and how they work together.</p>
 </dd>
 <dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
-</dd>
-<dt class="hdlist1">Important Interfaces</dt>
-<dd>
-<p><em>&lt;Description of important interfaces&gt;</em></p>
-</dd>
 </dl>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WIQ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> It’s the main application, currently represented as a whitebox. The following sections will break it down in detail.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WikidataAPI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> External API used as the knowledge hub.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1058,7 +1435,201 @@ according the the following black box template:</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><em>&lt;Purpose/Responsibility&gt;</em></p>
 </div>
+<div class="paragraph">
+<p><em>&lt;Interface(s)&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>==== &lt;Name black box 2&gt;</p>
+</div>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>==== &lt;Name black box n&gt;</p>
+</div>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>==== &lt;Name interface 1&gt;</p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>==== &lt;Name interface m&gt;</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_1">5.2. Level 1</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
+</div>
+<div class="paragraph">
+<p>You have to decide which building blocks of your system are important enough to justify such a detailed description.
+Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
+Leave out normal, simple, boring or standardized parts of your system</p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/diag-plantuml-md5-d1794a731ae61e9287bf391bb4bd1c00.png" alt="Diagram" width="397" height="412">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Motivation</dt>
+<dd>
+<p>The reasoning behind this separation is to achieve a modular architecture with clear separation of concerns.
+It also allows to expose the user management and the question generation as APIs.</p>
+</dd>
+<dt class="hdlist1">Contained Building Blocks</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Represents the user interface and manages the quiz logic of the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Management</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Handles everything related to user accounts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Generates questions from Wikidata data and sends them to the frontend.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Important Interfaces</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend &lt;&#8594; User Management</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator &lt;&#8594; Frontend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> This interface defines how the Question Generator Service delivers processed questions to the frontend for display.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator &lt;&#8594; Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This interface represents the service fetching data from the Wikidata API.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Insert your explanations of black boxes from level 1:</p>
+</div>
+<div class="paragraph">
+<p>If you use tabular form you will only describe your black boxes with name and
+responsibility according to the following schema:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
+Its headline is the name of the black box.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_black_box_1_2">5.2.1. &lt;Name black box 1&gt;</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you describe &lt;black box 1&gt;
+according the the following black box template:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Purpose/Responsibility</p>
+</li>
+<li>
+<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
+</li>
+<li>
+<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#8230;&#8203;.</p>
+</li>
+<li>
+<p>(Optional) directory/file location</p>
+</li>
+<li>
+<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
+</li>
+<li>
+<p>(Optional) Open issues/problems/risks</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><em>&lt;Purpose/Responsibility&gt;</em></p>
@@ -1078,32 +1649,33 @@ according the the following black box template:</p>
 <div class="paragraph">
 <p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name black box 2&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name black box n&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name interface 1&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>==== &lt;Name interface m&gt;</p>
 </div>
-<div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
-
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
+<h3 id="_level_2">5.3. Level 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1117,36 +1689,38 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
+<h4 id="_white_box_user_management_service">5.3.1. White Box User Management Service</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
-<p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
+<p>&#8230;&#8203;describes the internal structure of the User Management Service.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/diag-plantuml-md5-a213e1d1d4eb5da8be14de562a5bdaea.png" alt="Diagram" width="209" height="167">
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
+<h4 id="_white_box_question_generation_service">5.3.2. White Box Question Generation Service</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>&#8230;&#8203;describes the internal structure of the Question Generation Service.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/diag-plantuml-md5-e3ae3f4c9761ca8ab8744efa812666e2.png" alt="Diagram" width="373" height="167">
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
+<h3 id="_level_3">5.4. Level 3</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1159,7 +1733,7 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
+<h4 id="_white_box_building_block_x_1">5.4.1. White Box &lt;_building block x.1_&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1172,13 +1746,13 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
+<h4 id="_white_box_building_block_x_2">5.4.2. White Box &lt;_building block x.2_&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
+<h4 id="_white_box_building_block_y_1">5.4.3. White Box &lt;_building block y.1_&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
@@ -1190,100 +1764,30 @@ part of arc42 for additional levels.</p>
 <div class="sect1">
 <h2 id="section-runtime-view">6. Runtime View</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>important use cases or features: how do building blocks execute them?</p>
-</li>
-<li>
-<p>interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?</p>
-</li>
-<li>
-<p>operation and administration: launch, start-up, stop</p>
-</li>
-<li>
-<p>error and exception scenarios</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their <strong>architectural relevance</strong>. It is <strong>not</strong> important to describe a large number of scenarios. You should rather document a representative selection.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
-You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>There are many notations for describing scenarios, e.g.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>numbered list of steps (in natural language)</p>
-</li>
-<li>
-<p>activity diagrams or flow charts</p>
-</li>
-<li>
-<p>sequence diagrams</p>
-</li>
-<li>
-<p>BPMN or EPCs (event process chains)</p>
-</li>
-<li>
-<p>state machines</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-6/">Runtime View</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
 <div class="sect2">
-<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><em>&lt;insert runtime diagram or textual description of the scenario&gt;</em></p>
-</li>
-<li>
-<p><em>&lt;insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.&gt;</em></p>
-</li>
-</ul>
-</div>
+<h3 id="_users_login">6.1. User&#8217;s Login</h3>
 <div class="paragraph">
-<p>It is possible to use a sequence diagram:</p>
+<p>Sequence diagram for showing the process of a user logging in:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="332" height="335">
+<img src="./images/Login%20diagram.png" alt="Login diagram" width="285" height="378">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
-
+<h3 id="_users_sign_up">6.2. User&#8217;s sign up</h3>
+<div class="paragraph">
+<p>Sequence diagram for showing the process of a user creating an account:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Sign%20Up%20diagram.png" alt="Sign Up diagram" width="351" height="439">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
+<h3 id="_runtime_scenario_n">6.3. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1291,6 +1795,195 @@ building block instances depicted in this diagram.&gt;</em></p>
 <div class="sect1">
 <h2 id="section-deployment-view">7. Deployment View</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Our project is configurated using GitHub actions in such a way that every release that is made will trigger some unitary and end to end test, and an attempt to deploy the application over a server.
+This will allow our team to achieve continuous deployment and delivery.</p>
+</div>
+<div class="sect2">
+<h3 id="_quick_deployment_guide">7.1. Quick deployment guide</h3>
+<div class="paragraph">
+<p>Using your Azure account:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create an Ubuntu-20.04 virtual machine from Azure <a href="https://www.portal.azure.com">www.portal.azure.com</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Select an available location (usually Switzerland North, Zone 1, is available)</p>
+</li>
+<li>
+<p>Select the virtual machine "Standard B1s (1 vcpu, 1GiB of memory)"</p>
+</li>
+<li>
+<p>Set the username to <code>azureuser</code></p>
+</li>
+<li>
+<p>Allow SSH on port 22</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configure GitHub repository secrets with the server&#8217;s information:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Download the private key (.pem file) and paste all of its textual content over <code>DEPLOY_KEY</code>. Save the file for later configurations over SSH at the virtual machine.</p>
+</li>
+<li>
+<p>Check the public IP at Azure and paste it over <code>DEPLOY_HOST</code>.</p>
+</li>
+<li>
+<p><code>DEPLOY_USER</code> does not need to be changed</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Once the virtual machine is created and the repository is configured, go to Network Settings and add extra rules:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Open port number 3000 for user services</p>
+</li>
+<li>
+<p>Open port number 8000 for accessing the web application</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More services will be available in the future, so discussions will be made for additional ports supporting our services.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configure the virtual machine connecting through SSH for using Docker:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use some tool for connecting to the server using SSH (PuTTY, MobaXterm&#8230;&#8203;)</p>
+</li>
+<li>
+<p>Use the public IP address and the local .pem file for making the connection.</p>
+</li>
+<li>
+<p>Run the following commands for preparing the virtual machine:</p>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt update</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt install apt-transport-https ca-certificates curl software-properties-common</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt update</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt install docker-ce</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo usermod -aG docker ${USER}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo chmod +x /usr/local/bin/docker-compose</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Make a release in GitHub:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On the right-hand side of the main Code section of our repository, there is a section called Releases. It will be needed to add a new version following the version naming convention.</p>
+</li>
+<li>
+<p>Once the release is made, some GitHub actions will be triggered, and the containers will be tested and running once everything finishes.</p>
+</li>
+<li>
+<p>If some test fails during the process, deployment will be automatically aborted.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure">7.2. Infrastructure</h3>
+<div class="paragraph">
+<p>General view of system&#8217;s infrastructure</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/deployment-diagram.png" alt="deployment diagram" width="967" height="850">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_1_azure_ubuntu_server">7.3. Infrastructure Level 1 - Azure Ubuntu Server</h3>
+<div class="paragraph">
+<p>The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
+Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_2_docker">7.4. Infrastructure Level 2 - Docker</h3>
+<div class="paragraph">
+<p>Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
+Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
+Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.</p>
+</div>
+<div class="paragraph">
+<p>The virtual machine will contain as many containers as services in the application.</p>
+</div>
+<div class="paragraph">
+<p>For now, the project contains:
+<strong> Web application service running on port 3000
+</strong>* Gateway (middleware) service running on port 8000
+<strong>* Users and authentication services running on ports 8001 and 8002 respectively
+</strong> Mongo DB server running on port 27017
+<strong> Prometheus running on port 9090 for monitoring
+</strong> Grafana running on port 9091 for analytics and monitoring</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_3_github_actions">7.5. Infrastructure Level 3 - GitHub actions</h3>
+<div class="paragraph">
+<p>GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1345,8 +2038,9 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
+<h3 id="_infrastructure_level_1">7.6. Infrastructure Level 1</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1394,7 +2088,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
+<h3 id="_infrastructure_level_2">7.7. Infrastructure Level 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1406,13 +2100,13 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
+<h4 id="_infrastructure_element_1">7.7.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
+<h4 id="_infrastructure_element_2">7.7.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
@@ -1421,7 +2115,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
+<h4 id="_infrastructure_element_n">7.7.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
@@ -1559,6 +2253,79 @@ on this list.</p>
 <div class="sect1">
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Along the process of developing the application, decisions had to be taken as problems arise.
+These are the initial decicision that we have made but they change during the course of the project
+The following table contains some of the design decisions that were imposed to us due to the architectural constraints:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Imposed decisions</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Advantages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disadvantages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React.js or Svelte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not all of us know about its usage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It does not need to be started manually. Free and easy to understand</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We are quite new with MongoDB.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We do not have much experience using Docker</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows drawing diagrams very easily, with a simple syntax.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Does not allow as much control over the exact layout of the elements in the diagram as other tools.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Architectural Records</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Context</th>
+<th class="tableblock halign-left valign-top">Record</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1633,6 +2400,11 @@ concrete and measurable.</p>
 </div>
 <div class="sect2">
 <h3 id="_quality_tree">10.1. Quality Tree</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10-Quality-Tree-EN.png" alt="Quality Tree">
+</div>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1703,6 +2475,102 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p><strong>Usage scenarios</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality goal</th>
+<th class="tableblock halign-left valign-top">Motivation</th>
+<th class="tableblock halign-left valign-top">Usage scenario</th>
+<th class="tableblock halign-left valign-top">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reliability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must provide users with constistent performance and predictable results.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When users access the web it must behave the same every time giving the almost equal results and response times.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Performance</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must have a reasonable response time. Slow applications are not positively popular in society.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be able to give a fast response time to the users so the game is dynamic and entertaining.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Security</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Our web must be secure not only to protect data but to provide a realiable solution to our users. If we can&#8217;t assure our clients the web is secure, no one will use it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data will be only accessible by its owner. If a user tries to access other people&#8217;s information, the system will deny the operation, as data will be stored in a secure system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Portability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To reach the maximum number of users the application must work in the maximum number of infrastructures.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When users access the web from different browsers and devices, it must work and provide all the possible functionalities.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Usability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To make the website stand out from the competition, it must be easy to use, attract attention and be aestethic.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When the user wants to do something in the application, he/she should be able to do it without difficulty, guided by the interface elements.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Testability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All features of the application must be testable in order to verify that the web built was the one asked for.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit tests passed by the developers must generate an observable output.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Availability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be available 24 hours a day all weeks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user must be able to play at any time because it will be its free time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Change scenarios</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality goal</th>
+<th class="tableblock halign-left valign-top">Motivation</th>
+<th class="tableblock halign-left valign-top">Change scenario</th>
+<th class="tableblock halign-left valign-top">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maintainability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When developers must introduce a new feature to the web, they should be able to do it without changing the software architecture.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maintainability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When fixing errors and bugs on the system, developers should be able to do it without major consequences on the system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1710,6 +2578,85 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div class="sect1">
 <h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section contains a list of identified risks that the project will face during its lifetime. In addition to it, each particular risk comes with a brief
+self-explanatory description, the probability of its occurrence, its impact on the project and a solution on how to minimize it or mitigate it.</p>
+</div>
+<div class="sect2">
+<h3 id="_risks">11.1. Risks</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 30%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Risk</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Probability</th>
+<th class="tableblock halign-left valign-top">Impact</th>
+<th class="tableblock halign-left valign-top">Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Complications with the project characteristics</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Almost everyone on the team has never done a project of such a size, and there may be some trouble.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each member will try to maximize its knowledge on some aspect of the project in the first weeks, in order to be able to be something similar to a leader in each one of the posible key aspects of the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with Svelte</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As a team we decided to try a new language for the front-end.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The team will practice with the language to be able to do a good job when implementing the front-end.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with wikidata</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The team only used wikidata once before and not even everyone of us.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We must read some documentation and try out some basic features to familiarize with wikidata.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Teamwork issues</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The members of the team have never worked together. This may cause problems such as lack of communication or trust in each other&#8217;s work.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We will try to keep in touch a few times a week, to see each ones progress on our tasks and we will try to build some confidence with each other throughout the development of the project as most of us met on this subject.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Differences with technologies</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There are some members that don&#8217;t know as much in some aspects of the development</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The members that know more on each of the aspects will help the others understand the things they could find difficult.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Deadlines</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project is based on some deadline days when our work is presented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very high</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The team will follow the planification of the project to avoid problems on each one of the deadlines.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_technical_debts">11.2. Technical Debts</h3>
+<div class="paragraph">
+<div class="title">Wikidata</div>
+<p>The day when wikidata is outdated could come, and the app could still be working. It&#8217;s quite difficult but it could happen.</p>
+</div>
+<div class="paragraph">
+<div class="title">Availability</div>
+<p>The fact of using wikidata for retrieving the questions could mean that if the service of wikidata fails for some reason, the app would be failing as well.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1734,6 +2681,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1788,12 +2736,52 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>WIQ</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A web application where users can register and login in order to play. The game consists on answering a number of questions with different types and subjects obtaining a prize for each question well answered.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Wikidata</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>It is a collaborative, free and open knowledge base that stores structured information. It aims to provide a common source of data that can be used by Wikimedia projects and anyone else, under a public domain license.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Saber y ganar</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>It is a Spanish television quiz show. It involves contestants competing in several rounds of questions to test their knowledge in different categories.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Diagram</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A visual representation of information, data flow, processes, or systems using symbols, shapes, and lines to illustrate relationships, connections, and concepts.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Front-ent</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Refers to the part of a software application or website that users interact with directly. It encompasses the user interface, design elements, and functionality visible to users.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Back-end</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The behind-the-scenes part of a software application or website responsible for handling data processing, server-side logic, and database interactions. It includes the server, database, and application logic that users do not directly interact with.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Microservices</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>An architectural approach to building software applications as a collection of small, loosely coupled services. Each service is designed to perform a specific business function and can be developed, deployed, and scaled independently.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stakeholder</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Individuals or groups with an interest or concern in a project, product, or organization. Stakeholders may include any party affected by or involved in the outcomes of a particular initiative.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docker</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A platform for developing, shipping, and running applications in containers. It allows developers to package applications and their dependencies into standardized units called containers, providing a consistent environment for software deployment across different computing environments.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A popular open-source NoSQL database management system known for its flexibility, scalability, and ease of use. It stores data in a flexible, JSON-like format called BSON and is commonly used for applications requiring high-volume data storage and real-time data processing.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Svelte</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A modern JavaScript framework for building user interfaces. Unlike traditional frameworks that require the runtime presence of a virtual DOM, Svelte shifts the work to compile-time, resulting in highly optimized and efficient code with smaller bundle sizes.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API (Application programming interface)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications can use to request and exchange information. They enable developers to access the functionality of other software components or services without having to understand their internal workings. APIs are commonly used to integrate third-party services, access data from remote servers, and build modular and interoperable software systems.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1803,7 +2791,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-14 17:04:57 +0100
+Last updated 2024-02-01 12:49:52 +0100
 </div>
 </div>
 </body>
