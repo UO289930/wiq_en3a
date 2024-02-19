@@ -103,7 +103,7 @@ frame UbuntuServer {
 
 
         frame WebAPP {
-            node React/Svelte
+            node React
         }
 
         frame NodeJSGateway {
@@ -113,9 +113,9 @@ frame UbuntuServer {
         }
 
         frame MongoDB {
-            node Users
+            node UsersDatabase
 
-            node Analytics
+            node ResultsDatabase
         }
 
         frame .NET {
@@ -126,16 +126,16 @@ frame UbuntuServer {
     frame GitHub{
 
         frame GitHubActions{
-            node docker-compose
+            node dockerCompose
         }
 
     }
 }
 
-.NET -- MongoDB : MongoDB (port 27017)
-NodeJSGateway -- MongoDB : MongoDB (port 27017)
-WebApp -- NodeJSGateway : (port 8000:8002)
-WebApp -- .NET : .NET (port TBD)
+.NET -- ResultsDatabase : MongoDB (port 27017)
+NodeJSGateway -- UsersDatabase : MongoDB (port 27017)
+WebAPP -- NodeJSGateway : (port 8000:8002)
+WebAPP -- .NET : .NET (port TBD)
 client -- WebAPP : Web Browser (port 3000)
 
 Docker -- GitHubActions : on release
