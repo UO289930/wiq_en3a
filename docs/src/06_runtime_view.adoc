@@ -11,7 +11,10 @@ Sequence diagram for showing the process of a user logging in:
 [plantuml,"Login diagram",png]
 ----
 actor User
+collections FrontEnd
+collections UsersService
 database DB
+
 User -> FrontEnd: Request login
 FrontEnd -> UsersService: loginUser()
 UsersService  -> DB: checkUserData()
@@ -27,7 +30,10 @@ Sequence diagram for showing the process of a user creating an account:
 [plantuml,"Sign Up diagram",png]
 ----
 actor User
+collections FrontEnd
+collections UsersService
 database DB
+
 User -> FrontEnd: Request sign up
 FrontEnd -> UsersService: registerUser()
 UsersService -> DB: checkCredentialsExist()
