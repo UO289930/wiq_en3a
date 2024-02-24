@@ -42,6 +42,7 @@ UsersService  -> DB: CreateUserData()
 DB -> UsersService: Confirm data
 UsersService -> UsersService: signUp()
 UsersService -> FrontEnd: Redirect to login page
+@enduml
 ----
 
 === Data retrieval from WikiData
@@ -65,3 +66,5 @@ QuestionGenerator-> FrontEnd: Send game
 FrontEnd -> User: Question 1
 User-> FrontEnd: Answer 1
 ----
+
+=== <Runtime Scenario n>
