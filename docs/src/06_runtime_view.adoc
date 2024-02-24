@@ -44,4 +44,24 @@ UsersService -> UsersService: signUp()
 UsersService -> FrontEnd: Redirect to login page
 ----
 
-=== <Runtime Scenario n>
+=== Data retrieval from WikiData
+
+Sequence diagram for the process of retrieving data from WikiData
+
+[plantuml,"WikiData diagram",png]
+----
+actor User
+collections FrontEnd
+collections QuestionGenerator
+database Wikidata
+
+User -> FrontEnd: Request a game
+FrontEnd -> QuestionGenerator: createGame()
+QuestionGenerator-> Wikidata: Sparql query
+Wikidata-> QuestionGenerator : entitites data
+QuestionGenerator-> QuestionGenerator: fillQuestionStack()
+QuestionGenerator-> QuestionGenerator: popGameQuestions()
+QuestionGenerator-> FrontEnd: Send game
+FrontEnd -> User: Question 1
+User-> FrontEnd: Answer 1
+----
