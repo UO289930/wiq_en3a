@@ -1,3 +1,7 @@
+[![Deploy on release](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
+
 # wiq_en3a
 
 ## Welcome to WIQ👩‍🎓👨‍🎓 
@@ -14,10 +18,6 @@ Play with your friends and compare the scores. Who is the smartest❓
 🤓Let the game begin!👀🧠
 
   
-
-[![Deploy on release](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 
 This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html). 
 
