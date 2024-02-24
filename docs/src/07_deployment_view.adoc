@@ -112,7 +112,7 @@ frame UbuntuServer {
             node Users
         }
 
-        frame MongoDB {
+        database MongoDB {
             node UsersDatabase
 
             node ResultsDatabase
@@ -122,15 +122,15 @@ frame UbuntuServer {
             node RestAPI
         }
     }
+}
 
-    frame GitHub{
+frame GitHub{
 
         frame GitHubActions{
             node dockerCompose
         }
 
     }
-}
 
 .NET -- ResultsDatabase : MongoDB (port 27017)
 NodeJSGateway -- UsersDatabase : MongoDB (port 27017)
