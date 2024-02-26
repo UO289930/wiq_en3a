@@ -13,9 +13,7 @@ function Authentication() {
   return (
     
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold text-center mt-8">
-        Welcome to the 2024 edition of the Software Architecture course
-      </h1>
+      
       {showLogin ? <Login /> : <AddUser />}
       <div className="text-center mt-8">
         {showLogin ? (
