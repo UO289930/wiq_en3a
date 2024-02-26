@@ -87,7 +87,7 @@ Tabular or free form text.
 
 | *Performance*
 | The application must have a reasonable response time. Slow applications are not positively popular in society.
-| The application must be able to give a fast response time to the users so the game is dynamic and entertaining.
+| The application must be able to give a response time of at least 5 seconds with 10 concurrent users.
 | Very high
 
 | *Security*
@@ -95,15 +95,15 @@ Tabular or free form text.
 | Data will be only accessible by its owner. If a user tries to access other people's information, the system will deny the operation, as data will be stored in a secure system.
 | Very high
 
-| *Portability* 
-| To reach the maximum number of users the application must work in the maximum number of infrastructures. 
-| When users access the web from different browsers and devices, it must work and provide all the possible functionalities.
-| Very high
-
 | *Usability* 
 | To make the website stand out from the competition, it must be easy to use, attract attention and be aestethic.
-| When the user wants to do something in the application, he/she should be able to do it without difficulty, guided by the interface elements.
+| The user must be able to do identify the game elements shown in the screen as well as the menu for the different functionalities as the view profile or the logout ones.
 | Very high
+
+| *Portability* 
+| To reach the maximum number of users the application must work in the maximum number of infrastructures. 
+| The game experience and functionalities must be the same independently from the device which the user is connecting from.
+| High
 
 | *Testability* 
 | All features of the application must be testable in order to verify that the web built was the one asked for.

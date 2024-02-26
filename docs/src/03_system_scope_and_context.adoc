@@ -76,20 +76,19 @@ together with a mapping table showing the relationships between channels and inp
 
 ****
 
-**<Diagram or Table>**
+.Table of the Technical Context
 [cols="2,2"]
 |===
 | **Component** | **Technologies Used**
-| Front-end      | HTML, CSS, JavaScript (Svelte/React)
-| Back-end       | .NET/node.js, API de Wikidata
+| Front-end      | HTML, CSS, JavaScript (React)
+| Back-end       | .NET/node.js, Wikidata's API
 | Database  | MongoDB
 | Arquitechture | Microservices
 | Deployment and Maintenance | Docker
 |===
 
-**<optionally: Explanation of technical interfaces>**
 
-**<Mapping Input/Output to Channels>**
+.Mapping Input/Output to Channels
 [cols="2,2"]
 |===
 | **Component** | **Functionality**
