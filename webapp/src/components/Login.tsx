@@ -1,7 +1,6 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +23,7 @@ const Login = () => {
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
-    } catch (error) {
+    } catch (error : any) {
       setError(error.response.data.error);
     }
   };
@@ -34,46 +33,54 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <div className="container mx-auto mt-16 p-4 bg-white rounded shadow-lg">
       {loginSuccess ? (
         <div>
-          <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+          <h1 className="text-3xl font-bold text-center text-blue-500">
             Hello {username}!
-          </Typography>
-          <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
+          </h1>
+          <p className="text-center text-lg mt-2 text-gray-700">
             Your account was created on {new Date(createdAt).toLocaleDateString()}.
-          </Typography>
+          </p>
         </div>
       ) : (
         <div>
-          <Typography component="h1" variant="h5">
+          <h1 className="text-3xl font-bold text-blue-500 mb-4">
             Login
-          </Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Username"
+          </h1>
+          <input
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Password"
+          <input
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button variant="contained" color="primary" onClick={loginUser}>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white rounded-md px-4 py-2 w-full transition-colors duration-200"
+            onClick={loginUser}
+          >
             Login
-          </Button>
-          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
+          </button>
+          {openSnackbar && (
+            <div className="bg-green-500 text-white py-2 px-4 rounded-md mt-4">
+              Login successful
+            </div>
+          )}
           {error && (
-            <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
+            <div className="bg-red-500 text-white py-2 px-4 rounded-md mt-4">
+              Error: {error}
+            </div>
           )}
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 
