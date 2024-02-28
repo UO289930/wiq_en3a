@@ -7,7 +7,7 @@ import Login from './Login';
 const mockAxios = new MockAdapter(axios);
 
 describe('Login component', () => {
-  beforeEach(() => {
+ beforeEach(() => {
     mockAxios.reset();
   });
 
