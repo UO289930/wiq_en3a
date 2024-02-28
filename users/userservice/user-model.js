@@ -13,6 +13,22 @@ const userSchema = new mongoose.Schema({
       type: Date,
       default: Date.now, 
     },
+    email: {
+      type: String,
+      required: true,
+    },
+    questions_answered: {
+      type: int,
+      required: true, 
+    },
+    correctly_answered_questions: {
+      type: int,
+      required: false,
+    }
+
+
+
+
 });
 
 const User = mongoose.model('User', userSchema);
