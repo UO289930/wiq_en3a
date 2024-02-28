@@ -8,12 +8,27 @@ const User = require('./user-model')
 const app = express();
 const port = 8001;
 
-// Middleware to parse JSON in request body
+// Middleware to parse JSON in request bodyUsersDB
 app.use(bodyParser.json());
+ 
 
-// Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
+// Connect to MongoDB - testing
+const mongoUri = 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+mongoose.connect(mongoUri).then(
+  console.log('Succesfully connected to MongoDB')
+);
+
+
+// GET route to retrieve all users - not working
+app.get('/users', async (req, res) => {
+  try {
+      const users = await User.find(); // Retrieve all users from the database
+      console.log("Users:", users); // Print users in the terminal
+      res.json(users); // Send the array of users as JSON response
+  } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
@@ -26,6 +41,7 @@ function validateRequiredFields(req, requiredFields) {
     }
 }
 
+
 app.post('/adduser', async (req, res) => {
     try {
         // Check if required fields are present in the request body
@@ -37,6 +53,7 @@ app.post('/adduser', async (req, res) => {
         const newUser = new User({
             username: req.body.username,
             password: hashedPassword,
+            email: req.body.email
         });
 
         await newUser.save();
