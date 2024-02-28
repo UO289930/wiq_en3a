@@ -80,12 +80,16 @@ together with a mapping table showing the relationships between channels and inp
 [cols="2,2"]
 |===
 | **Component** | **Technologies Used**
-| Front-end      | HTML, CSS, JavaScript (React)
+| Front-end      | HTML, CSS (Tailwind), JavaScript (React)
 | Back-end       | .NET/node.js, Wikidata's API
 | Database  | MongoDB
 | Arquitechture | Microservices
 | Deployment and Maintenance | Docker
 |===
+
+
+.Diagram of the Technical Context
+image::3_2-Technical-Context-Diagram-EN.png["Technical Context"]
 
 
 .Mapping Input/Output to Channels
