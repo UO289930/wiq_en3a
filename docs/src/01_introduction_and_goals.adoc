@@ -115,6 +115,7 @@ Table with role names, person names, and their expectations with respect to the 
 |===
 | Role/Name     | Contact          | Expectations
 | Users         | N/A              | Intuitive and enjoyable quiz experience
+| Professors    | Pablo Gonzalez, Jose Labra  | The well-designed web application that fulfills the requirements
 | RTVE          | Project Manager  | Reliable and engaging platform for users
 | HappySw Team  | Development Team | Clear documentation and reliable system performance
 |===
