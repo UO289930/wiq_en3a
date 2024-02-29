@@ -15,14 +15,14 @@ const userSchema = new mongoose.Schema({
     },
     email: {
       type: String,
-      required: true,
+      required: true
     },
     questions_answered: {
-      type: int,
-      required: true, 
+      type: Number,
+      required: true,
     },
     correctly_answered_questions: {
-      type: int,
+      type: Number,
       required: false,
     }
 

@@ -14,17 +14,43 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB - testing
 const mongoUri = 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+
+// Connect to the database
 mongoose.connect(mongoUri).then(
   console.log('Succesfully connected to MongoDB')
 );
 
+app.get("/", async (req, res) => {
+  res.send("userservice for wiq_en3a");
 
-// GET route to retrieve all users - not working
-app.get('/users', async (req, res) => {
+  return res.status(200).send();
+});
+
+
+
+// GET route to retrieve one users - working
+app.get('/getOneUser', async (req, res) => {
   try {
-      const users = await User.find(); // Retrieve all users from the database
-      console.log("Users:", users); // Print users in the terminal
-      res.json(users); // Send the array of users as JSON response
+      
+      // access to the database 
+      const db = mongoose.connection.useDb("UsersDB");
+      
+      // access to the collection of the database
+      const userCollection = db.collection('User');
+      
+      userCollection.findOne({}, function(err, result) {
+        if (err) {
+          console.error('Error finding user:', err);
+        } else {
+          console.log('User:', result);
+          // Cerrar la conexión después de terminar la consulta
+          mongoose.connection.close();
+        }
+      });
+      //const users = await User.find(); // Retrieve all users from the database
+      //console.log("Users:", users); // Print users in the terminal
+      //res.json(users); // Send the array of users as JSON response
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
