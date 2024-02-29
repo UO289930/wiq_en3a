@@ -570,24 +570,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sergio\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\pedro\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
+      "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Documentos\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
       "projectName": "WikiDataTest",
-      "projectPath": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
-      "packagesPath": "C:\\Users\\Sergio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\obj\\",
+      "projectPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
+      "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Sergio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -642,6 +637,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

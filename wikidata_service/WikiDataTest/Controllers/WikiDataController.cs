@@ -15,13 +15,13 @@ namespace WikiDataTest.Controllers
             _logger = logger;
         }
 
-        [HttpGet("GetQuestions/{query}")]
-        public async Task<IActionResult> GetQuestions(string query)
+        [HttpGet("GetQuestions")]
+        public async Task<IActionResult> GetQuestions()
         {
             string endpointUrl = "https://query.wikidata.org/sparql?query=";
-            string sparqlQuery = "SELECT ?capital ?capitalLabel ?country ?countryLabel WHERE {  ?capital wdt:P1376 ?country.  ?capital wdt:P31 wd:Q5119. ?country wdt:P31 wd:Q3624078.  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}LIMIT 4";
+            string sparqlQuery = "SELECT ?capitalLabel ?countryLabel WHERE {  ?capital wdt:P1376 ?country.  ?capital wdt:P31 wd:Q5119. ?country wdt:P31 wd:Q3624078.  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}LIMIT 4";
 
-            var fullUrl = endpointUrl + query;
+            var fullUrl = endpointUrl + sparqlQuery;
 
             using (var client = new HttpClient())
             {
