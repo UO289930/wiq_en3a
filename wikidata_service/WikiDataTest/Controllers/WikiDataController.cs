@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
 
 namespace WikiDataTest.Controllers
 {
@@ -31,15 +31,46 @@ namespace WikiDataTest.Controllers
                 HttpResponseMessage response = await client.GetAsync(fullUrl);
 
                 string responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody);
-                var jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject(responseBody);
-                Console.WriteLine("------------------------------------------------------------------------------------");
 
-                Console.WriteLine(jsonResult);
+                RootObject jsonResult = JsonConvert.DeserializeObject<RootObject>(responseBody);
+                foreach(CapitalCountry c in jsonResult.results.bindings)
+                {
+                    Console.WriteLine(c.ToString());
+                }
+
+                
+
                 return Ok(jsonResult);
             }
            
         }
         
+    }
+
+    public class CapitalCountry
+    {
+        public Label capitalLabel { get; set; }
+        public Label countryLabel { get; set; }
+
+        public string ToString()
+        {
+            return countryLabel.value + ": " + capitalLabel.value;
+        }
+    }
+
+    public class Label
+    {
+        public string value { get; set; }
+    }
+
+
+    public class Results
+    {
+        public List<CapitalCountry> bindings { get; set; }
+    }
+
+    public class RootObject
+    {
+        public Results results { get; set; }
     }
 }

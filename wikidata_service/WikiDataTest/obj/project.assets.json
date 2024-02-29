@@ -570,23 +570,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ardil\\.nuget\\packages\\": {},
+    "C:\\Users\\Sergio\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ardil\\Desktop\\Clase\\ASW\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
+      "projectUniqueName": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
       "projectName": "WikiDataTest",
-      "projectPath": "C:\\Users\\ardil\\Desktop\\Clase\\ASW\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
-      "packagesPath": "C:\\Users\\ardil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ardil\\Desktop\\Clase\\ASW\\wiq_en3a\\wikidata_service\\WikiDataTest\\obj\\",
+      "projectPath": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\WikiDataTest.csproj",
+      "packagesPath": "C:\\Users\\Sergio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Sergio\\Documents\\GitHub\\wiq_en3a\\wikidata_service\\WikiDataTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ardil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sergio\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -595,8 +595,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -609,6 +607,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -647,7 +650,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

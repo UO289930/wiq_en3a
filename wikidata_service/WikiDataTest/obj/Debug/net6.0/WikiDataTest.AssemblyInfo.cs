@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WikiDataTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+acd20bb4116384df13ce8196886eac92d38bd027")]
 [assembly: System.Reflection.AssemblyProductAttribute("WikiDataTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WikiDataTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
