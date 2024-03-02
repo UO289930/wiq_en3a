@@ -19,14 +19,14 @@ const userSchema = new mongoose.Schema({
     },
     questions_answered: {
       type: Number,
-      required: true,
+      required: false,
     },
     correctly_answered_questions: {
       type: Number,
       required: false,
     }
 
-
+ 
 
 
 });
