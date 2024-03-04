@@ -11,8 +11,14 @@ const port = 8002;
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
+// Connect to MongoDB - testing
+const mongoUri = 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+
+// Connect to the database
+mongoose.connect(mongoUri).then(
+  console.log('Succesfully connected to MongoDB')
+);
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
@@ -26,20 +32,38 @@ function validateRequiredFields(req, requiredFields) {
 // Route for user login
 app.post('/login', async (req, res) => {
   try {
+
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
     const { username, password } = req.body;
 
-    // Find the user by username in the database
-    const user = await User.findOne({ username });
+    // access to the database 
+    const db = mongoose.connection.useDb("UsersDB");
+      
+    // access to the collection of the database
+    const userCollection = db.collection('User');
+
+    let user;
+    
+    await userCollection.findOne({ username: req.body.username }, function(err, result) {
+      if (err) {
+        console.error('Error finding user:', err);
+      } else {
+        user = result;
+        // Cerrar la conexión después de terminar la consulta
+        mongoose.connection.close();
+      }
+    });
+
+    console.log(user);
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
       // Generate a JWT token
-      const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+      const token = jwt.sign({ username: user.username, userEmail: user.email, questions_answered: user.questions_answered, correctly_answered_questions: user.correctly_answered_questions }, 'your-secret-key', { expiresIn: '1h' });
       // Respond with the token and user information
-      res.json({ token: token, username: username, createdAt: user.createdAt });
+      res.json({ token: token });
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }
