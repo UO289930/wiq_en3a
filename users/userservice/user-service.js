@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model')
+const User = require('./user-model') // user model
 
 const app = express();
 const port = 8001;
@@ -21,16 +21,43 @@ mongoose.connect(mongoUri).then(
   console.log('Succesfully connected to MongoDB')
 );
 
+// home
 app.get("/", async (req, res) => {
   res.send("userservice for wiq_en3a");
 
   return res.status(200).send();
 });
 
+const router = express.Router();
+
+// Get all users - not working
+app.get('/allUsers', async (req, res) => {
+  try {
+    // Obtener todos los usuarios usando el modelo User
+    const allUsers = await User.find();
+
+    // Objeto JSON con la lista de usuarios
+    const allUsersJSON = {
+      users: allUsers
+    };
+
+    res.json(allUsersJSON);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 
-// GET route to retrieve one users - working
-app.get('/getOneUser', async (req, res) => {
+
+
+
+
+
+
+
+// GET route to retrieve an specific user by username - working
+// 'http://localhost:8001/getOneUser?username=nombre_de_usuario'
+app.get('/getUser', async (req, res) => {
   try {
       
       // access to the database 
@@ -39,7 +66,7 @@ app.get('/getOneUser', async (req, res) => {
       // access to the collection of the database
       const userCollection = db.collection('User');
       
-      userCollection.findOne({}, function(err, result) {
+      userCollection.findOne({ username: req.body.username }, function(err, result) {
         if (err) {
           console.error('Error finding user:', err);
         } else {
