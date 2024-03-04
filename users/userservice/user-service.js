@@ -51,10 +51,6 @@ app.get('/allUsers', async (req, res) => {
 
 
 
-
-
-
-
 // GET route to retrieve an specific user by username - working
 // 'http://localhost:8001/getOneUser?username=nombre_de_usuario'
 app.get('/getUser', async (req, res) => {
@@ -106,11 +102,19 @@ app.post('/adduser', async (req, res) => {
         const newUser = new User({
             username: req.body.username,
             password: hashedPassword,
-            email: req.body.email
+            email: req.body.email,
+            questions_answered: 0,
+            correctly_answered_questions: 0
         });
 
-        await newUser.save();
-        res.json(newUser);
+        // access to the database 
+        const db = mongoose.connection.useDb("UsersDB");
+        
+        // access to the collection of the database
+        const userCollection = db.collection('User');
+        await userCollection.insertOne(newUser);
+
+        res.json(newUser.username);
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }});
