@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import AddUser from "./AddUser";
 import Login from "./Login";
 
-function Authentication() {
+type props = {
+  setIsLoggedState: (isLogged: boolean) => void;
+}
+
+const Authentication = (props : props) => {
   const [showLogin, setShowLogin] = useState(true);
 
 
@@ -14,7 +18,7 @@ function Authentication() {
     
     <div className="container mx-auto">
       
-      {showLogin ? <Login /> : <AddUser />}
+      {showLogin ? <Login setIsLoggedState={props.setIsLoggedState} /> : <AddUser />}
       <div className="text-center mt-8">
         {showLogin ? (
           <button
