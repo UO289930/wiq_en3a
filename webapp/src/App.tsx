@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Game from './components/Game/Game';
 import { loginWithToken } from './services/auth-service';
 import Authentication from './components/auth/Authentication';
 import { useUserStore } from './stores/user-store';
+import { Home } from './components/general/Home';
 
 function App() {
   
@@ -16,7 +16,7 @@ function App() {
     return <Authentication/>
   }
   else {
-    return <Game />
+    return <Home />
   }
   
 }

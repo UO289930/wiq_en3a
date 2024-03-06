@@ -1,4 +1,5 @@
 import React from "react";
+import {Button} from "../ui/button";
 
 type props = {
     onNextQuestion: () => void;
@@ -7,9 +8,9 @@ type props = {
 const NextQuestion = (props : props) =>{
   
     return (
-      <button className='m-5 p-3 border-2 border-purple-900 text-white bg-purple-500 rounded-full hover:bg-purple-700' onClick={ () => props.onNextQuestion()}>
-        Next Question
-      </button>
+      <Button className='m-5 p-3' variant={"ghost"} onClick={ () => props.onNextQuestion()}>
+        Next Question {'->'}
+      </Button>
     );
   }
 

@@ -12,10 +12,10 @@ type props = {
 
 const Answer = (props : props) => {
 
-    const commonStyle = 'flex justify-center items-center border-4 border-purple-700 py-2 px-4 rounded text-white font-bold text-2xl ';
+    const commonStyle = 'flex w-2/5 justify-center items-center py-2 px-4 rounded-2xl text-text font-bold text-2xl border-2 border-text ';
   
     const [clicked, setClicked] = useState(false);
-    const [buttonClass, setButtonClass] = useState(`${commonStyle} hover:bg-purple-700 bg-purple-500`);
+    const [buttonClass, setButtonClass] = useState(`${commonStyle}  hover:bg-background2 hover:cursor-pointer`);
   
     const handleClick = () => {
       setClicked(true);
@@ -23,11 +23,10 @@ const Answer = (props : props) => {
       processBhColor();
       props.setCorrectSelected(props.correctAnswer);
       if(props.correctAnswer) props.setScore(props.score + 10);
-      console.log(props.score);
     };
   
     const processBhColor = () => {
-      const newClass = props.correctAnswer ? 'bg-green-500' : 'bg-red-500';
+      const newClass = props.correctAnswer ? 'bg-primary' : 'bg-danger';
       setButtonClass( () => `${commonStyle} ${newClass}`);
     };
 
