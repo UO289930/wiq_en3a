@@ -45,11 +45,11 @@ export default function Game() {
   }
 
   return (
-    <div id='mainContainer' className='flex flex-col  h-screen '>
+    <div id='mainContainer' className='flex flex-col h-full text-text'>
         
-      <div id='pregunta' className='bg-purple-400 h-1/2 border-4 border-purple-700 flex-1'>
+      <div id='pregunta' className='h-1/2 flex-1'>
         <div className="flex justify-between">
-        <text className='text-white text-2xl p-8'> Score: {score} </text>
+        <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
         {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
         </div>
         <Question questionText={getQuestion()} />

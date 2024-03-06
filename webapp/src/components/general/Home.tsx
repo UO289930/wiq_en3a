@@ -11,11 +11,11 @@ export const Home = () => {
     const isPlaying = usePlayingState(state => state.playing);
     const showDialog = useShowCancellingDialog(state => state.show);
 
-    return (<div className="h-1/2">
+    return (<div className="flex flex-col h-full">
         <Nav />
         {isPlaying ? <Game /> : (
         <div className="flex h-full justify-center items-center"> 
-            <Button onClick={() => {usePlayingState.getState().startPlaying()}}>Start Game</Button>
+            <Button className="w-2/5 h-24 text-4xl" onClick={() => {usePlayingState.getState().startPlaying()}}>Start Game!</Button>
         </div>
         )}
     <AlertDialog open={showDialog}>
