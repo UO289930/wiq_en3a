@@ -15,7 +15,7 @@ export const Nav = () => {
         </Avatar>
         <div className="flex">
         <Button onClick={() => handleShowDialog(() => usePlayingState.getState().stopPlaying())} className="text-text hover:text-primary" variant="ghost">Home</Button>
-        <Button onClick={() => handleShowDialog(() => logout())} className="text-text hover:text-primary" variant="ghost">Logout</Button>
+        <Button onClick={() => handleShowDialog(() => {usePlayingState.getState().stopPlaying();logout()})} className="text-text hover:text-primary" variant="ghost">Logout</Button>
         </div>
         </div>
     )

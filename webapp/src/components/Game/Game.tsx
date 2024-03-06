@@ -3,8 +3,7 @@ import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
-import { logout, getUsername } from "../../services/auth-service";
-import { Nav } from "../general/Nav";
+import { usePlayingState } from "../../stores/playing-store";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
@@ -41,6 +40,7 @@ export default function Game() {
 
 
   if (questionCount >= 10) {
+    usePlayingState.getState().gameOver();
     return <GameOver score={score} />;
   }
 
