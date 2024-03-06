@@ -1,16 +1,12 @@
 // user-service.js
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model') // user model
 
 
 // app and port definition
 const app = express();
 const port = 8002;
-
-
 
 
 // Connect to MongoDB
@@ -30,7 +26,9 @@ const userRoutes = require('./userservice/user-service.js');
 app.use(bodyParser.json());
 
 // Routes middlewares to be used
+//app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+
 
 
 
