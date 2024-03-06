@@ -1,14 +1,22 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode"; 
+import { useUserStore } from '../stores/user-store';
 
 const API_URL = 'http://localhost:8002';
 
-type JwtPayload = {
+export type JwtPayload = {
   username: string;
   userEmail: string;
   questions_answered: number;
   correctly_answered_questions: number;
 };
+
+export const loginWithToken = () => {
+  const tokenInfo = getTokenInfo();
+  if(tokenInfo) {
+    useUserStore.getState().setUser(tokenInfo);
+  }
+}
 
 export const login = async (username: string, password: string)=> {
   try {
@@ -16,6 +24,7 @@ export const login = async (username: string, password: string)=> {
     const token = response.data.token;
     console.log('token:', token);
     localStorage.setItem('token', token); // store the token in local storage
+    loginWithToken();
     return true;
   } catch (error) {
     console.error('Error during login:', error);
@@ -41,7 +50,8 @@ export const isLogged = () => {
 };
 
 export const logout = () => {
-  localStorage.removeItem('token'); 
+  localStorage.removeItem('token');
+  useUserStore.getState().logout();
 };
 
 export const getTokenInfo = (): JwtPayload | null => {

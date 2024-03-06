@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
-import { logout } from "../../services/auth-service";
+import { logout, getUsername } from "../../services/auth-service";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
@@ -30,7 +30,10 @@ export default function Game() {
 
   return (
     <div id='mainContainer' className='flex flex-col  h-screen '>
-      <div> <button onClick={() => logout()}>logout</button></div>
+      <div className="flex justify-between"> 
+        <h1> {getUsername()}</h1>
+        <button onClick={() => logout()}>logout</button>
+      </div>
       <div id='pregunta' className='bg-purple-400 h-1/2 border-4 border-purple-700 flex-1'>
         <div className="flex justify-between">
         <text className='text-white text-2xl p-8'> Score: {score} </text>

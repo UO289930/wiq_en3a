@@ -2,12 +2,9 @@
 import React, { useState } from 'react';
 import {login} from '../../services/auth-service';
 
-type props = {
-  setIsLoggedState: (isLogged: boolean) => void;
-}
 
 
-const Login = (props:props) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,8 +14,6 @@ const Login = (props:props) => {
     const response = await login(username, password);
     if (!response) {
       setError("No funca el login");
-    } else {
-      props.setIsLoggedState(true);
     }
     
   }
