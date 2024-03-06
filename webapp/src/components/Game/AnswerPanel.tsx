@@ -13,7 +13,7 @@ type props = {
 
 const AnswerPanel = (props: props) => {
   return (
-    <div id="respuestas" className="flex flex-wrap gap-10 justify-center flex-1  ">
+    <div id="respuestas" className="flex flex-wrap gap-10 justify-center flex-1 py-5  ">
       {props.answers.map((answer, index) => {
         return (
           <Answer
