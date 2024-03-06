@@ -1,4 +1,4 @@
-import { usePlayingState } from "../../stores/playing-store"
+import { handleShowDialog, usePlayingState } from "../../stores/playing-store"
 import { logout } from "../../services/auth-service"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {Button} from "../ui/button"
@@ -14,8 +14,8 @@ export const Nav = () => {
             <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="flex">
-        <Button onClick={() => usePlayingState.getState().stopPlaying} className="text-text hover:text-primary" variant="ghost">Home</Button>
-        <Button onClick={() => logout()} className="text-text hover:text-primary" variant="ghost">Logout</Button>
+        <Button onClick={() => handleShowDialog(() => usePlayingState.getState().stopPlaying())} className="text-text hover:text-primary" variant="ghost">Home</Button>
+        <Button onClick={() => handleShowDialog(() => logout())} className="text-text hover:text-primary" variant="ghost">Logout</Button>
         </div>
         </div>
     )
