@@ -18,7 +18,7 @@ mongoose.connect(mongoUri).then(
 
 
 // Routes
-//const authRoutes = require('./authservice/auth-service.js');
+const authRoutes = require('./authservice/auth-service.js');
 const userRoutes = require('./userservice/user-service.js');
 
 
@@ -26,7 +26,7 @@ const userRoutes = require('./userservice/user-service.js');
 app.use(bodyParser.json());
 
 // Routes middlewares to be used
-//app.use('/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 
 

@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const User = require('./auth-model')
+const authUser = require('./auth-model')
+const jwt = require('jsonwebtoken');
 
 
 // Function to validate required fields in the request body
