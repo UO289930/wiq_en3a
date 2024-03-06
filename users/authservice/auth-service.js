@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('./auth-model')
+const cors = require('cors');
 
 const app = express();
 const port = 8002; 
 
+
+app.use(cors());
 // Middleware to parse JSON in request body
 app.use(express.json());
 
@@ -51,8 +54,6 @@ app.post('/login', async (req, res) => {
         console.error('Error finding user:', err);
       } else {
         user = result;
-        // Cerrar la conexión después de terminar la consulta
-        mongoose.connection.close();
       }
     });
 

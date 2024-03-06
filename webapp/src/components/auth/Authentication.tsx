@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import AddUser from "./AddUser";
 import Login from "./Login";
 
-function Authentication() {
+
+const Authentication = () => {
   const [showLogin, setShowLogin] = useState(true);
 
 
