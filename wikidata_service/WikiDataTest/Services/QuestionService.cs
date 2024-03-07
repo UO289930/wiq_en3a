@@ -54,6 +54,7 @@ namespace WikiDataTest.Services
                     {
                         wrongId = r.Next(capitalCountries.Length);
                     }
+                    // Adding the id of the wrongAnswer to the array
                     wrongIds[w - 1] = wrongId;
                     answers[w] = capitalCountries[wrongId].capitalLabel.value;
                 }
