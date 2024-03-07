@@ -37,7 +37,22 @@ namespace WikiDataTest.Controllers
             }
 
             return Ok(questions);
-        }       
+        }   
+
+         [HttpGet("GetQuestionss")]
+        public async Task<IActionResult> GetQuestionss()
+        {
+            RootObject jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetMovieDirectorQuery());
+
+            // Question[] questions = _questionService.GenerateQuestionsCapitalsOf(jsonQuestions.results.bindings.ToArray<CapitalCountry>());
+
+            // foreach (var item in questions)
+            // {
+            //     Console.WriteLine(item.ToString());
+            // }
+
+            return Ok(jsonQuestions);
+        }           
     }
 
 }
