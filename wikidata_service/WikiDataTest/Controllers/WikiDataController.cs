@@ -24,8 +24,8 @@ namespace WikiDataTest.Controllers
             _questionService = questionService;
         }
 
-        [HttpGet("GetQuestions")]
-        public async Task<IActionResult> GetQuestions()
+        [HttpGet("GetCapitalsQuestions")]
+        public async Task<IActionResult> GetCapitalsQuestions()
         {
             RootObject jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetCapitalsQuery());
 
@@ -39,20 +39,21 @@ namespace WikiDataTest.Controllers
             return Ok(questions);
         }   
 
-         [HttpGet("GetQuestionss")]
-        public async Task<IActionResult> GetQuestionss()
+        [HttpGet("GetQuestionsMovieQuestions")]
+        public async Task<IActionResult> GetQuestionsMovieDirectorQuestions()
         {
-            RootObject jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetMovieDirectorQuery());
-
-            // Question[] questions = _questionService.GenerateQuestionsCapitalsOf(jsonQuestions.results.bindings.ToArray<CapitalCountry>());
-
-            // foreach (var item in questions)
-            // {
-            //     Console.WriteLine(item.ToString());
-            // }
+            var jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetMovieDirectorQuery());
 
             return Ok(jsonQuestions);
-        }           
+        }        
+
+        [HttpGet("GetElementSymbolQuestions")]
+        public async Task<IActionResult> GetElementSymbolQuestions()
+        {
+            var jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetElementSymbolQuery());
+
+            return Ok(jsonQuestions);
+        }       
     }
 
 }
