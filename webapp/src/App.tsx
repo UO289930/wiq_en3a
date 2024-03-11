@@ -12,12 +12,13 @@ function App() {
     loginWithToken();
   }, []);
 
-  if (user == null) {
-    return <Authentication/>
-  }
-  else {
-    return <Home />
-  }
+  // if (user == null) {
+  //   return <Authentication/>
+  // }
+  // else {
+  //   return <Home />
+  // }
+  return <Home />
   
 }
 

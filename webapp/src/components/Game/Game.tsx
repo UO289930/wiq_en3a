@@ -3,14 +3,14 @@ import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
-import { usePlayingState } from "../../stores/playing-store";
+import { obtenerPreguntas,useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer } from "../../stores/playing-store";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
     const [loading, setLoading] = useState(false); // Nuevo estado para controlar si se están cargando nuevas preguntas
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
-    const [questionCount, setQuestionCount] = useState(0); // Estado para rastrear el número de preguntas mostradas
+    
 
 
 
@@ -20,29 +20,23 @@ export default function Game() {
     setTimeout(() => {
       setLoading(false); // Establecer loading en false después de un tiempo de espera
       setAnswered(false); // Reiniciar el estado answered
-      setQuestionCount(questionCount + 1); // Incrementar el contador de preguntas
+      useGameQuestions.getState().nextQuestion(); // Incrementar el contador de preguntas
     }, 0);
   };
 
-  function getAnswersList(){
-    cAnswer = 2;
-    return ['a1', 'b2', 'c3', 'd4'];
-  }
+  // obtenerPreguntas();
 
-  var cAnswer=-1;
-   
+  let questions = useGameQuestions(state => state.questions);
+  let questionCount = useGameQuestions(state => state.questionCount);
+  
 
-  var questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10']
-
-  function getQuestion(){
-    return questions[questionCount];
-  }
-
-
-  if (questionCount >= 10) {
-    usePlayingState.getState().gameOver();
+  console.log(questions);
+  
+  if (questionCount === 10) {
     return <GameOver score={score} />;
   }
+
+  
 
   return (
     <div id='mainContainer' className='flex flex-col h-full text-text'>
@@ -52,13 +46,13 @@ export default function Game() {
         <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
         {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
         </div>
-        <Question questionText={getQuestion()} />
-        {answered && (<span className='flex justify-center text-3xl '> {correctSelected?'CORRECT!':'WRONG! correct answer : ' + getAnswersList()[cAnswer]} </span>)}
+        <Question questionText={getQuestion(questions, questionCount)} />
+        {answered && (<span className='flex justify-center text-3xl '> {correctSelected?'CORRECT!':'WRONG! correct answer : ' + getCorrectAnswer(questions, questionCount)} </span>)}
         
       </div>
       {!loading && <AnswerPanel score={score}
             setCorrectSelected={setCorrectSelected}
-            setScore={setScore}answered={answered} setAnswered={setAnswered} answers={getAnswersList()} correctAnswer={cAnswer}/>}
+            setScore={setScore}answered={answered} setAnswered={setAnswered} answers={getAnswersList(questions, questionCount)} correctAnswer={getCorrectAnswer(questions, questionCount)}/>}
     </div>
   );
 }
