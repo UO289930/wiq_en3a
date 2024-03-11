@@ -2,7 +2,7 @@
 FROM node:20
 
 # Set the working directory in the container
-WORKDIR /usr/src/authservice
+WORKDIR /usr/src/users
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8002
 
 # Define the command to run your app
-CMD ["node", "auth-service.js"]
+CMD ["node", "index.js"]

@@ -1,59 +1,15 @@
-// user-service.js
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-const User = require('./user-model') // user model
-
-const app = express();
-const port = 8001;
-
-// Middleware to parse JSON in request bodyUsersDB
-app.use(bodyParser.json());
- 
-
-// Connect to MongoDB - testing
-const mongoUri = 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-
-
-// Connect to the database
-mongoose.connect(mongoUri).then(
-  console.log('Succesfully connected to MongoDB')
-);
-
-// home
-app.get("/", async (req, res) => {
-  res.send("userservice for wiq_en3a");
-
-  return res.status(200).send();
-});
-
 const router = express.Router();
-
-// Get all users - not working
-app.get('/allUsers', async (req, res) => {
-  try {
-    // Obtener todos los usuarios usando el modelo User
-    const allUsers = await User.find();
-
-    // Objeto JSON con la lista de usuarios
-    const allUsersJSON = {
-      users: allUsers
-    };
-
-    res.json(allUsersJSON);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+const bcrypt = require('bcrypt');
+const User = require('./user-model')
 
 
 
+// GET route to retrieve an specific user by username
+// 'http://localhost:8002/getOneUser?username=nombre_de_usuario'
 
-
-// GET route to retrieve an specific user by username - working
-// 'http://localhost:8001/getOneUser?username=nombre_de_usuario'
-app.get('/getUser', async (req, res) => {
+router.get('/getUser', async (req, res) => {
   try {
       
       // access to the database 
@@ -71,9 +27,6 @@ app.get('/getUser', async (req, res) => {
           mongoose.connection.close();
         }
       });
-      //const users = await User.find(); // Retrieve all users from the database
-      //console.log("Users:", users); // Print users in the terminal
-      //res.json(users); // Send the array of users as JSON response
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -91,7 +44,7 @@ function validateRequiredFields(req, requiredFields) {
 }
 
 
-app.post('/adduser', async (req, res) => {
+router.post('/adduser', async (req, res) => {
     try {
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
@@ -119,14 +72,35 @@ app.post('/adduser', async (req, res) => {
         res.status(400).json({ error: error.message }); 
     }});
 
-const server = app.listen(port, () => {
-  console.log(`User Service listening at http://localhost:${port}`);
+
+
+
+// edit a user to update the total and correct question answered
+router.post('/editUser', async (req, res) => {
+  try {
+
+      // --- find the user to be updated
+      const db = mongoose.connection.useDb("UsersDB"); // database
+      const userCollection = db.collection('User');    // collection
+      
+      let userToUpdate = await userCollection.findOne({ username: req.body.username });
+      if (!userToUpdate) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      // --- update the fields 
+      userToUpdate.questions_answered = userToUpdate.questions_answered + req.body.questions_answered;
+      userToUpdate.correctly_answered_questions = userToUpdate.correctly_answered_questions + req.body.correctly_answered_questions;
+
+      // --- update the user in the database
+      await userCollection.updateOne({ username: userToUpdate.username }, { $set: userToUpdate });
+      return res.json({ message: 'User updated' });
+
+  } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-// Listen for the 'close' event on the Express.js server
-server.on('close', () => {
-    // Close the Mongoose connection
-    mongoose.connection.close();
-  });
 
-module.exports = server
+
+module.exports = router;
