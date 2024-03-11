@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using WikiDataTest.Controllers;
 using WikiDataTest.Models;
 
 namespace WikiDataTest.Services
