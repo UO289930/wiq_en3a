@@ -1,73 +1,80 @@
 // src/components/AddUser.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import {register} from '../../services/auth-service';
 
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+type props = {
+  onRegistrationCompleted: (username:String) => void;
+}
 
-const AddUser = () => {
+
+const AddUser = (props: props)  => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const[confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const addUser = async () => {
-    try {
-      await axios.post(`${apiEndpoint}/adduser`, { username, password });
-      setOpenSnackbar(true);
-    } catch (error : any) {
-      setError(error.response.data.error);
+
+  const registerUser = async () => {
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
     }
-  };
+    const response = await register(email,username, password);
+    if (!response) {
+      setError("Error while registering");
+    }
+    else {
+      props.onRegistrationCompleted(response);
+    }
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+    
+  }
+
 
   return (
-    <div className="container mx-auto mt-16">
-  <h1 className="text-3xl font-bold mb-4">Add User</h1>
-  <label htmlFor="username" className="block mb-2">Username</label>
-  <input
-    id="username"
-    name="username"
-    className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-    type="text"
-    placeholder="Username"
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-  />
-  <label htmlFor="password" className="block mb-2">Password</label>
-  <input
-    id="password"
-    name="password"
-    className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full"
-    type="password"
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-  />
-  <button
-    className="bg-blue-500 text-white rounded-md px-4 py-2 w-full"
-    onClick={addUser}
-  >
-    Add User
-  </button>
-  <div className="mt-4">
-    {openSnackbar && (
-      <div className="bg-green-500 text-white py-2 px-4 rounded-md mb-4">
-        User added successfully
-      </div>
-    )}
-    {error && (
-      <div className="bg-red-500 text-white py-2 px-4 rounded-md">
-        Error: {error}
-      </div>
-    )}
-  </div>
-</div>
+    <Card className="">
+          <CardHeader>
+            <CardTitle>Register</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="space-y-1">
+              <Label htmlFor="Username">Username</Label>
+              <Input value={username}
+          onChange={(e) => setUsername(e.target.value)} id="Username"  />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="Email">Email</Label>
+              <Input value={email}
+          onChange={(e) => setEmail(e.target.value)} id="Email"  />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="password">Password</Label>
+              <Input value={password}
+          onChange={(e) => setPassword(e.target.value)} type="password" id="password" />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)} type="password" id="confirmPassword" />
+            </div>
+            {error && (
+            <Label className="text-danger">
+              Error: {error}
+            </Label>
+          )}
+          </CardContent>
+          <CardFooter>
+            <Button onClick={() => registerUser()}> Register</Button>
+          </CardFooter>
+        </Card>
+  )
 
 
-  );
 };
 
 export default AddUser;

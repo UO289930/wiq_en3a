@@ -66,7 +66,7 @@ router.post('/adduser', async (req, res) => {
         // access to the collection of the database
         const userCollection = db.collection('User');
         await userCollection.insertOne(newUser);
-
+        console.log(newUser.username);
         res.json(newUser.username);
     } catch (error) {
         res.status(400).json({ error: error.message }); 

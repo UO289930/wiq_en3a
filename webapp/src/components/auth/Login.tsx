@@ -6,9 +6,12 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
+interface props {
+  postRegisterText: string;
+}
 
 
-const Login = () => {
+const Login = (props:props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,8 +19,7 @@ const Login = () => {
   const loginUser = async () => {
     const response = await login(username, password);
     if (!response) {
-      console.log('No funca el login');
-      setError("No funca el login");
+      setError("Invalid Credentials");
     }
     
   }
@@ -28,6 +30,7 @@ const Login = () => {
           <CardHeader>
             <CardTitle>Login</CardTitle>
           </CardHeader>
+          
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="Username">Username</Label>
@@ -44,6 +47,9 @@ const Login = () => {
               Error: {error}
             </Label>
           )}
+          {props.postRegisterText && (
+          <Label className="text-primary">{props.postRegisterText}</Label>
+        )}
           </CardContent>
           <CardFooter>
             <Button onClick={() => loginUser()}> Login</Button>
