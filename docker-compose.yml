@@ -11,6 +11,16 @@ services:
     networks:
       - mynetwork
 
+  wikidata_service: 
+    container_name: wikidata_service-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3awikidata_service:latest 
+    build: ./wikidata_service/WikiDataTest
+    profiles: ["dev", "prod"]
+    ports:
+      - "7259:7259" 
+    networks:
+      - mynetwork
+
   authservice:
     container_name: authservice-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_en3a/authservice:latest
@@ -48,6 +58,7 @@ services:
       - mongodb
       - userservice
       - authservice
+      - wikidata_service
     ports:
       - "8000:8000"
     networks:
