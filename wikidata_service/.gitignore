@@ -1,7 +1,3 @@
-node_modules
-coverage
-docs/build
-
 # globs
 Makefile.in
 *.userprefs
