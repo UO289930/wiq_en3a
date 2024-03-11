@@ -41,3 +41,42 @@ export const handleShowDialog = ( func: () => void) =>  {
     }
 }
 
+export type Question = {
+    text: string,
+    answers: string[],
+    correctAnswer: number
+}
+
+interface GameQuestions{
+    questions: Question[],
+    setQuestions: (questions: any[]) => void,
+    questionCount: number,
+    nextQuestion: () => void
+}
+
+const retrieveQuestions = ():Question[] =>{
+  try {
+    fetch('https:localhost:7259/WikiData/GetQuestions').then((response) => response.json())
+      .then(data => {
+        useGameQuestions.getState().setQuestions(data);
+      }); 
+  } catch (error) {
+    console.error('There was a problem with the questions:', error); 
+  }
+  const questions: Question[] = [];
+  return questions;
+}
+
+export const useGameQuestions = create<GameQuestions>((set) => ({
+  questions: retrieveQuestions(),
+  setQuestions: (questions: any[]) => set({questions: questions}),
+  questionCount: 0,
+  nextQuestion: () => set(state => ({questionCount: state.questionCount + 1}))
+}));
+
+export const getQuestion= (questions:Question[], questionCount:number) => questions[questionCount].text;
+export const getAnswersList= (questions:Question[], questionCount:number) => questions[questionCount].answers;
+export const getCorrectAnswer= (questions:Question[], questionCount:number) => questions[questionCount].correctAnswer;
+
+
+
