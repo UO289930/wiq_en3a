@@ -1,21 +1,27 @@
-# wiq_en3a
-
-Members:
-- Sergio Truébano Robles -> uo289930@uniovi.es
-- Pedro Limeres Granado -> uo282763@uniovi.es
-- Alberto Guerra Rodas -> UO282421@uniovi.es
-- Ángel Macías Rodríguez -> uo289362@uniovi.es
-- Rita Fernández-Catuxo Ortiz -> uo284185@uniovi.es
-- Vira Terletska -> viraterletska2005@gmail.com
-- Sergio Llenderrozos Piñera -> uo283367@uniovi.es
-
 [![Deploy on release](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_en3a/actions/workflows/release.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 
+# wiq_en3a
+
+## Welcome to WIQ👩‍🎓👨‍🎓 
+
+The WIQ is a web application where you can show off your knowledge.
+
+Creat an account or log in if you are already a member and start the engaging quiz!
+Enjoy the variaty of questions, which are automatically generated from a vast pool of data available in Wikidata🌎. Each question offers multiple-choice options, including correct answer and several distractors🔍. Choose a right answer and win the prize🏆. Stay sharp and focused, there are also the time limits, --> the clock is ticking🕐 ⏳. 
+
+
+The more you know the more you win 🥇!
+Play with your friends and compare the scores. Who is the smartest❓
+
+🤓Let the game begin!👀🧠
+
+  
+
 This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html). 
 
-This repo is a basic application composed of several components.
+➡This repo is a basic application composed of several components.
 
 - **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
 - **User service**. Express service that handles the insertion of new users in the system.
@@ -24,7 +30,7 @@ This repo is a basic application composed of several components.
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
 
-## Quick start guide
+## Quick start guide 🏁
 
 ### Using docker
 
@@ -40,7 +46,7 @@ and launch it with docker compose:
 docker compose --profile dev up --build
 ```
 
-### Starting Component by component
+### Starting Component by component🔍
 
 First, start the database. Either install and run Mongo or run it using docker:
 
@@ -54,7 +60,7 @@ Lastly, go to the webapp directory and launch this component with `npm install` 
 
 After all the components are launched, the app should be available in localhost in port 3000.
 
-## Deployment
+## Deployment➡
 
 For the deployment, we have several options. 
 
@@ -64,7 +70,7 @@ Other options include using the container services that most cloud services prov
 
 We are going to use the first approach, creating a virtual machine in a cloud service and after installing docker and docker-compose, deploy our containers there using GitHub Actions and SSH.
 
-### Machine requirements for deployment
+### Machine requirements for deployment✅
 
 The machine for deployment can be created in services like Microsoft Azure or Amazon AWS. These are in general the settings that it must have:
 
@@ -86,7 +92,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### Continuous delivery (GitHub Actions)
+### Continuous delivery (GitHub Actions)🐱‍👤
 
 Once we have our machine ready, we could deploy by hand the application, taking our docker-compose file and executing it in the remote machine. 
 
@@ -121,3 +127,13 @@ This action uses three secrets that must be configured in the repository:
 - DEPLOY_KEY: key to authenticate the user in the remote machine.
 
 Note that this action logs in the remote machine and downloads the docker-compose file from the repository and launches it. Obviously, previous actions have been executed which have uploaded the docker images to the GitHub Packages repository.
+
+##  👩‍💻Members:
+
+- Sergio Truébano Robles -> uo289930@uniovi.es
+- Pedro Limeres Granado -> uo282763@uniovi.es
+- Alberto Guerra Rodas -> UO282421@uniovi.es
+- Ángel Macías Rodríguez -> uo289362@uniovi.es
+- Rita Fernández-Catuxo Ortiz -> uo284185@uniovi.es
+- Vira Terletska -> uo305097@uniovi.es
+- Sergio Llenderrozos Piñera -> uo283367@uniovi.es

@@ -37,8 +37,6 @@ router.post('/login', async (req, res) => {
         console.error('Error finding user:', err);
       } else {
         user = result;
-        // Cerrar la conexión después de terminar la consulta
-        mongoose.connection.close();
       }
     });
 
