@@ -2,8 +2,8 @@ const axios = require('axios');
 
 async function testLogin() {
   try {
-    const response = await axios.post('http://localhost:8002/login', {
-      username: 'tomas',
+    const response = await axios.post('http://localhost:8002/auth/login', {
+      username: 'trogui',
       password: '0000'
     });
 
