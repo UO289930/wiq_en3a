@@ -11,6 +11,21 @@
             this.text = text;
             this.answers = answers;
             this.correctAnswer = correctAnswer;
+            suffleAnswers();
+        }
+
+        private void suffleAnswers()
+        {
+            Random rand = new Random();
+            int newIndex = rand.Next(answers.Length);
+
+            // Swap correct answer with the answer at the new index
+            string temp = answers[newIndex];
+            answers[newIndex] = answers[correctAnswer];
+            answers[correctAnswer] = temp;
+
+            // Update correctAnswer to point to the new index
+            correctAnswer = newIndex;
         }
 
         public string ToString()

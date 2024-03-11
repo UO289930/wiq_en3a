@@ -24,8 +24,8 @@ namespace WikiDataTest.Controllers
             _questionService = questionService;
         }
 
-        [HttpGet("GetQuestions")]
-        public async Task<IActionResult> GetQuestions()
+        [HttpGet("GetCapitalsQuestions")]
+        public async Task<IActionResult> GetCapitalsQuestions()
         {
             RootObject jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetCapitalsQuery());
 
@@ -37,6 +37,22 @@ namespace WikiDataTest.Controllers
             }
 
             return Ok(questions);
+        }   
+
+        [HttpGet("GetQuestionsMovieQuestions")]
+        public async Task<IActionResult> GetQuestionsMovieDirectorQuestions()
+        {
+            var jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetMovieDirectorQuery());
+
+            return Ok(jsonQuestions);
+        }        
+
+        [HttpGet("GetElementSymbolQuestions")]
+        public async Task<IActionResult> GetElementSymbolQuestions()
+        {
+            var jsonQuestions = await _wikiDataService.GetQuestions(_queryService.GetElementSymbolQuery());
+
+            return Ok(jsonQuestions);
         }       
     }
 
