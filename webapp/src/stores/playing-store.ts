@@ -56,7 +56,7 @@ interface GameQuestions{
 
 const retrieveQuestions = ():Question[] =>{
   try {
-    fetch('https:localhost:7259/WikiData/GetQuestions').then((response) => response.json())
+    fetch('https:localhost:7259/WikiData/GetCapitalsQuestions').then((response) => response.json())
       .then(data => {
         useGameQuestions.getState().setQuestions(data);
       }); 
