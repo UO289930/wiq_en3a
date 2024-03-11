@@ -2,10 +2,10 @@ const axios = require('axios');
 
 async function testAddUser() {
   try {
-    const response = await axios.post('http://localhost:8001/addUser', {
-      username: 'trogui',
+    const response = await axios.post('http://localhost:8002/user/adduser', {
+      username: 'manolo',
       password: '0000', 
-      email: 'trogui@gmail.com'
+      email: 'manolo@gmail.com'
     });
 
     console.log('Response:', response.data);
