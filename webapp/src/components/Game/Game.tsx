@@ -3,7 +3,7 @@ import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
-import { obtenerPreguntas,useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer } from "../../stores/playing-store";
+import {  useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer } from "../../stores/playing-store";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
@@ -11,9 +11,6 @@ export default function Game() {
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
     
-
-
-
   const handleNextQuestion = () => {
     setLoading(true); // Establecer loading en true al hacer clic en "Next Question"
     // Simular carga de nuevas preguntas
@@ -24,19 +21,13 @@ export default function Game() {
     }, 0);
   };
 
-  // obtenerPreguntas();
-
   let questions = useGameQuestions(state => state.questions);
   let questionCount = useGameQuestions(state => state.questionCount);
-  
-
-  console.log(questions);
   
   if (questionCount === 10) {
     return <GameOver score={score} />;
   }
-
-  
+ 
 
   return (
     <div id='mainContainer' className='flex flex-col h-full text-text'>

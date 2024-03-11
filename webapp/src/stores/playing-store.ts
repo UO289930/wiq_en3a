@@ -54,23 +54,21 @@ interface GameQuestions{
     nextQuestion: () => void
 }
 
-export const obtenerPreguntas = ():Question[] =>{
+const retrieveQuestions = ():Question[] =>{
   try {
     fetch('https:localhost:7259/WikiData/GetQuestions').then((response) => response.json())
       .then(data => {
         useGameQuestions.getState().setQuestions(data);
-      }); // La ruta depende de tu configuración de enrutamiento en el backend
+      }); 
   } catch (error) {
-    console.error('Hubo un problema al obtener las preguntas:', error); // Manejar cualquier error de la solicitud
+    console.error('There was a problem with the questions:', error); 
   }
   const questions: Question[] = [];
   return questions;
 }
 
-
-
 export const useGameQuestions = create<GameQuestions>((set) => ({
-  questions: obtenerPreguntas(),
+  questions: retrieveQuestions(),
   setQuestions: (questions: any[]) => set({questions: questions}),
   questionCount: 0,
   nextQuestion: () => set(state => ({questionCount: state.questionCount + 1}))
