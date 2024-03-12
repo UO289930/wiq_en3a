@@ -1,5 +1,6 @@
 
 import {create} from 'zustand';
+import { getCorrectlyAnsweredQuestions, getQuestionsAnswered } from '../services/auth-service';
 
 interface PlayingState {
     playing: boolean,
@@ -80,7 +81,9 @@ type Stats = {
     questionsAnswered: number,
     correctlyAnsweredQuestions: number,
     setQuestionsAnswered: (questionsAnswered: number) => void,
-    setCorrectlyAnsweredQuestions: (correctlyAnsweredQuestions: number) => void
+    setCorrectlyAnsweredQuestions: (correctlyAnsweredQuestions: number) => void,
+    sumQuestionsAnswered: (sumTotal: number) => void,
+    sumCorrectlyAnsweredQuestions: (sumCorrect: number) => void
 }
 
 export const useStats = create<Stats>((set) => ({
@@ -88,6 +91,8 @@ export const useStats = create<Stats>((set) => ({
   correctlyAnsweredQuestions: 0,
   setQuestionsAnswered: (questionsAnswered: number) => set({ questionsAnswered }),
   setCorrectlyAnsweredQuestions: (correctlyAnsweredQuestions: number) => set({ correctlyAnsweredQuestions }),
+  sumQuestionsAnswered: (sumTotal: number) => set({ questionsAnswered: getQuestionsAnswered() + sumTotal }),
+  sumCorrectlyAnsweredQuestions: (sumCorrect: number) => set({ correctlyAnsweredQuestions: getCorrectlyAnsweredQuestions() + sumCorrect }),
 }));
 
 

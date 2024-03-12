@@ -4,6 +4,7 @@ import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
 import {  useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer, usePlayingState } from "../../stores/playing-store";
+import { updateStats } from "../../services/auth-service";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
@@ -26,6 +27,7 @@ export default function Game() {
   let isGameOver = usePlayingState(state => state.isGameOver);
   
   if (questionCount === 10) {
+    updateStats(questionCount, score/10)
     usePlayingState.getState().gameOver();
     return <GameOver score={score} />;
   } else {
