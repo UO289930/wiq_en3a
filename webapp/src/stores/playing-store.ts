@@ -51,28 +51,46 @@ interface GameQuestions{
     questions: Question[],
     setQuestions: (questions: any[]) => void,
     questionCount: number,
-    nextQuestion: () => void
+    nextQuestion: () => void,
+    startGame: () => void
 }
 
-const retrieveQuestions = ():Question[] =>{
-  try {
-    fetch('https:localhost:7259/WikiData/GetCapitalsQuestions').then((response) => response.json())
-      .then(data => {
-        useGameQuestions.getState().setQuestions(data);
-      }); 
-  } catch (error) {
-    console.error('There was a problem with the questions:', error); 
-  }
-  const questions: Question[] = [];
-  return questions;
-}
+const retrieveQuestions = () => {
+  return fetch('https://localhost:7259/WikiData/GetCapitalsQuestions')
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('There was a problem with the questions:', error);
+      return []; // Return an empty array in case of an error
+    });
+};
 
 export const useGameQuestions = create<GameQuestions>((set) => ({
-  questions: retrieveQuestions(),
-  setQuestions: (questions: any[]) => set({questions: questions}),
+  questions: [],
+  setQuestions: (questions: any[]) => set({ questions: questions }),
   questionCount: 0,
-  nextQuestion: () => set(state => ({questionCount: state.questionCount + 1}))
+  nextQuestion: () => set((state) => ({ questionCount: state.questionCount + 1 })),
+  startGame: async () => {
+    set({ questionCount: 0 });
+    const questions = await retrieveQuestions();
+    set({ questions });
+  },
 }));
+
+type Stats = {
+    questionsAnswered: number,
+    correctlyAnsweredQuestions: number,
+    setQuestionsAnswered: (questionsAnswered: number) => void,
+    setCorrectlyAnsweredQuestions: (correctlyAnsweredQuestions: number) => void
+}
+
+export const useStats = create<Stats>((set) => ({
+  questionsAnswered: 0,
+  correctlyAnsweredQuestions: 0,
+  setQuestionsAnswered: (questionsAnswered: number) => set({ questionsAnswered }),
+  setCorrectlyAnsweredQuestions: (correctlyAnsweredQuestions: number) => set({ correctlyAnsweredQuestions }),
+}));
+
+
 
 export const getQuestion= (questions:Question[], questionCount:number) => questions[questionCount].text;
 export const getAnswersList= (questions:Question[], questionCount:number) => questions[questionCount].answers;

@@ -1,48 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type props = {
-    answered : boolean,
-    correctAnswer : boolean,
-    answer : string,
+    answered: boolean,
+    correctAnswer: boolean,
+    answer: string,
     score: number,
-    setAnswered : (answered : boolean) => void,
-    setScore : (score : number) => void
-    setCorrectSelected : (correctSelected : boolean) => void
+    setAnswered: (answered: boolean) => void,
+    setScore: (score: number) => void,
+    setCorrectSelected: (correctSelected: boolean) => void
 }
 
-const Answer = (props : props) => {
+const Answer = (props: props) => {
+    const commonStyle = 'flex w-2/5 justify-center items-center py-2 px-4 rounded-2xl text-text font-bold text-2xl border-2 border-text';
 
-    const commonStyle = 'flex w-2/5 justify-center items-center py-2 px-4 rounded-2xl text-text font-bold text-2xl border-2 border-text ';
-  
-    const [clicked, setClicked] = useState(false);
-    const [buttonClass, setButtonClass] = useState(`${commonStyle}  hover:bg-background2 hover:cursor-pointer`);
-  
+    const [buttonClass, setButtonClass] = useState(`${commonStyle} hover:bg-background2 hover:cursor-pointer`);
+    const [clickedAnswer, setClickedAnswer] = useState('');
+
     const handleClick = () => {
-      setClicked(true);
-      props.setAnswered(true);
-      processBhColor();
-      props.setCorrectSelected(props.correctAnswer);
-      if(props.correctAnswer) props.setScore(props.score + 10);
+        setClickedAnswer(props.answer);
+        props.setAnswered(true);
+        props.setCorrectSelected(props.correctAnswer);
+        if (props.correctAnswer) props.setScore(props.score + 10);
     };
-  
-    const processBhColor = () => {
-      const newClass = props.correctAnswer ? 'bg-primary' : 'bg-danger';
-      setButtonClass( () => `${commonStyle} ${newClass}`);
-    };
+
+    useEffect(() => {
+        if (props.answered) {
+            const newClass = props.correctAnswer ? 'bg-primary' : (clickedAnswer === props.answer ? 'bg-danger' : '');
+            setButtonClass(`${commonStyle} ${newClass}`);
+        } else {
+            setButtonClass(`${commonStyle} hover:bg-background2 hover:cursor-pointer`);
+        }
+    }, [props.answered, props.correctAnswer, clickedAnswer]);
 
     return (
-        <button 
-          className={buttonClass}
-          onClick={handleClick}
-          disabled={props.answered || clicked}
+        <button
+            className={buttonClass}
+            onClick={handleClick}
+            disabled={props.answered}
         >
-          {props.answer}
+            {props.answer}
         </button>
     );
-
-    
-  
-    
-  }
+}
 
 export default Answer;

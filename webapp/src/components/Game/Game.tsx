@@ -3,7 +3,7 @@ import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
-import {  useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer } from "../../stores/playing-store";
+import {  useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer, usePlayingState } from "../../stores/playing-store";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
@@ -23,27 +23,38 @@ export default function Game() {
 
   let questions = useGameQuestions(state => state.questions);
   let questionCount = useGameQuestions(state => state.questionCount);
+  let isGameOver = usePlayingState(state => state.isGameOver);
   
   if (questionCount === 10) {
+    usePlayingState.getState().gameOver();
     return <GameOver score={score} />;
+  } else {
+    var questionText = getQuestion(questions, questionCount);
+    var answers = getAnswersList(questions, questionCount);
+    var correctAnswer = getCorrectAnswer(questions, questionCount);
   }
- 
 
-  return (
-    <div id='mainContainer' className='flex flex-col h-full text-text'>
-        
-      <div id='pregunta' className='h-1/2 flex-1'>
-        <div className="flex justify-between">
-        <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
-        {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
+  
+
+
+  
+ 
+  
+    return (
+      <div id='mainContainer' className='flex flex-col h-full text-text'>
+          
+        <div id='pregunta' className='h-1/2 flex-1'>
+          <div className="flex justify-between">
+          <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
+          {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
+          </div>
+          <Question questionText={questionText} />
+          {answered && (<span className='flex justify-center text-3xl '> {correctSelected?'CORRECT!':'WRONG! correct answer : ' + answers[correctAnswer]} </span>)}
+          
         </div>
-        <Question questionText={getQuestion(questions, questionCount)} />
-        {answered && (<span className='flex justify-center text-3xl '> {correctSelected?'CORRECT!':'WRONG! correct answer : ' + getCorrectAnswer(questions, questionCount)} </span>)}
-        
+        {!loading && <AnswerPanel score={score}
+              setCorrectSelected={setCorrectSelected}
+              setScore={setScore}answered={answered} setAnswered={setAnswered} answers={answers} correctAnswer={correctAnswer}/>}
       </div>
-      {!loading && <AnswerPanel score={score}
-            setCorrectSelected={setCorrectSelected}
-            setScore={setScore}answered={answered} setAnswered={setAnswered} answers={getAnswersList(questions, questionCount)} correctAnswer={getCorrectAnswer(questions, questionCount)}/>}
-    </div>
-  );
+    );
 }
