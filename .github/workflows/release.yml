@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-docker-push-wikidata-service:
+  docker-push-wikidata-service:
     name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
