@@ -27,8 +27,10 @@ export default function Game() {
   let isGameOver = usePlayingState(state => state.isGameOver);
   
   if (questionCount === 10) {
-    updateStats(questionCount, score/10)
-    usePlayingState.getState().gameOver();
+    if(!isGameOver){
+      updateStats(questionCount, score/10);
+      usePlayingState.getState().gameOver();
+    }
     return <GameOver score={score} />;
   } else {
     var questionText = getQuestion(questions, questionCount);
