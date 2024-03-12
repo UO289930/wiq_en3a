@@ -3,13 +3,15 @@ import { logout, getQuestionsAnswered, getCorrectlyAnsweredQuestions } from "../
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import React from "react";
+import { useUserStore } from "../../stores/user-store";
 
 export const Nav = () => {
+  let username : string = useUserStore(state => state.user?.username!);
   let questionAnswered : number = useStats(state => state.questionsAnswered);
   let correctlyAnswered : number = useStats(state => state.correctlyAnsweredQuestions);
   const getCorrectRate = () => {
     if(questionAnswered === 0) return 0;
-    return (correctlyAnswered / questionAnswered) * 100;
+    return (Math.round(((correctlyAnswered / questionAnswered) * 100) * 100) / 100).toFixed(2);
   }
 
   return (
@@ -20,7 +22,8 @@ export const Nav = () => {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="flex items-center gap-2 text-text text-sm font-thin ">
-      <h2 className="font-normal">Total Stats (</h2>
+      <h2 className="font-bold">{username}</h2>
+      <h2 className="font-normal">- Total Stats (</h2>
       <p>Total: {questionAnswered}</p>
       <p>Correct: {correctlyAnswered}</p>
       <p>Correct Rate: {getCorrectRate()}%</p>
