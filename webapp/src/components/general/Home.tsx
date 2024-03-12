@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "./Nav";
 import Game from "../Game/Game";
-import { usePlayingState, useShowCancellingDialog } from "../../stores/playing-store";
+import { useGameQuestions, usePlayingState, useShowCancellingDialog } from "../../stores/playing-store";
 import { Button } from "../ui/button";
 import { AlertDialog, AlertDialogPortal, AlertDialogTrigger,AlertDialogOverlay,AlertDialogContent } from "../ui/alert-dialog";
 
@@ -11,11 +11,16 @@ export const Home = () => {
     const isPlaying = usePlayingState(state => state.playing);
     const showDialog = useShowCancellingDialog(state => state.show);
 
+    const handleStartPlaying = async () => {
+        await useGameQuestions.getState().startGame();
+        usePlayingState.getState().startPlaying();
+      };
+
     return (<div className="flex flex-col h-full">
         <Nav />
         {isPlaying ? <Game /> : (
         <div className="flex h-full justify-center items-center"> 
-            <Button className="w-2/5 h-24 text-4xl" onClick={() => {usePlayingState.getState().startPlaying()}}>Start Game!</Button>
+            <Button className="w-2/5 h-24 text-4xl" onClick={() => handleStartPlaying()}>Start Game!</Button>
         </div>
         )}
     <AlertDialog open={showDialog}>

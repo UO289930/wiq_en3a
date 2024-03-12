@@ -45,6 +45,11 @@ export const register = async (email:string, username: string, password: string)
   }
 };
 
+export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
+  const username = getUsername();
+  
+}
+
 export const isLogged = () => {
   const token = localStorage.getItem('token');
   return !!token; 
