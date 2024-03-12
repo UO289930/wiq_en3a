@@ -22,7 +22,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
-          workdir: wikidata-service
+          workdir: wikidata_service
           buildargs: API_URI
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
