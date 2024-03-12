@@ -18,7 +18,7 @@ jobs:
       env:
         API_URI: http://${{ secrets.DEPLOY_HOST }}:7259
       with:
-          name: arquisoft/wiq_en3a/wikidata-service
+          name: arquisoft/wiq_en3a/wikidata_service
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
