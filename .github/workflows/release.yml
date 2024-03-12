@@ -5,26 +5,31 @@ on:
     types: [published]
 
 jobs:
-  e2e-tests:
+docker-push-wikidata-service:
+    name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@v5
+      env:
+        API_URI: http://${{ secrets.DEPLOY_HOST }}:7259
       with:
-        node-version: 20
-    - run: npm --prefix users/authservice install
-    - run: npm --prefix users/userservice install
-    - run: npm --prefix gatewayservice install
-    - run: npm --prefix webapp install
-    - run: npm --prefix webapp run build
-    - run: npm --prefix webapp run test:e2e
+          name: arquisoft/wiq_en3a/wikidata-service
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          workdir: wikidata-service
+          buildargs: API_URI
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-    needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -44,7 +49,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -61,7 +65,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -78,7 +81,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
