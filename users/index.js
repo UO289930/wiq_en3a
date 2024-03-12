@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 
 
 // app and port definition
+var cors = require('cors')
 const app = express();
+app.use(cors())
 const port = 8002;
 
 

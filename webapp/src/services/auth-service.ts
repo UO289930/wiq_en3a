@@ -20,7 +20,8 @@ export const loginWithToken = () => {
 
 export const login = async (username: string, password: string)=> {
   try {
-    const response = await axios.post(`${API_URL}/login`, { username, password });
+    const response = await axios.post(`${API_URL}/auth/login`, { username, password });
+    //const response = await axios.post("http://localhost:8002/auth/login", { username, password });
     const token = response.data.token;
     console.log('token:', token);
     localStorage.setItem('token', token); // store the token in local storage
@@ -34,10 +35,10 @@ export const login = async (username: string, password: string)=> {
 
 export const register = async (email:string, username: string, password: string) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, { username, password, email });
-    const token = response.data.token;
-    localStorage.setItem('token', token); // store the token in local storage
-    return token;
+    const response = await axios.post(`${API_URL}/user/adduser`, { username, password, email });
+    console.log('response:', response);
+    const name = response.data;
+    return name;
   } catch (error) {
     console.error('Error during registration:', error);
     throw error;
