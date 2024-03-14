@@ -9,7 +9,7 @@ const User = require('./user-model')
 // GET route to retrieve an specific user by username
 // 'http://localhost:8002/getOneUser?username=nombre_de_usuario'
 
-router.get('/getUser', async (req, res) => {
+router.get('/getuser', async (req, res) => {
   try {
       
       // access to the database 
@@ -76,7 +76,7 @@ router.post('/adduser', async (req, res) => {
 
 
 // edit a user to update the total and correct question answered
-router.post('/editUser', async (req, res) => {
+router.post('/edituser', async (req, res) => {
   try {
 
       // --- find the user to be updated
