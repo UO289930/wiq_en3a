@@ -25,7 +25,7 @@ app.get('/health', (_req, res) => {
 app.post('/login', async (req, res) => {
   try {
     // Forward the login request to the authentication service
-    const authResponse = await axios.post(authServiceUrl+'/auth/login', req.body);
+    const authResponse = await axios.post(authServiceUrl+'/login', req.body);
     res.json(authResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -35,17 +35,28 @@ app.post('/login', async (req, res) => {
 app.post('/adduser', async (req, res) => {
   try {
     // Forward the add user request to the user service
-    const userResponse = await axios.post(userServiceUrl+'/user/adduser', req.body);
+    const userResponse = await axios.post(userServiceUrl+'/adduser', req.body);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
 
-app.get('/WikiData/GetCapitalQuestions', async (_req, res) => {
+app.post('/edituser', async (req, res) => {
   try {
-    const userResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalQuestions', req.body);
+    // Forward the edit user request to the user service
+    const userResponse = await axios.post(userServiceUrl+'/edituser', req.body);
     res.json(userResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/WikiData/GetCapitalsQuestions', async (_req, res) => {
+  try {
+    // Forward the edit user request to the user service
+    const wikiResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalsQuestions', req.body);
+    res.json(wikiResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
