@@ -42,9 +42,9 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-app.get('/WikiData/getCapitalQuestions', async (_req, res) => {
+app.get('/WikiData/GetCapitalQuestions', async (_req, res) => {
   try {
-    const userResponse = await axios.get(wikidataServiceUrl+'/WikiData/getCapitalQuestions', req.body);
+    const userResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalQuestions', req.body);
     res.json(userResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

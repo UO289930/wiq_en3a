@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useUserStore } from '../stores/user-store';
 import { useStats } from '../stores/playing-store';
 
-const API_URL = 'http://localhost:8002';
+const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 export type JwtPayload = {
   username: string;

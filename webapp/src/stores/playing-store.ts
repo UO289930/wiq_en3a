@@ -56,8 +56,10 @@ interface GameQuestions{
     startGame: () => void
 }
 
+const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+
 const retrieveQuestions = () => {
-  return fetch('/WikiData/GetCapitalsQuestions')
+  return fetch(`${API_URL}/WikiData/GetCapitalsQuestions`)
     .then((response) => response.json())
     .catch((error) => {
       console.error('There was a problem with the questions:', error);
