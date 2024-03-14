@@ -15,9 +15,15 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0'
     
     - run: npm --prefix gatewayservice ci
     - run: npm --prefix webapp ci
+    - run: dotnet build ./wikidata_service/WikidataService.csproj
+    - run: npm --prefix authservice ci
+    - run: npm --prefix userservice ci
     
     - run: npm --prefix gatewayservice test -- --coverage
     - run: npm --prefix webapp test -- --coverage
