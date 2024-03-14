@@ -6,8 +6,7 @@ const promBundle = require('express-prom-bundle');
 const app = express();
 const port = 8000;
 
-const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
-const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
+const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8002';
 const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'http://localhost:7259';
 
 app.use(cors());
@@ -25,7 +24,7 @@ app.get('/health', (_req, res) => {
 app.post('/login', async (req, res) => {
   try {
     // Forward the login request to the authentication service
-    const authResponse = await axios.post(authServiceUrl + '/auth/login', req.body);
+    const authResponse = await axios.post(userServiceUrl + '/auth/login', req.body);
     res.json(authResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

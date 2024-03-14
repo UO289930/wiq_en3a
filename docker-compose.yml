@@ -21,29 +21,15 @@ services:
     networks:
       - mynetwork
 
-  authservice:
-    container_name: authservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_en3a/authservice:latest
-    profiles: ["dev", "prod"]
-    build: ./users/authservice
-    depends_on:
-      - mongodb
-    ports:
-      - "8002:8002"
-    networks:
-      - mynetwork
-    environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
-
   userservice:
     container_name: userservice-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_en3a/userservice:latest
     profiles: ["dev", "prod"]
-    build: ./users/userservice
+    build: ./users
     depends_on:
       - mongodb
     ports:
-      - "8001:8001"
+      - "8002:8002"
     networks:
       - mynetwork
     environment:
@@ -57,15 +43,13 @@ services:
     depends_on:
       - mongodb
       - userservice
-      - authservice
       - wikidata_service
     ports:
       - "8000:8000"
     networks:
       - mynetwork
     environment:
-      AUTH_SERVICE_URL: http://authservice:8002
-      USER_SERVICE_URL: http://userservice:8001
+      USER_SERVICE_URL: http://userservice:8002
       WIKIDATA_SERVICE_URL: http://wikidata_service:7259
 
 
