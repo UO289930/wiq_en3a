@@ -5,25 +5,6 @@ on:
     types: [published]
 
 jobs:
-  docker-push-wikidata-service:
-    name: Push wikidata Docker Image to GitHub Packages
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-    - uses: actions/checkout@v4
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@v5
-      env:
-        API_URI: http://${{ secrets.DEPLOY_HOST }}:7259
-      with:
-          name: arquisoft/wiq_en3a/wikidata_service
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-          workdir: wikidata_service
-          buildargs: API_URI
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
@@ -43,8 +24,8 @@ jobs:
           registry: ghcr.io
           workdir: webapp
           buildargs: API_URI
-  docker-push-authservice:
-    name: Push auth service Docker Image to GitHub Packages
+  docker-push-wikidata-service:
+    name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -54,11 +35,27 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
-          name: arquisoft/wiq_en3a/authservice
+          name: arquisoft/wiq_en3a/wikidata_service
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
-          workdir: users/authservice
+          workdir: wikidata_service
+  docker-push-authservice:
+      name: Push auth service Docker Image to GitHub Packages
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        packages: write
+      steps:
+      - uses: actions/checkout@v4
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+            name: arquisoft/wiq_en3a/authservice
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+            registry: ghcr.io
+            workdir: users/authservice
   docker-push-userservice:
     name: Push user service Docker Image to GitHub Packages
     runs-on: ubuntu-latest
@@ -106,4 +103,4 @@ jobs:
           wget https://raw.githubusercontent.com/arquisoft/wiq_en3a/master/docker-compose.yml -O docker-compose.yml
           wget https://raw.githubusercontent.com/arquisoft/wiq_en3a/master/.env
           docker compose down
-          docker compose --profile prod up -d
+          docker compose --profile prod up -d --pull always

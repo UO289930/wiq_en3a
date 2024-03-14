@@ -66,6 +66,8 @@ services:
     environment:
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
+      WIKIDATA_SERVICE_URL: http://wikidata_service:7259
+
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
