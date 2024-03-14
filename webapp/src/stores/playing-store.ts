@@ -57,7 +57,7 @@ interface GameQuestions{
 }
 
 const retrieveQuestions = () => {
-  return fetch('https://localhost:7259/WikiData/GetCapitalsQuestions')
+  return fetch('/WikiData/GetCapitalsQuestions')
     .then((response) => response.json())
     .catch((error) => {
       console.error('There was a problem with the questions:', error);
