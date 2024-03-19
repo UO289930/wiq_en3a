@@ -3,11 +3,16 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
+The WIQ web application is developed by HappySw for RTVE to create an experimental version of the Saber y Ganar quiz show. 
+The primary goal of WIQ is to provide users with an engaging platform where they can participate in quiz games,
+answer questions generated from Wikidata, and win prizes.
+
+This document outlines the essential requirements guiding the software architects and development team in creating WIQ.
+
 [role="arc42help"]
 ****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. 
+Describes the relevant requirements that software architects and development team must consider. 
 These include
-
 * underlying business goals, 
 * essential features, 
 * essential functional requirements, 
@@ -16,6 +21,17 @@ These include
 ****
 
 === Requirements Overview
+ 
+The system aims to fulfill the following essential requirements:
+
+1. Users can register and login to participate in quiz games.
+2. Questions are automatically generated from data available in Wikidata.
+3. Users receive historical data of their participation, including the number of games played, questions passed and failed, and timestamps.
+4. Each question must be answered within a specific time limit.
+5. Questions consist of one correct answer and several distractors, all automatically generated.
+6. Access to user information and generated questions is available through an API.
+
+
 
 [role="arc42help"]
 ****
@@ -42,6 +58,14 @@ See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 docum
 ****
 
 === Quality Goals
+
+|===
+| Quality Goal | Description
+| Reliability  | Ensure consistent and accurate question generation and user data management.
+| Performance  | Optimize system response times and capacity to handle multiple user interactions simultaneously.
+| Security     | Implement robust security measures to protect user data and prevent unauthorized access.
+|===
+
 
 [role="arc42help"]
 ****
@@ -86,8 +110,15 @@ Table with role names, person names, and their expectations with respect to the 
 ****
 
 [options="header",cols="1,2,2"]
+
+
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+| Role/Name     | Contact          | Expectations
+| Users         | N/A              | Intuitive and enjoyable quiz experience
+| Professors    | Pablo Gonzalez, Jose Labra  | The well-designed web application that fulfills the requirements
+| RTVE          | Project Manager  | Reliable and engaging platform for users
+| HappySw Team  | Development Team | Clear documentation and reliable system performance
 |===
+
+
+
