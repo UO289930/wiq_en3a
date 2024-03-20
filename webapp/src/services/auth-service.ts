@@ -3,7 +3,8 @@ import { jwtDecode } from "jwt-decode";
 import { useUserStore } from '../stores/user-store';
 import { useStats } from '../stores/playing-store';
 
-const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+// const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+const API_URL = process.env.REACT_APP_API_ENDPOINT;
 
 export type JwtPayload = {
   username: string;
@@ -22,7 +23,7 @@ export const loginWithToken = () => {
 
 export const login = async (username: string, password: string)=> {
   try {
-    const response = await axios.post(`${API_URL}/login`, { username, password });
+    const response = await axios.post(API_URL + "/login", { username, password });
     //const response = await axios.post("http://localhost:8002/auth/login", { username, password });
     const token = response.data.token;
     console.log('token:', token);
