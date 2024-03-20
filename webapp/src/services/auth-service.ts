@@ -5,8 +5,6 @@ import { useStats } from '../stores/playing-store';
 
 // const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 const API_URL = process.env.REACT_APP_API_ENDPOINT;
-const userServiceUrl = process.env.USER_SERVICE_URL;
-
 
 export type JwtPayload = {
   username: string;
@@ -40,7 +38,7 @@ export const login = async (username: string, password: string)=> {
 
 export const register = async (email:string, username: string, password: string) => {
   try {
-    const response = await axios.post(userServiceUrl + "/adduser", { username, password, email });
+    const response = await axios.post(userServiceUrl + "/user/adduser", { username, password, email });
     console.log('response:', response);
     const name = response.data;
     return name;

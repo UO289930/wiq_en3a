@@ -18,3 +18,6 @@ EXPOSE 8002
 
 # Define the command to run your app
 CMD ["node", "index.js"]
+
+EXPOSE 8002
+
