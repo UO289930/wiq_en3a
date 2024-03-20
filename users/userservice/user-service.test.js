@@ -108,8 +108,40 @@ describe('User Service', () => {
   });
 
 
-  
-  
+  // --- TESTS FOR /editUser  ---
+
+  // TEST TO EDIT A USER THAT EXISTS
+  it('should update user information', async () => {
+    const updateUser = {
+      username: 'rita',
+      questions_answered: 1,
+      correctly_answered_questions: 1,
+    };
+
+    const response = await request(app)
+      .post('/user/editUser')
+      .send(updateUser);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('message', 'User updated');
+  });
+
+  // TEST TO EDIT A USER THAT DOESN'T EXIST
+  it('should return 404 if user is not found', async () => {
+    const nonExistentUser = {
+      username: 'nonexistentuser',
+      questions_answered: 1,
+      correctly_answered_questions: 1,
+    };
+
+    const response = await request(app)
+      .post('/user/editUser')
+      .send(nonExistentUser);
+
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error');
+  });
+ 
 
 });
 
