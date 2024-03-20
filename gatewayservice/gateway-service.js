@@ -21,7 +21,7 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'OK' });
 });
 
-app.post('/login', async (req, res) => {
+app.post(userServiceUrl + '/login', async (req, res) => {
   try {
     // Forward the login request to the authentication service
     const authResponse = await axios.post(userServiceUrl + '/auth/login', req.body);
@@ -31,7 +31,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/adduser', async (req, res) => {
+app.post(userServiceUrl + '/adduser', async (req, res) => {
   try {
     // Forward the add user request to the user service
     const userResponse = await axios.post(userServiceUrl + '/user/adduser', req.body);
@@ -51,7 +51,7 @@ app.post('/edituser', async (req, res) => {
   }
 });
 
-app.get('/WikiData/GetCapitalsQuestions', async (_req, res) => {
+app.get(wikidataServiceUrl + '/WikiData/GetCapitalsQuestions', async (_req, res) => {
   try {
     // Forward the edit user request to the user service
     const wikiResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalsQuestions');
