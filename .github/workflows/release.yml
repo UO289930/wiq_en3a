@@ -8,24 +8,29 @@ jobs:
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    
     permissions:
       contents: read
       packages: write
     steps:
     - uses: actions/checkout@v4
+
+    - name: Create .env file
+      run: echo "REACT_APP_API_ENDPOINT=http://${{ secrets.DEPLOY_HOST }}:8000" > webapp/.env
+    
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
-        API_URI: http://${{ secrets.DEPLOY_HOST }}:8000
+        REACT_APP_API_ENDPOINT: http://${{ secrets.DEPLOY_HOST }}:8000
+        teamname: wiq_en3a
       with:
           name: arquisoft/wiq_en3a/webapp
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           workdir: webapp
-          buildargs: API_URI
-  docker-push-wikidataservice:
+          buildargs: |
+            REACT_APP_API_ENDPOINT
+  docker-push-wikidata-service:
     name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
@@ -76,7 +81,7 @@ jobs:
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest
-    needs: [docker-push-userservice,docker-push-gatewayservice,docker-push-webapp, docker-push-wikidataservice]
+    needs: [docker-push-userservice,docker-push-gatewayservice,docker-push-webapp, docker-push-wikidata-service]
     steps:
     - name: Deploy over SSH
       uses: fifsky/ssh-action@master
