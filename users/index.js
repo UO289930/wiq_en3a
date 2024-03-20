@@ -43,4 +43,4 @@ server.on('close', () => {
     mongoose.connection.close();
   });
 
-module.exports = server
+  module.exports = { app, server };
