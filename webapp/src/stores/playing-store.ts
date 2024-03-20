@@ -59,6 +59,7 @@ interface GameQuestions{
 const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 const retrieveQuestions = () => {
+  console.log(`${API_URL}`);
   return fetch(`${API_URL}/WikiData/GetCapitalsQuestions`)
     .then((response) => response.json())
     .catch((error) => {
