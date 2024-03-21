@@ -11,11 +11,11 @@ services:
     networks:
       - mynetwork
 
-  apiservice:
-    container_name: apiservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_en3a/apiservice:latest
+  api:
+    container_name: api-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3a/api:latest
     profiles: ["dev", "prod"]
-    build: ./apiservice
+    build: ./api
     depends_on:
       - mongodb
     ports:
@@ -32,13 +32,13 @@ services:
     build: ./gatewayservice
     depends_on:
       - mongodb
-      - apiservice
+      - api
     ports:
       - "8000:8000"
     networks:
       - mynetwork
     environment:
-      API_SERVICE_URL: http://apiservice:8002
+      API_SERVICE_URL: http://api:8002
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
