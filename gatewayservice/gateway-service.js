@@ -27,7 +27,6 @@ app.post('/login', async (req, res) => {
     const authResponse = await axios.post(userServiceUrl + '/auth/login', req.body);
     res.json(authResponse.data);
   } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
     console.error(error);
   }
 });
@@ -38,7 +37,6 @@ app.post('/adduser', async (req, res) => {
     const userResponse = await axios.post(userServiceUrl + '/user/adduser', req.body);
     res.json(userResponse.data);
   } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
     console.error(error);
   }
 });
@@ -49,7 +47,6 @@ app.post('/edituser', async (req, res) => {
     const userResponse = await axios.post(userServiceUrl + '/user/edituser', req.body);
     res.json(userResponse.data);
   } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
     console.error(error);
   }
 });
@@ -61,7 +58,6 @@ app.get('/WikiData/GetCapitalsQuestions', async (_req, res) => {
     const wikiResponse = await axios.get(wikidataServiceUrl + '/WikiData/GetCapitalsQuestions');
     res.json(wikiResponse.data);
   } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
     console.error(error);
   }
 });
