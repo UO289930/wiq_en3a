@@ -50,7 +50,7 @@ app.post('/edituser', async (req, res) => {
   }
 });
 
-app.get('/getCapitalsQuestions', async (_req, res) => {
+app.get('/GetCapitalsQuestions', async (_req, res) => {
   try {
     // Forward the edit user request to the user service
     console.log(process.env.apiServiceUrl);
