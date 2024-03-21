@@ -61,14 +61,24 @@ const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 export const retrieveQuestions = async () => {
   try {
-    let response = await axios.get(`${API_URL}/WikiData/GetCapitalsQuestions`);
+    let response = await axios.get(`${API_URL}/GetCapitalsQuestions`);
     console.log('response:', response);
-    return response.data.json();
+    return response.data;
   } catch (error) {
     console.error('There was a problem with the questions:', error);
     return [];
   }
 };
+
+// const retrieveQuestionss = () => {
+//   console.log(`${API_URL}`);
+//   return fetch(`${API_URL}/WikiData/GetCapitalsQuestions`)
+//     .then((response) => response.json())
+//     .catch((error) => {
+//       console.error('There was a problem with the questions:', error);
+//       return []; // Return an empty array in case of an error
+//     });
+// };
 
 export const useGameQuestions = create<GameQuestions>((set) => ({
   questions: [],
