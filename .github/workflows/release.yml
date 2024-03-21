@@ -13,15 +13,10 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v4
-
-    - name: Create .env file
-      run: echo "REACT_APP_API_ENDPOINT=http://${{ secrets.DEPLOY_HOST }}:8000" > webapp/.env
-    
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
-        REACT_APP_API_ENDPOINT: http://${{ secrets.DEPLOY_HOST }}:8000
-        teamname: wiq_en3a
+        API_URI: http://${{ secrets.DEPLOY_HOST }}:8000
       with:
           name: arquisoft/wiq_en3a/webapp
           username: ${{ github.actor }}
@@ -29,7 +24,7 @@ jobs:
           registry: ghcr.io
           workdir: webapp
           buildargs: |
-            REACT_APP_API_ENDPOINT
+            API_URI
   docker-push-wikidata-service:
     name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
