@@ -23,7 +23,7 @@ export const loginWithToken = () => {
 
 export const login = async (username: string, password: string)=> {
   try {
-    const response = await axios.post(API_URL + "/login", { username, password });
+    const response = await axios.post(`${API_URL}/login`, { username, password });
     //const response = await axios.post("http://localhost:8002/auth/login", { username, password });
     const token = response.data.token;
     console.log('token:', token);
@@ -38,7 +38,7 @@ export const login = async (username: string, password: string)=> {
 
 export const register = async (email:string, username: string, password: string) => {
   try {
-    const response = await axios.post(API_URL + "/adduser", { username, password, email });
+    const response = await axios.post(`${API_URL}/adduser`, { username, password, email });
     console.log('response:', response);
     const name = response.data;
     return name;

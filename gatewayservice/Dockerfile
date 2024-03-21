@@ -15,5 +15,3 @@ COPY . .
 
 # Define the command to run your app
 CMD ["node", "gateway-service.js"]
-
-EXPOSE 8000
