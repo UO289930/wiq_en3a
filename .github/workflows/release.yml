@@ -23,13 +23,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           workdir: webapp
-          buildargs: API_URI
+          buildargs: |
+            API_URI
   docker-push-wikidata-service:
     name: Push wikidata Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -40,13 +38,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           workdir: wikidata_service
-          buildargs: API_URI
   docker-push-userservice:
     name: Push user service Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -57,13 +51,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         workdir: users
-        buildargs: API_URI
   docker-push-gatewayservice:
     name: Push gateway service Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
@@ -74,7 +64,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         workdir: gatewayservice
-        buildargs: API_URI
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest
@@ -82,12 +71,14 @@ jobs:
     steps:
     - name: Deploy over SSH
       uses: fifsky/ssh-action@master
+      env:
+        API_URI: ${{ secrets.DEPLOY_HOST }}
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         user: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         command: |
-          wget https://raw.githubusercontent.com/arquisoft/wiq_en3a/master/docker-compose.yml -O docker-compose.yml
+          wget https://raw.githubusercontent.com/arquisoft/wiq_en3a/build_sergiollende/docker-compose.yml -O docker-compose.yml
           wget https://raw.githubusercontent.com/arquisoft/wiq_en3a/master/.env
-          docker compose down
+          docker compose --profile prod down
           docker compose --profile prod up -d --pull always

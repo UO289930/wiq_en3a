@@ -51,13 +51,20 @@ app.post('/edituser', async (req, res) => {
   }
 });
 
-app.get('/WikiData/GetCapitalsQuestions', async (_req, res) => {
+app.get('/GetCapitalsQuestions', async (_req, res) => {
   try {
     // Forward the edit user request to the user service
-    const wikiResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalsQuestions');
-    res.json(wikiResponse.data);
+    console.log(process.env.WIKIDATA_SERVICE_URL);
+    const wikiResponse = await axios.get(wikidataServiceUrl + '/WikiData/GetCapitalsQuestions', { timeout: 5000 });
+    if (wikiResponse.status !== 200) {
+      console.error('Error with the wikidata service:', wikiResponse.status);
+      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
+    } else {
+      res.json(wikiResponse.data);
+    }
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: 'Error with the gateway service' });
   }
 });
 
