@@ -25,32 +25,19 @@ jobs:
           workdir: webapp
           buildargs: |
             API_URI
-  docker-push-wikidata-service:
-    name: Push wikidata Docker Image to GitHub Packages
+  docker-push-api:
+    name: Push api Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
-          name: arquisoft/wiq_en3a/wikidata_service
+          name: arquisoft/wiq_en3a/api
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
-          workdir: wikidata_service
-  docker-push-userservice:
-    name: Push user service Docker Image to GitHub Packages
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@v5
-      with:
-        name: arquisoft/wiq_en3a/userservice
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: ghcr.io
-        workdir: users
+          workdir: api
   docker-push-gatewayservice:
     name: Push gateway service Docker Image to GitHub Packages
     runs-on: ubuntu-latest
