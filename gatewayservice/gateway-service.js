@@ -54,6 +54,7 @@ app.post('/edituser', async (req, res) => {
 app.get('/WikiData/GetCapitalsQuestions', async (_req, res) => {
   try {
     // Forward the edit user request to the user service
+    console.log(process.env.WIKIDATA_SERVICE_URL);
     const wikiResponse = await axios.get(wikidataServiceUrl+'/WikiData/GetCapitalsQuestions');
     res.json(wikiResponse.data);
   } catch (error) {
