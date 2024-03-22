@@ -8,7 +8,7 @@ WORKDIR /usr/src/api
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install
+RUN npm install --no-cache
 
 # Copy the app source code to the working directory
 COPY . .
