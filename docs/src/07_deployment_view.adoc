@@ -98,28 +98,30 @@ General view of system's infrastructure
 [plantuml, target=deployment-diagram, format=png]
 ....
 actor client as "Client"
-frame UbuntuServer {
-    frame Docker {
+frame Azure {
+    frame UbuntuServer {
+        frame Docker {
 
 
-        frame WebAPP {
-            node React
-        }
+            frame WebAPP {
+                node React
+            }
 
-        frame NodeJSGateway {
-            node Authentication
+            frame NodeJSGateway {
+                node Authentication
 
-            node Users
-        }
+                node Users
+            }
 
-        database MongoDB {
-            node UsersDatabase
+            database MongoDB {
+                node UsersDatabase
 
-            node ResultsDatabase
-        }
+                node ResultsDatabase
+            }
 
-        frame .NET {
-            node RestAPI
+            frame .NET {
+                node RestAPI
+            }
         }
     }
 }
@@ -130,6 +132,10 @@ frame GitHub{
             node dockerCompose
         }
 
+        frame wiq_en3a{
+            node project
+        }
+
     }
 
 .NET -- ResultsDatabase : MongoDB (port 27017)
@@ -138,7 +144,8 @@ WebAPP -- NodeJSGateway : (port 8000:8002)
 WebAPP -- .NET : .NET (port TBD)
 client -- WebAPP : Web Browser (port 3000)
 
-Docker -- GitHubActions : on release
+GitHubActions -- UbuntuServer : on release
+Docker -- wiq_en3a
 ....
 
 

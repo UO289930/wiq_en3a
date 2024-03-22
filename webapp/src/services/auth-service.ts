@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useUserStore } from '../stores/user-store';
 import { useStats } from '../stores/playing-store';
 
-const API_URL = 'http://localhost:8002';
+const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 export type JwtPayload = {
   username: string;
@@ -22,7 +22,7 @@ export const loginWithToken = () => {
 
 export const login = async (username: string, password: string)=> {
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, { username, password });
+    const response = await axios.post(`${API_URL}/login`, { username, password });
     //const response = await axios.post("http://localhost:8002/auth/login", { username, password });
     const token = response.data.token;
     console.log('token:', token);
@@ -37,7 +37,7 @@ export const login = async (username: string, password: string)=> {
 
 export const register = async (email:string, username: string, password: string) => {
   try {
-    const response = await axios.post(`${API_URL}/user/adduser`, { username, password, email });
+    const response = await axios.post(`${API_URL}/adduser`, { username, password, email });
     console.log('response:', response);
     const name = response.data;
     return name;
@@ -50,7 +50,7 @@ export const register = async (email:string, username: string, password: string)
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {
-    await axios.post(`${API_URL}/user/editUser`, { username, questions_answered, correctly_answered_questions });
+    await axios.post(`${API_URL}/edituser`, { username, questions_answered, correctly_answered_questions });
     updateStatsState(questions_answered, correctly_answered_questions);
     return true;
   } catch (error) {
