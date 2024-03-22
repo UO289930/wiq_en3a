@@ -22,6 +22,7 @@ mongoose.connect(mongoUri).then(
 // Routes
 const authRoutes = require('./authservice/auth-service.js');
 const userRoutes = require('./userservice/user-service.js');
+const wikidataRoutes = require('./wikidataservice/wikidata-service.js');
 
 
 // Middlewares added to the application
@@ -30,6 +31,7 @@ app.use(bodyParser.json());
 // Routes middlewares to be used
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/wikidata', wikidataRoutes);
 
 
 // Start the server
