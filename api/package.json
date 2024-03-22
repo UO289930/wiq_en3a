@@ -1,7 +1,7 @@
 {
-  "name": "users",
+  "name": "api",
   "version": "1.0.0",
-  "description": "User service, in charge of handling users in the application",
+  "description": "API service, in charge of handling the different clases of the API in the application",
   "main": "service.js",
   "scripts": {
     "start": "node index.js",
