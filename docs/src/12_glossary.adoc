@@ -35,6 +35,39 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 |===
 |Term |Definition
 
+|WIQ
+|A web application where users can register and login in order to play. The game consists on answering a number of questions with different types and subjects obtaining a prize for each question well answered.
+
+|Wikidata
+|It is a collaborative, free and open knowledge base that stores structured information. It aims to provide a common source of data that can be used by Wikimedia projects and anyone else, under a public domain license.
+
+|Saber y ganar
+|It is a Spanish television quiz show. It involves contestants competing in several rounds of questions to test their knowledge in different categories.
+
+|Diagram
+|A visual representation of information, data flow, processes, or systems using symbols, shapes, and lines to illustrate relationships, connections, and concepts.
+
+|Front-ent
+|Refers to the part of a software application or website that users interact with directly. It encompasses the user interface, design elements, and functionality visible to users.
+
+|Back-end
+|The behind-the-scenes part of a software application or website responsible for handling data processing, server-side logic, and database interactions. It includes the server, database, and application logic that users do not directly interact with.
+
+|Microservices
+|An architectural approach to building software applications as a collection of small, loosely coupled services. Each service is designed to perform a specific business function and can be developed, deployed, and scaled independently.
+
+|Stakeholder
+|Individuals or groups with an interest or concern in a project, product, or organization. Stakeholders may include any party affected by or involved in the outcomes of a particular initiative.
+
+|Docker
+|A platform for developing, shipping, and running applications in containers. It allows developers to package applications and their dependencies into standardized units called containers, providing a consistent environment for software deployment across different computing environments.
+
+|MongoDB
+|A popular open-source NoSQL database management system known for its flexibility, scalability, and ease of use. It stores data in a flexible, JSON-like format called BSON and is commonly used for applications requiring high-volume data storage and real-time data processing.
+
+|Svelte
+|A modern JavaScript framework for building user interfaces. Unlike traditional frameworks that require the runtime presence of a virtual DOM, Svelte shifts the work to compile-time, resulting in highly optimized and efficient code with smaller bundle sizes.
+
 |API (Application programming interface)
 |Set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications can use to request and exchange information. They enable developers to access the functionality of other software components or services without having to understand their internal workings. APIs are commonly used to integrate third-party services, access data from remote servers, and build modular and interoperable software systems.
 

@@ -11,7 +11,10 @@ Sequence diagram for showing the process of a user logging in:
 [plantuml,"Login diagram",png]
 ----
 actor User
+collections FrontEnd
+collections UsersService
 database DB
+
 User -> FrontEnd: Request login
 FrontEnd -> UsersService: loginUser()
 UsersService  -> DB: checkUserData()
@@ -27,7 +30,10 @@ Sequence diagram for showing the process of a user creating an account:
 [plantuml,"Sign Up diagram",png]
 ----
 actor User
+collections FrontEnd
+collections UsersService
 database DB
+
 User -> FrontEnd: Request sign up
 FrontEnd -> UsersService: registerUser()
 UsersService -> DB: checkCredentialsExist()
@@ -36,6 +42,29 @@ UsersService  -> DB: CreateUserData()
 DB -> UsersService: Confirm data
 UsersService -> UsersService: signUp()
 UsersService -> FrontEnd: Redirect to login page
+@enduml
+----
+
+=== Data retrieval from WikiData
+
+Sequence diagram for the process of retrieving data from WikiData
+
+[plantuml,"WikiData diagram",png]
+----
+actor User
+collections FrontEnd
+collections QuestionGenerator
+database Wikidata
+
+User -> FrontEnd: Request a game
+FrontEnd -> QuestionGenerator: createGame()
+QuestionGenerator-> Wikidata: Sparql query
+Wikidata-> QuestionGenerator : entitites data
+QuestionGenerator-> QuestionGenerator: fillQuestionStack()
+QuestionGenerator-> QuestionGenerator: popGameQuestions()
+QuestionGenerator-> FrontEnd: Send game
+FrontEnd -> User: Question 1
+User-> FrontEnd: Answer 1
 ----
 
 === <Runtime Scenario n>
