@@ -118,6 +118,50 @@ paths:
                     type: string
                     example: Internal Server Error
 
+/auth/login:
+  type: POST
+  description: Authenticate a user by providing username and password.
+  requestBody:
+    description: User credentials for authentication.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The username of the user.
+            password:
+              type: string
+              description: The password of the user.
+          required:
+            - username
+            - password
+  possibleResponses:
+    '200':
+      description: User authenticated successfully
+      body:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: JWT token for accessing protected endpoints.
+    '401':
+      description: Unauthorized
+      body:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Unauthorized
+
+
 tags:
   - name: User
     description: Endpoints related to user management.
+  - name: Authentication
+    description: Endpoints related to user authentication.
