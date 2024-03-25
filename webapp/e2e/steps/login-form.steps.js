@@ -37,7 +37,7 @@ defineFeature(feature, test => {
     when('I fill the data in the form and press login', async () => {
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
-      await expect(page).toClick('button', { text: 'Login' });
+      await expect(page).toClick('button', { id: 'LoginButton' });
     });
 
     then('The app loads and the start game appers', async () => {

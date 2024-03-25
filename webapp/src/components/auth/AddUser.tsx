@@ -69,7 +69,7 @@ const AddUser = (props: props)  => {
           )}
           </CardContent>
           <CardFooter>
-            <Button onClick={() => registerUser()}> Register</Button>
+            <Button id="RegisterButton" onClick={() => registerUser()}> Register</Button>
           </CardFooter>
         </Card>
   )
