@@ -1,6 +1,6 @@
 Feature: Logging in a new user
 
-Scenario: The user is not registered in the site
+Scenario: Logging in a new user
   Given An unregistered user
   When I fill the data in the form and press login
   Then The app loads and the start game appers

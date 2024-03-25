@@ -52,7 +52,7 @@ const Login = (props:props) => {
         )}
           </CardContent>
           <CardFooter>
-            <Button onClick={() => loginUser()}> Login</Button>
+            <Button id="LoginButton" onClick={() => loginUser()}> Login</Button>
           </CardFooter>
         </Card>
   )
