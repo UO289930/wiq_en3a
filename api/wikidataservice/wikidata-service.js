@@ -2,19 +2,52 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
  
-// Route for user login
+// Route for getting questions about capitals
 router.get('/getCapitalsQuestions', async (req, res) => {
     try {
-        // Obtiene las preguntas de la fuente de datos
-        const jsonQuestions = await getQuestions(getCapitalsQuery());
+        // Obtain questions in json format from wikidata
+        const jsonQuestions = await getQuestions(getCountryCapitalsQuery());
 
-        // Genera las preguntas sobre las capitales
-        const questions = generateQuestionsCapitalsOf(jsonQuestions.results.bindings);
+        // Generate the questions
+        const questions = generateQuestions("What is the capital of:", jsonQuestions.results.bindings);
 
-        // Envía las preguntas como respuesta HTTP
         res.status(200).json(questions);
     } catch (error) {
         // Maneja cualquier error y envía una respuesta de error HTTP
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Route for getting questions about the director of a movie
+router.get('/getDirectorsQuestions', async (req, res) => {
+    try {
+        // Obtain questions in json format from wikidata
+        const jsonQuestions = await getQuestions(getMovieDirectorQuery());
+
+        // Generate the questions
+        const questions = generateQuestions("What is the director of the movie:", jsonQuestions.results.bindings);
+
+        // // Envía las preguntas como respuesta HTTP
+        res.status(200).json(questions);
+    } catch (error) {
+        // Maneja cualquier error y envía una respuesta de error HTTP
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Route for getting questions about the symbol of an element
+router.get('/getElementSymbolsQuestions', async (req, res) => {
+    try {
+        // Obtain questions in json format from wikidata
+        const jsonQuestions = await getQuestions(getElementSymbolQuery());
+
+        // Generate the questions
+        const questions = generateQuestions("What is the symbol of the element:", jsonQuestions.results.bindings);
+
+        res.status(200).json(questions);
+    } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -44,62 +77,84 @@ async function getQuestions(sparqlQuery) {
     }
 }
 
-function generateQuestionsCapitalsOf(capitalCountries, numberQuestions = 10) {
+function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
     const questions = [];
 
     const ids = new Set();
 
-    // Genera un conjunto de índices únicos aleatorios
+    // Generate a set of unique random indices
     while (ids.size < numberQuestions) {
-        ids.add(Math.floor(Math.random()*capitalCountries.length+1));
+        ids.add(Math.floor(Math.random()*dataSet.length));
     }
 
     const idsList = Array.from(ids);
 
-    // Genera las preguntas
+    // Generate the questions
     for (let j = 0; j < idsList.length; j++) {
-        const countryName = capitalCountries[idsList[j]].countryLabel.value;
-        const questionText = `What is the capital of ${countryName}?`;
+        const name = dataSet[idsList[j]].themeLabel.value;
+        const questionText = questionMessage + name;
         const answers = [];
 
-        // Índice de la respuesta correcta
+        // Index of the correct answer
         let correctAnswer = 0;
 
-        // Agrega la capital correcta en el primer lugar
-        answers[correctAnswer] = capitalCountries[idsList[j]].capitalLabel.value;
+        // Add the correct answer in the first place
+        answers[correctAnswer] = dataSet[idsList[j]].attributeLabel.value;
 
-        // Obtiene 3 respuestas incorrectas aleatorias de todas las capitales
+        // Get 3 random incorrect answers from all 
         const wrongIds = new Set();
         for (let w = 1; w < 4; w++) {
-            let wrongId = Math.floor(Math.random()*capitalCountries.length+1);
+            let wrongId = Math.floor(Math.random()*dataSet.length);
             while (idsList[j] === wrongId || wrongIds.has(wrongId)) {
-                wrongId = Math.floor(Math.random()*capitalCountries.length+1);
+                wrongId = Math.floor(Math.random()*dataSet.length);
             }
-            // Agrega el id de la respuesta incorrecta al conjunto
+            // Add the id of the incorrect answer to the set
             wrongIds.add(wrongId);
-            answers[w] = capitalCountries[wrongId].capitalLabel.value;
+            answers[w] = dataSet[wrongId].attributeLabel.value;
         }
+
+        // Shuffle the answers
+        const shuffled = shuffleAnswers(answers, correctAnswer);
 
         questions[j] = {
             text:questionText, 
-            answers, 
-            correctAnswer  
+            answers: shuffled.answers, 
+            correctAnswer: shuffled.correctAnswer
         };
     }
-
     return questions;
 }
 
-function getCapitalsQuery() {
-    return `
-        SELECT ?capitalLabel ?countryLabel WHERE {
-            ?capital wdt:P1376 ?country.
-            ?capital wdt:P31 wd:Q5119.
-            ?country wdt:P31 wd:Q3624078.
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-        }
-        LIMIT 400
-    `;
+function shuffleAnswers(answers, correctAnswer)
+{
+    let newIndex = Math.floor(Math.random()*answers.length);
+
+    // Swap correct answer with the answer at the new index
+    let temp = answers[newIndex];
+    answers[newIndex] = answers[correctAnswer];
+    answers[correctAnswer] = temp;
+
+    // Update correctAnswer to point to the new index
+    correctAnswer = newIndex;
+
+    return {answers, correctAnswer};
+}
+
+// function getCapitalsQuery() {
+//     return `
+//         SELECT ?capitalLabel ?countryLabel WHERE {
+//             ?capital wdt:P1376 ?country.
+//             ?capital wdt:P31 wd:Q5119.
+//             ?country wdt:P31 wd:Q3624078.
+//             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+//         }
+//         LIMIT 400
+//     `;
+// }
+
+// Define la función para obtener la consulta del director de la película
+function getCountryCapitalsQuery() {
+    return generateSparqlQuery("Q6256", "P36");
 }
 
 // Define la función para obtener la consulta del director de la película
