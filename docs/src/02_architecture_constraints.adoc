@@ -9,8 +9,6 @@ When designing the WIQ application, there are several constraints that must be t
 |===
 |Constraint|Explanation
 | WikiData | Our application must generate questions automatically getting data from WikiData 
-| Docker | We are using docker for the deployment.It's a platform that allows you to package Our application and its dependencies into a standardized unit called a container. 
-| Azure | Azure is a cloud computing platform where we are going to host our WIQ application
 | Version control and monitoring (GitHub) | For the WIQ application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member. 
 | User Experience | The design of the application must make its use friendly and easy 
 | Test coverage | Code must meet a good test quality and coverage to ensure the expected outcome.
