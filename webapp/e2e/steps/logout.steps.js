@@ -34,7 +34,7 @@ defineFeature(feature, test => {
 
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
-      await expect(page).toClick('button', { id: 'LoginButton' })
+      await expect(page).toClick('button', { text: 'Log in' })
     });
 
     when('I click the logout button', async () => {
@@ -43,7 +43,7 @@ defineFeature(feature, test => {
     });
 
     then('The login page appears on screen', async () => {
-        await expect(page).toMatchElement("button", { id: "Login" });
+        await expect(page).toMatchElement("button", { text: "Log in" });
     });
   })
 

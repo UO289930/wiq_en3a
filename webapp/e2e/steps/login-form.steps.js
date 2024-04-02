@@ -37,11 +37,11 @@ defineFeature(feature, test => {
     when('I fill the data in the form and press login', async () => {
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
-      await expect(page).toClick('button', { id: 'LoginButton' });
+      await expect(page).toClick('button', { text: 'Log in' });
     });
 
     then('The app loads and the start game appers', async () => {
-        await expect(page).toMatchElement("button", { text: "Start game" });
+        await expect(page).toMatchElement("button", { text: "Start Game!" });
     });
   })
 

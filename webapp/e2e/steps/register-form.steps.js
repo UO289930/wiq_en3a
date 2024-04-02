@@ -41,11 +41,11 @@ defineFeature(feature, test => {
       await expect(page).toFill('input[id="Email"]', email);
       await expect(page).toFill('input[id="password"]', password);
       await expect(page).toFill('input[id="confirmPassword"]', password);
-      await expect(page).toClick('button', { id: 'RegisterButton' });
+      await expect(page).toClick('button', { text: 'Create account' });
     });
 
     then('A confirmation message should be shown in the screen', async () => {
-        await expect(page).toMatchElement("div", { text: "User added successfully" });
+        await expect(page).toMatchElement('label', { text: "has been registered" });
     });
   })
 
