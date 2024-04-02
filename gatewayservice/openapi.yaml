@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Gateway Service API
+  version: 0.0.1
+  description: Gateway Service
+
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /adduser:
+    post:
+      summary: Add a new user
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: User ID
+                  password:
+                    type: string
+                    example: Password
+        '400':
+          description: Invalid input
+        '409':
+          description: User already exists
