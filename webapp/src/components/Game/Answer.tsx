@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-type props = {
+export type props = {
     answered: boolean,
     correctAnswer: boolean,
     answer: string,
@@ -17,6 +17,7 @@ const Answer = (props: props) => {
     const [clickedAnswer, setClickedAnswer] = useState('');
 
     const handleClick = () => {
+        console.log('clicked answer');
         setClickedAnswer(props.answer);
         props.setAnswered(true);
         props.setCorrectSelected(props.correctAnswer);

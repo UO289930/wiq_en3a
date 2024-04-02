@@ -21,9 +21,7 @@ jobs:
     
     - run: npm --prefix gatewayservice ci
     - run: npm --prefix webapp ci
-    - run: npm --prefix authservice ci
-    - run: npm --prefix userservice ci
-    - run: dotnet build ./wikidata_service/WikidataService.csproj
+    - run: npm --prefix api ci
     
     - run: npm --prefix gatewayservice test -- --coverage
     - run: npm --prefix webapp test -- --coverage
