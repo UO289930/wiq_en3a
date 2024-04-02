@@ -1,7 +1,7 @@
 import React from "react";
 import Answer from "./Answer";
 
-type props = {
+export type props = {
   answered: boolean;
   correctAnswer: number;
   answers: string[];
@@ -12,11 +12,13 @@ type props = {
 };
 
 const AnswerPanel = (props: props) => {
+
   return (
     <div id="respuestas" className="flex flex-wrap gap-10 justify-center flex-1 py-5  ">
       {props.answers.map((answer, index) => {
         return (
           <Answer
+            key={index}
             score={props.score}
             setCorrectSelected={props.setCorrectSelected}
             setScore={props.setScore}
