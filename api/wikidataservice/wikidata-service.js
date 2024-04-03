@@ -9,7 +9,7 @@ router.get('/getCapitalsQuestions', async (req, res) => {
         const jsonQuestions = await getQuestions(getCountryCapitalsQuery());
 
         // Generate the questions
-        const questions = generateQuestions("What is the capital of:", jsonQuestions.results.bindings);
+        const questions = generateQuestions("What is the capital of: ", jsonQuestions.results.bindings);
 
         res.status(200).json(questions);
     } catch (error) {
@@ -26,7 +26,7 @@ router.get('/getDirectorsQuestions', async (req, res) => {
         const jsonQuestions = await getQuestions(getMovieDirectorQuery());
 
         // Generate the questions
-        const questions = generateQuestions("What is the director of the movie:", jsonQuestions.results.bindings);
+        const questions = generateQuestions("What is the director of the movie: ", jsonQuestions.results.bindings);
 
         // // Envía las preguntas como respuesta HTTP
         res.status(200).json(questions);
@@ -44,7 +44,7 @@ router.get('/getElementSymbolsQuestions', async (req, res) => {
         const jsonQuestions = await getQuestions(getElementSymbolQuery());
 
         // Generate the questions
-        const questions = generateQuestions("What is the symbol of the element:", jsonQuestions.results.bindings);
+        const questions = generateQuestions("What is the symbol of the element: ", jsonQuestions.results.bindings);
 
         res.status(200).json(questions);
     } catch (error) {

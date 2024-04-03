@@ -3,6 +3,7 @@ import Question from "./Question";
 import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
+import Counter from "./Counter";
 import {  useGameQuestions, getQuestion, getAnswersList, getCorrectAnswer, usePlayingState } from "../../stores/playing-store";
 import { updateStats } from "../../services/auth-service";
 
@@ -13,6 +14,8 @@ export default function Game() {
     const [correctSelected, setCorrectSelected] = useState(false);
     
   const handleNextQuestion = () => {
+    setCount(questionTime);  // reset count
+    setCorrectSelected(false);
     setLoading(true); // Establecer loading en true al hacer clic en "Next Question"
     // Simular carga de nuevas preguntas
     setTimeout(() => {
@@ -25,6 +28,9 @@ export default function Game() {
   let questions = useGameQuestions(state => state.questions);
   let questionCount = useGameQuestions(state => state.questionCount);
   let isGameOver = usePlayingState(state => state.isGameOver);
+
+  const questionTime = 10;  // set question time
+  const [count, setCount] = useState(questionTime);  // define count state
   
   if (questionCount === 10) {
     if(!isGameOver){
@@ -33,28 +39,24 @@ export default function Game() {
     }
     return <GameOver score={score} />;
   } else {
+    console.log('questionCount', questionCount)
     var questionText = getQuestion(questions, questionCount);
     var answers = getAnswersList(questions, questionCount);
     var correctAnswer = getCorrectAnswer(questions, questionCount);
   }
-
-  
-
-
   
  
-  
     return (
       <div id='mainContainer' data-testid="game-component" className='flex flex-col h-full text-text'>
           
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
           <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
+          <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount}/>  
           {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
           </div>
           <Question questionText={questionText} />
-          {answered && (<span className='flex justify-center text-3xl '> {correctSelected?'CORRECT!':'WRONG! correct answer : ' + answers[correctAnswer]} </span>)}
-          
+          {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + answers[correctAnswer])} </span>)}
         </div>
         {!loading && <AnswerPanel score={score}
               setCorrectSelected={setCorrectSelected}
