@@ -32,7 +32,7 @@ describe('Login', () => {
     mockLogin.mockResolvedValueOnce(false);
     render(<Login postRegisterText="" />);
 
-    const loginButton = screen.getByRole('button', { name: 'Login' });
+    const loginButton = screen.getByRole('button', { name: 'Log in' });
     fireEvent.click(loginButton);
 
     const errorMessage = await screen.findByText('Error: Invalid Credentials');
