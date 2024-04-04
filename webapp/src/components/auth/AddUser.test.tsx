@@ -44,7 +44,7 @@ describe('AddUser', () => {
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
     fireEvent.change(confirmPasswordInput, { target: { value: 'differentpassword' } });
 
-    const registerButton = screen.getByRole('button', { name: 'Register' });
+    const registerButton = screen.getByRole('button', { name: 'Create account' });
     fireEvent.click(registerButton);
 
     const errorMessage = screen.getByText('Error: Passwords do not match');
