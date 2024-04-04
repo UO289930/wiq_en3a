@@ -29,7 +29,7 @@ export default function Game() {
   let questionCount = useGameQuestions(state => state.questionCount);
   let isGameOver = usePlayingState(state => state.isGameOver);
 
-  const questionTime = 10;  // set question time
+  const questionTime = 1000;  // set question time
   const [count, setCount] = useState(questionTime);  // define count state
   
   if (questionCount === 10) {
@@ -51,7 +51,8 @@ export default function Game() {
           
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
-          <text className='text-white text-2xl font-bold p-8'> Score: {score} </text>
+          <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
+          
           <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount}/>  
           {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
           </div>
