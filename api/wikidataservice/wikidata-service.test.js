@@ -1,9 +1,18 @@
 const request = require('supertest');
+//const axios = require('axios');
 
 let app;
 
 beforeAll(async () => {
-  app = require('./wikidata-service'); 
+  app = require('./wikidata-service');
+});
+
+beforeEach(() => {
+  mockRequest = {};
+  mockResponse = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+  };
 });
 
 afterAll(async () => {
@@ -11,19 +20,40 @@ afterAll(async () => {
 });
 
 describe('Wikidata Service', () => {
-
-  function checkInvariant(response){
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(10);
-    expect(response.body[0]).toHaveProperty('text');
-    expect(response.body[0]).toHaveProperty('answers');
-    expect(response.body[0]).toHaveProperty('correctAnswer');
-  }
   
   it('should retrieve 10 capitals questions with their corresponding answers', async () => {
 
-    const response = await request(app).get('/GetCapitalsQuestions');
-    checkInvariant(response);
+    //const res = await axios.get('http://51.103.210.249:8000/GetCapitalsQuestions');
+  
+    const res = await request(app).get('/getCapitalsQuestions').send({});
+
+    expect(res.status).toBe(200);
+    expect(res.data.length).toBe(10);
+    expect(res.data[0]).toHaveProperty('text');
+    expect(res.data[0]).toHaveProperty('answers');
+    expect(res.data[0]).toHaveProperty('correctAnswer');
+  });
+
+  it('should retrieve 10 capitals questions with their corresponding answers', async () => {
+  
+    const res = await request(app).get('/getDirectorsQuestions').send({});
+
+    expect(res.status).toBe(200);
+    expect(res.data.length).toBe(10);
+    expect(res.data[0]).toHaveProperty('text');
+    expect(res.data[0]).toHaveProperty('answers');
+    expect(res.data[0]).toHaveProperty('correctAnswer');
+  });
+
+  it('should retrieve 10 capitals questions with their corresponding answers', async () => {
+  
+    const res = await request(app).get('/getElementSymbolsQuestions').send({});
+
+    expect(res.status).toBe(200);
+    expect(res.data.length).toBe(10);
+    expect(res.data[0]).toHaveProperty('text');
+    expect(res.data[0]).toHaveProperty('answers');
+    expect(res.data[0]).toHaveProperty('correctAnswer');
   });
 
 });
