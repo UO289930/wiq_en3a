@@ -19,7 +19,6 @@ const GameOver = (props: props) => {
       </div>
       <div className="flex">
       <Button onClick={() => handleHome()} className="text-xl" variant={"ghost"}>HOME</Button>
-      <Button onClick={() => {usePlayingState.getState().stopPlaying()}} className="text-xl" variant={"ghost"}>RESTART</Button>
       </div>
     </div>
   );
