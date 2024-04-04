@@ -39,7 +39,6 @@ export default function Game() {
     }
     return <GameOver score={score} />;
   } else {
-    console.log('questionCount', questionCount)
     var questionText = getQuestion(questions, questionCount);
     var answers = getAnswersList(questions, questionCount);
     var correctAnswer = getCorrectAnswer(questions, questionCount);
@@ -52,8 +51,8 @@ export default function Game() {
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
           <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
-          
-          <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount}/>  
+
+          <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
           {answered && (<NextQuestion onNextQuestion={handleNextQuestion} />)}
           </div>
           <Question questionText={questionText} />

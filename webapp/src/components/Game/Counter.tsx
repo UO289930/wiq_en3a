@@ -8,6 +8,7 @@ type props = {
     duration: number,
     count: number,
     setCount: (count: number) => void,
+    initialCount: number,
 }
 
 const Counter = (props: props) => {
@@ -29,7 +30,7 @@ const Counter = (props: props) => {
         }
     }, [props.count]);
 
-    return <Progress value={props.count/10} className="self-center w-[100%]" />;
+    return <Progress value={props.count*(100 / props.initialCount)} className="self-center w-[100%]" />;
 };
 
 export default Counter;
