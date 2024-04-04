@@ -25,7 +25,7 @@ describe('Wikidata Service', () => {
 
     //const res = await axios.get('http://51.103.210.249:8000/GetCapitalsQuestions');
   
-    const res = await request(app).get('/getCapitalsQuestions').send({});
+    const res = await request(app).get('/getCapitalsQuestions');
 
     expect(res.status).toBe(200);
     expect(res.data.length).toBe(10);
@@ -36,7 +36,7 @@ describe('Wikidata Service', () => {
 
   it('should retrieve 10 capitals questions with their corresponding answers', async () => {
   
-    const res = await request(app).get('/getDirectorsQuestions').send({});
+    const res = await request(app).get('/getDirectorsQuestions');
 
     expect(res.status).toBe(200);
     expect(res.data.length).toBe(10);
@@ -47,7 +47,7 @@ describe('Wikidata Service', () => {
 
   it('should retrieve 10 capitals questions with their corresponding answers', async () => {
   
-    const res = await request(app).get('/getElementSymbolsQuestions').send({});
+    const res = await request(app).get('/getElementSymbolsQuestions');
 
     expect(res.status).toBe(200);
     expect(res.data.length).toBe(10);
