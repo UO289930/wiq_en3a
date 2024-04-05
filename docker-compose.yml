@@ -11,11 +11,11 @@ services:
     networks:
       - mynetwork
 
-  api:
-    container_name: api-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_en3a/api:latest
+  users:
+    container_name: users-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3a/users:latest
     profiles: ["dev", "prod"]
-    build: ./api
+    build: ./users
     depends_on:
       - mongodb
     ports:
@@ -25,6 +25,16 @@ services:
     environment:
       MONGODB_URI: mongodb://mongodb:27017/userdb
 
+  wikidataservice:
+    container_name: wikidataservice-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3a/wikidataservice:latest
+    profiles: ["dev", "prod"]
+    build: ./wikidataservice
+    ports:
+      - "8001:8001"
+    networks:
+      - mynetwork
+
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_en3a/gatewayservice:latest
@@ -32,13 +42,15 @@ services:
     build: ./gatewayservice
     depends_on:
       - mongodb
-      - api
+      - users
+      - wikidataservice
     ports:
       - "8000:8000"
     networks:
       - mynetwork
     environment:
-      API_SERVICE_URL: http://api:8002
+      USERS_SERVICE_URL: http://users:8002
+      WIKIDATA_SERVICE_URL: http://wikidataservice:8001
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}

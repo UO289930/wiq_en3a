@@ -2,7 +2,7 @@
 FROM node:20
 
 # Set the working directory in the container
-WORKDIR /usr/src/api
+WORKDIR /usr/src/users
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
