@@ -8,7 +8,6 @@ export type props = {
     setAnswered: (answered: boolean) => void,
     setScore: (score: number) => void,
     setCorrectSelected: (correctSelected: boolean) => void,
-    handleNextQuestion: () => void,
 }
 
 const Answer = (props: props) => {

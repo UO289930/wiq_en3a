@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Question from "./Question";
-import NextQuestion from "./NextQuestion";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
 import Counter from "./Counter";
@@ -77,8 +76,7 @@ export default function Game() {
             answered={answered} 
             setAnswered={setAnswered} 
             answers={answers} 
-            correctAnswer={correctAnswer} 
-            handleNextQuestion={handleNextQuestion}/>}
+            correctAnswer={correctAnswer} />}
     </div>
   );
 }
