@@ -111,6 +111,14 @@ router.get('/getElementSymbolsQuestions', async (req, res, next) => {
     }
 });
 
+router.get('/*', (_req,res) =>{
+    res.status(404).json({
+        status:"not found",
+        message:"Wrong URL: Please, check the correct enpoint URL"
+
+    });
+} );
+
 async function getData(sparqlQuery) {
     try {
         const endpointUrl = "https://query.wikidata.org/sparql?query=";

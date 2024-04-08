@@ -52,38 +52,24 @@ app.post('/edituser', async (req, res) => {
 });
 
 app.get('/GetQuestions', async (_req, res) => {
-  try {
-    const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 20000 });
-    if (wikiResponse.status !== 200) {
-      console.error('Error with the wikidata service:', wikiResponse.status);
-      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
-    } else {
-      res.json(wikiResponse.data);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error with the gateway service' });
-  }
+  getQuestions('/getQuestions');
 });
 
 app.get('/GetCapitalsQuestions', async (_req, res) => {
-  try {
-    const wikiResponse = await axios.get(wikidataServiceUrl + '/getCapitalsQuestions', { timeout: 10000 });
-    if (wikiResponse.status !== 200) {
-      console.error('Error with the wikidata service:', wikiResponse.status);
-      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
-    } else {
-      res.json(wikiResponse.data);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error with the gateway service' });
-  }
+  getQuestions('/getCapitalsQuestions');
 });
 
 app.get('/GetElementSymbolsQuestions', async (_req, res) => {
+  getQuestions('/getElementSymbolsQuestions');
+});
+
+app.get('/GetMovieDirectorsQuestions', async (_req, res) => {
+  getQuestions('/getMovieDirectorsQuestions');
+});
+
+async function getQuestions(specificPath){
   try {
-    const wikiResponse = await axios.get(wikidataServiceUrl + '/getElementSymbolsQuestions', { timeout: 10000 });
+    const wikiResponse = await axios.get(wikidataServiceUrl + specificPath, { timeout: 10000 });
     if (wikiResponse.status !== 200) {
       console.error('Error with the wikidata service:', wikiResponse.status);
       res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
@@ -94,6 +80,13 @@ app.get('/GetElementSymbolsQuestions', async (_req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Error with the gateway service' });
   }
+}
+
+app.get('/*', (_req,res) =>{
+  res.status(404).json({
+    status:"not found",
+    message:"Wrong URL: Please, check the correct enpoint URL"
+  });
 });
 
 // Start the gateway service
