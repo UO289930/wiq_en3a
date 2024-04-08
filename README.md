@@ -3,6 +3,13 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 
 # wiq_en3a
+Thank you for checking out wiq_en3a! Below are some useful links to get started:
+
+- **[Application](http://51.103.210.249:3000/)**: Click this link to start playing!
+  
+- **[Documentation](https://arquisoft.github.io/wiq_en3a/)**: Explore detailed documentation to learn more about the game and its features.
+
+Feel free to explore the application and documentation, and don't hesitate to reach out if you have any questions or feedback. Enjoy playing wiq_en3a!
 
 ## Welcome to WIQ👩‍🎓👨‍🎓 
 
