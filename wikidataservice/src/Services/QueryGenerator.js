@@ -11,7 +11,7 @@ class QueryGenerator {
         return this.generateSparqlQuery("Q11344", "P246", limit);
     }
 
-    static generateSparqlQuery(themeId, attributeId, limit = 10) {
+    static generateSparqlQuery(themeId, attributeId, limit) {
         return `
             SELECT ?themeLabel ?attributeLabel WHERE {
                 ?theme wdt:P31 wd:${themeId};

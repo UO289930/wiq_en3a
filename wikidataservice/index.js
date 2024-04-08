@@ -4,9 +4,12 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const { generateQuestions } = require('./src/Services/QuestionGenerator');
 
 const app = express();
 const port = 8001;
+
+const NUMBER_QUESTIONS = 10;
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
@@ -26,23 +29,37 @@ router.get('/health', (_req, res, next) => {
 // Route for getting questions about mixed topics
 router.get('/getQuestions', async (req, res, next) => {
     try {
-        // Obtain questions in json format from wikidata
-        const jsonCountryQuestions = await getQuestions(QueryGenerator.getCountryCapitalsQuery());
-        const jsonElemntsQuestions = await getQuestions(QueryGenerator.getElementSymbolQuery());
-        const jsonMovieQuestions = await getQuestions(QueryGenerator.getMovieDirectorQuery());
+        let start = Date.now();
+        // Obtain data in asyncronous json format from wikidata
+        const dataCalls = async () => {
+            const jsonCountryQuestions = getData(QueryGenerator.getCountryCapitalsQuery(NUMBER_QUESTIONS));
+            const jsonElementsQuestions = getData(QueryGenerator.getElementSymbolQuery(NUMBER_QUESTIONS));
+            const jsonMovieQuestions = getData(QueryGenerator.getMovieDirectorQuery(NUMBER_QUESTIONS));
+
+            const results = await Promise.all([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions]);
+            return results;
+        };
+
+        const [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions] = await dataCalls();
+        let end = Date.now();
+        console.log("Getting data from wikidata", end - start, "ms");
 
         // Generate the questions
-        const questions1 = generateQuestions("What is the capital of: ", jsonCountryQuestions.results.bindings);
-        const questions2 = generateQuestions("What is the element of: ", jsonElemntsQuestions.results.bindings);
-        const questions3 = generateQuestions("What is the director of: ", jsonMovieQuestions.results.bindings);
+        const questions1 = generateQuestions("What is the capital of: ", jsonCountryQuestions.results.bindings, NUMBER_QUESTIONS);
+        const questions2 = generateQuestions("What is the element of: ", jsonElementsQuestions.results.bindings, NUMBER_QUESTIONS);
+        const questions3 = generateQuestions("What is the director of: ", jsonMovieQuestions.results.bindings, NUMBER_QUESTIONS);
 
-         // Combine the questions
-         const allQuestions = [...questions1, ...questions2, ...questions3];
+        // Combine the questions
+        const allQuestions = [...questions1, ...questions2, ...questions3];
 
-         // Shuffle the questions
-         // const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
- 
-         res.status(200).json(allQuestions);
+        // Shuffle the questions
+        let shuffled = allQuestions
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value)
+
+        
+         res.status(200).json(shuffled);
     } catch (error) {
         next(error);
     }
@@ -52,10 +69,10 @@ router.get('/getQuestions', async (req, res, next) => {
 router.get('/getCapitalsQuestions', async (req, res, next) => {
     try {
         // Obtain questions in json format from wikidata
-        const jsonQuestions = await getQuestions(QueryGenerator.getCountryCapitalsQuery());
+        const jsonQuestions = await getData(QueryGenerator.getCountryCapitalsQuery(NUMBER_QUESTIONS));
 
         // Generate the questions
-        const questions = generateQuestions("What is the capital of: ", jsonQuestions.results.bindings);
+        const questions = generateQuestions("What is the capital of: ", jsonQuestions.results.bindings, NUMBER_QUESTIONS);
 
         res.status(200).json(questions);
     } catch (error) {
@@ -67,7 +84,7 @@ router.get('/getCapitalsQuestions', async (req, res, next) => {
 router.get('/getDirectorsQuestions', async (req, res, next) => {
     try {
         // Obtain questions in json format from wikidata
-        const jsonQuestions = await getQuestions(QueryGenerator.getMovieDirectorQuery());
+        const jsonQuestions = await getData(QueryGenerator.getMovieDirectorQuery());
 
         // Generate the questions
         const questions = generateQuestions("What is the director of the movie: ", jsonQuestions.results.bindings);
@@ -83,7 +100,7 @@ router.get('/getDirectorsQuestions', async (req, res, next) => {
 router.get('/getElementSymbolsQuestions', async (req, res, next) => {
     try {
         // Obtain questions in json format from wikidata
-        const jsonQuestions = await getQuestions(QueryGenerator.getElementSymbolQuery());
+        const jsonQuestions = await getData(QueryGenerator.getElementSymbolQuery());
 
         // Generate the questions
         const questions = generateQuestions("What is the symbol of the element: ", jsonQuestions.results.bindings);
@@ -94,71 +111,7 @@ router.get('/getElementSymbolsQuestions', async (req, res, next) => {
     }
 });
 
-
-function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
-    const questions = [];
-
-    const ids = new Set();
-
-    // Generate a set of unique random indices
-    while (ids.size < numberQuestions) {
-        ids.add(Math.floor(Math.random()*dataSet.length));
-    }
-
-    const idsList = Array.from(ids);
-
-    // Generate the questions
-    for (let j = 0; j < idsList.length; j++) {
-        const name = dataSet[idsList[j]].themeLabel.value;
-        const questionText = questionMessage + name;
-        const answers = [];
-
-        // Index of the correct answer
-        let correctAnswer = 0;
-
-        // Add the correct answer in the first place
-        answers[correctAnswer] = dataSet[idsList[j]].attributeLabel.value;
-
-        // Get 3 random incorrect answers from all 
-        const wrongIds = new Set();
-        for (let w = 1; w < 4; w++) {
-            let wrongId = Math.floor(Math.random()*dataSet.length);
-            while (idsList[j] === wrongId || wrongIds.has(wrongId)) {
-                wrongId = Math.floor(Math.random()*dataSet.length);
-            }
-            // Add the id of the incorrect answer to the set
-            wrongIds.add(wrongId);
-            answers[w] = dataSet[wrongId].attributeLabel.value;
-        }
-
-        // Shuffle the answers
-        const shuffled = shuffleAnswers(answers, correctAnswer);
-
-        questions[j] = {
-            text:questionText, 
-            answers: shuffled.answers, 
-            correctAnswer: shuffled.correctAnswer
-        };
-    }
-    return questions;
-}
-
-function shuffleAnswers(answers, correctAnswer)
-{
-    let newIndex = Math.floor(Math.random()*answers.length);
-
-    // Swap correct answer with the answer at the new index
-    let temp = answers[newIndex];
-    answers[newIndex] = answers[correctAnswer];
-    answers[correctAnswer] = temp;
-
-    // Update correctAnswer to point to the new index
-    correctAnswer = newIndex;
-
-    return {answers, correctAnswer};
-}
-
-async function getQuestions(sparqlQuery) {
+async function getData(sparqlQuery) {
     try {
         const endpointUrl = "https://query.wikidata.org/sparql?query=";
         const fullUrl = endpointUrl + encodeURIComponent(sparqlQuery);
