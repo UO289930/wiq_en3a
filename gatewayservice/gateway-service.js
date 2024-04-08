@@ -52,22 +52,33 @@ app.post('/edituser', async (req, res) => {
 });
 
 app.get('/GetQuestions', async (_req, res) => {
-  getQuestions('/getQuestions');
+  try {
+    const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 10000 });
+    if (wikiResponse.status !== 200) {
+      console.error('Error with the wikidata service:', wikiResponse.status);
+      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
+    } else {
+      res.json(wikiResponse.data);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
 });
 
 app.get('/GetCapitalsQuestions', async (_req, res) => {
-  getQuestions('/getCapitalsQuestions');
+  getQuestions('/getCapitalsQuestions', res);
 });
 
 app.get('/GetElementSymbolsQuestions', async (_req, res) => {
-  getQuestions('/getElementSymbolsQuestions');
+  getQuestions('/getElementSymbolsQuestions', res);
 });
 
 app.get('/GetMovieDirectorsQuestions', async (_req, res) => {
-  getQuestions('/getMovieDirectorsQuestions');
+  getQuestions('/getMovieDirectorsQuestions', res);
 });
 
-async function getQuestions(specificPath){
+async function getQuestions(specificPath, res){
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + specificPath, { timeout: 10000 });
     if (wikiResponse.status !== 200) {
@@ -78,7 +89,7 @@ async function getQuestions(specificPath){
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error with the gateway service' });
+    res.status(500).json({ error: error });
   }
 }
 

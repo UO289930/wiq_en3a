@@ -8,7 +8,6 @@ const { generateQuestions } = require('./src/Services/QuestionGenerator');
 
 const app = express();
 const port = 8001;
-
 const NUMBER_QUESTIONS = 10;
 
 // Middleware to parse JSON in request body
@@ -21,6 +20,22 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Internal Server Error')
 });
 
+let jsonCountryQuestions,jsonElementsQuestions,jsonMovieQuestions;
+
+// Initial questions
+getData(QueryGenerator.getMovieDirectorQuery(20)).then(result => {
+    console.log(result);
+    jsonMovieQuestions = result;
+});
+getData(QueryGenerator.getCountryCapitalsQuery(200)).then(result => {
+    console.log(result);
+    jsonCountryQuestions = result;
+});
+getData(QueryGenerator.getElementSymbolQuery(200)).then(result => {
+    console.log(result);
+    jsonElementsQuestions = result;
+});
+
 // Default endpoint
 router.get('/health', (_req, res, next) => {
     res.json({ status: 'OK' });
@@ -29,25 +44,11 @@ router.get('/health', (_req, res, next) => {
 // Route for getting questions about mixed topics
 router.get('/getQuestions', async (req, res, next) => {
     try {
-        let start = Date.now();
-        // Obtain data in asyncronous json format from wikidata
-        const dataCalls = async () => {
-            const jsonCountryQuestions = getData(QueryGenerator.getCountryCapitalsQuery(NUMBER_QUESTIONS));
-            const jsonElementsQuestions = getData(QueryGenerator.getElementSymbolQuery(NUMBER_QUESTIONS));
-            const jsonMovieQuestions = getData(QueryGenerator.getMovieDirectorQuery(NUMBER_QUESTIONS));
-
-            const results = await Promise.all([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions]);
-            return results;
-        };
-
-        const [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions] = await dataCalls();
-        let end = Date.now();
-        console.log("Getting data from wikidata", end - start, "ms");
 
         // Generate the questions
-        const questions1 = generateQuestions("What is the capital of: ", jsonCountryQuestions.results.bindings, NUMBER_QUESTIONS);
-        const questions2 = generateQuestions("What is the element of: ", jsonElementsQuestions.results.bindings, NUMBER_QUESTIONS);
-        const questions3 = generateQuestions("What is the director of: ", jsonMovieQuestions.results.bindings, NUMBER_QUESTIONS);
+        const questions1 = generateQuestions("What is the capital of: ", jsonCountryQuestions.results.bindings);
+        const questions2 = generateQuestions("What is the element of: ", jsonElementsQuestions.results.bindings);
+        const questions3 = generateQuestions("What is the director of: ", jsonMovieQuestions.results.bindings);
 
         // Combine the questions
         const allQuestions = [...questions1, ...questions2, ...questions3];
@@ -57,13 +58,14 @@ router.get('/getQuestions', async (req, res, next) => {
             .map(value => ({ value, sort: Math.random() }))
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value)
-
         
-         res.status(200).json(shuffled);
+         res.status(200).json(shuffled.slice(0,10));
     } catch (error) {
         next(error);
     }
 });
+
+
 
 // Route for getting questions about capitals
 router.get('/getCapitalsQuestions', async (req, res, next) => {
@@ -89,7 +91,7 @@ router.get('/getDirectorsQuestions', async (req, res, next) => {
         // Generate the questions
         const questions = generateQuestions("What is the director of the movie: ", jsonQuestions.results.bindings);
 
-        // // Envía las preguntas como respuesta HTTP
+        // Envía las preguntas como respuesta HTTP
         res.status(200).json(questions);
     } catch (error) {
         next(error);
