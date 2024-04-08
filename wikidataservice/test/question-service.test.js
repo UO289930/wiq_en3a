@@ -19,5 +19,9 @@ describe('Wikidata Service - Question Retrieval', () => {
       const response = await request(app).get('/getCapitalsQuestions');
       console.log(response); // Imprime la respuesta
       expect(response.status).toBe(200)
+      expect(response._body.length).toBe(10)
+      expect(response._body[0]).toHaveProperty("text")
+      expect(response._body[0]).toHaveProperty("correctAnswer")
+      expect(response._body[0]).toHaveProperty("answers")
     }, 10000);
 });
