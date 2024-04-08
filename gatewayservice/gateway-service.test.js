@@ -34,9 +34,6 @@ describe('Gateway Service', () => {
     expect(response.body.userId).toBe('mockedUserId');
   });
 
-  
-  /**
-
   // Test wrong endpoint
   it('should give an error message', async () => {
     const response = await request(app).get('/text');
@@ -46,16 +43,18 @@ describe('Gateway Service', () => {
   });
 
   
+  
   it('should retrieve 10 capitals questions with their corresponding answers', async () => {
     //checkCorrectQuestionsResponse('/GetCapitalsQuestions', 10);
     const response = await request(app).get('/GetCapitalsQuestions');
-    console.log(response);
     expect(response.statusCode).toBe(200);
     expect(response._body.length).toBe(10);
     expect(response._body[0]).toHaveProperty("text");
     expect(response._body[0]).toHaveProperty("correctAnswer");
     expect(response._body[0]).toHaveProperty("answers");
   }, 10000);
+
+  /**
   
   it('should retrieve 30 questions with their corresponding answers', async () => {
     const response = await request(app).get('/GetQuestions');
