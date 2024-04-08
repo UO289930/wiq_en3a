@@ -20,7 +20,7 @@ export const Home = () => {
         <Nav />
         {isPlaying ? <Game /> : (
         <div className="flex h-full justify-center items-center"> 
-            <Button className="w-2/5 h-24 text-4xl" onClick={() => handleStartPlaying()}>Start Game!</Button>
+            <button className="w-2/5 h-24 text-4xl" onClick={() => handleStartPlaying()}>Start Game!</button>
         </div>
         )}
     <AlertDialog open={showDialog}>
