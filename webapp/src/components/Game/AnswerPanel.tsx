@@ -9,6 +9,7 @@ export type props = {
   setAnswered: (answered: boolean) => void;
   setScore: (score: number) => void;
   setCorrectSelected: (correctSelected: boolean) => void;
+  handleNextQuestion: () => void;
 };
 
 const AnswerPanel = (props: props) => {
@@ -26,6 +27,7 @@ const AnswerPanel = (props: props) => {
             correctAnswer={props.correctAnswer === index}
             answered={props.answered}
             setAnswered={props.setAnswered}
+            handleNextQuestion={props.handleNextQuestion}
           />
         );
       })}
