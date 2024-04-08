@@ -59,7 +59,7 @@ export default function Game() {
   }
   
   return (
-    <div id='mainContainer' className='flex flex-col h-full text-text'>
+    <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
       <div id='pregunta' className='h-1/2 flex-1'>
         <div className="flex justify-between">
           <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
