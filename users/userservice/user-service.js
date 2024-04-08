@@ -27,6 +27,7 @@ router.get('/getUser', async (req, res) => {
           mongoose.connection.close();
         }
       });
+      
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -38,7 +39,7 @@ router.get('/getUser', async (req, res) => {
 function validateRequiredFields(req, requiredFields) {
     for (const field of requiredFields) {
       if (!(field in req.body)) {
-        throw new Error(`Missing required field: ${field}`);
+        return res.status(400).json({ error: 'Username and password are required' });
       }
     }
 }
@@ -46,6 +47,7 @@ function validateRequiredFields(req, requiredFields) {
 
 router.post('/adduser', async (req, res) => {
     try {
+
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
 
