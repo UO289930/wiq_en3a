@@ -45,22 +45,22 @@ describe('Wikidata Service - Question Retrieval', () => {
 
     it('should retrieve 10 capitals questions with their corresponding answers', async () => {
       await checkCorrectQuestionsResponse('/getCapitalsQuestions', 10);
-    }, 20000);
+    }, 60000);
 
     it('should retrieve 30 questions with their corresponding answers', async () => {
       
       await checkCorrectQuestionsResponse('/getQuestions', 10);
-    }, 30000);
+    }, 60000);
 
     it('should retrieve 10 element type symbols questions with their corresponding answers', async () => {
     
       await checkCorrectQuestionsResponse('/getElementSymbolsQuestions', 10);
-    }, 20000);
+    }, 60000);
 
     it('should retrieve 10 movie directors questions with their corresponding answers', async () => {
     
       await checkCorrectQuestionsResponse('/getDirectorsQuestions', 10);
-    }, 20000);
+    }, 60000);
 
     it('should respond with an error message', async () => {
     

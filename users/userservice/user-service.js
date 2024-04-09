@@ -9,7 +9,7 @@ const User = require('./user-model')
 // GET route to retrieve an specific user by username
 // 'http://localhost:8002/getOneUser?username=nombre_de_usuario'
 
-router.get('/getuser', async (req, res) => {
+router.get('/getUser', async (req, res) => {
   try {
       
       // access to the database 
@@ -27,6 +27,7 @@ router.get('/getuser', async (req, res) => {
           mongoose.connection.close();
         }
       });
+      
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -38,7 +39,7 @@ router.get('/getuser', async (req, res) => {
 function validateRequiredFields(req, requiredFields) {
     for (const field of requiredFields) {
       if (!(field in req.body)) {
-        throw new Error(`Missing required field: ${field}`);
+        return res.status(400).json({ error: 'Username and password are required' });
       }
     }
 }
@@ -46,6 +47,7 @@ function validateRequiredFields(req, requiredFields) {
 
 router.post('/adduser', async (req, res) => {
     try {
+
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
 
@@ -66,7 +68,7 @@ router.post('/adduser', async (req, res) => {
         // access to the collection of the database
         const userCollection = db.collection('User');
         await userCollection.insertOne(newUser);
-        console.log(newUser.username);
+
         res.json(newUser.username);
     } catch (error) {
         res.status(400).json({ error: error.message }); 
@@ -76,7 +78,7 @@ router.post('/adduser', async (req, res) => {
 
 
 // edit a user to update the total and correct question answered
-router.post('/edituser', async (req, res) => {
+router.post('/editUser', async (req, res) => {
   try {
 
       // --- find the user to be updated
