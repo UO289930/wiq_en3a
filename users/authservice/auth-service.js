@@ -20,6 +20,11 @@ router.post('/login', async (req, res) => {
   try {
 
     // Check if required fields are present in the request body
+    if (!req.body.username || !req.body.password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+
+    // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
     const { username, password } = req.body;
@@ -32,7 +37,7 @@ router.post('/login', async (req, res) => {
 
     let user;
     
-    await userCollection.findOne({ username: req.body.username }, function(err, result) {
+    await userCollection.findOne({ username }, function(err, result) {
       if (err) {
         console.error('Error finding user:', err);
       } else {
