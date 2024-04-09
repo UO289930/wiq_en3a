@@ -5,10 +5,8 @@ const bodyParser = require('body-parser');
 
 
 // app and port definition
-var cors = require('cors')
 const app = express();
-app.use(cors())
-const port = 8002;
+const port = process.env.PORT || 8002;
 
 
 // Connect to MongoDB
@@ -23,6 +21,7 @@ mongoose.connect(mongoUri).then(
 const authRoutes = require('./authservice/auth-service.js');
 const userRoutes = require('./userservice/user-service.js');
 
+
 // Middlewares added to the application
 app.use(bodyParser.json());
 
@@ -30,9 +29,12 @@ app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 
+
+
+
 // Start the server
 const server = app.listen(port, () => {
-    console.log(`GatewayService Service listening at http://localhost:${port}`);
+    console.log(`Auth Service listening at http://localhost:${port}`);
   });
 
 // Listen for the 'close' event on the Express.js server
@@ -41,4 +43,5 @@ server.on('close', () => {
     mongoose.connection.close();
   });
 
-module.exports = server
+
+module.exports = { app, server };
