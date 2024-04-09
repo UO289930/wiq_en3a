@@ -55,8 +55,11 @@ app.get('/GetQuestions', async (_req, res) => {
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 10000 });
     if (wikiResponse.status !== 200) {
-      console.error('Error with the wikidata service:', wikiResponse.status);
-      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
+      let statusCode = wikiResponse.status ? wikiResponse.status : 500;
+
+      console.error('Error with the wikidata service:', statusCode);
+      res.status(statusCode).json({ error: 'Error with the wikidata service' });
+
     } else {
       res.json(wikiResponse.data);
     }
@@ -82,8 +85,11 @@ async function getQuestions(specificPath, res){
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + specificPath, { timeout: 10000 });
     if (wikiResponse.status !== 200) {
-      console.error('Error with the wikidata service:', wikiResponse.status);
-      res.status(wikiResponse.status).json({ error: 'Error with the wikidata service' });
+      let statusCode = wikiResponse.status ? wikiResponse.status : 500;
+
+      console.error('Error with the wikidata service:', statusCode);
+      res.status(statusCode).json({ error: 'Error with the wikidata service' });
+
     } else {
       res.json(wikiResponse.data);
     }

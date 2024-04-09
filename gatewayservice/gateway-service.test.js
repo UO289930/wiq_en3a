@@ -9,20 +9,9 @@ afterAll(() => {
 })
 
 describe('Gateway Service', () => {
-  // Mock responses from external services
-  axios.post.mockImplementation((url, data) => {
-    if (url.endsWith('/login')) {
-      return Promise.resolve({ data: { token: 'mockedToken' } });
-    } else if (url.endsWith('/adduser')) {
-      return Promise.resolve({ data: { userId: 'mockedUserId' } });
-    }
-  });
-  
+
   axios.get.mockImplementation((url) => {
-    if (url.endsWith('/getCapitalsQuestions') 
-        || url.endsWith('/getQuestions') 
-        || url.endsWith('/getElementSymbolsQuestions') 
-        || url.endsWith('/getMovieDirectorsQuestions')) {
+    if (url.endsWith('Questions')) {
       return Promise.resolve({data: {questions: [
         {
         "text": "What is the capital of France?",
@@ -76,7 +65,23 @@ describe('Gateway Service', () => {
         }
         ]} });
     } 
+
+    return Promise.resolve({data: {
+      status:"not found",
+      message:"Wrong URL: Please, check the correct enpoint URL"
+    }});
   });
+
+  // Mock responses from external services
+  axios.post.mockImplementation((url) => {
+    if (url.endsWith('/login')) {
+      return Promise.resolve({ data: { token: 'mockedToken' } });
+    } else if (url.endsWith('/adduser')) {
+      return Promise.resolve({ data: { userId: 'mockedUserId' } });
+    }
+  });
+  
+  
 
   // Test /login endpoint
   it('should forward login request to auth service', async () => {
@@ -102,54 +107,53 @@ describe('Gateway Service', () => {
   it('should give an error message', async () => {
     const response = await request(app).get('/text');
     expect(response.statusCode).toBe(404);
-    expect(response._body.status).toBe('not found');
-    expect(response._body.message).toBe('Wrong URL: Please, check the correct enpoint URL');
+    expect(response.body.status).toBe('not found');
+    expect(response.body.message).toBe('Wrong URL: Please, check the correct enpoint URL');
   });
 
-  /*
   
-  it('should retrieve 10 capitals questions with their corresponding answers', async () => {
-    //checkCorrectQuestionsResponse('/GetCapitalsQuestions', 10);
-    const response = await request(app).get('/GetCapitalsQuestions');
-    expect(response.statusCode).toBe(200);
-    expect(response.body.questions.length).toBe(10);
-    expect(response.body.questions[0]).toHaveProperty("text");
-    expect(response.body.questions[0]).toHaveProperty("correctAnswer");
-    expect(response.body.questions[0]).toHaveProperty("answers");
-  }, 10000);
+  // it('should retrieve 10 capitals questions with their corresponding answers', async () => {
+  //   //checkCorrectQuestionsResponse('/GetCapitalsQuestions', 10);
+  //   const response = await request(app).get('/GetQuestions');
+  //   expect(response.statusCode).toBe(200);
+  //   expect(response.body.questions.length).toBe(10);
+  //   expect(response.body.questions[0]).toHaveProperty("text");
+  //   expect(response.body.questions[0]).toHaveProperty("correctAnswer");
+  //   expect(response.body.questions[0]).toHaveProperty("answers");
+  // }, 10000);
 
   
-  it('should retrieve 10 questions with their corresponding answers', async () => {
-    //checkCorrectQuestionsResponse('/GetQuestions', 10);
-    const response = await request(app).get('/GetQuestions');
-    expect(response.statusCode).toBe(200);
-    expect(response.body.questions.length).toBe(10);
-    expect(response.body.questions[0]).toHaveProperty("text");
-    expect(response.body.questions[0]).toHaveProperty("correctAnswer");
-    expect(response.body.questions[0]).toHaveProperty("answers");
-  }, 30000);
+  // it('should retrieve 10 questions with their corresponding answers', async () => {
+  //   //checkCorrectQuestionsResponse('/GetQuestions', 10);
+  //   const response = await request(app).get('/GetQuestions');
+  //   expect(response.statusCode).toBe(200);
+  //   expect(response.body.questions.length).toBe(10);
+  //   expect(response.body.questions[0]).toHaveProperty("text");
+  //   expect(response.body.questions[0]).toHaveProperty("correctAnswer");
+  //   expect(response.body.questions[0]).toHaveProperty("answers");
+  // }, 30000);
 
-  it('should retrieve 10 element type symbols questions with their corresponding answers', async () => {
-    //checkCorrectQuestionsResponse('/GetElementSymbolsQuestions', 10);
-    const response = await request(app).get('/GetElementSymbolsQuestions');
-    console.log(response.data);
-    expect(response.statusCode).toBe(200);
-    expect(response.body.questions.length).toBe(10);
-    expect(response.body.questions[0]).toHaveProperty("text");
-    expect(response.body.questions[0]).toHaveProperty("correctAnswer");
-    expect(response.body.questions[0]).toHaveProperty("answers");
-  }, 10000);
+  // it('should retrieve 10 element type symbols questions with their corresponding answers', async () => {
+  //   //checkCorrectQuestionsResponse('/GetElementSymbolsQuestions', 10);
+  //   const response = await request(app).get('/GetElementSymbolsQuestions');
+  //   console.log(response.data);
+  //   expect(response.statusCode).toBe(200);
+  //   expect(response.body.questions.length).toBe(10);
+  //   expect(response.body.questions[0]).toHaveProperty("text");
+  //   expect(response.body.questions[0]).toHaveProperty("correctAnswer");
+  //   expect(response.body.questions[0]).toHaveProperty("answers");
+  // }, 10000);
 
-  it('should retrieve 10 movie directors questions with their corresponding answers', async () => {
-    //checkCorrectQuestionsResponse('/getMovieDirectorsQuestions', 10);
-    const response = await request(app).get('/GetMovieDirectorsQuestions');
-    console.log(response.data);
-    expect(response.statusCode).toBe(200);
-    expect(response.body.questions.length).toBe(10);
-    expect(response.body.questions[0]).toHaveProperty("text");
-    expect(response.body.questions[0]).toHaveProperty("correctAnswer");
-    expect(response.body.questions[0]).toHaveProperty("answers");
-  }, 10000);
+  // it('should retrieve 10 movie directors questions with their corresponding answers', async () => {
+  //   //checkCorrectQuestionsResponse('/getMovieDirectorsQuestions', 10);
+  //   const response = await request(app).get('/GetMovieDirectorsQuestions');
+  //   console.log(response.data);
+  //   expect(response.statusCode).toBe(200);
+  //   expect(response.body.questions.length).toBe(10);
+  //   expect(response.body.questions[0]).toHaveProperty("text");
+  //   expect(response.body.questions[0]).toHaveProperty("correctAnswer");
+  //   expect(response.body.questions[0]).toHaveProperty("answers");
+  // }, 10000);
 
 
   async function checkCorrectQuestionsResponse(endpoint, retrieved){
@@ -159,6 +163,6 @@ describe('Gateway Service', () => {
     expect(response._body[0]).toHaveProperty("text");
     expect(response._body[0]).toHaveProperty("correctAnswer");
     expect(response._body[0]).toHaveProperty("answers");
-  }*/
+  }
   
 });
