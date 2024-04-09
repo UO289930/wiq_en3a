@@ -3,7 +3,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const User = require('./user-model');
-const { app } = require('../index.js'); // Assuming index.js exports 'app'
+const { app } = require('../index.js'); 
 
 
 let mongoServer;
@@ -20,8 +20,6 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
-  
-  //await mongoose.connect(mongoUri);
 });
 
 afterAll(async () => {
