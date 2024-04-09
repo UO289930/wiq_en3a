@@ -4,6 +4,10 @@ const app = require('./gateway-service');
 
 jest.mock('axios');
 
+afterAll(() => {
+  app.close();
+})
+
 describe('Gateway Service', () => {
   // Mock responses from external services
   axios.post.mockImplementation((url, data) => {
