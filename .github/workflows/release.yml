@@ -41,8 +41,7 @@ jobs:
       with:
         node-version: 20
     - run: npm --prefix wikidataservice install
-    - run: npm --prefix users/authservice install
-    - run: npm --prefix users/userservice install
+    - run: npm --prefix users install
     - run: npm --prefix gatewayservice install
     - run: npm --prefix webapp install
     - run: CI=false npm --prefix webapp run build
