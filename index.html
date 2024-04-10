@@ -467,8 +467,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-solution-strategy">4. Solution Strategy</a>
 <ul class="sectlevel2">
 <li><a href="#_technologies">4.1. Technologies</a></li>
-<li><a href="#_architecture_design">4.2. Architecture &amp; Design</a></li>
-<li><a href="#_team_organization">4.3. Team Organization</a></li>
+<li><a href="#_technological_decisions">4.2. Technological decisions</a></li>
+<li><a href="#_architecture_design">4.3. Architecture &amp; Design</a></li>
+<li><a href="#_team_organization">4.4. Team Organization</a></li>
 </ul>
 </li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
@@ -1160,16 +1161,10 @@ Refer to details in the following sections.</p>
 + <strong>Express.js</strong>: Express.js, often simply called Express, is a minimalist web application framework for Node.js. It simplifies the process of building web applications by providing a robust set of features, including middleware support, routing, and templating engines. Express is known for its flexibility, simplicity, and performance, making it a popular choice for developing web applications and APIs in Node.js.</p>
 </li>
 <li>
-<p><strong>.NET</strong>: versatile developer platform for creating web, mobile, desktop, and cloud applications. It supports multiple programming languages and provides a rich set of libraries and tools for building software solutions. With built-in support for creating APIs and consuming web services, .NET makes it simple to develop and integrate with backend systems and services.</p>
-</li>
-<li>
 <p><strong>Wikidata</strong>: Wikidata provides a REST API for retrieving information related to any topic. It helps us to dynamically generate questions for our game using it from any programming language.</p>
 </li>
 <li>
 <p><strong>MongoDB</strong>: popular NoSQL database known for its flexibility and scalability. It stores data in flexible JSON-like documents and is widely used in modern web development for its simplicity and ability to handle large volumes of data.</p>
-</li>
-<li>
-<p><strong>Cucumber</strong>: Testing tool that supports Behavior Driven Development (BDD) and allows us also to comply testability quality attribute.</p>
 </li>
 <li>
 <p><strong>SonarCloud</strong>: Cloud-based service provided by SonarSource, which offers continuous code quality analysis and automated code reviews for software development projects. It helps developers identify and fix bugs, security vulnerabilities, and code smells in their codebase to improve overall software quality.</p>
@@ -1183,11 +1178,23 @@ Refer to details in the following sections.</p>
 <li>
 <p><strong>Docker</strong>: platform that will be used for deploying our services inside containers. Containers are lightweight, portable, and self-sufficient units that contain everything needed to run an application, including the code, runtime, system tools, libraries, and settings. Docker enables developers to package their applications along with all dependencies into containers, ensuring consistency across different environments, such as development, testing, and production.</p>
 </li>
+<li>
+<p><strong>GitHub Actions</strong>: built-in automation tool on GitHub that allows us to automate some workflows that are triggered after some specific github branches actions at development. It provides as continuous integration of the game functionality.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_architecture_design">4.2. Architecture &amp; Design</h3>
+<h3 id="_technological_decisions">4.2. Technological decisions</h3>
+<div class="paragraph">
+<p>At the beggining of the project, the team decided to develop the wikidata API by means of .NET technology and C# programming language.
+As part of continuous integration, the application was attempted to be deployed without success due to docker issues with .NET container.
+Therefore, the team decided to migrate the whole API to Node.js using javascript and express framework.
+As a conclusion, it was worth spending time making the migration for reducing the number of potential issues at deployment time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_architecture_design">4.3. Architecture &amp; Design</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1199,19 +1206,9 @@ In a microservices architecture, each service typically represents a specific bu
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>--------------------(This could be another option if we eventually decide not to use microservices architecture)--------------------</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>MVC (Model-View-Controller)</strong>: is a software architectural pattern which divides an application into three interconnected components: the Model, which represents the data and business logic; the View, responsible for the presentation layer and user interface; and the Controller, acting as an intermediary between the Model and View. MVC promotes separation of concerns, making it easier to manage and maintain complex web applications by enabling developers to work on different components independently. This pattern enhances code reuse, improves testability, and facilitates scalability, contributing to the development of robust and maintainable web applications across various frameworks and programming languages.</p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_team_organization">4.3. Team Organization</h3>
+<h3 id="_team_organization">4.4. Team Organization</h3>
 <div class="paragraph">
 <p>For developing this project we are using Github as the control version systems.
 The master branch contains the final version of the product, so that every accepted pull request to master branch will be considered as a new release.
@@ -1330,7 +1327,7 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="319" height="126">
+<img src="./images/diag-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="319" height="126">
 </div>
 </div>
 <div class="dlist">
@@ -1381,7 +1378,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="370" height="520">
+<img src="./images/diag-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="372" height="522">
 </div>
 </div>
 <div class="dlist">
@@ -1587,7 +1584,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="209" height="167">
+<img src="./images/diag-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="209" height="167">
 </div>
 </div>
 </div>
@@ -1602,7 +1599,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="162" height="159">
+<img src="./images/diag-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="162" height="159">
 </div>
 </div>
 </div>
@@ -1620,7 +1617,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
+<img src="./images/diag-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1823,7 +1820,7 @@ This will allow our team to achieve continuous deployment and delivery.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1246" height="965">
+<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1462" height="1149">
 </div>
 </div>
 </div>
@@ -1847,11 +1844,12 @@ Each implemented service will be isolated at deploy time, so there is no need of
 <div class="paragraph">
 <p>For now, the project contains:
 <strong> Web application service running on port 3000
-</strong>* Gateway (middleware) service running on port 8000
-<strong>* Users and authentication services running on ports 8001 and 8002 respectively
-</strong> Mongo DB server running on port 27017
-<strong> Prometheus running on port 9090 for monitoring
-</strong> Grafana running on port 9091 for analytics and monitoring</p>
+</strong> Gateway (middleware) service running on port 8000
+<strong> Wikidata API running on port 8001
+</strong> Users API running on port 8002
+<strong> Mongo DB server running on port 27017
+</strong> Prometheus running on port 9090 for monitoring
+** Grafana running on port 9091 for analytics and monitoring</p>
 </div>
 </div>
 <div class="sect2">
@@ -2287,15 +2285,9 @@ The following table contains the most interesting the design decisions that we h
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ADR7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API in C#</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Better structure and two people knew about the language</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Dificulties with deployment, using another editor to run it, problems when committing new files.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database for questions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Support if wikidata service stops working</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">New different relational database into the aplication, new api to develop, dependency on the database server we choose to use.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API also in Node.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Better project structure. Same language as users API. Easier for us to deploy it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Its performance is reduced with heavy computational tasks</p></td>
 </tr>
 </tbody>
 </table>
@@ -2583,13 +2575,6 @@ self-explanatory description, the probability of its occurrence, its impact on t
 <td class="tableblock halign-left valign-top"><p class="tableblock">Each member will try to maximize its knowledge on some aspect of the project in the first weeks, in order to be able to be something similar to a leader in each one of the posible key aspects of the project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with C#</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">As a team we decided to try .NET to code the API of wikidata.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The team will practice with the language to be able to do a good job when implementing the back-end.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with wikidata</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The team only used wikidata once before and not even everyone of us.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
@@ -2764,7 +2749,7 @@ self-explanatory description, the probability of its occurrence, its impact on t
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-26 17:35:38 +0100
+Last updated 2024-02-13 13:04:17 +0100
 </div>
 </div>
 </body>
