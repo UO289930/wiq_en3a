@@ -81,7 +81,7 @@ together with a mapping table showing the relationships between channels and inp
 |===
 | **Component** | **Technologies Used**
 | Front-end      | HTML, CSS (Tailwind), JavaScript (React)
-| Back-end       | .NET/node.js, Wikidata's API
+| Back-end       | node.js (Express), Wikidata's API
 | Database  | MongoDB
 | Arquitechture | Microservices
 | Deployment and Maintenance | Docker
