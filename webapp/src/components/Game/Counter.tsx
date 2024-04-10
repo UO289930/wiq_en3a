@@ -30,7 +30,7 @@ const Counter = (props: props) => {
         }
     }, [props.count]);
 
-    return <Progress value={props.count*(100 / props.initialCount)} className="self-center w-[100%]" />;
+    return <Progress data-testid="counter" value={props.count*(100 / props.initialCount)} className="self-center w-[100%]" />;
 };
 
 export default Counter;

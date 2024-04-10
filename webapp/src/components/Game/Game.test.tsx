@@ -5,5 +5,10 @@ import Game from './Game';
 
 test('always true test', () => {
     
-    expect(true).toBe(true);
+  //   render(<Game />);
+  
+  // // Verifica que el componente Game se renderizó correctamente
+  // const gameComponent = screen.getByTestId('game-component');
+  // expect(gameComponent).toBeInTheDocument();
+  expect(true).toBe(true);
 });
