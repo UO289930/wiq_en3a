@@ -17,11 +17,11 @@ self-explanatory description, the probability of its occurrence, its impact on t
 | High
 | Each member will try to maximize its knowledge on some aspect of the project in the first weeks, in order to be able to be something similar to a leader in each one of the posible key aspects of the project.
 
-|*Problems with Svelte*
-| As a team we decided to try a new language for the front-end.
+|*Problems with C#*
+| As a team we decided to try .NET to code the API of wikidata.
 | High
 | High
-| The team will practice with the language to be able to do a good job when implementing the front-end.
+| The team will practice with the language to be able to do a good job when implementing the back-end.
 
 |*Problems with wikidata*
 | The team only used wikidata once before and not even everyone of us.
