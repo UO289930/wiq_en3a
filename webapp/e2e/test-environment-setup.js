@@ -13,9 +13,9 @@ async function startServer() {
     const mongoUri = mongoserver.getUri();
     process.env.MONGODB_URI = mongoUri;
     gatewayservice = await require("../../gatewayservice/gateway-service");
-    wikidataservice = await require("../../api/wikidataservice/wikidata-service");
-    authservice = await require("../../api/authservice/auth-service");
-    userservice = await require("../../api/userservice/user-service");
+    wikidataservice = await require("../../wikidataservice/index");
+    authservice = await require("../../users/authservice/auth-service");
+    userservice = await require("../../users/userservice/user-service");
   }
 
   startServer();
