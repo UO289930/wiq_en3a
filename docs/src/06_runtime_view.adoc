@@ -16,10 +16,10 @@ collections UsersService
 database DB
 
 User -> FrontEnd: Request login
-FrontEnd -> UsersService: loginUser()
-UsersService  -> DB: checkUserData()
+FrontEnd -> UsersService: "/users/login"
+UsersService  -> DB: validateRequiredFields()
 DB -> UsersService: Confirm data
-UsersService -> UsersService: login()
+UsersService -> UsersService: loginUser()
 UsersService -> FrontEnd: Confirm login
 ----
 
@@ -35,12 +35,11 @@ collections UsersService
 database DB
 
 User -> FrontEnd: Request sign up
-FrontEnd -> UsersService: registerUser()
+FrontEnd -> UsersService: "/users/adduser"
 UsersService -> DB: checkCredentialsExist()
 DB -> UsersService: Confirm data
-UsersService  -> DB: CreateUserData()
+UsersService  -> DB: Create new user
 DB -> UsersService: Confirm data
-UsersService -> UsersService: signUp()
 UsersService -> FrontEnd: Redirect to login page
 @enduml
 ----
@@ -53,18 +52,15 @@ Sequence diagram for the process of retrieving data from WikiData
 ----
 actor User
 collections FrontEnd
-collections QuestionGenerator
+collections WikidataService
 database Wikidata
 
-User -> FrontEnd: Request a game
-FrontEnd -> QuestionGenerator: createGame()
-QuestionGenerator-> Wikidata: Sparql query
-Wikidata-> QuestionGenerator : entitites data
-QuestionGenerator-> QuestionGenerator: fillQuestionStack()
-QuestionGenerator-> QuestionGenerator: popGameQuestions()
-QuestionGenerator-> FrontEnd: Send game
+User -> FrontEnd: Start Game
+FrontEnd -> WikidataService: "/GetQuestions"
+WikidataService-> Wikidata: Sparql query
+Wikidata-> WikidataService : entitites data
+WikidataService-> WikidataService: createQuestions()
+WikidataService-> FrontEnd: Send 10 questions
 FrontEnd -> User: Question 1
 User-> FrontEnd: Answer 1
 ----
-
-=== <Runtime Scenario n>

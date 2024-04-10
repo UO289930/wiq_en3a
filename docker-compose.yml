@@ -19,7 +19,7 @@ services:
     depends_on:
       - mongodb
     ports:
-      - "8002:8002"
+      - "8003:8003"
     networks:
       - mynetwork
     environment:
@@ -49,7 +49,7 @@ services:
     networks:
       - mynetwork
     environment:
-      USERS_SERVICE_URL: http://users:8002
+      USERS_SERVICE_URL: http://users:8003
       WIKIDATA_SERVICE_URL: http://wikidataservice:8001
 
   webapp:

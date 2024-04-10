@@ -35,7 +35,7 @@ beforeAll(async () => {
  
   //await mongoose.connect(mongoUri);
   await addUser(user);
-});
+},30000);
  
  
 afterAll(async () => {

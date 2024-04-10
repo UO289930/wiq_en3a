@@ -107,20 +107,24 @@ frame Azure {
                 node React
             }
 
-            frame NodeJSGateway {
-                node Authentication
-
+            frame APIGateway {
                 node Users
+
+                node Wikidata
             }
 
             database MongoDB {
                 node UsersDatabase
-
-                node ResultsDatabase
             }
 
-            frame .NET {
-                node RestAPI
+            frame UsersAPI {
+                node AuthenticationService
+
+                node UsersService
+            }
+
+            frame WikidataAPI {
+                node QuestionGeneratorService
             }
         }
     }
@@ -138,10 +142,11 @@ frame GitHub{
 
     }
 
-.NET -- ResultsDatabase : MongoDB (port 27017)
-NodeJSGateway -- UsersDatabase : MongoDB (port 27017)
-WebAPP -- NodeJSGateway : (port 8000:8002)
-WebAPP -- .NET : .NET (port TBD)
+
+WebAPP -- APIGateway : port 8000
+Wikidata -- WikidataAPI: port 8001
+Users -- UsersAPI : port 8002
+UsersAPI -- UsersDatabase : MongoDB (port 27017)
 client -- WebAPP : Web Browser (port 3000)
 
 GitHubActions -- UbuntuServer : on release
@@ -165,8 +170,9 @@ The virtual machine will contain as many containers as services in the applicati
 
 For now, the project contains:
 ** Web application service running on port 3000
-*** Gateway (middleware) service running on port 8000
-*** Users and authentication services running on ports 8001 and 8002 respectively
+** Gateway (middleware) service running on port 8000
+** Wikidata API running on port 8001
+** Users API running on port 8002
 ** Mongo DB server running on port 27017
 ** Prometheus running on port 9090 for monitoring
 ** Grafana running on port 9091 for analytics and monitoring
