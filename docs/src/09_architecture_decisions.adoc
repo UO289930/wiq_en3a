@@ -12,12 +12,13 @@ The following table contains the most interesting the design decisions that we h
 |===
 |Code|Decision|Advantages|Disadvantages
 |ADR1| React.js | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.| Not all of us know about its usage
-|ADR2| Tawilwind CSS | Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework | Quite new for most of us
+|ADR2| Tailwind CSS | Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework | Quite new for most of us
 |ADR3| MongoDB | It does not need to be started manually. Free and easy to understand| We are quite new with MongoDB.
 |ADR4| Docker | Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example| We do not have much experience using Docker
 |ADR5| PlantUML | Allows drawing diagrams very easily, with a simple syntax.| Does not allow as much control over the exact layout of the elements in the diagram as other tools.
 |ADR6| Node.js | For small applications it's a very fast techonology. It's easy to learn and we already know a bit about it| Its performance is reduced with heavy computational tasks
 |ADR7| Wikidata API in C# | Better structure and two people knew about the language| Dificulties with deployment, using another editor to run it, problems when committing new files.
+|ADR8| Database for questions | Support if wikidata service stops working | New different relational database into the aplication, new api to develop, dependency on the database server we choose to use.
 |===
 
 
