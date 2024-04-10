@@ -6,7 +6,7 @@ const promBundle = require('express-prom-bundle');
 const app = express();
 const port = 8000;
 
-const userServiceUrl = process.env.USERS_SERVICE_URL || 'http://localhost:8002';
+const userServiceUrl = process.env.USERS_SERVICE_URL || 'http://localhost:8003';
 const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'http://localhost:8001';
 
 app.use(cors());
