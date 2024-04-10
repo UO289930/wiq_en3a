@@ -56,18 +56,73 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== _<Concept 1>_
+=== Domain Concepts
 
-_<explanation>_
+==== Question
+
+In our app, the question is always represent as a data structure with the next format: 
+
+[listing]
+----
+{
+    text: "What is the capital of Asturias?"
+    answers: [Gijón,Oviedo,Cangas de Onís]
+    correctIndex: 1
+}
+----
+
+
+*Benefits:*
+
+- Consistency: This format ensures consistent representation of questions throughout the app, reducing errors and simplifying code maintenance.
+- Clarity: By explicitly defining the data format, developers can clearly understand how to work with question data within the codebase.
+- Flexibility: By defining an array and a correct index, the array could be of multiple sizes.
+
+
+=== UX Concepts
+
+==== Color 
+
+We decided to use a color palette of 4 colors:
+
+
+[cols="1,1"]
+|===
+| Name | Color
+| Background | +++<span style="color: #191919; font-weight:bold">#191919</span>+++
+| Text| +++<span style="background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span>+++
+| Primary | +++<span style="color: #00c896; font-weight:bold">#00c896</span>+++
+| Danger | +++<span style="color: #e35a2a; font-weight:bold">#e35a2a</span>+++
+|===
+
+*Benefits:*
+
+ - Clarity: Thanks to this simple palette it is very easy to identify when something is correct or not.
+ - Consistency: By using a limited set of colors, the overall visual design of the application will be cohesive and harmonious.
+ - Accessibility: The chosen colors provide good contrast ratios, ensuring the content is readable and accessible for users with various visual abilities.
+ - Branding: The selected colors can be used to reinforce the application's brand identity and make it recognizable to users.
+
+The chosen color palette strikes a balance between functionality, aesthetics, and branding. The dark background with light text provides a high-contrast theme that is easy on the eyes, while the primary and danger colors are used sparingly to highlight important information or actions.
 
 
 
-=== _<Concept 2>_
 
-_<explanation>_
+
+=== Development concepts
+
+==== Testing
+We test the application with these different tests:
+ - Unit Testing: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.
+ - Load Testing: We used Gattling for measuring the performance of the application when many users are using it.
+ - E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.
+
+==== Deployment
+The application is deployed using Docker.
+
+==== Configurability
+The application will not have configurable features. An early idea was to include a "dark mode".
+Through the development we decided to postpone these ideas in order to focus on a better application in general.
+
 
 ...
 
-=== _<Concept n>_
-
-_<explanation>_

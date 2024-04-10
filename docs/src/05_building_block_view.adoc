@@ -99,74 +99,6 @@ Contained Building Blocks::
 |===
 
 
-[role="arc42help"]
-****
-Insert your explanations of black boxes from level 1:
-
-If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:
-
-[cols="1,2" options="header"]
-|===
-| **Name** | **Responsibility**
-| _<black box 1>_ | _<Text>_
-| _<black box 2>_ | _<Text>_
-|===
-
-
-
-If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.
-****
-
-
-==== <Name black box 1>
-
-[role="arc42help"]
-****
-Here you describe <black box 1>
-according the the following black box template:
-
-* Purpose/Responsibility
-* Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.
-* (Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, ....
-* (Optional) directory/file location
-* (Optional) Fulfilled requirements (if you need traceability to requirements).
-* (Optional) Open issues/problems/risks
-
-
-
-_<Purpose/Responsibility>_
-
-_<Interface(s)>_
-
-_<(Optional) Quality/Performance Characteristics>_
-
-_<(Optional) Directory/File Location>_
-
-_<(Optional) Fulfilled Requirements>_
-
-_<(optional) Open Issues/Problems/Risks>_
-
-
-
-
-==== <Name black box 2>
-
-_<black box template>_
-
-==== <Name black box n>
-
-_<black box template>_
-
-
-==== <Name interface 1>
-
-...
-
-==== <Name interface m>
-****
-
 === Level 1
 
 [role="arc42help"]
@@ -185,14 +117,16 @@ actor user as "User browser"
 frame WIQ {
     node Frontend
     node UserManagement
-    node QuestionGeneration
+    node WikidataService
+    node Gateway
 }
 cloud Wikidata as "Wikidata"
 
 user -- Frontend
-Frontend -- UserManagement
-Frontend -- QuestionGeneration
-QuestionGeneration -- Wikidata
+Frontend -- Gateway
+Gateway -- UserManagement
+Gateway -- WikidataService
+WikidataService -- Wikidata
 ....
 
 
@@ -209,7 +143,8 @@ Contained Building Blocks::
 | **Name** | **Responsibility**
 | Frontend  | Represents the user interface and manages the quiz logic of the application.
 | User Management | Handles everything related to user accounts.
-| Question Generator | Generates questions from Wikidata data and sends them to the frontend.
+| Wikidata Service | Generates questions from Wikidata data.
+| Gateway |Acts as a central hub for managing API traffic.
 |===
 
 Important Interfaces::
@@ -217,9 +152,9 @@ Important Interfaces::
 [cols="1,2" options="header"]
 |===
 | **Name** | **Description**
-| Frontend <-> User Management  | This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.
-| Question Generator <-> Frontend | This interface defines how the Question Generator Service delivers processed questions to the frontend for display.
-| Question Generator <-> Wikidata API | This interface represents the service fetching data from the Wikidata API.
+| Frontend -> User Management  | This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.
+| Frontend -> Wikidata Service | This interface defines how the Question Generator Service delivers processed questions to the frontend for display.
+| Wikidata Service -> Wikidata API | This interface represents the service fetching data from the Wikidata API.
 |===
 
 
@@ -243,8 +178,6 @@ If you use a list of black box descriptions then you fill in a separate black bo
 Its headline is the name of the black box.
 ****
 
-
-==== <Name black box 1>
 
 [role="arc42help"]
 ****
@@ -317,7 +250,7 @@ Leave out normal, simple, boring or standardized parts of your system
 skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
-rectangle "User Management" as UserManagement
+rectangle "User Management API" as UserManagement
 database "Users MongoDB Database" as MongoDB
 
 ' Define connections
@@ -326,7 +259,7 @@ UserManagement --> MongoDB
 @enduml
 ----
 
-==== White Box Question Generation Service
+==== White Box Wikidata Service
 
 
 [role="arc42help"]
@@ -341,45 +274,35 @@ UserManagement --> MongoDB
 skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
-rectangle "Question Generation" as QuestionGeneration
-database "Questions MongoDB Database" as MongoDB
+rectangle "Wikidata Service API" as WikidataService
 cloud "Wikidata API" as WikidataAPI
 
 ' Define connections
-QuestionGeneration --> MongoDB
-QuestionGeneration --> WikidataAPI
+WikidataService --> WikidataAPI
 @enduml
 ----
 
 
 === Level 3
 
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.
+==== White Box User Management API
 
-When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.
-****
-
-
-==== White Box <_building block x.1_>
 
 [role="arc42help"]
 ****
-Specifies the internal structure of _building block x.1_.
+...describes the internal structure of the User Management API.
 ****
 
+[plantuml, format=png]
+....
+frame UserManagementAPI {
+    node UserService
+    node AuthService
+}
+database MongoDB as "MongoDB"
 
-_<white box template>_
+UserService -- MongoDB
+AuthService -- MongoDB
+....
 
 
-==== White Box <_building block x.2_>
-
-_<white box template>_
-
-
-
-==== White Box <_building block y.1_>
-
-_<white box template>_
