@@ -144,8 +144,8 @@ frame GitHub{
 
 
 WebAPP -- APIGateway : port 8000
-APIGateway -- WikidataAPI: port 8001
-APIGateway -- UsersAPI : port 8002
+Wikidata -- WikidataAPI: port 8001
+Users -- UsersAPI : port 8002
 UsersAPI -- UsersDatabase : MongoDB (port 27017)
 client -- WebAPP : Web Browser (port 3000)
 
