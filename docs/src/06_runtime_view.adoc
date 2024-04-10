@@ -64,5 +64,3 @@ WikidataService-> FrontEnd: Send 10 questions
 FrontEnd -> User: Question 1
 User-> FrontEnd: Answer 1
 ----
-
-=== <Runtime Scenario n>
