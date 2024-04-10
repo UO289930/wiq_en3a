@@ -65,9 +65,6 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 |MongoDB
 |A popular open-source NoSQL database management system known for its flexibility, scalability, and ease of use. It stores data in a flexible, JSON-like format called BSON and is commonly used for applications requiring high-volume data storage and real-time data processing.
 
-|Svelte
-|A modern JavaScript framework for building user interfaces. Unlike traditional frameworks that require the runtime presence of a virtual DOM, Svelte shifts the work to compile-time, resulting in highly optimized and efficient code with smaller bundle sizes.
-
 |API (Application programming interface)
 |Set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications can use to request and exchange information. They enable developers to access the functionality of other software components or services without having to understand their internal workings. APIs are commonly used to integrate third-party services, access data from remote servers, and build modular and interoperable software systems.
 
