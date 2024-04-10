@@ -484,7 +484,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_users_login">6.1. User&#8217;s Login</a></li>
 <li><a href="#_users_sign_up">6.2. User&#8217;s sign up</a></li>
 <li><a href="#_data_retrieval_from_wikidata">6.3. Data retrieval from WikiData</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -500,9 +499,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_concept_1">8.1. <em>&lt;Concept 1&gt;</em></a></li>
-<li><a href="#_concept_2">8.2. <em>&lt;Concept 2&gt;</em></a></li>
-<li><a href="#_concept_n">8.3. <em>&lt;Concept n&gt;</em></a></li>
+<li><a href="#_domain_concepts">8.1. Domain Concepts</a></li>
+<li><a href="#_ux_concepts">8.2. UX Concepts</a></li>
+<li><a href="#_development_concepts">8.3. Development concepts</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
@@ -807,14 +806,6 @@ These stakeholders determine the extent and the level of detail of your work and
 <td class="tableblock halign-left valign-top"><p class="tableblock">Our application must generate questions automatically getting data from WikiData</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">We are using docker for the deployment.It&#8217;s a platform that allows you to package Our application and its dependencies into a standardized unit called a container.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure is a cloud computing platform where we are going to host our WIQ application</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Version control and monitoring (GitHub)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For the WIQ application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member.</p></td>
 </tr>
@@ -1048,7 +1039,7 @@ together with a mapping table showing the relationships between channels and inp
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">.NET/node.js, Wikidata&#8217;s API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">node.js (Express), Wikidata&#8217;s API</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
@@ -1373,115 +1364,6 @@ In the best case you will get away with examples or simple signatures.</p>
 </tr>
 </tbody>
 </table>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Insert your explanations of black boxes from level 1:</p>
-</div>
-<div class="paragraph">
-<p>If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
-<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you describe &lt;black box 1&gt;
-according the the following black box template:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Purpose/Responsibility</p>
-</li>
-<li>
-<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
-</li>
-<li>
-<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#8230;&#8203;.</p>
-</li>
-<li>
-<p>(Optional) directory/file location</p>
-</li>
-<li>
-<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
-</li>
-<li>
-<p>(Optional) Open issues/problems/risks</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>&lt;Purpose/Responsibility&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Interface(s)&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>==== &lt;Name black box 2&gt;</p>
-</div>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>==== &lt;Name black box n&gt;</p>
-</div>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>==== &lt;Name interface 1&gt;</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>==== &lt;Name interface m&gt;</p>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_level_1">5.2. Level 1</h3>
@@ -1499,7 +1381,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-d1794a731ae61e9287bf391bb4bd1c00.png" alt="Diagram" width="397" height="412">
+<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="370" height="520">
 </div>
 </div>
 <div class="dlist">
@@ -1533,8 +1415,12 @@ It also allows to expose the user management and the question generation as APIs
 <td class="tableblock halign-left valign-top"><p class="tableblock"> Handles everything related to user accounts.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Generates questions from Wikidata data and sends them to the frontend.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Generates questions from Wikidata data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gateway</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acts as a central hub for managing API traffic.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1556,15 +1442,15 @@ It also allows to expose the user management and the question generation as APIs
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend &lt;&#8594; User Management</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend &#8594; User Management</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator &lt;&#8594; Frontend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend &#8594; Wikidata Service</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> This interface defines how the Question Generator Service delivers processed questions to the frontend for display.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generator &lt;&#8594; Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service &#8594; Wikidata API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This interface represents the service fetching data from the Wikidata API.</p></td>
 </tr>
 </tbody>
@@ -1606,8 +1492,6 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_1_2">5.2.1. &lt;Name black box 1&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1678,7 +1562,6 @@ according the the following black box template:</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect2">
 <h3 id="_level_2">5.3. Level 2</h3>
 <div class="sidebarblock arc42help">
@@ -1704,12 +1587,12 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-a213e1d1d4eb5da8be14de562a5bdaea.png" alt="Diagram" width="209" height="167">
+<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="209" height="167">
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_question_generation_service">5.3.2. White Box Question Generation Service</h4>
+<h4 id="_white_box_wikidata_service">5.3.2. White Box Wikidata Service</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1719,47 +1602,26 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-e3ae3f4c9761ca8ab8744efa812666e2.png" alt="Diagram" width="373" height="167">
+<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="162" height="159">
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_level_3">5.4. Level 3</h3>
+<div class="sect3">
+<h4 id="_white_box_user_management_api">5.4.1. White Box User Management API</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
-</div>
-<div class="paragraph">
-<p>When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.</p>
+<p>&#8230;&#8203;describes the internal structure of the User Management API.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.4.1. White Box &lt;_building block x.1_&gt;</h4>
-<div class="sidebarblock arc42help">
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<p>Specifies the internal structure of <em>building block x.1</em>.</p>
+<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
 </div>
-</div>
-</div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.4.2. White Box &lt;_building block x.2_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.4.3. White Box &lt;_building block y.1_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1776,7 +1638,7 @@ part of arc42 for additional levels.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/Login%20diagram.png" alt="Login diagram" width="379" height="378">
+<img src="./images/Login%20diagram.png" alt="Login diagram" width="421" height="378">
 </div>
 </div>
 </div>
@@ -1787,7 +1649,7 @@ part of arc42 for additional levels.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/Sign%20Up%20diagram.png" alt="Sign Up diagram" width="486" height="439">
+<img src="./images/Sign%20Up%20diagram.png" alt="Sign Up diagram" width="486" height="396">
 </div>
 </div>
 </div>
@@ -1798,12 +1660,9 @@ part of arc42 for additional levels.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/WikiData%20diagram.png" alt="WikiData diagram" width="431" height="482">
+<img src="./images/WikiData%20diagram.png" alt="WikiData diagram" width="396" height="439">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -2243,26 +2102,126 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_concept_1">8.1. <em>&lt;Concept 1&gt;</em></h3>
+<h3 id="_domain_concepts">8.1. Domain Concepts</h3>
+<div class="sect3">
+<h4 id="_question">8.1.1. Question</h4>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p>In our app, the question is always represent as a data structure with the next format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+    text: "What is the capital of Asturias?"
+    answers: [Gijón,Oviedo,Cangas de Onís]
+    correctIndex: 1
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Benefits:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Consistency: This format ensures consistent representation of questions throughout the app, reducing errors and simplifying code maintenance.</p>
+</li>
+<li>
+<p>Clarity: By explicitly defining the data format, developers can clearly understand how to work with question data within the codebase.</p>
+</li>
+<li>
+<p>Flexibility: By defining an array and a correct index, the array could be of multiple sizes.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_concept_2">8.2. <em>&lt;Concept 2&gt;</em></h3>
+<h3 id="_ux_concepts">8.2. UX Concepts</h3>
+<div class="sect3">
+<h4 id="_color">8.2.1. Color</h4>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p>We decided to use a color palette of 4 colors:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Color</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Background</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #191919; font-weight:bold">#191919</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Primary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #00c896; font-weight:bold">#00c896</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Danger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #e35a2a; font-weight:bold">#e35a2a</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Benefits:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Clarity: Thanks to this simple palette it is very easy to identify when something is correct or not.</p>
+</li>
+<li>
+<p>Consistency: By using a limited set of colors, the overall visual design of the application will be cohesive and harmonious.</p>
+</li>
+<li>
+<p>Accessibility: The chosen colors provide good contrast ratios, ensuring the content is readable and accessible for users with various visual abilities.</p>
+</li>
+<li>
+<p>Branding: The selected colors can be used to reinforce the application&#8217;s brand identity and make it recognizable to users.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The chosen color palette strikes a balance between functionality, aesthetics, and branding. The dark background with light text provides a high-contrast theme that is easy on the eyes, while the primary and danger colors are used sparingly to highlight important information or actions.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_development_concepts">8.3. Development concepts</h3>
+<div class="sect3">
+<h4 id="_testing">8.3.1. Testing</h4>
+<div class="paragraph">
+<p>We test the application with these different tests:
+ - Unit Testing: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.
+ - Load Testing: We used Gattling for measuring the performance of the application when many users are using it.
+ - E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deployment">8.3.2. Deployment</h4>
+<div class="paragraph">
+<p>The application is deployed using Docker.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configurability">8.3.3. Configurability</h4>
+<div class="paragraph">
+<p>The application will not have configurable features. An early idea was to include a "dark mode".
+Through the development we decided to postpone these ideas in order to focus on a better application in general.</p>
 </div>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_concept_n">8.3. <em>&lt;Concept n&gt;</em></h3>
-<div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
-</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
@@ -2271,11 +2230,12 @@ on this list.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Along the process of developing the application, decisions had to be taken as problems arise.
-These are the initial decicision that we have made but they change during the course of the project
-The following table contains some of the design decisions that were imposed to us due to the architectural constraints:</p>
+These are the final decicision that we have made according to their advantages.
+If you want a description about each of the technologies we have chosen, go to the <a href="#section-glossary">Glossary</a> of the documentation.
+The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Imposed decisions</caption>
+<caption class="title">Table 3. Architectural Records</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -2290,55 +2250,52 @@ The following table contains some of the design decisions that were imposed to u
 <td class="tableblock halign-left valign-top"><p class="tableblock">Disadvantages</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ID1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">React.js or Svelte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not all of us know about its usage</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ID2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tailwind CSS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quite new for most of us</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">It does not need to be started manually. Free and easy to understand</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We are quite new with MongoDB.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ID3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We do not have much experience using Docker</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ID4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Allows drawing diagrams very easily, with a simple syntax.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Does not allow as much control over the exact layout of the elements in the diagram as other tools.</p></td>
 </tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Architectural Records</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
 <tr>
-<th class="tableblock halign-left valign-top">Code</th>
-<th class="tableblock halign-left valign-top">Context</th>
-<th class="tableblock halign-left valign-top">Record</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For small applications it&#8217;s a very fast techonology. It&#8217;s easy to learn and we already know a bit about it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Its performance is reduced with heavy computational tasks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API in C#</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Better structure and two people knew about the language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dificulties with deployment, using another editor to run it, problems when committing new files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADR8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database for questions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Support if wikidata service stops working</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New different relational database into the aplication, new api to develop, dependency on the database server we choose to use.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2626,11 +2583,11 @@ self-explanatory description, the probability of its occurrence, its impact on t
 <td class="tableblock halign-left valign-top"><p class="tableblock">Each member will try to maximize its knowledge on some aspect of the project in the first weeks, in order to be able to be something similar to a leader in each one of the posible key aspects of the project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with Svelte</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">As a team we decided to try a new language for the front-end.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with C#</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As a team we decided to try .NET to code the API of wikidata.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The team will practice with the language to be able to do a good job when implementing the front-end.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The team will practice with the language to be able to do a good job when implementing the back-end.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problems with wikidata</strong></p></td>
@@ -2788,12 +2745,12 @@ self-explanatory description, the probability of its occurrence, its impact on t
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>A platform for developing, shipping, and running applications in containers. It allows developers to package applications and their dependencies into standardized units called containers, providing a consistent environment for software deployment across different computing environments.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A popular open-source NoSQL database management system known for its flexibility, scalability, and ease of use. It stores data in a flexible, JSON-like format called BSON and is commonly used for applications requiring high-volume data storage and real-time data processing.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Deployment</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The process of making a software application, website, or service available for use. It involves taking the codebase of a developed application and installing it onto servers or other computing infrastructure so that it can be accessed by end-users.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Svelte</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A modern JavaScript framework for building user interfaces. Unlike traditional frameworks that require the runtime presence of a virtual DOM, Svelte shifts the work to compile-time, resulting in highly optimized and efficient code with smaller bundle sizes.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>A popular open-source NoSQL database management system known for its flexibility, scalability, and ease of use. It stores data in a flexible, JSON-like format called BSON and is commonly used for applications requiring high-volume data storage and real-time data processing.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>API (Application programming interface)</em></p></td>
