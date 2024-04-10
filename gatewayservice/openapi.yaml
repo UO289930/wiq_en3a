@@ -118,50 +118,198 @@ paths:
                     type: string
                     example: Internal Server Error
 
-/auth/login:
-  type: POST
-  description: Authenticate a user by providing username and password.
-  requestBody:
-    description: User credentials for authentication.
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            username:
-              type: string
-              description: The username of the user.
-            password:
-              type: string
-              description: The password of the user.
-          required:
-            - username
-            - password
-  possibleResponses:
-    '200':
-      description: User authenticated successfully
-      body:
-        application/json:
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-                description: JWT token for accessing protected endpoints.
-    '401':
-      description: Unauthorized
-      body:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Unauthorized
+  /auth/login:
+    post:
+      summary: Authenticate a user by providing username and password.
+      tags:
+            - Authentication
+      description: Logs in a user given an existing username and password are provided
+      requestBody:
+        required: true
+        description: User credentials for authentication.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The username of the user.
+                password:
+                  type: string
+                  description: The password of the user.
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: User authenticated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT token for accessing protected endpoints.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
 
+  /health:
+    get:
+      summary: Health check endpoint
+      tags:
+            - General
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:    
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
 
+  /GetQuestions:
+    get:
+      summary: Get questions from Wikidata service
+      tags:
+            - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      type: object
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /GetCapitalsQuestions:
+    get:
+      summary: Get capital questions
+      tags:
+            - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      type: object
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /GetElementSymbolsQuestions:
+    get:
+      summary: Get element symbol questions
+      tags:
+            - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      type: object
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /GetMovieDirectorsQuestions:
+    get:
+      summary: Get movie director questions
+      tags:
+            - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      type: object
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /:
+    get:
+      summary: Catch-all endpoint
+      tags:
+            - General
+      responses:
+        '404':
+          description: Endpoint not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Endpoint not found
 tags:
   - name: User
     description: Endpoints related to user management.
   - name: Authentication
     description: Endpoints related to user authentication.
+  - name: Wikidata
+    description: Endpoints related to wikidata.
+  - name: General
+    description: General endpoints for an application
