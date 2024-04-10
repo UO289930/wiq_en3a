@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 // app and port definition
 const app = express();
-const port = process.env.PORT || 8002;
+const port = process.env.PORT || 8003;
 
 
 // Connect to MongoDB
