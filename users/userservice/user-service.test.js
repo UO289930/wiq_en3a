@@ -21,7 +21,7 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
-});
+},30000);
 
 afterAll(async () => {
   jest.setTimeout(30000);
