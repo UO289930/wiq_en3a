@@ -3,6 +3,7 @@ import ReactDice, { ReactDiceRef } from 'react-dice-complete'
 
 type props = {
     setDiceResult: (diceResult: number) => void
+    handleClick: () => void
 }
 
 
@@ -13,11 +14,9 @@ export const Dice = (props:props) => {
   const rollDone = (totalValue: number, values: number[]) => {
 
     props.setDiceResult(totalValue)
+    props.handleClick()
   }
 
-  const rollAll = () => {
-    reactDice.current?.rollAll()
-  }
 
   return (
     <ReactDice

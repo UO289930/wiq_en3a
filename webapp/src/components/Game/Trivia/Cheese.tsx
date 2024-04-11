@@ -5,11 +5,11 @@ export type props = {
     showGreen: boolean,
     showYellow: boolean,
     showPink: boolean,
-    showCyan: boolean,
+    showOrange: boolean,
 }
 
 export const Cheese = (props : props) => {
-    console.log(props);
+    
   return (
       <div className="caja-quesitos ">
 
@@ -18,7 +18,7 @@ export const Cheese = (props : props) => {
             {props.showGreen && <div className="quesito-verde"></div>}
             {props.showYellow && <div className="quesito-amarillo"></div>}
             {props.showPink && <div className="quesito-rosa"></div>}
-            {props.showCyan && <div className="quesito-cian"></div>}
+            {props.showOrange && <div className="quesito-naranja"></div>}
 
         </div>
 

@@ -1,15 +1,13 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { useGameQuestions, usePlayingState } from "../../stores/playing-store";
+import { Link } from "react-router-dom";
 
 type props = {
   score: number;
 };
 
 const GameOver = (props: props) => {
-  const handleHome = () => {
-    usePlayingState.getState().stopPlaying();
-  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-text gap-16">
@@ -18,7 +16,7 @@ const GameOver = (props: props) => {
         <p className="text-2xl">Score: {props.score}</p>
       </div>
       <div className="flex">
-      <Button onClick={() => handleHome()} className="text-xl" variant={"ghost"}>HOME</Button>
+      <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl"} to={`/home`}>Home</Link>
       </div>
     </div>
   );
