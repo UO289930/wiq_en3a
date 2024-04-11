@@ -46,7 +46,8 @@ export const handleShowDialog = ( func: () => void) =>  {
 export type Question = {
     text: string,
     answers: string[],
-    correctAnswer: number
+    correctAnswer: number,
+    wikiLink:string
 }
 
 interface GameQuestions{

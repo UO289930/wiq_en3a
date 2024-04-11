@@ -40,7 +40,8 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
         questions[j] = {
             text:questionText, 
             answers: shuffled.answers, 
-            correctAnswer: shuffled.correctAnswer
+            correctAnswer: shuffled.correctAnswer,
+            wikiLink: 'https://www.google.com/search?client=opera-gx&q=pinguinos+de+madagascar+personajes&sourceid=opera&ie=UTF-8&oe=UTF-8',
         };
     }
     return questions;

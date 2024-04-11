@@ -15,7 +15,7 @@ const Counter = (props: props) => {
     useEffect(() => {
         const timer = setInterval(() => {            
             props.setCount(props.count>0?props.count-1:0);
-        }, 10);
+        }, 100);
 
         if(props.answered) clearInterval(timer);
 
