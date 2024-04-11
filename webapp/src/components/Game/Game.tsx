@@ -12,7 +12,7 @@ export default function Game() {
     const [loading, setLoading] = useState(false); // Nuevo estado para controlar si se están cargando nuevas preguntas
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
-    
+    const [answerSelected, setAnswerSelected] = useState(0);
     
   const handleNextQuestion = () => {
     // Mostrar el componente temporal
@@ -46,12 +46,12 @@ export default function Game() {
   const questionTime = 1000;  // set question time
   const [count, setCount] = useState(questionTime);  // define count state
   
-  if (questionCount === 10) {
+  if (questionCount === 1) {
     if(!isGameOver){
       updateStats(questionCount, score/10);
       usePlayingState.getState().gameOver();
     }
-    return <GameOver score={score} />;
+    return <GameOver questions={questions} score={score} />;
   } else {
     var questionText = getQuestion(questions, questionCount);
     var answers = getAnswersList(questions, questionCount);

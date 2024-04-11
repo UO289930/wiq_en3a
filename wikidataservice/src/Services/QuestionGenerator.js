@@ -40,7 +40,8 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
         questions[j] = {
             text:questionText, 
             answers: shuffled.answers, 
-            correctAnswer: shuffled.correctAnswer
+            correctAnswer: shuffled.correctAnswer,
+            wikiLink: 'link',
         };
     }
     return questions;
