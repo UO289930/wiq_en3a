@@ -12,12 +12,12 @@ export default function Game() {
     const [loading, setLoading] = useState(false); // Nuevo estado para controlar si se están cargando nuevas preguntas
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
-    const [answerSelected, setAnswerSelected] = useState(0);
+    const [answerSelected, setAnswerSelected] = useState(new Array<string>());
+    const [outOfTime, setOutOfTime] = useState(true);
     
   const handleNextQuestion = () => {
-    // Mostrar el componente temporal
-    setShowTempComponent(true);
-
+    if(outOfTime) saveAnswer(' ');
+    setOutOfTime(true);
     // Después de 3 segundos, ocultar el componente temporal y realizar las demás acciones
     setTimeout(() => {
       setCount(questionTime);  // reset count
@@ -28,12 +28,15 @@ export default function Game() {
         setLoading(false); // Establecer loading en false después de un tiempo de espera
         setAnswered(false); // Reiniciar el estado answered
         useGameQuestions.getState().nextQuestion(); // Incrementar el contador de preguntas
-        setShowTempComponent(false);
       }, 0);
     }, 3000); // 3 segundos
   };
 
-  const [showTempComponent, setShowTempComponent] = useState(false);
+
+  const saveAnswer = (answer: string) => {
+    answerSelected.push(answer);
+    setAnswerSelected(answerSelected);
+  }
 
   useEffect(() => {
     if(answered) handleNextQuestion();
@@ -43,15 +46,17 @@ export default function Game() {
   let questionCount = useGameQuestions(state => state.questionCount);
   let isGameOver = usePlayingState(state => state.isGameOver);
 
-  const questionTime = 1000;  // set question time
+  const questionTime = 100;  // set question time
   const [count, setCount] = useState(questionTime);  // define count state
   
-  if (questionCount === 1) {
+  if (questionCount === 2) {
     if(!isGameOver){
       updateStats(questionCount, score/10);
       usePlayingState.getState().gameOver();
     }
-    return <GameOver questions={questions} score={score} />;
+    answerSelected.forEach((answer) => console.log(answer));
+    
+    return <GameOver answers={answerSelected} questions={questions} score={score} />;
   } else {
     var questionText = getQuestion(questions, questionCount);
     var answers = getAnswersList(questions, questionCount);
@@ -76,7 +81,9 @@ export default function Game() {
             answered={answered} 
             setAnswered={setAnswered} 
             answers={answers} 
-            correctAnswer={correctAnswer} />}
+            correctAnswer={correctAnswer}
+            setAnswerSelected={saveAnswer} 
+            setOutOfTime={setOutOfTime}/>}
     </div>
   );
 }
