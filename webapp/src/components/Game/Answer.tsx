@@ -9,7 +9,6 @@ export type props = {
     setScore: (score: number) => void,
     setCorrectSelected: (correctSelected: boolean) => void,
     setAnswerSelected: (answerSelected: string) => void,
-    setOutOfTime: (outOfTime: boolean) => void
 }
 
 const Answer = (props: props) => {
@@ -24,7 +23,6 @@ const Answer = (props: props) => {
         props.setAnswered(true);
         props.setCorrectSelected(props.correctAnswer);
         props.setAnswerSelected(props.answer);
-        props.setOutOfTime(false);
         if (props.correctAnswer) props.setScore(props.score + 10);
     };
 

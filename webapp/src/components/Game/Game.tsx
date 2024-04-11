@@ -16,7 +16,7 @@ export default function Game() {
     const [outOfTime, setOutOfTime] = useState(true);
     
   const handleNextQuestion = () => {
-    if(outOfTime) saveAnswer(' ');
+    if(count===0) saveAnswer(' ');
     setOutOfTime(true);
     // Después de 3 segundos, ocultar el componente temporal y realizar las demás acciones
     setTimeout(() => {
@@ -83,7 +83,7 @@ export default function Game() {
             answers={answers} 
             correctAnswer={correctAnswer}
             setAnswerSelected={saveAnswer} 
-            setOutOfTime={setOutOfTime}/>}
+            />}
     </div>
   );
 }
