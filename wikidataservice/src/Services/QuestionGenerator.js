@@ -13,6 +13,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
     // Generate the questions
     for (let j = 0; j < idsList.length; j++) {
         const name = dataSet[idsList[j]].themeLabel.value;
+        const url = dataSet[idsList[j]].entityUrl.value;
         const questionText = questionMessage + name;
         const answers = [];
 
@@ -39,6 +40,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
 
         questions[j] = {
             text:questionText, 
+            url : url,
             answers: shuffled.answers, 
             correctAnswer: shuffled.correctAnswer
         };

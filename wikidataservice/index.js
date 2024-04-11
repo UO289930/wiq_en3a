@@ -19,17 +19,34 @@ app.use(function (err, req, res, next) {
 });
 
 async function init(){
+    console.log("Loading data from Wikidata, please wait...");
 
-    let [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions] = await Promise.all([
-        getData(QueryGenerator.getCountryCapitalsQuery(200)),
-        getData(QueryGenerator.getElementSymbolQuery(200)),
-        getData(QueryGenerator.getMovieDirectorQuery(20))
+    let historyData = QueryGenerator.getQuestionsAndQuery("History");
+    let sportData = QueryGenerator.getQuestionsAndQuery("Sport");
+    let geographyData = QueryGenerator.getQuestionsAndQuery("Geography");
+    let entertainmentData = QueryGenerator.getQuestionsAndQuery("Entertainment");
+    let chemistryData = QueryGenerator.getQuestionsAndQuery("Chemistry");
+
+    let [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
+            jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion, jsonEntertainmentQuestion, jsonChemistryQuestion] = await Promise.all([
+        getDataNormalGame(QueryGenerator.getCountryCapitalsQuery(200)),
+        getDataNormalGame(QueryGenerator.getElementSymbolQuery(200)),
+        getDataNormalGame(QueryGenerator.getMovieDirectorQuery(20)),
+        getDataTrivial(historyData.questionText, historyData.query),
+        getDataTrivial(sportData.questionText, sportData.query),
+        getDataTrivial(geographyData.questionText, geographyData.query),
+        getDataTrivial(entertainmentData.questionText, entertainmentData.query),
+        getDataTrivial(chemistryData.questionText, chemistryData.query)
     ]);
 
-    return [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions];
+    console.log("Data loaded");
+
+    return [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
+        jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion,jsonEntertainmentQuestion, jsonChemistryQuestion];
 }
 
-init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions]) => {
+init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
+        jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion, jsonEntertainmentQuestion, jsonChemistryQuestion]) => {
     
     // Route for getting questions about mixed topics
     app.get('/getQuestions', async (req, res, next) => {
@@ -54,8 +71,68 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions]) 
             next(error);
         }
     });
+
+    // Route for getting questions about history
+    app.get('/getHistoryQuestions', async (req, res, next) => {
+        try {
+            // Generate the questions
+            console.log(jsonHistoryQuestions.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonHistoryQuestions.questionText, jsonHistoryQuestions.jsonResult.results.bindings);
     
+            res.status(200).json(questions);
+        } catch (error) {
+            next(error);
+        }
+    });
     
+    // Route for getting questions about sports
+    app.get('/getSportsQuestions', async (req, res, next) => {
+        try {
+            // Generate the questions
+            console.log(jsonHistoryQuestions.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonSportsQuestions.questionText, jsonSportsQuestions.jsonResult.results.bindings);
+    
+            res.status(200).json(questions);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+    // Route for getting questions about geography
+    app.get('/getGeographyQuestions', async (req, res, next) => {
+        try {
+            // Generate the questions
+            const questions = generateQuestions(jsonGeographyQuestion.questionText, jsonGeographyQuestion.jsonResult.results.bindings);
+    
+            res.status(200).json(questions);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+    // Route for getting questions about entertainment
+    app.get('/getEntertainmentQuestions', async (req, res, next) => {
+        try {
+            // Generate the questions
+            const questions = generateQuestions(jsonEntertainmentQuestion.questionText, jsonEntertainmentQuestion.jsonResult.results.bindings);
+    
+            res.status(200).json(questions);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+    // Route for getting questions about chemistry
+    app.get('/getChemistryQuestions', async (req, res, next) => {
+        try {
+            // Generate the questions
+            const questions = generateQuestions(jsonChemistryQuestion.questionText, jsonChemistryQuestion.jsonResult.results.bindings);
+    
+            res.status(200).json(questions);
+        } catch (error) {
+            next(error);
+        }
+    });
     
     // Route for getting questions about capitals
     app.get('/getCapitalsQuestions', async (req, res, next) => {
@@ -113,7 +190,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions]) 
     
 });
 
-async function getData(sparqlQuery) {
+async function getDataNormalGame(sparqlQuery) {
     try {
         const endpointUrl = "https://query.wikidata.org/sparql?query=";
         const fullUrl = endpointUrl + encodeURIComponent(sparqlQuery);
@@ -130,6 +207,30 @@ async function getData(sparqlQuery) {
         const jsonResult = response.data;
 
         return jsonResult;
+    } catch (error) {
+        // Maneja cualquier error que pueda ocurrir durante la solicitud HTTP
+        console.error('Error:', error.message);
+        throw new Error('Failed to fetch data from Wikidata');
+    }
+}
+
+async function getDataTrivial(questionText, sparqlQuery) {
+    try {
+        const endpointUrl = "https://query.wikidata.org/sparql?query=";
+        const fullUrl = endpointUrl + encodeURIComponent(sparqlQuery);
+
+        // Realiza la solicitud HTTP utilizando axios
+        const response = await axios.get(fullUrl, {
+            headers: {
+                'User-Agent': 'Sergiollende/1.0',
+                'Accept': 'application/sparql-results+json'
+            }
+        });
+
+        return {
+             jsonResult : response.data,
+             questionText : questionText
+        };
     } catch (error) {
         // Maneja cualquier error que pueda ocurrir durante la solicitud HTTP
         console.error('Error:', error.message);
