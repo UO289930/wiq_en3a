@@ -2,9 +2,9 @@ const request = require('supertest');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const User = require('./user-model');
-process.env.PORT = '8004';
-const { app } = require('../index.js'); 
+const User = require('./userservice/user-model.js');
+// process.env.PORT = '8004';
+const { app } = require('./index.js'); 
 
 
 let mongoServer;
