@@ -5,8 +5,8 @@ info:
   description: Gateway Service OpenAPI specification.
 
 servers:
-  - url: http://localhost:8080
-    description: Local server
+  - url: http://localhost:8000
+    description: Development server
 
 paths:
   /user/adduser:
@@ -191,21 +191,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the capital of Spain?
+                      answers: [Madrid, Lisbon, Paris, Rome]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetCapitalsQuestions:
     get:
@@ -218,21 +222,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the capital of Spain?
+                      answers: [Madrid, Lisbon, Paris, Rome]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetElementSymbolsQuestions:
     get:
@@ -245,21 +253,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the symbol of Calcium?
+                      answers: [Ca, H, Na, Cl]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetMovieDirectorsQuestions:
     get:
@@ -272,21 +284,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: Who is the director of Avatar?
+                      answers: [James Cameron, Martin Scorsese, Quentin Tarantino, Steven Spielberg]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /:
     get:
@@ -304,6 +320,34 @@ paths:
                   error:
                     type: string
                     example: Endpoint not found
+components:
+  schemas:
+    Questions:
+      type: array
+      description: An array with questions
+      items: 
+        $ref: '#/components/schemas/OneQuestion'
+    OneQuestion: 
+      type: object
+      properties: 
+        text: 
+          type: string
+          description: The question itself
+        answers:
+          type: array
+          description: The four answers for the question
+        correctAnswer: 
+          type: integer
+          description: Index of the correct answer 
+    Error500Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: WikidataService status response
+        message:
+          type: string
+          description: Error
 tags:
   - name: User
     description: Endpoints related to user management.
