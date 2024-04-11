@@ -8,8 +8,8 @@ Thank you for checking out wiq_en3a! Below are some useful links to get started:
 - **[Application](http://51.103.210.249:3000/)**: Click this link to start playing!
   
 - **[Documentation](https://arquisoft.github.io/wiq_en3a/)**: Explore detailed documentation to learn more about the game and its features.
-- 
-- **[OpenAPI](http://51.103.210.249:8000/api-doc)**: Explore detailed documentation of our API.
+
+- **[OpenAPI](http://51.103.210.249:8000/api-doc/)**: Explore detailed documentation of our API.
 
 Feel free to explore the application and documentation, and don't hesitate to reach out if you have any questions or feedback. Enjoy playing wiq_en3a!
 
