@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { Nav } from './components/general/Nav';
 import { SimpleNav } from './components/general/SimpleNav';
 import { TriviaGame } from './components/Game/Trivia/TriviaGame';
+import RankingTable from './components/leaderboard/RankingTable';
 
 function App() {
   
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="trivia" element={<TriviaGame/>} /> 
+          <Route path="/leaderboard" element={<RankingTable />}/>
         </Routes>
       </Router>
     )
