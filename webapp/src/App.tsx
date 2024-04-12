@@ -8,6 +8,7 @@ import { Nav } from './components/general/Nav';
 import { SimpleNav } from './components/general/SimpleNav';
 import { TriviaGame } from './components/Game/Trivia/TriviaGame';
 import RankingTable from './components/leaderboard/RankingTable';
+import LeaderBoard from './components/leaderboard/LeaderBoard';
 
 function App() {
   
@@ -28,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="trivia" element={<TriviaGame/>} /> 
-          <Route path="/leaderboard" element={<RankingTable />}/>
+          <Route path="/leaderboard" element={<LeaderBoard />}/>
         </Routes>
       </Router>
     )
