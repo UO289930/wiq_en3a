@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
-
+import React, { ReactNode, useEffect, useState } from "react";
+import { GiPodiumSecond, GiPodiumThird, GiPodiumWinner } from "react-icons/gi";
+import * as Avatar from '@radix-ui/react-avatar';
+import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 
 export interface User {
     username: string,
@@ -48,6 +50,10 @@ export default function RankingTable() {
     ]
 
     const [users, setUsers] = useState<User[]>([])
+    const [podium, setPodium] = useState<ReactNode[]>
+        ([<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />])
+
+        
     useEffect(() => {
         setUsers(memoryusers.sort((a, b) => b.correctAnswers - a.correctAnswers));
     }, [])
@@ -67,10 +73,24 @@ export default function RankingTable() {
                     users.map((user, index) => {
                         return (
                             <tr className="body-row">
-                                <td className="avatar">{user.username}</td>
-                                <td className="ranking">{index + 1}</td>
+                                <td className="avatar">
+                                <Avatar.Root className="AvatarRoot">
+                                <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
+                                </Avatar.Root>
+                                {user.username.toLowerCase()}
+                                </td>
+                                <td className="ranking">
+                                    {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
+                                </td>
                                 <td className="correct-answers">{user.correctAnswers}</td>
-                                <td className="progress">{user.totalAnswers - (user.totalAnswers - user.correctAnswers)}%</td>
+                                <td className="progress">
+                                    <CircularProgress 
+                                        value={user.totalAnswers - (user.totalAnswers - user.correctAnswers)} 
+                                        color='#00A078' thickness='.4rem'
+                                        size={"3.6rem"}>
+                                        <CircularProgressLabel>{user.totalAnswers - (user.totalAnswers - user.correctAnswers)}%</CircularProgressLabel>
+                                    </CircularProgress>
+                                </td>
                             </tr>
                         )
                     })
