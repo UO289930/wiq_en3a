@@ -86,10 +86,17 @@ describe('Gateway Service', () => {
       return Promise.resolve({ data: { token: 'mockedToken' } });
     } else if (url.endsWith('/adduser')) {
       return Promise.resolve({ data: { userId: 'mockedUserId' } });
+    } else if(url.endsWith('/edituser')){
+      return Promise.resolve({ data: { message: 'User updated' } });
     }
   });
-  
-  
+
+  // Test health
+  it('should retrieve health ok message', async () => {
+    const response = await request(app).get("/health");
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe("OK");
+  });
 
   // Test /login endpoint
   it('should forward login request to auth service', async () => {
@@ -120,6 +127,8 @@ describe('Gateway Service', () => {
   });
 
   
+  // Test questions
+
   it('should retrieve 10 questions with their corresponding answers', async () => {
     await checkCorrectQuestionsResponse('/GetQuestions', 10);
   });
@@ -145,5 +154,11 @@ describe('Gateway Service', () => {
     expect(response.body.questions[0]).toHaveProperty("correctAnswer");
     expect(response.body.questions[0]).toHaveProperty("answers");
   }
+
+  // Test openapi
+  it('should retrieve swagger page', async () => {
+    const response = await request(app).get("/api-doc");
+    expect(response.status).toBe(301);
+  });
   
 });
