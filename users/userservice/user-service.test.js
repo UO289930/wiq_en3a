@@ -17,14 +17,14 @@ const user = {
 };
 
 beforeAll(async () => {
-  jest.setTimeout(30000);
-  mongoServer = await MongoMemoryServer.create();
+  //jest.setTimeout(30000);
+  mongoServer = await MongoMemoryServer.create(); // database in memory
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
 },30000);
 
 afterAll(async () => {
-  jest.setTimeout(30000);
+  //jest.setTimeout(30000);
   await mongoose.connection.close();
   await mongoServer.stop();
 });
@@ -138,6 +138,29 @@ describe('User Service', () => {
       .send(nonExistentUser);
 
     expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error');
+  });
+
+
+  // --- TESTS FOR /getAllUsers  ---
+
+
+  // TESTS TO GET ALL THE USERS
+  it('should get all users on GET /user/getAllUsers', async () => {
+    const response = await request(app).get('/user/getAllUsers');
+    
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBe(true);
+  });
+
+  it('should return 500 if there is an internal server error', async () => {
+    // We simulate an error in the database by closing the connection before the request
+    await mongoose.connection.close();
+
+    const response = await request(app).get('/user/getAllUsers');
+    
+    
+    expect(response.status).toBe(500);
     expect(response.body).toHaveProperty('error');
   });
  

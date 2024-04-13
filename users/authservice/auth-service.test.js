@@ -11,7 +11,7 @@ let mongoServer;
  
 // user that already exists in the database
 const user = {
-  username: 'trogui',
+  username: 'rita',
   password: '0000',
 };
  
