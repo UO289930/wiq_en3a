@@ -10,72 +10,35 @@ export interface User {
     totalAnswers: number
 }
 
-// const API_URL = 'http://localhost:8003';
 
-const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-
-/*
-export const retrieveAllUsers = () => {
-    fetch(`${API_URL}/getAllUsers`)
-    .then((response) => {console.log(response.json()); return response.json()})
-    .then((data) => {
-      console.log('response:', data);
-      return data;
-    })
-    .catch((error) => {
-     console.error('There was a problem with the users (fetch):', error);
-      return []
-    });
-};
-*/
-
-
- 
 export default function RankingTable() {
 
-    const memoryusers:User[] = [
-        {
-            username: "Pepe",
-            correctAnswers: 100,
-            totalAnswers: 100,
-        }, 
-        {
-            username: "Mani",
-            correctAnswers: 30,
-            totalAnswers: 100,
-        }, 
-        {
-            username: "Loli",
-            correctAnswers: 90,
-            totalAnswers: 100,
-        }, 
-        {
-            username: "Josu",
-            correctAnswers: 12,
-            totalAnswers: 100,
-        }
-    ]
-
+ 
     const [users, setUsers] = useState<User[]>([])
     const [podium, setPodium] = useState<ReactNode[]>
         ([<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />])
+    
 
-    /*
-    const getAllUserss = async () => {
-        console.log('hola');
-        const response = await getAllUsers();
-        console.log(response);
-        console.log('adios');
         
-    }*/
+    const getAllUsers2 = async () => {
+        const response = await getAllUsers();
+        return response;
+    }
+        
 
     useEffect(() => {
-        setUsers(memoryusers.sort((a, b) => b.correctAnswers - a.correctAnswers));
-
-
-        const json = getAllUsers();
-        console.log(json);
+        getAllUsers2().then((users) => {
+            const usersArray: User[] = Object.values(users).map((user: any) => ({
+                username: user.username,
+                correctAnswers: user.correctly_answered_questions,
+                totalAnswers: user.questions_answered
+            }));
+            setUsers(usersArray.sort((a, b) => b.correctAnswers - a.correctAnswers));
+        }).catch((error) => {
+            console.error('Error during retrieving all the users', error);
+        });
     }, [])
+
     
     
 

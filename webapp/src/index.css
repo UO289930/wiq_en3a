@@ -139,6 +139,13 @@
   }
 }
 
+:root {
+  --tw-bg-opacity: 1; 
+}
+
+html {
+  background-color: rgb(25 25 25 / var(--tw-bg-opacity));
+}
 
 .AvatarFallback {
   width: 100%;

@@ -59,9 +59,9 @@ app.post('/edituser', async (req, res) => {
 
 app.get('/getAllUsers', async (req, res) => {
   try {
-    // Forward the edit user request to the user service
-    const userResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
-    res.json(userResponse.data);
+    // Forward the get all users request to the user service
+    const usersResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
+    res.json(usersResponse.data);
   } catch (error) {
     console.error(error);
   }

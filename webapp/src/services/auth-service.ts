@@ -52,8 +52,7 @@ export const register = async (email:string, username: string, password: string)
 export const getAllUsers = async () => {
   try {
     const response = await axios.get(`${API_URL}/getAllUsers`, {});
-    console.log('response:', response);
-    return response;
+    return response.data;
   } catch (error) {
     console.error('Error during retrieving all the users', error);
     throw error;
