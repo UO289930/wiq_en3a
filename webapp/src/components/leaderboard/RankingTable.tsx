@@ -60,20 +60,20 @@ export default function RankingTable() {
     const [podium, setPodium] = useState<ReactNode[]>
         ([<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />])
 
-    
+    /*
     const getAllUserss = async () => {
         console.log('hola');
         const response = await getAllUsers();
         console.log(response);
         console.log('adios');
         
-    }
+    }*/
 
     useEffect(() => {
         setUsers(memoryusers.sort((a, b) => b.correctAnswers - a.correctAnswers));
 
 
-        const json = getAllUserss();
+        const json = getAllUsers();
         console.log(json);
     }, [])
     

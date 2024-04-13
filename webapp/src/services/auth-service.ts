@@ -51,7 +51,7 @@ export const register = async (email:string, username: string, password: string)
 
 export const getAllUsers = async () => {
   try {
-    const response = await axios.post(`${API_URL}/getAllUsers`, {});
+    const response = await axios.get(`${API_URL}/getAllUsers`, {});
     console.log('response:', response);
     return response;
   } catch (error) {
@@ -59,7 +59,7 @@ export const getAllUsers = async () => {
     throw error;
   }
 };
-
+ 
 
 
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
