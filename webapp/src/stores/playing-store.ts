@@ -60,6 +60,32 @@ interface GameQuestions{
 
 const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
+
+
+/*  get all users
+
+
+
+export const retrieveAllUsers = () => {
+    fetch(`${API_URL}/user/getAllUsers`)
+    .then((response) => {console.log(response.json()); return response.json()})
+    .then((data) => {
+      console.log('response:', data);
+      return data;
+    })
+    .catch((error) => {
+      console.error('There was a problem with the users:', error);
+      return []
+    });
+};
+
+
+*/
+
+
+
+
+
 export const retrieveQuestions = async () => {
   try {
     let response = await axios.get(`${API_URL}/GetQuestions`);

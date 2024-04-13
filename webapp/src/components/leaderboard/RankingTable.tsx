@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { GiPodiumSecond, GiPodiumThird, GiPodiumWinner } from "react-icons/gi";
 import * as Avatar from '@radix-ui/react-avatar';
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import { getAllUsers } from "../../services/auth-service";
 
 export interface User {
     username: string,
@@ -11,19 +12,25 @@ export interface User {
 
 // const API_URL = 'http://localhost:8003';
 
-// export const retrieveAllUsers = () => {
-//     fetch(`${API_URL}/user/getAllUsers`)
-//     .then((response) => {console.log(response.json()); return response.json()})
-//     .then((data) => {
-//       console.log('response:', data);
-//       return data;
-//     })
-//     .catch((error) => {
-//       console.error('There was a problem with the users:', error);
-//       return []
-//     });
-// };
+const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
+/*
+export const retrieveAllUsers = () => {
+    fetch(`${API_URL}/getAllUsers`)
+    .then((response) => {console.log(response.json()); return response.json()})
+    .then((data) => {
+      console.log('response:', data);
+      return data;
+    })
+    .catch((error) => {
+     console.error('There was a problem with the users (fetch):', error);
+      return []
+    });
+};
+*/
+
+
+ 
 export default function RankingTable() {
 
     const memoryusers:User[] = [
@@ -53,10 +60,24 @@ export default function RankingTable() {
     const [podium, setPodium] = useState<ReactNode[]>
         ([<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />])
 
+    
+    const getAllUserss = async () => {
+        console.log('hola');
+        const response = await getAllUsers();
+        console.log(response);
+        console.log('adios');
         
+    }
+
     useEffect(() => {
         setUsers(memoryusers.sort((a, b) => b.correctAnswers - a.correctAnswers));
+
+
+        const json = getAllUserss();
+        console.log(json);
     }, [])
+    
+    
 
     return (
         <table className="ranking-table">
