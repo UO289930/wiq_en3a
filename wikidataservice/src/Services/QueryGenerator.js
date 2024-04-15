@@ -8,15 +8,12 @@ class QueryGenerator {
         
         // Itererate trough the items and generate a query for each one
         for (let item of items) {
-            // if ('year' in item.) {
-            //     // If the item has a year property, generate a query with the date parsed
-            //     query = this.generateSparqlQuery(itemData.themeId, itemData.attributeId, limit);
-            //     // query = this.generateSparqlQueryYear(itemData.themeId, itemData.attributeId, limit);
-            // } else {
-            //     query = this.generateSparqlQuery(itemData.themeId, itemData.attributeId, limit);
-            // }
-
-            query = this.generateSparqlQuery(item.themeId, item.attributeId, 5);
+            if (item.hasOwnProperty('year')) {
+                // If the item has a year property, generate a query with the date parsed
+                query = this.generateSparqlQueryYear(item.themeId, item.attributeId, 5);
+            } else {
+                query = this.generateSparqlQuery(item.themeId, item.attributeId, 5);
+            }
 
             let obj = {
                 query: query,
@@ -57,7 +54,7 @@ class QueryGenerator {
 
     static generateSparqlQueryYear(themeId, attributeId, limit) {
         return `
-            SELECT ?themeLabel (YEAR(?date) as ?year) ?entityUrl WHERE {
+            SELECT ?themeLabel (YEAR(?date) as ?attributeLabel) ?entityUrl WHERE {
                 ?theme wdt:P31 wd:${themeId};
                     wdt:${attributeId} ?date.
                 BIND(IRI(CONCAT("https://www.wikidata.org/entity/", STRAFTER(STR(?theme), "http://www.wikidata.org/entity/"))) AS ?entityUrl)
