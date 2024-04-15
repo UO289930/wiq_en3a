@@ -4,9 +4,10 @@ import Authentication from './components/auth/Authentication';
 import { useUserStore } from './stores/user-store';
 import { Home } from './components/general/Home';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import { Nav } from './components/general/Nav';
 import { SimpleNav } from './components/general/SimpleNav';
 import { TriviaGame } from './components/Game/Trivia/TriviaGame';
+import GameStatisticsPage from './components/GameStatistics/GameStatisticsPage';
+
 
 function App() {
   
@@ -26,6 +27,7 @@ function App() {
         <SimpleNav />
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/statistics" element={<GameStatisticsPage/>} />
           <Route path="trivia" element={<TriviaGame/>} /> 
         </Routes>
       </Router>

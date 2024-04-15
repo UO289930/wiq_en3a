@@ -27,6 +27,7 @@ export const SimpleNav = () => {
       </div>
       <div className="flex gap-5">
         <Link className={getLinkStyle()} to={`/`}>Home</Link>
+        <Link className={getLinkStyle()} to={`/statistics`}>Statistics</Link>
         <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>
       </div>
     </div>
