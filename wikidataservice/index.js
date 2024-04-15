@@ -77,7 +77,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
         try {
             // Generate the questions
             console.log(jsonHistoryQuestions.jsonResult.results.bindings);
-            const questions = generateQuestions(jsonHistoryQuestions.questionText, jsonHistoryQuestions.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonHistoryQuestions.questionText, jsonHistoryQuestions.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -90,7 +90,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
         try {
             // Generate the questions
             console.log(jsonHistoryQuestions.jsonResult.results.bindings);
-            const questions = generateQuestions(jsonSportsQuestions.questionText, jsonSportsQuestions.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonSportsQuestions.questionText, jsonSportsQuestions.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -102,7 +102,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getGeographyQuestions', async (req, res, next) => {
         try {
             // Generate the questions
-            const questions = generateQuestions(jsonGeographyQuestion.questionText, jsonGeographyQuestion.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonGeographyQuestion.questionText, jsonGeographyQuestion.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -114,7 +114,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getEntertainmentQuestions', async (req, res, next) => {
         try {
             // Generate the questions
-            const questions = generateQuestions(jsonEntertainmentQuestion.questionText, jsonEntertainmentQuestion.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonEntertainmentQuestion.questionText, jsonEntertainmentQuestion.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -126,7 +126,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getChemistryQuestions', async (req, res, next) => {
         try {
             // Generate the questions
-            const questions = generateQuestions(jsonChemistryQuestion.questionText, jsonChemistryQuestion.jsonResult.results.bindings);
+            const questions = generateQuestions(jsonChemistryQuestion.questionText, jsonChemistryQuestion.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
