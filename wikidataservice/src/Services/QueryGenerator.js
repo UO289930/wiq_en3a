@@ -59,6 +59,7 @@ class QueryGenerator {
                     wdt:${attributeId} ?date.
                 BIND(IRI(CONCAT("https://www.wikidata.org/entity/", STRAFTER(STR(?theme), "http://www.wikidata.org/entity/"))) AS ?entityUrl)
                 SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+                FILTER(YEAR(?date) >= 1)
             }
             LIMIT ${limit}
         `;
