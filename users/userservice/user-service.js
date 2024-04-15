@@ -19,8 +19,6 @@ function validateRequiredFields(req, requiredFields) {
 
 
 // GET route to retrieve an specific user by username
-// 'http://localhost:8002/getOneUser?username=nombre_de_usuario'
-
 router.get('/getUser', async (req, res) => {
   try {
       
@@ -46,14 +44,33 @@ router.get('/getUser', async (req, res) => {
 });
 
 
+
+/**
+ * This method checks if the user already exists in the database
+ */
+async function checkUsername(req) {
+  // access to the database and its collection
+  const db = mongoose.connection.useDb("UsersDB");
+  const userCollection = db.collection('User');
+
+  const user = await userCollection.findOne({username: req.body.username});
+  if(user !== null){
+    throw new Error('The username already exists in the database')
+  }
+}
+
+
+
 /**
  * POST route to add a new user to the database
  */
 router.post('/adduser', async (req, res) => {
     try {
-
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
+
+        // check if the username is already in the database
+        await checkUsername(req);
 
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
