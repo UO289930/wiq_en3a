@@ -17,11 +17,11 @@ export const TriviaGame = () => {
 
   const [diceResult, setDiceResult] = useState(0);
   const [playingMode, setPlayingMode] = useState(false);
+
+ 
   
   const handleClick = () => {
-    setTimeout(() => {
-      setPlayingMode(true);
-    } ,5000);
+    
   }
 
   const textStyle = {
