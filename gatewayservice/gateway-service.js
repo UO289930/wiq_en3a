@@ -86,6 +86,27 @@ app.get('/GetMovieDirectorsQuestions', async (_req, res) => {
   getQuestions('/getMovieDirectorsQuestions', res);
 });
 
+app.get('/GetHistoryQuestions', async (_req, res) => {
+  getQuestions('/getHistoryQuestions', res);
+});
+
+app.get('/GetSportQuestions', async (_req, res) => {
+  getQuestions('/getSportQuestions', res);
+});
+
+app.get('/GetGeographyQuestions', async (_req, res) => {
+  getQuestions('/getGeographyQuestions', res);
+});
+
+app.get('/GetEntertainmentQuestions', async (_req, res) => {
+  getQuestions('/getEntertainmentQuestions', res);
+});
+
+app.get('/GetChemistryQuestions', async (_req, res) => {
+  getQuestions('/getChemistryQuestions', res);
+});
+
+
 async function getQuestions(specificPath, res){
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + specificPath, { timeout: 10000 });

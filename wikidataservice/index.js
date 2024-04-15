@@ -86,7 +86,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     });
     
     // Route for getting questions about sports
-    app.get('/getSportsQuestions', async (req, res, next) => {
+    app.get('/getSportQuestions', async (req, res, next) => {
         try {
             // Generate the questions
             console.log(jsonHistoryQuestions.jsonResult.results.bindings);
