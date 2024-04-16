@@ -1,10 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Home } from './Home';
-import { create } from 'zustand';
-import { useGameQuestions, usePlayingState, useShowCancellingDialog, useStats } from '../../stores/playing-store';
-import { useUserStore } from '../../stores/user-store';
-
 
 describe('Home component', () => {
   it('should render the "Start Game!" button when not playing', () => {

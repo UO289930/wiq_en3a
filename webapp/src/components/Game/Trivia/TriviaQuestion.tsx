@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button } from "../../ui/button";
-import { Question as questionType } from "@/src/stores/playing-store";
+import { Question as questionType } from "../../../services/question-service";
 import Question from "../Question";
 import AnswerPanel from "../AnswerPanel";
 

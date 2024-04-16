@@ -3,7 +3,7 @@ import { Cheese } from "./Cheese";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
-import { Question as questionType } from "@/src/stores/playing-store";
+import { Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
@@ -18,7 +18,6 @@ export const TriviaGame = () => {
   const [diceResult, setDiceResult] = useState(0);
   const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
   const [isShowingQuestion, setIsShowingQuestion] = useState(false);
-  const [questionAnswered, setQuestionAnswered] = useState(false);
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
@@ -124,7 +123,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
         />
         <Popover>
         <PopoverTrigger className="text-text">
-          <Button className="bg-transparent border w-32 border-text hover:">Show Categories</Button>
+          <Button className="bg-transparent border w-32 border-text">Show Categories</Button>
         </PopoverTrigger>
         <PopoverContent side="left">
           <div className="bg-transparent  mt-4 mr-8 p-4">

@@ -1,4 +1,5 @@
-import { Question } from "@/src/stores/playing-store";
+import { Question } from "@/src/services/question-service";
+
 
 
 let url = 'http://localhost:8000/';

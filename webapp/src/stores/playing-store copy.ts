@@ -2,6 +2,7 @@
 import axios from 'axios';
 import {create} from 'zustand';
 import { getCorrectlyAnsweredQuestions, getQuestionsAnswered } from '../services/auth-service';
+import { Question } from '../services/question-service';
 
 interface PlayingState {
     playing: boolean,
@@ -41,12 +42,6 @@ export const handleShowDialog = ( func: () => void) =>  {
     } else {
       func();
     }
-}
-
-export type Question = {
-    text: string,
-    answers: string[],
-    correctAnswer: number
 }
 
 interface GameQuestions{
