@@ -7,13 +7,14 @@ import { getCategoryColorWithNumber, getCategoryWithNumber } from "./categories"
 import { Question as questionType } from "@/src/stores/playing-store";
 import Question from "../Question";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
+import { TriviaQuestion } from "./TriviaQuestion";
 
 export const TriviaGame = () => {
-  const [showBlue, setShowBlue] = useState(true);
-  const [showGreen, setShowGreen] = useState(true);
-  const [showYellow, setShowYellowCheese] = useState(true);
-  const [showPink, setShowPinkCheese] = useState(true);
-  const [showOrange, setShowOrange] = useState(true);
+  const [showBlue, setShowBlue] = useState(false);
+  const [showGreen, setShowGreen] = useState(false);
+  const [showYellow, setShowYellow] = useState(false);
+  const [showPink, setShowPink] = useState(false);
+  const [showOrange, setShowOrange] = useState(false);
 
   const [diceResult, setDiceResult] = useState(0);
   const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
@@ -21,6 +22,30 @@ export const TriviaGame = () => {
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
+
+  type SetColorFunction = (bool: boolean) => void; 
+
+const getSetColor: (n: number) => SetColorFunction = (n: number) => {
+  let category = getCategoryWithNumber(n);
+  switch (category) {
+    case "Sport":
+      return setShowBlue; 
+    case "Science":
+      return setShowGreen;
+    case "History":
+      return setShowYellow;
+    case "Geography":
+      return setShowOrange;
+    case "Entertainment":
+      return setShowPink;
+    default:
+      return setShowBlue;
+
+  }
+  
+ 
+};
+
 
   const generateDiceRandomNumber = () => {
     return Math.floor(Math.random() * 6) + 1;
@@ -43,13 +68,7 @@ export const TriviaGame = () => {
     }
   }, [diceResult]);
 
-  const getQuestionText = (question: questionType | null) => {
-    if (question === null) {
-      return "No question available";
-    } else {
-      return question.text;
-    }
-  }
+ 
 
 
   const textStyle = {
@@ -119,15 +138,10 @@ export const TriviaGame = () => {
       </h1>
       </div>
       :
-      <div className="flex flex-col justify-center items-center w-full">
-        
-        <Question questionText={getQuestionText(questionShowed)}></Question>
-        <Button className="bg-primary text-text " onClick={() => {setIsShowingQuestion(false)}}>Stop playing</Button>
-          
-         
-      </div>
+      <TriviaQuestion setColor={getSetColor(diceResult)}  questionShowed={questionShowed} setIsShowingQuestion={setIsShowingQuestion}></TriviaQuestion>
       }
       
-    </div>
+      
+      </div>
   );
 };

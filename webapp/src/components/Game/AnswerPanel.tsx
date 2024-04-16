@@ -5,9 +5,9 @@ export type props = {
   answered: boolean;
   correctAnswer: number;
   answers: string[];
-  score: number;
+  score: number | undefined;
   setAnswered: (answered: boolean) => void;
-  setScore: (score: number) => void;
+  setScore: (score: number) => void | undefined;
   setCorrectSelected: (correctSelected: boolean) => void;
 };
 
