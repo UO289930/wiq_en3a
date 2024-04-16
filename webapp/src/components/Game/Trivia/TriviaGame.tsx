@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { Cheese } from "./Cheese";
 import { useState } from "react";
-import { Dice } from "./Dice";
 import { Button } from "../../ui/button";
-import { getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
+import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
 import { Question as questionType } from "@/src/stores/playing-store";
-import Question from "../Question";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
 export const TriviaGame = () => {
   const [showBlue, setShowBlue] = useState(false);
@@ -114,8 +113,8 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   };
 
   return (
-    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-ful">
-      <div className="flex justify-start gap-4 items-center">
+    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
+      <div className="flex w-full gap-4 justify-between">
         <Cheese
           showBlue={showBlue}
           showGreen={showGreen}
@@ -123,6 +122,21 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
+        <Popover>
+        <PopoverTrigger className="text-text">
+          <Button className="bg-transparent border border-text hover:">Categories</Button>
+        </PopoverTrigger>
+        <PopoverContent side="left">
+          <div className="bg-transparent">
+            <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
+            <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
+            <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
+            <h1 style={{color: getCategoryColor("Geography")}}>4 - Geography</h1>
+            <h1 style={{color: getCategoryColor("Entertainment")}}>5 - Entertainment</h1>
+          </div>
+        </PopoverContent>
+        </Popover>
+
       </div>
       {!isShowingQuestion ? 
       <div>
