@@ -49,7 +49,7 @@ export default function RankingTable() {
                     <th className="avatar"></th>
                     <th className="ranking">RANKING</th>
                     <th className="correct-answers">CORRECT ANSWERS</th>
-                    <th className="progress"></th>
+                    <th className="progress">% CORRECT ANSWERS</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,10 +69,10 @@ export default function RankingTable() {
                                 <td className="correct-answers">{user.correctAnswers}</td>
                                 <td className="progress">
                                     <CircularProgress 
-                                        value={user.totalAnswers - (user.totalAnswers - user.correctAnswers)} 
+                                        value={ user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100) : 0} 
                                         color='#00A078' thickness='.4rem'
                                         size={"3.6rem"}>
-                                        <CircularProgressLabel>{user.totalAnswers - (user.totalAnswers - user.correctAnswers)}%</CircularProgressLabel>
+                                        <CircularProgressLabel>{user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100).toFixed(0) : 0}%</CircularProgressLabel>
                                     </CircularProgress>
                                 </td>
                             </tr>
