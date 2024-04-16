@@ -5,8 +5,8 @@ import { Dice } from "./Dice";
 import { Button } from "../../ui/button";
 import { getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
 import { Question as questionType } from "@/src/stores/playing-store";
-import { getArtQuestion, getGeographyQuestion, getHistoryQuestion, getScienceQuestion, getSportQuestion } from "./fakeQuestions";
 import Question from "../Question";
+import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 
 export const TriviaGame = () => {
   const [showBlue, setShowBlue] = useState(true);
@@ -16,33 +16,72 @@ export const TriviaGame = () => {
   const [showOrange, setShowOrange] = useState(true);
 
   const [diceResult, setDiceResult] = useState(0);
-  const [playingMode, setPlayingMode] = useState(false);
+  const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
+  const [isShowingQuestion, setIsShowingQuestion] = useState(false);
 
  
+  const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
+
+  const generateDiceRandomNumber = () => {
+    return Math.floor(Math.random() * 6) + 1;
   
-  const handleClick = () => {
-    
   }
+
+
+  useEffect(() => {
+    if(isShowingQuestion || diceResult === 0){
+      return 
+    }
+
+    else {
+      sleep(1000).then(() => {
+        getQuestion(getCategory(diceResult)).then((question) => {
+          setQuestionShowed(question);
+          setIsShowingQuestion(true);
+        });
+      });
+    }
+  }, [diceResult]);
+
+  const getQuestionText = (question: questionType | null) => {
+    if (question === null) {
+      return "No question available";
+    } else {
+      return question.text;
+    }
+  }
+
 
   const textStyle = {
     color: getCategoryColorWithNumber(diceResult),
   };
 
-  const getQuestion = (category : string) : questionType => {
-    switch (category) {
-      case "Sport":
-        return getSportQuestion();
-      case "Science":
-        return getScienceQuestion();
-      case "History":
-        return getHistoryQuestion();
-      case "Geography":
-        return getGeographyQuestion();
-      case "Art":
-        return getArtQuestion();
-      default:
-        return getSportQuestion();
-
+  const getQuestion = async (category: string): Promise<questionType> => {
+    try {
+      let question: questionType;
+      switch (category) {
+        case "Sport":
+          question = await getSportQuestions();
+          break;
+        case "Science":
+          question = await getScienceQuestions();
+          break;
+        case "History":
+          question = await getHistoryQuestions();
+          break;
+        case "Geography":
+          question = await getGeographyQuestions();
+          break;
+        case "Entertainment":
+          question = await getEntertainmentQuestions();
+          break;
+        default:
+          question = await getSportQuestions();
+      }
+      return question;
+    } catch (error) {
+      console.error("Error getting question:", error);
+      throw error;
     }
   };
   
@@ -65,9 +104,15 @@ export const TriviaGame = () => {
           showOrange={showOrange}
         />
       </div>
-      {!playingMode ? 
+      {!isShowingQuestion ? 
       <div>
-      <Dice setDiceResult={setDiceResult} handleClick={handleClick} />
+      <Button className="w-12" onClick={() => {
+        setDiceResult(generateDiceRandomNumber());
+      }}>
+        {// <Dice setDiceResult={setDiceResult}/>
+        }
+      {diceResult === 0 ? "Roll dice" : diceResult}
+      </Button>
 
       <h1 className="text-text text-2xl">
         Category: {getCategory(diceResult)}
@@ -76,8 +121,8 @@ export const TriviaGame = () => {
       :
       <div className="flex flex-col justify-center items-center w-full">
         
-        <Question questionText={getQuestion(getCategory(diceResult)).text}></Question>
-        <Button className="bg-primary text-text " onClick={() => {setPlayingMode(false)}}>Stop playing</Button>
+        <Question questionText={getQuestionText(questionShowed)}></Question>
+        <Button className="bg-primary text-text " onClick={() => {setIsShowingQuestion(false)}}>Stop playing</Button>
           
          
       </div>

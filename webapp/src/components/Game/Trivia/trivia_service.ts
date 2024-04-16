@@ -1,44 +1,43 @@
 import { Question } from "@/src/stores/playing-store";
 
 
-let url = 'http://localhost:8001/';
+let url = 'http://localhost:8000/';
 
 const getString = (string : string) : string => {
-    return "get" + string + "Questions";
+    return "Get" + string + "Questions";
 }
 
-const jsonToQuestion = (json : any) : Question => {
-    return {
-        text: json.text,
-        answers: json.answers,
-        correctAnswer: json.correctAnswer
-    }
-}
-
-
-export const getSportQuestions = async () => {
+export const getSportQuestions = async (): Promise<Question> => {
     const response = await fetch(url + getString("Sport"));
-    return await jsonToQuestion(await response.json())
-}
+    const data = await response.json();
+    console.log(data);
+    return data[0];
+  };
 
-export const getScienceQuestions = async () => {
+export const getScienceQuestions = async (): Promise<Question> => {
     const response = await fetch(url + getString("Chemistry"));
-    return await response.json();
-}
+    const data = await response.json();
+    return data[0];
+  };
 
-export const getHistoryQuestions = async () => {
+export const getHistoryQuestions = async (): Promise<Question> => {
     const response = await fetch(url + getString("History"));
-    return await response.json();
-}
+    const data = await response.json();
+    return data[0];
+  };
 
-export const getGeographyQuestions = async () => {
+export const getGeographyQuestions = async (): Promise<Question> => {
     const response = await fetch(url + getString("Geography"));
-    return await response.json();
-}
+    const data = await response.json();
+    return data[0];
+  };
 
-export const getEntertainmentQuestions = async () => {
+  export const getEntertainmentQuestions = async (): Promise<Question> => {
     const response = await fetch(url + getString("Entertainment"));
-    return await response.json();
-}
+    const data = await response.json();
+    return data[0];
+  }
+    
+
 
 

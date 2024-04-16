@@ -4,7 +4,7 @@ numberCategoryMap.set(1, "Sports");
 numberCategoryMap.set(2, "Science");
 numberCategoryMap.set(3, "History");
 numberCategoryMap.set(4, "Geography");
-numberCategoryMap.set(5, "Art");
+numberCategoryMap.set(5, "Entertainment");
 numberCategoryMap.set(6, "Free Choice");
 
 
@@ -14,7 +14,7 @@ categoryColorMap.set("Sports", "#ec811c");
 categoryColorMap.set("Science", "#61a33a");
 categoryColorMap.set("History", "#ffcc00");
 categoryColorMap.set("Geography", "#1f71b3");
-categoryColorMap.set("Art", "#db3d78");
+categoryColorMap.set("Entertainment", "#db3d78");
 
 
 export const getCategoryWithNumber = (number: number) : string => {
