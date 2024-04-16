@@ -24,6 +24,40 @@
     position: absolute;
     border: 3px solid #ededed;
   }
+
+    border-radius: 50%;
+    background-color: #ededed;
+    position:relative;
+    overflow: hidden;
+    border: 7px solid #ededed;
+    > div {
+      width:100%;
+      outline: 0px;
+      height:100%;
+      position: absolute;
+      border: 3px solid #ededed;
+    }
+      
+    .quesito-amarillo {
+      background-color: #ffcc00;
+      top: -65%;
+      right: 50%;
+      transform: rotate(90deg) skew(-15deg);
+    }
+      
+    .quesito-naranja {
+      background-color: #ec811c;
+      transform: rotate(15deg) skew(-20deg);
+      left: -80%;
+      top: 29%;
+    }
+    .quesito-verde {
+      background-color: #61a33a;
+      left: 50%;
+      top: -65%;
+      transform: rotate(90deg) skew(15deg);
+    }
+ 
     
   .quesito-amarillo {
     background-color: #ffcc00;

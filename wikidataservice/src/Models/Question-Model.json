@@ -1,0 +1,77 @@
+{
+  "array": [
+  {
+    "question": "Where happens the: ",
+    "themeId": "Q198",
+    "attributeId": "P17",
+    "topic":"History"
+  },
+  {
+    "question": "In which year begins the: ",
+    "themeId": "Q198",
+    "attributeId": "P580",
+    "topic":"History",
+    "year":true
+  },
+  {
+    "question": "Which is the capital of: ",
+    "themeId": "Q6256",
+    "attributeId": "P36",
+    "topic":"Geography"
+  },
+  {
+    "question": "Which is the population of:",
+    "themeId": "Q6256",
+    "attributeId": "P1082",
+    "topic":"Geography"
+  },
+  {
+    "question": "Which is the highest point of: ",
+    "themeId": "Q6256",
+    "attributeId": "P610",
+    "topic":"Geography"
+  },
+  {
+    "question": "Who is the actual trainer of: ",
+    "themeId": "Q476028",
+    "attributeId": "P286",
+    "topic":"Sport"
+  },
+  {
+    "question": "Where is located the stadium called: ",
+    "themeId": "Q483110",
+    "attributeId": "P276",
+    "topic":"Sport"
+  },
+  {
+    "question": "Who is the director of: ",
+    "themeId": "Q11424",
+    "attributeId": "P57",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Who did the song: ",
+    "themeId": "Q7366",
+    "attributeId": "P86",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Who is the author of the book: ",
+    "themeId": "Q571",
+    "attributeId": "P50",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "What is the element of: ",
+    "themeId": "Q11344",
+    "attributeId": "P246",
+    "topic":"Chemistry"
+  },
+  {
+    "question": "Who is the chemical formula of: ",
+    "themeId": "Q11173",
+    "attributeId": "P274",
+    "topic":"Chemistry"
+  }
+]
+}

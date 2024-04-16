@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ReactDice, { ReactDiceRef } from 'react-dice-complete'
 
 type props = {
@@ -10,14 +10,12 @@ export const Dice = (props:props) => {
     
   const reactDice = useRef<ReactDiceRef>(null)
 
-  const rollDone = (totalValue: number, values: number[]) => {
+    
+    function rollDone(num: number) : void {
+        props.setDiceResult(num)
+    }
 
-    props.setDiceResult(totalValue)
-  }
 
-  const rollAll = () => {
-    reactDice.current?.rollAll()
-  }
 
   return (
     <ReactDice
