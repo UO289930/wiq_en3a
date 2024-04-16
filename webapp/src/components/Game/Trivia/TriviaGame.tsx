@@ -114,7 +114,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
   return (
     <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
-      <div className="flex w-full gap-4 justify-between">
+      <div className="flex w-full gap-4 justify-between mb-10">
         <Cheese
           showBlue={showBlue}
           showGreen={showGreen}
@@ -124,10 +124,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
         />
         <Popover>
         <PopoverTrigger className="text-text">
-          <Button className="bg-transparent border border-text hover:">Categories</Button>
+          <Button className="bg-transparent border w-32 border-text hover:">Show Categories</Button>
         </PopoverTrigger>
         <PopoverContent side="left">
-          <div className="bg-transparent">
+          <div className="bg-transparent  mt-4 mr-8 p-4">
             <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
             <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
             <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
@@ -141,10 +141,15 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       {!isShowingQuestion ? 
       <div>
       <Button className="w-12" onClick={() => {
-        setDiceResult(generateDiceRandomNumber());
-      }}>
-        {// <Dice setDiceResult={setDiceResult}/>
+        let result = generateDiceRandomNumber();
+        while(result === diceResult){
+          result = generateDiceRandomNumber();
         }
+        setDiceResult(result);
+        
+      }}>
+        
+        
       {diceResult === 0 ? "Roll dice" : diceResult}
       </Button>
 
