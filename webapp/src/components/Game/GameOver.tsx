@@ -18,10 +18,10 @@ const GameOver = (props: props) => {
     let score = 0;
     for (let i = 0; i < props.questions.length; i++) {
       if (props.questions[i].answers[props.questions[i].correctAnswer] === props.answers[i]) {
-        score+=10;
+        score++;
       }
     }
-    return score;
+    return (score/props.questions.length) * 100;
   };
 
   return (
