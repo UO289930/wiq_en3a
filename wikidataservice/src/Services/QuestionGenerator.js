@@ -1,6 +1,5 @@
 function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
     const questions = [];
-
     const ids = new Set();
 
     // Generate a set of unique random indices

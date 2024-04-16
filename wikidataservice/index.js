@@ -19,28 +19,43 @@ app.use(function (err, req, res, next) {
 });
 
 async function init(){
+    let start = Date.now();
     console.log("Loading data from Wikidata, please wait...");
 
-    let historyData = QueryGenerator.getQuestionsAndQuery("History");
-    let sportData = QueryGenerator.getQuestionsAndQuery("Sport");
-    let geographyData = QueryGenerator.getQuestionsAndQuery("Geography");
-    let entertainmentData = QueryGenerator.getQuestionsAndQuery("Entertainment");
-    let chemistryData = QueryGenerator.getQuestionsAndQuery("Chemistry");
+    // Data groups to be fetched from Wikidata
+    let dataGroups = [
+        { name: 'history', data: QueryGenerator.getQuestionsAndQuery("History") },
+        { name: 'sports', data: QueryGenerator.getQuestionsAndQuery("Sport") },
+        { name: 'geography', data: QueryGenerator.getQuestionsAndQuery("Geography") },
+        { name: 'entertainment', data: QueryGenerator.getQuestionsAndQuery("Entertainment") },
+        { name: 'chemistry', data: QueryGenerator.getQuestionsAndQuery("Chemistry")  },
+        { name: 'country', data: QueryGenerator.getCountryCapitalsQuery(20), isNormalGame: true },
+        { name: 'elements', data: QueryGenerator.getElementSymbolQuery(20), isNormalGame: true },
+        { name: 'movies', data: QueryGenerator.getMovieDirectorQuery(20), isNormalGame: true }
+    ];
+    
+    // If the group is a normal game, the data is fetched in a normal mode,
+    // otherwise, the data is fetched in trivial mode
+    let allPromises = dataGroups.map(group => 
+        group.isNormalGame ? 
+        getDataNormalGame(group.data) : 
+        group.data.map(data => getDataTrivial(data.questionText, data.query))
+    );
+    
+    // If the result is an array of promises, it is resolved with Promise.all
+    // Otherwise, the promise is resolved directly
+    let results = await Promise.all(allPromises.map(groupPromises => Array.isArray(groupPromises) ? 
+            Promise.all(groupPromises) : 
+            groupPromises));
+    
+    // Assign the results to the corresponding variables
+    let [jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion, jsonEntertainmentQuestion, jsonChemistryQuestion,
+         jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions] = results;
 
-    let [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
-            jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion, jsonEntertainmentQuestion, jsonChemistryQuestion] = await Promise.all([
-        getDataNormalGame(QueryGenerator.getCountryCapitalsQuery(200)),
-        getDataNormalGame(QueryGenerator.getElementSymbolQuery(200)),
-        getDataNormalGame(QueryGenerator.getMovieDirectorQuery(20)),
-        getDataTrivial(historyData.questionText, historyData.query),
-        getDataTrivial(sportData.questionText, sportData.query),
-        getDataTrivial(geographyData.questionText, geographyData.query),
-        getDataTrivial(entertainmentData.questionText, entertainmentData.query),
-        getDataTrivial(chemistryData.questionText, chemistryData.query)
-    ]);
+    let end = Date.now();
+    console.log("Data loaded: " + (end - start) + " ms");
 
-    console.log("Data loaded");
-
+    // Returning all the data
     return [jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
         jsonHistoryQuestions, jsonSportsQuestions, jsonGeographyQuestion,jsonEntertainmentQuestion, jsonChemistryQuestion];
 }
@@ -76,8 +91,9 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getHistoryQuestions', async (req, res, next) => {
         try {
             // Generate the questions
-            console.log(jsonHistoryQuestions.jsonResult.results.bindings);
-            const questions = generateQuestions(jsonHistoryQuestions.questionText, jsonHistoryQuestions.jsonResult.results.bindings, 1);
+            const randomIndex = Math.floor(Math.random() * jsonHistoryQuestions.length);
+            let itemData = jsonHistoryQuestions[randomIndex];
+            const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -88,9 +104,10 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     // Route for getting questions about sports
     app.get('/getSportQuestions', async (req, res, next) => {
         try {
-            // Generate the questions
-            console.log(jsonHistoryQuestions.jsonResult.results.bindings);
-            const questions = generateQuestions(jsonSportsQuestions.questionText, jsonSportsQuestions.jsonResult.results.bindings, 1);
+            // Generate the questions of a random topic from the list in the json
+            const randomIndex = Math.floor(Math.random() * jsonSportsQuestions.length);
+            let itemData = jsonSportsQuestions[randomIndex];
+            const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -101,8 +118,10 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     // Route for getting questions about geography
     app.get('/getGeographyQuestions', async (req, res, next) => {
         try {
-            // Generate the questions
-            const questions = generateQuestions(jsonGeographyQuestion.questionText, jsonGeographyQuestion.jsonResult.results.bindings, 1);
+            // Generate the questions of a random topic from the list in the json
+            const randomIndex = Math.floor(Math.random() * jsonGeographyQuestion.length);
+            let itemData = jsonGeographyQuestion[randomIndex];
+            const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -113,8 +132,10 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     // Route for getting questions about entertainment
     app.get('/getEntertainmentQuestions', async (req, res, next) => {
         try {
-            // Generate the questions
-            const questions = generateQuestions(jsonEntertainmentQuestion.questionText, jsonEntertainmentQuestion.jsonResult.results.bindings, 1);
+            // Generate the questions of a random topic from the list in the json
+            const randomIndex = Math.floor(Math.random() * jsonEntertainmentQuestion.length);
+            let itemData = jsonEntertainmentQuestion[randomIndex];
+            const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
@@ -125,8 +146,10 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     // Route for getting questions about chemistry
     app.get('/getChemistryQuestions', async (req, res, next) => {
         try {
-            // Generate the questions
-            const questions = generateQuestions(jsonChemistryQuestion.questionText, jsonChemistryQuestion.jsonResult.results.bindings, 1);
+            // Generate the questions of a random topic from the list in the json
+            const randomIndex = Math.floor(Math.random() * jsonChemistryQuestion.length);
+            let itemData = jsonChemistryQuestion[randomIndex];
+            const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
     
             res.status(200).json(questions);
         } catch (error) {
