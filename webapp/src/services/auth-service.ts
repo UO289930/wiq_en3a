@@ -47,6 +47,20 @@ export const register = async (email:string, username: string, password: string)
   }
 };
 
+
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getAllUsers`, {});
+    return response.data;
+  } catch (error) {
+    console.error('Error during retrieving all the users', error);
+    throw error;
+  }
+};
+ 
+
+
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {

@@ -56,6 +56,18 @@ app.post('/edituser', async (req, res) => {
   }
 });
 
+
+app.get('/getAllUsers', async (req, res) => {
+  try {
+    // Forward the get all users request to the user service
+    const usersResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
+    res.json(usersResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
 app.get('/GetQuestions', async (_req, res) => {
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 10000 });
