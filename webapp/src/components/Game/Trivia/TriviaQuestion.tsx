@@ -20,7 +20,7 @@ export const TriviaQuestion = (props : props) => {
     useEffect(() => {
         if (answered) {
           sleep(2000).then(() => {
-            props.setColor(true);
+            
             props.setIsShowingQuestion(false);
           })}
       }, [answered]);
@@ -28,7 +28,7 @@ export const TriviaQuestion = (props : props) => {
     const setCorrectSelected = (result : boolean) => {
 
         if(result){
-            console.log('correct answer')
+            props.setColor(true);
         }
         else {
             console.log('incorrect answer')

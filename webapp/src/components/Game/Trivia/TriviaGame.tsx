@@ -48,7 +48,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
 
   const generateDiceRandomNumber = () => {
-    return Math.floor(Math.random() * 6) + 1;
+    return Math.floor(Math.random() * 5) + 1;
   
   }
 
