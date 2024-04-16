@@ -10,9 +10,9 @@ class QueryGenerator {
         for (let item of items) {
             if (item.hasOwnProperty('year')) {
                 // If the item has a year property, generate a query with the date parsed
-                query = this.generateSparqlQueryYear(item.themeId, item.attributeId, 5);
+                query = this.generateSparqlQueryYear(item.themeId, item.attributeId, 200);
             } else {
-                query = this.generateSparqlQuery(item.themeId, item.attributeId, 5);
+                query = this.generateSparqlQuery(item.themeId, item.attributeId, 200);
             }
 
             let obj = {
