@@ -3,7 +3,8 @@
 export type Question = {
   text: string,
   answers: string[],
-  correctAnswer: number
+  correctAnswer: number,
+  wikiLink: string
 }
 
 

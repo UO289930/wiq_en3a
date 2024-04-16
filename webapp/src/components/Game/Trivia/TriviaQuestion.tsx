@@ -54,6 +54,7 @@ export const TriviaQuestion = (props: props) => {
         answers={props.questionShowed?.answers || []}
         setAnswered={setAnswered}
         setCorrectSelected={setCorrectSelected}
+        setAnswerSelected={() => {}}
       ></AnswerPanel>
     </div>
   );
