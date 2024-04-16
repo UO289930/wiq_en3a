@@ -8,6 +8,7 @@ export type props = {
     questionShowed: questionType | null
     setIsShowingQuestion: (isShowingQuestion: boolean) => void
     setColor: (bool : boolean) => void
+    color: string
 
 } 
 
@@ -48,7 +49,7 @@ export const TriviaQuestion = (props : props) => {
       }
 
     return (
-        <div className="flex flex-col justify-center items-center w-full">
+        <div style={{borderColor: props.color}} className="flex flex-col justify-center items-center w-full border-2 rounded-lg p-8">
         
         <Question questionText={getQuestionText(props.questionShowed)}></Question>
         <AnswerPanel

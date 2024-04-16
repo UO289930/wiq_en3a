@@ -10,10 +10,10 @@ numberCategoryMap.set(6, "Free Choice");
 
 let categoryColorMap = new Map<string, string>();
 
-categoryColorMap.set("Sports", "#ec811c");
+categoryColorMap.set("Sports", "#1f71b3");
 categoryColorMap.set("Science", "#61a33a");
 categoryColorMap.set("History", "#ffcc00");
-categoryColorMap.set("Geography", "#1f71b3");
+categoryColorMap.set("Geography", "#ec811c");
 categoryColorMap.set("Entertainment", "#db3d78");
 
 

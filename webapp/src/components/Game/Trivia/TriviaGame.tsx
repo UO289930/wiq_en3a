@@ -19,6 +19,7 @@ export const TriviaGame = () => {
   const [diceResult, setDiceResult] = useState(0);
   const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
   const [isShowingQuestion, setIsShowingQuestion] = useState(false);
+  const [questionAnswered, setQuestionAnswered] = useState(false);
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
@@ -138,7 +139,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       </h1>
       </div>
       :
-      <TriviaQuestion setColor={getSetColor(diceResult)}  questionShowed={questionShowed} setIsShowingQuestion={setIsShowingQuestion}></TriviaQuestion>
+      <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} setColor={getSetColor(diceResult)}  questionShowed={questionShowed} setIsShowingQuestion={setIsShowingQuestion}></TriviaQuestion>
       }
       
       
