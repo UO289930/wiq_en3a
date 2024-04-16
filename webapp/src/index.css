@@ -32,8 +32,8 @@
       transform: rotate(90deg) skew(-15deg);
     }
       
-    .quesito-cian {
-      background-color: #88cfed;
+    .quesito-naranja {
+      background-color: #ec811c;
       transform: rotate(15deg) skew(-20deg);
       left: -80%;
       top: 29%;

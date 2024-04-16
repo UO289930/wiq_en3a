@@ -1,7 +1,5 @@
-import { handleShowDialog, usePlayingState, useStats } from "../../stores/playing-store";
-import { logout, getQuestionsAnswered, getCorrectlyAnsweredQuestions } from "../../services/auth-service";
+
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button } from "../ui/button";
 import React from "react";
 import { useUserStore } from "../../stores/user-store";
 import { Link } from "react-router-dom";

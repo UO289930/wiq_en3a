@@ -4,9 +4,10 @@ import Authentication from './components/auth/Authentication';
 import { useUserStore } from './stores/user-store';
 import { Home } from './components/general/Home';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import { Nav } from './components/general/Nav';
 import { SimpleNav } from './components/general/SimpleNav';
 import { TriviaGame } from './components/Game/Trivia/TriviaGame';
+import Game from './components/Game/Game';
+import { Logout } from './components/auth/Logout';
 
 function App() {
   
@@ -16,7 +17,7 @@ function App() {
     loginWithToken();
   }, []);
 
-  if (user == null) {
+  if (false) {
     return <Authentication/>
   }
   else {
@@ -26,7 +27,10 @@ function App() {
         <SimpleNav />
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="game" element={<Game/>} /> 
           <Route path="trivia" element={<TriviaGame/>} /> 
+          <Route path="logout" element={<Logout/>} />
+          <Route path="*" element={<Home/>} />
         </Routes>
       </Router>
     )
