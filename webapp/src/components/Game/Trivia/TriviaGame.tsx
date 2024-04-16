@@ -7,6 +7,7 @@ import { Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import GameOver from "../GameOver";
 
 export const TriviaGame = () => {
   const [showBlue, setShowBlue] = useState(false);
@@ -18,6 +19,9 @@ export const TriviaGame = () => {
   const [diceResult, setDiceResult] = useState(0);
   const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
   const [isShowingQuestion, setIsShowingQuestion] = useState(false);
+
+  const [answerSelected, setAnswerSelected] = useState(new Array<string>());
+  const [questions, setQuestions] = useState<questionType[]>([]);
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
@@ -111,6 +115,24 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     return getCategoryWithNumber(diceResult);
   };
 
+  const saveAnswer = (answer: string) => {
+    answerSelected.push(answer);
+    setAnswerSelected(answerSelected);
+
+    questions.push(questionShowed as questionType);
+    setQuestions(questions);
+    
+    
+  }
+
+  
+  //GAME FINISHED
+  if(showBlue && showGreen && showYellow && showPink && showOrange){
+    return <GameOver answers={answerSelected} questions={questions} />;
+  }
+
+
+
   return (
     <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
       <div className="flex w-full gap-4 justify-between mb-10">
@@ -157,7 +179,11 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       </h1>
       </div>
       :
-      <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} setColor={getSetColor(diceResult)}  questionShowed={questionShowed} setIsShowingQuestion={setIsShowingQuestion}></TriviaQuestion>
+      <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} 
+      setColor={getSetColor(diceResult)}  
+      questionShowed={questionShowed} 
+      setIsShowingQuestion={setIsShowingQuestion}
+      saveAnswer={saveAnswer}></TriviaQuestion>
       }
       
       

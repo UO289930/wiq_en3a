@@ -6,7 +6,6 @@ import { Question } from "../../services/question-service";
 
 
 type props = {
-  score: number,
   questions: Question[],
   answers : string[];
 };
@@ -14,6 +13,16 @@ type props = {
 
 
 const GameOver = (props: props) => {
+
+  const getScore = () => {
+    let score = 0;
+    for (let i = 0; i < props.questions.length; i++) {
+      if (props.questions[i].answers[props.questions[i].correctAnswer] === props.answers[i]) {
+        score+=10;
+      }
+    }
+    return score;
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-text gap-16">
@@ -42,7 +51,7 @@ const GameOver = (props: props) => {
           </table>
         </div>
         
-        <p className="text-2xl mt-4">Score: {props.score}</p>
+        <p className="text-2xl mt-4">Score: {getScore()}</p>
       </div>
       <div className="flex">
       <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl"} to={`/home`}>Home</Link>
