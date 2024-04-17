@@ -60,8 +60,6 @@ export default function Game() {
 
  
   if (questionCount === 10) {
-
-      
     updateStats(questionCount, score/10); 
     return <GameOver answers={answerSelected} questions={questions} />;
   } 
@@ -74,7 +72,7 @@ export default function Game() {
       <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
-            <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
+            <text className='text-white text-xl font-bold p-4'> {questionCount+1}/{questions.length} </text>
             <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
           </div>
           <Question questionText={questions[questionCount].text} />

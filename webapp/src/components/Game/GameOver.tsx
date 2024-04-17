@@ -21,11 +21,14 @@ const GameOver = (props: props) => {
         score++;
       }
     }
-    return (score/props.questions.length) * 100;
+    return score;
   };
 
   return (
     <div className="flex flex-col items-center justify-center text-text gap-16">
+      <div className="flex">
+      <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl mt-6"} to={`/home`}>Home</Link>
+      </div>
       <h1 className="text-6xl font-bold ">Game Over</h1>
       <div>
         <div>
@@ -51,11 +54,9 @@ const GameOver = (props: props) => {
           </table>
         </div>
         
-        <p className="text-2xl mt-4">Score: {getScore()}</p>
+        <p className="text-2xl mt-4">Score: {getScore()} / {props.questions.length}</p>
       </div>
-      <div className="flex">
-      <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl"} to={`/home`}>Home</Link>
-      </div>
+      
     </div>
   );
 };
