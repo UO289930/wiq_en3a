@@ -1,13 +1,25 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GameOver from './GameOver';
+import { BrowserRouter as Router } from 'react-router-dom'; // Importa BrowserRouter
+
 
 describe('GameOver component', () => {
   it('should render the score correctly', () => {
-    expect(true).toBe(true);
-    // const score = 42;
-    // render(<GameOver score={score} />);
-    // expect(screen.getByText(`Score: ${score}`)).toBeInTheDocument();
+    const questions = [
+      { text: 'Question 1', answers: ['A', 'B', 'C'], correctAnswer: 0, wikiLink: '#' },
+      { text: 'Question 2', answers: ['A', 'B', 'C'], correctAnswer: 1, wikiLink: '#' },
+    ];
+    const answers = ['A', 'B'];  
+    
+    render(
+      <Router>
+        <GameOver questions={questions} answers={answers}/>
+      </Router>
+    );
+
+
+    expect(screen.getByText(`Score: 2 / 2`)).toBeInTheDocument();
   });
 
 });

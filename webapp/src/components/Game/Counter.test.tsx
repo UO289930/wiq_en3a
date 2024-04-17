@@ -17,15 +17,4 @@ describe('Counter component', () => {
     expect(screen.findByTestId('counter'));
   });
 
-  // test('checks that the progress bar decreases in time', () => {
-  //   // Importa la función que simula el paso del tiempo
-  //   jest.useFakeTimers();
-  //   render(<Counter {...mockedProps} />);
-    
-  //   jest.advanceTimersByTime(10000);
-
-  //   expect(screen.findByTestId('counter'));
-  // });
-
-  
 });
