@@ -16,10 +16,10 @@ function App() {
   const user = useUserStore(state => state.user);
   
   useEffect(() => {
-    loginWithToken();
+    //loginWithToken();
   }, []);
 
-  if (false) {
+  if (!user) {
     return <Authentication/>
   }
   else {
