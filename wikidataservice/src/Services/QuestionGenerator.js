@@ -26,7 +26,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
         const wrongIds = new Set();
         for (let w = 1; w < 4; w++) {
             let wrongId = Math.floor(Math.random()*dataSet.length);
-            while (idsList[j] === wrongId || wrongIds.has(wrongId)) {
+            while (idsList[j] === wrongId || wrongIds.has(wrongId) || answers.includes(dataSet[wrongId].attributeLabel.value)) {
                 wrongId = Math.floor(Math.random()*dataSet.length);
             }
             // Add the id of the incorrect answer to the set
