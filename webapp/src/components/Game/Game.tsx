@@ -15,7 +15,7 @@ export default function Game() {
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
 
-    const questionTime = 1000;  // set question time
+    const questionTime = 100;  // set question time
     const [count, setCount] = useState(questionTime);  // define count state
 
     const[questions, setQuestions] = useState<questionType[]>([]);
@@ -69,7 +69,7 @@ export default function Game() {
   
   
   return (
-    <div className="h-full">
+    <div className="h-4/5">
       {loadingdata ? <h1>Loading...</h1> :
       <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
         <div id='pregunta' className='h-1/2 flex-1'>

@@ -25,7 +25,7 @@ const GameOver = (props: props) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-text gap-16">
+    <div className="flex flex-col items-center justify-center text-text gap-16">
       <h1 className="text-6xl font-bold ">Game Over</h1>
       <div>
         <div>
