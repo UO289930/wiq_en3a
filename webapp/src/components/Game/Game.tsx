@@ -69,31 +69,29 @@ export default function Game() {
   
   
   return (
-    <div className="h-4/5">
-    {loadingdata ? <h1>Loading...</h1> :
-    <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
-    <div id='pregunta' className='h-1/2 flex-1'>
-      <div className="flex justify-between">
-        <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
-        <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
+    <div className="h-full">
+      {loadingdata ? <h1>Loading...</h1> :
+      <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
+        <div id='pregunta' className='h-1/2 flex-1'>
+          <div className="flex justify-between">
+            <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
+            <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
+          </div>
+          <Question questionText={questions[questionCount].text} />
+          {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
+          {answered && (<Countdown duration={3}/>)}
+          
+        </div>
+          {!loading && <AnswerPanel score={score}
+            setCorrectSelected={setCorrectSelected}
+            setScore={setScore} 
+            answered={answered} 
+            setAnswered={setAnswered} 
+            setAnswerSelected={saveAnswer}
+            answers={questions[questionCount].answers} 
+            correctAnswer={questions[questionCount].correctAnswer} />}
       </div>
-      <Question questionText={questions[questionCount].text} />
-      {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
-      {answered && (<Countdown duration={3}/>)}
-      
-     
-    </div>
-    
-    {!loading && <AnswerPanel score={score}
-          setCorrectSelected={setCorrectSelected}
-          setScore={setScore} 
-          answered={answered} 
-          setAnswered={setAnswered} 
-          setAnswerSelected={saveAnswer}
-          answers={questions[questionCount].answers} 
-          correctAnswer={questions[questionCount].correctAnswer} />}
-  </div>
-    }
+      }
     </div>
     
   );

@@ -31,7 +31,7 @@ const GameOver = (props: props) => {
         <div>
           <table className="table-auto">
             <thead>
-              <tr>
+              <tr className="header">
                 <th className="px-4 py-2">Question</th>
                 <th className="px-4 py-2">Correct Answer</th>
                 <th className="px-4 py-2">Your Answer</th>
@@ -40,7 +40,7 @@ const GameOver = (props: props) => {
             </thead>
             <tbody>
               {props.questions.map((question, index) => (
-                <tr key={index}>
+                <tr className="body-row">
                   <td className="border px-4 py-2">{question.text}</td>
                   <td className="border px-4 py-2 text-center">{question.answers[question.correctAnswer]}</td>
                   <td className={`border px-4 py-2 font-bold text-center ${question.answers[question.correctAnswer] === props.answers[index] ? 'bg-primary' : 'bg-danger'}`}>{props.answers[index]}</td>

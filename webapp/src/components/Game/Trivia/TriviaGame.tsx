@@ -64,6 +64,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     else {
       sleep(1000).then(() => {
         getQuestion(getCategory(diceResult)).then((question) => {
+          if(isNumber(question.answers[0]))
+            question.answers = question.answers.map((a) => formatNumberWithDots(a));
+          
+
           setQuestionShowed(question);
           setIsShowingQuestion(true);
         });
@@ -107,10 +111,6 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     }
   };
   
-
-
-
-
   const getCategory = (diceResult: number) => {
     return getCategoryWithNumber(diceResult);
   };
@@ -119,19 +119,35 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     answerSelected.push(answer);
     setAnswerSelected(answerSelected);
 
+
     questions.push(questionShowed as questionType);
-    setQuestions(questions);
-    
-    
+    setQuestions(questions);    
   }
 
+  function formatNumberWithDots(str : string) : string {
+    
+    if (str.length < 4) {
+      return str;
+    }
+    let result = '';
+    for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+      result = str[i] + result;
+      if (count % 3 === 2 && i !== 0) {
+        result = '.' + result;
+      }
+    }
   
+    return result;
+  }
+  
+  function isNumber(str : string) : boolean {
+    return !isNaN(Number(str));
+  }
+
   //GAME FINISHED
   if(showBlue && showGreen && showYellow && showPink && showOrange){
     return <GameOver answers={answerSelected} questions={questions} />;
   }
-
-
 
   return (
     <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
@@ -170,7 +186,6 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
         
       }}>
         
-        
       {diceResult === 0 ? "Roll dice" : diceResult}
       </Button>
 
@@ -179,6 +194,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       </h1>
       </div>
       :
+
       <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} 
       setColor={getSetColor(diceResult)}  
       questionShowed={questionShowed} 
