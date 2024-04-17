@@ -128,7 +128,7 @@ describe('User Service', () => {
   // TEST TO EDIT A USER THAT EXISTS
   it('should update user information', async () => {
     const updateUser = {
-      username: 'rita',
+      username: 'testuser',
       questions_answered: 1,
       correctly_answered_questions: 1,
     };
