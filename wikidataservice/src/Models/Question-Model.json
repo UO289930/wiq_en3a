@@ -26,13 +26,13 @@
     "topic":"Geography"
   },
   {
-    "question": "Which is the highest point of: ",
+    "question": "Which is the highest point in: ",
     "themeId": "Q6256",
     "attributeId": "P610",
     "topic":"Geography"
   },
   {
-    "question": "Who is the actual trainer of: ",
+    "question": "Who is the actual coach of: ",
     "themeId": "Q476028",
     "attributeId": "P286",
     "topic":"Sport"
@@ -50,7 +50,7 @@
     "topic":"Entertainment"
   },
   {
-    "question": "Who did the song: ",
+    "question": "Who wrote the song: ",
     "themeId": "Q7366",
     "attributeId": "P86",
     "topic":"Entertainment"
@@ -62,13 +62,13 @@
     "topic":"Entertainment"
   },
   {
-    "question": "What is the element of: ",
+    "question": "What is the chemical element for: ",
     "themeId": "Q11344",
     "attributeId": "P246",
     "topic":"Chemistry"
   },
   {
-    "question": "Who is the chemical formula of: ",
+    "question": "Who is the chemical formula for: ",
     "themeId": "Q11173",
     "attributeId": "P274",
     "topic":"Chemistry"
