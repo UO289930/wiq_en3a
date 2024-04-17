@@ -15,7 +15,7 @@ export default function Game() {
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
 
-    const questionTime = 1000;  // set question time
+    const questionTime = 100;  // set question time
     const [count, setCount] = useState(questionTime);  // define count state
 
     const[questions, setQuestions] = useState<questionType[]>([]);
@@ -58,48 +58,38 @@ export default function Game() {
     if(answered) handleNextQuestion();
   }, [answered]);
 
-  
-
-
-  
-
  
-  
   if (questionCount === 10) {
-
-      
     updateStats(questionCount, score/10); 
-    return <GameOver answers={answerSelected} questions={questions} score={score} />;
+    return <GameOver answers={answerSelected} questions={questions} />;
   } 
 
   
   
   return (
     <div className="h-4/5">
-    {loadingdata ? <h1>Loading...</h1> :
-    <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
-    <div id='pregunta' className='h-1/2 flex-1'>
-      <div className="flex justify-between">
-        <text className='text-white text-xl font-bold p-4'> Score: {score} </text>
-        <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
+      {loadingdata ? <h1>Loading...</h1> :
+      <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
+        <div id='pregunta' className='h-1/2 flex-1'>
+          <div className="flex justify-between">
+            <text className='text-white text-xl font-bold p-4'> {questionCount+1}/{questions.length} </text>
+            <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
+          </div>
+          <Question questionText={questions[questionCount].text} />
+          {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
+          {answered && (<Countdown duration={3}/>)}
+          
+        </div>
+          {!loading && <AnswerPanel score={score}
+            setCorrectSelected={setCorrectSelected}
+            setScore={setScore} 
+            answered={answered} 
+            setAnswered={setAnswered} 
+            setAnswerSelected={saveAnswer}
+            answers={questions[questionCount].answers} 
+            correctAnswer={questions[questionCount].correctAnswer} />}
       </div>
-      <Question questionText={questions[questionCount].text} />
-      {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
-      {answered && (<Countdown duration={3}/>)}
-      
-     
-    </div>
-    
-    {!loading && <AnswerPanel score={score}
-          setCorrectSelected={setCorrectSelected}
-          setScore={setScore} 
-          answered={answered} 
-          setAnswered={setAnswered} 
-          setAnswerSelected={saveAnswer}
-          answers={questions[questionCount].answers} 
-          correctAnswer={questions[questionCount].correctAnswer} />}
-  </div>
-    }
+      }
     </div>
     
   );

@@ -9,6 +9,7 @@ export type props = {
   setIsShowingQuestion: (isShowingQuestion: boolean) => void;
   setColor: (bool: boolean) => void;
   color: string;
+  saveAnswer: (answer: string) => void;
 };
 
 export const TriviaQuestion = (props: props) => {
@@ -40,6 +41,8 @@ export const TriviaQuestion = (props: props) => {
     }
   };
 
+  
+
   return (
     <div
       style={{ borderColor: props.color }}
@@ -54,7 +57,7 @@ export const TriviaQuestion = (props: props) => {
         answers={props.questionShowed?.answers || []}
         setAnswered={setAnswered}
         setCorrectSelected={setCorrectSelected}
-        setAnswerSelected={() => {}}
+        setAnswerSelected={props.saveAnswer}
       ></AnswerPanel>
     </div>
   );

@@ -7,6 +7,7 @@ import { Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import GameOver from "../GameOver";
 
 export const TriviaGame = () => {
   const [showBlue, setShowBlue] = useState(false);
@@ -18,6 +19,9 @@ export const TriviaGame = () => {
   const [diceResult, setDiceResult] = useState(0);
   const [questionShowed, setQuestionShowed] = useState<questionType | null>(null);
   const [isShowingQuestion, setIsShowingQuestion] = useState(false);
+
+  const [answerSelected, setAnswerSelected] = useState(new Array<string>());
+  const [questions, setQuestions] = useState<questionType[]>([]);
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
@@ -60,6 +64,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     else {
       sleep(1000).then(() => {
         getQuestion(getCategory(diceResult)).then((question) => {
+          if(isNumber(question.answers[0]))
+            question.answers = question.answers.map((a) => formatNumberWithDots(a));
+          
+
           setQuestionShowed(question);
           setIsShowingQuestion(true);
         });
@@ -103,16 +111,46 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     }
   };
   
-
-
-
-
   const getCategory = (diceResult: number) => {
     return getCategoryWithNumber(diceResult);
   };
 
+  const saveAnswer = (answer: string) => {
+    answerSelected.push(answer);
+    setAnswerSelected(answerSelected);
+
+
+    questions.push(questionShowed as questionType);
+    setQuestions(questions);    
+  }
+
+  function formatNumberWithDots(str : string) : string {
+    
+    if (str.length < 4) {
+      return str;
+    }
+    let result = '';
+    for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+      result = str[i] + result;
+      if (count % 3 === 2 && i !== 0) {
+        result = '.' + result;
+      }
+    }
+  
+    return result;
+  }
+  
+  function isNumber(str : string) : boolean {
+    return !isNaN(Number(str));
+  }
+
+  //GAME FINISHED
+  if(showBlue && showGreen && showYellow && showPink && showOrange){
+    return <GameOver answers={answerSelected} questions={questions} />;
+  }
+
   return (
-    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
+    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full" data-testid="trivia-game-component">
       <div className="flex w-full gap-4 justify-between mb-10">
         <Cheese
           showBlue={showBlue}
@@ -148,7 +186,6 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
         
       }}>
         
-        
       {diceResult === 0 ? "Roll dice" : diceResult}
       </Button>
 
@@ -157,7 +194,12 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       </h1>
       </div>
       :
-      <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} setColor={getSetColor(diceResult)}  questionShowed={questionShowed} setIsShowingQuestion={setIsShowingQuestion}></TriviaQuestion>
+
+      <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} 
+      setColor={getSetColor(diceResult)}  
+      questionShowed={questionShowed} 
+      setIsShowingQuestion={setIsShowingQuestion}
+      saveAnswer={saveAnswer}></TriviaQuestion>
       }
       
       
