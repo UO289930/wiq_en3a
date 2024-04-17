@@ -33,7 +33,7 @@ beforeAll(async () => {
   app.use('/user', userRoutes);
 
   app.listen(port, () => {
-    console.log(`Auth Service listening at http://localhost:${port}`);
+    console.log(`User Service listening at http://localhost:${port}`);
   });
 
 },30000);
