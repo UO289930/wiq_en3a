@@ -1,30 +1,47 @@
 const request = require('supertest');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const User = require('./user-model');
+const express = require('express');
+const bodyParser = require('body-parser');
 process.env.PORT = '8004';
-const { app } = require('../index.js'); 
 
 
+// APP
+process.env.PORT = '8004';
+const app = express();
+const port = process.env.PORT || 8005;
 let mongoServer;
 
-// Mock user data for testing
-const user = {
-  username: 'testuser',
-  password: 'password123',
-  email: 'test@example.com',
-};
+
 
 beforeAll(async () => {
-  //jest.setTimeout(30000);
+  jest.setTimeout(30000);
+
+  // -- CONNECTION TO MONGO
   mongoServer = await MongoMemoryServer.create(); // database in memory
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
+
+  mongoose.connect(mongoUri).then(
+    console.log('Succesfully connected to MongoDB')
+  );
+
+
+  // routes and middlewares
+  const authRoutes = require('../authservice/auth-service.js');
+  const userRoutes = require('./user-service.js');
+  app.use(bodyParser.json());
+  app.use('/auth', authRoutes);
+  app.use('/user', userRoutes);
+
+  app.listen(port, () => {
+    console.log(`Auth Service listening at http://localhost:${port}`);
+  });
+
 },30000);
 
 afterAll(async () => {
-  //jest.setTimeout(30000);
+  jest.setTimeout(30000);
   await mongoose.connection.close();
   await mongoServer.stop();
 });
