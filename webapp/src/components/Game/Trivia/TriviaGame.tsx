@@ -150,7 +150,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   }
 
   return (
-    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full">
+    <div className="p-5 gap-8 flex justify-start items-start flex-col h-full w-full" data-testid="trivia-game-component">
       <div className="flex w-full gap-4 justify-between mb-10">
         <Cheese
           showBlue={showBlue}
