@@ -26,14 +26,12 @@ beforeAll(async () => {
   
   
   // routes and middlewares
-  const authRoutes = require('../authservice/auth-service.js');
   const userRoutes = require('./user-service.js');
   app.use(bodyParser.json());
-  app.use('/auth', authRoutes);
   app.use('/user', userRoutes);
   
   app.listen(port, () => {
-    console.log(`Auth Service listening at http://localhost:${port}`);
+    console.log(`User Service listening at http://localhost:${port}`);
   });
 
 },30000);

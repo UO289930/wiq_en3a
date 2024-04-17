@@ -3,16 +3,21 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const User = require('./auth-model');
-const { app } = require('../index.js');
+const express = require('express');
+const bodyParser = require('body-parser');
  
- 
+// APP
+process.env.PORT = '8006';
+const app = express();
+const port = process.env.PORT || 8007;
 let mongoServer;
  
  
 // user that already exists in the database
 const user = {
-  username: 'rita',
+  username: 'authtests',
   password: '0000',
+  email: 'authtests@gmail.com'
 };
  
 // Add a new user to the database
@@ -21,6 +26,7 @@ async function addUser(user){
   const newUser = new User({
     username: user.username,
     password: hashedPassword,
+    email: user.email
   });
  
   await newUser.save();
@@ -29,13 +35,28 @@ async function addUser(user){
  
 beforeAll(async () => {
   jest.setTimeout(30000);
-  mongoServer = await MongoMemoryServer.create();
+
+  // -- CONNECTION TO MONGO MEMORY SERVER
+  mongoServer = await MongoMemoryServer.create(); // database in memory
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
+
+  mongoose.connect(mongoUri).then(
+    console.log('Succesfully connected to Mongo Memory Server')
+  );
+  
+  
+  // routes and middlewares
+  const authRoutes = require('./auth-service.js');
+  app.use(bodyParser.json());
+  app.use('/auth', authRoutes);
+  
+  app.listen(port, () => {
+    console.log(`Auth Service listening at http://localhost:${port}`);
+  });
  
-  //await mongoose.connect(mongoUri);
   await addUser(user);
-});
+}, 30000);
  
  
 afterAll(async () => {
@@ -57,7 +78,6 @@ describe('Auth Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('token');
   });
- 
  
  
   // TEST TO LOGIN WITH AN INVALID USER
