@@ -19,7 +19,7 @@ function App() {
     loginWithToken();
   }, []);
 
-  if (false) {
+  if (!user) {
     return <Authentication/>
   }
   else {
