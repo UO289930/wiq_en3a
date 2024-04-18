@@ -13,12 +13,20 @@ export const SimpleNav = () => {
   } 
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const songs = ['/VALKIRIA.mp4', '/madagascar.mp3', '/pollitoPio.mp3'];
 
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        let randomSong;
+        do {
+          randomSong = Math.floor(Math.random() * songs.length);
+        } while (randomSong === currentSong);
+        setCurrentSong(randomSong);
       } else {
         audioRef.current.play();
       }
@@ -47,7 +55,7 @@ export const SimpleNav = () => {
           {isPlaying ? '🔇' : '🎵'}
         </button>
       </div>
-      <audio ref={audioRef} src="/VALKIRIA.mp4" />
+      <audio ref={audioRef} src={songs[currentSong]} />
     </div>
   );
 };
