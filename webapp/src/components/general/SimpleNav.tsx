@@ -16,7 +16,7 @@ export const SimpleNav = () => {
   const [currentSong, setCurrentSong] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const songs = ['/VALKIRIA.mp4', '/madagascar.mp3', '/pollitoPio.mp3'];
+  const songs = ['/runningSong.mp3', '/madagascar.mp3', '/madagascarThemeSong.mp3', '/panteraRosa.mp3'];
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -52,7 +52,7 @@ export const SimpleNav = () => {
         <Link className={getLinkStyle()} to={`/stats`}>Statistics</Link>
         <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>    
         <button onClick={togglePlay}>
-          {isPlaying ? '🔇' : '🎵'}
+          {isPlaying ? '🎵' :  '🔇'}
         </button>
       </div>
       <audio ref={audioRef} src={songs[currentSong]} />
