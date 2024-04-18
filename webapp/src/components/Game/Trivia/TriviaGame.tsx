@@ -45,16 +45,12 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       return setShowBlue;
 
   }
-  
- 
+   
 };
-
 
   const generateDiceRandomNumber = () => {
     return Math.floor(Math.random() * 5) + 1;
-  
   }
-
 
   useEffect(() => {
     if(isShowingQuestion || diceResult === 0){

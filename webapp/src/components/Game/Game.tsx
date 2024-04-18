@@ -10,13 +10,13 @@ import { getQuestionsFromApi } from "../../services/question-service";
 
 export default function Game() {
     const [answered, setAnswered] = useState(false);
-    const [loading, setLoading] = useState(false); // Nuevo estado para controlar si se están cargando nuevas preguntas
+    const [loading, setLoading] = useState(false); 
     const [loadingdata, setLoadingData] = useState(true);
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
 
     const questionTime = 100;  // set question time
-    const [count, setCount] = useState(questionTime);  // define count state
+    const [count, setCount] = useState(questionTime);  
 
     const[questions, setQuestions] = useState<questionType[]>([]);
     const[questionCount, setQuestionCount] = useState(0);
@@ -31,21 +31,25 @@ export default function Game() {
       })
     }, []);
 
-
-    
-  const handleNextQuestion = () => {
-    if(count===0) saveAnswer(' ');
-    // Después de 3 segundos, ocultar el componente temporal y realizar las demás acciones
-
-    setTimeout(() => {
+  const goToNextQuestion = () => {
       setCount(questionTime);  
       setCorrectSelected(false);
       setQuestionCount(questionCount+1);
       setLoading(true); 
+
       setTimeout(() => {
         setLoading(false); 
         setAnswered(false);
       }, 0);
+  }
+    
+  const handleNextQuestion = () => {
+    if(count===0) saveAnswer(' ');
+    var q = questionCount;
+
+    setTimeout(() => {
+      if(q === questionCount)
+        goToNextQuestion();
     }, 3000);
   };
 
@@ -73,7 +77,7 @@ export default function Game() {
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
             <text className='text-white text-xl font-bold p-4'> {questionCount+1}/{questions.length} </text>
-            <Counter answered={answered} setAnswered={setAnswered}  duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
+            <Counter answered={answered} setAnswered={setAnswered} duration={questionTime} count={count} setCount={setCount} initialCount={questionTime}/>  
           </div>
           <Question questionText={questions[questionCount].text} />
           {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
@@ -88,7 +92,9 @@ export default function Game() {
             setAnswerSelected={saveAnswer}
             answers={questions[questionCount].answers} 
             correctAnswer={questions[questionCount].correctAnswer} />}
+
       </div>
+      
       }
     </div>
     
