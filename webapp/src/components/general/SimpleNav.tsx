@@ -1,8 +1,9 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import React from "react";
+import React, { useState, useRef } from 'react';
 import { useUserStore } from "../../stores/user-store";
 import { Link } from "react-router-dom";
+
 
 export const SimpleNav = () => {
   let username : string = useUserStore(state => state.user?.username!);
@@ -10,6 +11,20 @@ export const SimpleNav = () => {
   const getLinkStyle = ():string => {
     return "text-text text-sm font-bold hover:text-primary transition-colors duration-300 ease-in-out"
   } 
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <div className="aspect-square h-12 px-5 py-3 flex items-center w-full justify-between border-b ">
@@ -27,9 +42,12 @@ export const SimpleNav = () => {
         <Link className={getLinkStyle()} to={`/`}>Home</Link>
         <Link className={getLinkStyle()} to={`/leaderboard`}>Leaderboard</Link>
         <Link className={getLinkStyle()} to={`/stats`}>Statistics</Link>
-        <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>        
+        <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>    
+        <button onClick={togglePlay}>
+          {isPlaying ? '🔇' : '🎵'}
+        </button>
       </div>
+      <audio ref={audioRef} src="/VALKIRIA.mp4" />
     </div>
-
   );
 };
