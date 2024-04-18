@@ -10,6 +10,7 @@ import RankingTable from './components/leaderboard/RankingTable';
 import LeaderBoard from './components/leaderboard/LeaderBoard';
 import Game from './components/Game/Game';
 import { Logout } from './components/auth/Logout';
+import Statistics from './components/stats/Statistics';
 
 function App() {
   
@@ -32,6 +33,7 @@ function App() {
           <Route path="game" element={<Game/>} /> 
           <Route path="trivia" element={<TriviaGame/>} /> 
           <Route path="/leaderboard" element={<LeaderBoard />}/>
+          <Route path="/stats" element={<Statistics />}/>
           <Route path="logout" element={<Logout/>} />
           <Route path="*" element={<Home/>} />
 

@@ -46,7 +46,7 @@ export const register = async (email:string, username: string, password: string)
     throw error;
   }
 };
-
+ 
 
 
 export const getAllUsers = async () => {
@@ -58,6 +58,19 @@ export const getAllUsers = async () => {
     throw error;
   }
 };
+
+export const getUser = async (username: string) => {
+  try {
+    const response = await axios.post(`${API_URL}/getUser`, {username});
+    console.log('response:', response);
+    return response.data;
+  } catch (error) {
+    console.error('Error during retrieving the users', error);
+    throw error;
+  }
+};
+ 
+
  
 
 
