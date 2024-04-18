@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "../../ui/button";
 import { Question as questionType } from "../../../services/question-service";
 import Question from "../Question";
-import AnswerPanel from "../AnswerPanel"; 
+import AnswerPanel from "../AnswerPanel";
 
 export type props = {
   questionShowed: questionType | null;
@@ -13,6 +13,8 @@ export type props = {
   setCategoriesPassed: (categoriesPassed: number[]) => void;
   categoriesPassed: number[];
   category: number;
+  setLifesNumber: (lifes: number) => void;
+  lifes: number;
 };
 
 export const TriviaQuestion = (props: props) => {
@@ -31,11 +33,11 @@ export const TriviaQuestion = (props: props) => {
   const setCorrectSelected = (result: boolean) => {
     if (result) {
       props.setColor(true);
-
+      
       props.categoriesPassed.push(props.category);
       props.setCategoriesPassed(props.categoriesPassed);
     } else {
-      console.log("incorrect answer");
+      props.setLifesNumber(props.lifes - 1);
     }
   };
 
@@ -47,7 +49,7 @@ export const TriviaQuestion = (props: props) => {
     }
   };
 
-
+  
 
   return (
     <div

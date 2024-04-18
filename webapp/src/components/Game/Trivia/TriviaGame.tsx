@@ -24,6 +24,8 @@ export const TriviaGame = () => {
   const [questions, setQuestions] = useState<questionType[]>([]);
 
   const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
+
+  const [lifes, setLifes] = useState(3);
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
 
@@ -141,8 +143,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   }
 
   //GAME FINISHED
-  if(showBlue && showGreen && showYellow && showPink && showOrange){
-    return <GameOver answers={answerSelected} questions={questions} />;
+  if((showBlue && showGreen && showYellow && showPink && showOrange)){
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !! "/>;
+  }else if(lifes === 0){
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Lose !! :( "/>;
   }
 
   return (
@@ -155,6 +159,11 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
+        <div className="h-full flex items-center">
+          {Array.from({ length: lifes }, (_, index) => (
+            <span className="text-4xl " key={index}>&#x2764;</span>
+          ))}
+        </div>
         <Popover>
         <PopoverTrigger className="text-text">
           <Button className="bg-transparent border w-32 border-text">Show Categories</Button>
@@ -172,8 +181,8 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
       </div>
       {!isShowingQuestion ? 
-      <div>
-      <Button className="w-20 h-20" onClick={() => {
+      <div className="">
+      <Button className="w-20 h-20 flex justify-center items-center" onClick={() => {
         let result = generateDiceRandomNumber();
         while(categoriesPassed.includes(result))
           result = generateDiceRandomNumber();  
@@ -184,7 +193,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       {diceResult === 0 ? "Roll dice" : diceResult}
       </Button>
 
-      <h1 className="text-text text-2xl">
+      <h1 className="text-text text-2xl mt-2">
         Category: {getCategory(diceResult)}
       </h1>
       </div>
@@ -197,7 +206,9 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
         saveAnswer={saveAnswer}
         setCategoriesPassed={setCategoriesPassed}
         categoriesPassed={categoriesPassed}
-        category={diceResult}></TriviaQuestion>
+        category={diceResult}
+        lifes={lifes}
+        setLifesNumber={setLifes}></TriviaQuestion>
       }
       
       
