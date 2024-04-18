@@ -44,6 +44,39 @@ function validateRequiredFields(req, requiredFields) {
     }
 }
 
+function validateUsername(username){
+  
+  if (!username.trim()) {
+      throw new Error('The username cannot be empty or contain only spaces');
+  }
+
+  if (username.trim().length < 4) {
+    throw new Error('The username must be at least 4 characters long');
+}
+}
+
+function validateEmail(email){
+    // regular expression to validate the email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      throw new Error('Invalid email address');
+    }
+}
+
+function validatePassword(password){
+  
+  if (password.trim().length < 8) {
+      throw new Error('The password must be at least 8 characters long');
+  }
+  if (!/\d/.test(password)) {
+      throw new Error('The password must contain at least one numeric character');
+  }
+  if (!/[A-Z]/.test(password)) {
+      throw new Error('The password must contain at least one uppercase letter');
+  }
+}
+
 
 router.post('/adduser', async (req, res) => {
     try {
@@ -51,6 +84,11 @@ router.post('/adduser', async (req, res) => {
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
 
+        // validate username, email and password fields
+        validateUsername(req.body.username);
+        validateEmail(req.body.email);
+        validatePassword(req.body.password);
+      
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
