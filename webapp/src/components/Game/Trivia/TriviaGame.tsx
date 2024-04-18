@@ -23,6 +23,7 @@ export const TriviaGame = () => {
   const [answerSelected, setAnswerSelected] = useState(new Array<string>());
   const [questions, setQuestions] = useState<questionType[]>([]);
 
+  const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
 
@@ -71,8 +72,6 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     }
   }, [diceResult]);
 
- 
-
 
   const textStyle = {
     color: getCategoryColorWithNumber(diceResult),
@@ -115,6 +114,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     answerSelected.push(answer);
     setAnswerSelected(answerSelected);
 
+    setDiceResult(0);
 
     questions.push(questionShowed as questionType);
     setQuestions(questions);    
@@ -173,13 +173,12 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       </div>
       {!isShowingQuestion ? 
       <div>
-      <Button className="w-12" onClick={() => {
+      <Button className="w-20 h-20" onClick={() => {
         let result = generateDiceRandomNumber();
-        while(result === diceResult){
-          result = generateDiceRandomNumber();
-        }
-        setDiceResult(result);
-        
+        while(categoriesPassed.includes(result))
+          result = generateDiceRandomNumber();  
+        setDiceResult(result);        
+
       }}>
         
       {diceResult === 0 ? "Roll dice" : diceResult}
@@ -192,10 +191,13 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       :
 
       <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} 
-      setColor={getSetColor(diceResult)}  
-      questionShowed={questionShowed} 
-      setIsShowingQuestion={setIsShowingQuestion}
-      saveAnswer={saveAnswer}></TriviaQuestion>
+        setColor={getSetColor(diceResult)}  
+        questionShowed={questionShowed} 
+        setIsShowingQuestion={setIsShowingQuestion}
+        saveAnswer={saveAnswer}
+        setCategoriesPassed={setCategoriesPassed}
+        categoriesPassed={categoriesPassed}
+        category={diceResult}></TriviaQuestion>
       }
       
       
