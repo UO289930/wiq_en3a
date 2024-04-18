@@ -10,6 +10,11 @@ export type props = {
   setColor: (bool: boolean) => void;
   color: string;
   saveAnswer: (answer: string) => void;
+  setCategoriesPassed: (categoriesPassed: number[]) => void;
+  categoriesPassed: number[];
+  category: number;
+  setLifesNumber: (lifes: number) => void;
+  lifes: number;
 };
 
 export const TriviaQuestion = (props: props) => {
@@ -28,8 +33,11 @@ export const TriviaQuestion = (props: props) => {
   const setCorrectSelected = (result: boolean) => {
     if (result) {
       props.setColor(true);
+      
+      props.categoriesPassed.push(props.category);
+      props.setCategoriesPassed(props.categoriesPassed);
     } else {
-      console.log("incorrect answer");
+      props.setLifesNumber(props.lifes - 1);
     }
   };
 

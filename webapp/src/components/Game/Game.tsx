@@ -65,15 +65,15 @@ export default function Game() {
  
   if (questionCount === 10) {
     updateStats(questionCount, score/10); 
-    return <GameOver answers={answerSelected} questions={questions} />;
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="Game Over" />;
   } 
 
   
   
   return (
-    <div className="h-4/5">
+    <div className="h-4/5" data-testid="game-component">
       {loadingdata ? <h1>Loading...</h1> :
-      <div id='mainContainer'  data-testid="game-component" className='flex flex-col h-full text-text'>
+      <div id='mainContainer' className='flex flex-col h-full text-text'>
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
             <text className='text-white text-xl font-bold p-4'> {questionCount+1}/{questions.length} </text>
