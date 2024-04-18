@@ -65,7 +65,7 @@ export default function Game() {
  
   if (questionCount === 10) {
     updateStats(questionCount, score/10); 
-    return <GameOver answers={answerSelected} questions={questions} />;
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="Game Over" />;
   } 
 
   

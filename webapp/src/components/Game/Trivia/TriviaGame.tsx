@@ -164,25 +164,19 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
             <span className="text-4xl " key={index}>&#x2764;</span>
           ))}
         </div>
-        <Popover>
-        <PopoverTrigger className="text-text">
-          <Button className="bg-transparent border w-32 border-text">Show Categories</Button>
-        </PopoverTrigger>
-        <PopoverContent side="left">
-          <div className="bg-transparent  mt-4 mr-8 p-4">
-            <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
-            <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
-            <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
-            <h1 style={{color: getCategoryColor("Geography")}}>4 - Geography</h1>
-            <h1 style={{color: getCategoryColor("Entertainment")}}>5 - Entertainment</h1>
-          </div>
-        </PopoverContent>
-        </Popover>
+        
+        <div className="bg-transparent p-4">
+          <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
+          <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
+          <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
+          <h1 style={{color: getCategoryColor("Geography")}}>4 - Geography</h1>
+          <h1 style={{color: getCategoryColor("Entertainment")}}>5 - Entertainment</h1>
+        </div>
 
       </div>
       {!isShowingQuestion ? 
       <div className="">
-      <Button className="w-20 h-20 flex justify-center items-center" onClick={() => {
+      <Button className="text-2xl font-bold w-20 h-20 flex justify-center items-center" onClick={() => {
         let result = generateDiceRandomNumber();
         while(categoriesPassed.includes(result))
           result = generateDiceRandomNumber();  
@@ -190,7 +184,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
       }}>
         
-      {diceResult === 0 ? "Roll dice" : diceResult}
+      {diceResult === 0 ? "Roll" : diceResult}
       </Button>
 
       <h1 className="text-text text-2xl mt-2">
