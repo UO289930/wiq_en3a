@@ -51,8 +51,8 @@ export const SimpleNav = () => {
         <Link className={getLinkStyle()} to={`/leaderboard`}>Leaderboard</Link>
         <Link className={getLinkStyle()} to={`/stats`}>Statistics</Link>
         <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>    
-        <button onClick={togglePlay}>
-          {isPlaying ? '🎵' :  '🔇'}
+        <button onClick={togglePlay} style={{ color: 'white' } }>
+          {isPlaying ? '🔊' :  '🔇'}
         </button>
       </div>
       <audio ref={audioRef} src={songs[currentSong]} />
