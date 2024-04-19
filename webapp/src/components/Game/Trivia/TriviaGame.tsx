@@ -8,8 +8,13 @@ import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, 
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import GameOver from "../GameOver";
+import Counter from "../Counter";
 
-export const TriviaGame = () => {
+type Props = {
+  difficulty: string;
+};
+
+export const TriviaGame = (props : Props) => {
   const [showBlue, setShowBlue] = useState(false);
   const [showGreen, setShowGreen] = useState(false);
   const [showYellow, setShowYellow] = useState(false);
@@ -22,6 +27,11 @@ export const TriviaGame = () => {
 
   const [answerSelected, setAnswerSelected] = useState(new Array<string>());
   const [questions, setQuestions] = useState<questionType[]>([]);
+
+  const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
+
+  const [lifes, setLifes] = useState(3);
+
 
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
@@ -45,16 +55,12 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       return setShowBlue;
 
   }
-  
- 
+   
 };
-
 
   const generateDiceRandomNumber = () => {
     return Math.floor(Math.random() * 5) + 1;
-  
   }
-
 
   useEffect(() => {
     if(isShowingQuestion || diceResult === 0){
@@ -70,17 +76,16 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
           setQuestionShowed(question);
           setIsShowingQuestion(true);
+          
         });
       });
     }
   }, [diceResult]);
 
- 
 
-
-  const textStyle = {
-    color: getCategoryColorWithNumber(diceResult),
-  };
+  // const textStyle = {
+  //   color: getCategoryColorWithNumber(diceResult),
+  // };
 
   const getQuestion = async (category: string): Promise<questionType> => {
     try {
@@ -119,6 +124,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     answerSelected.push(answer);
     setAnswerSelected(answerSelected);
 
+    setDiceResult(0);
 
     questions.push(questionShowed as questionType);
     setQuestions(questions);    
@@ -145,8 +151,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   }
 
   //GAME FINISHED
-  if(showBlue && showGreen && showYellow && showPink && showOrange){
-    return <GameOver answers={answerSelected} questions={questions} />;
+  if((showBlue && showGreen && showYellow && showPink && showOrange)){
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !! "/>;
+  }else if(props.difficulty==='hard' && lifes === 0){
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Lose !! :( "/>;
   }
 
   return (
@@ -159,47 +167,50 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
-        <Popover>
-        <PopoverTrigger className="text-text">
-          <Button className="bg-transparent border w-32 border-text">Show Categories</Button>
-        </PopoverTrigger>
-        <PopoverContent side="left">
-          <div className="bg-transparent  mt-4 mr-8 p-4">
-            <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
-            <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
-            <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
-            <h1 style={{color: getCategoryColor("Geography")}}>4 - Geography</h1>
-            <h1 style={{color: getCategoryColor("Entertainment")}}>5 - Entertainment</h1>
-          </div>
-        </PopoverContent>
-        </Popover>
+        {props.difficulty==='hard' && <div className="h-full flex items-center" data-testid="lifes">
+          {Array.from({ length: lifes }, (_, index) => (
+            <span className="text-4xl " key={index}>&#x2764;</span>
+          ))}
+        </div>}
+        
+        <div className="bg-transparent p-4">
+          <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>
+          <h1 style={{color: getCategoryColor("Science")}}> 2 - Science</h1>
+          <h1 style={{color: getCategoryColor("History")}}>3 - History</h1>
+          <h1 style={{color: getCategoryColor("Geography")}}>4 - Geography</h1>
+          <h1 style={{color: getCategoryColor("Entertainment")}}>5 - Entertainment</h1>
+        </div>
 
       </div>
       {!isShowingQuestion ? 
-      <div>
-      <Button className="w-12" onClick={() => {
+      <div className="">
+      <Button className="text-2xl font-bold w-20 h-20 flex justify-center items-center" onClick={() => {
         let result = generateDiceRandomNumber();
-        while(result === diceResult){
-          result = generateDiceRandomNumber();
-        }
-        setDiceResult(result);
-        
+        while(categoriesPassed.includes(result))
+          result = generateDiceRandomNumber();  
+        setDiceResult(result);        
+
       }}>
         
-      {diceResult === 0 ? "Roll dice" : diceResult}
+      {diceResult === 0 ? "Roll" : diceResult}
       </Button>
 
-      <h1 className="text-text text-2xl">
+      <h1 className="text-text text-2xl mt-2">
         Category: {getCategory(diceResult)}
       </h1>
       </div>
       :
 
       <TriviaQuestion color={getCategoryColorWithNumber(diceResult)} 
-      setColor={getSetColor(diceResult)}  
-      questionShowed={questionShowed} 
-      setIsShowingQuestion={setIsShowingQuestion}
-      saveAnswer={saveAnswer}></TriviaQuestion>
+        setColor={getSetColor(diceResult)}  
+        questionShowed={questionShowed} 
+        setIsShowingQuestion={setIsShowingQuestion}
+        saveAnswer={saveAnswer}
+        setCategoriesPassed={setCategoriesPassed}
+        categoriesPassed={categoriesPassed}
+        category={diceResult}
+        lifes={lifes}
+        setLifesNumber={setLifes}></TriviaQuestion>
       }
       
       

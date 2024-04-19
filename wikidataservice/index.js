@@ -29,9 +29,9 @@ async function init(){
         { name: 'geography', data: QueryGenerator.getQuestionsAndQuery("Geography") },
         { name: 'entertainment', data: QueryGenerator.getQuestionsAndQuery("Entertainment") },
         { name: 'chemistry', data: QueryGenerator.getQuestionsAndQuery("Chemistry")  },
-        { name: 'country', data: QueryGenerator.getCountryCapitalsQuery(20), isNormalGame: true },
-        { name: 'elements', data: QueryGenerator.getElementSymbolQuery(20), isNormalGame: true },
-        { name: 'movies', data: QueryGenerator.getMovieDirectorQuery(20), isNormalGame: true }
+        { name: 'country', data: QueryGenerator.getCountryCapitalsQuery(200), isNormalGame: true },
+        { name: 'elements', data: QueryGenerator.getElementSymbolQuery(200), isNormalGame: true },
+        { name: 'movies', data: QueryGenerator.getMovieDirectorQuery(200), isNormalGame: true }
     ];
     
     // If the group is a normal game, the data is fetched in a normal mode,
@@ -161,7 +161,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getCapitalsQuestions', async (req, res, next) => {
         try {
             // Obtain questions in json format from wikidata
-            const jsonQuestions = await getData(QueryGenerator.getCountryCapitalsQuery(NUMBER_QUESTIONS));
+            const jsonQuestions = await getDataNormalGame(QueryGenerator.getCountryCapitalsQuery(NUMBER_QUESTIONS));
     
             // Generate the questions
             const questions = generateQuestions("What is the capital of: ", jsonQuestions.results.bindings, NUMBER_QUESTIONS);
@@ -176,7 +176,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getDirectorsQuestions', async (req, res, next) => {
         try {
             // Obtain questions in json format from wikidata
-            const jsonQuestions = await getData(QueryGenerator.getMovieDirectorQuery());
+            const jsonQuestions = await getDataNormalGame(QueryGenerator.getMovieDirectorQuery());
     
             // Generate the questions
             const questions = generateQuestions("What is the director of the movie: ", jsonQuestions.results.bindings);
@@ -192,7 +192,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     app.get('/getElementSymbolsQuestions', async (req, res, next) => {
         try {
             // Obtain questions in json format from wikidata
-            const jsonQuestions = await getData(QueryGenerator.getElementSymbolQuery());
+            const jsonQuestions = await getDataNormalGame(QueryGenerator.getElementSymbolQuery());
     
             // Generate the questions
             const questions = generateQuestions("What is the symbol of the element: ", jsonQuestions.results.bindings);
