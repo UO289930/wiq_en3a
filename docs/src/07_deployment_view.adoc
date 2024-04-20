@@ -24,9 +24,9 @@ Using your Azure account:
 ** `DEPLOY_USER` does not need to be changed
 
 * Once the virtual machine is created and the repository is configured, go to Network Settings and add extra rules:
-** Open port number 3000 for user services
-** Open port number 8000 for accessing the web application
-*** More services will be available in the future, so discussions will be made for additional ports supporting our services.
+** Open port number 80 for accesing the web application, or 443 in case HTTPS is used
+** Open port number 8000 for giving access to the API gateway
+** Open port number 9091 for giving access to monitoring the application checking some Grafana data
 
 * Configure the virtual machine connecting through SSH for using Docker:
 ** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
@@ -145,9 +145,9 @@ frame GitHub{
 
 WebAPP -- APIGateway : port 8000
 Wikidata -- WikidataAPI: port 8001
-Users -- UsersAPI : port 8002
+Users -- UsersAPI : port 8003
 UsersAPI -- UsersDatabase : MongoDB (port 27017)
-client -- WebAPP : Web Browser (port 3000)
+client -- WebAPP : Web Browser (port 80)
 
 GitHubActions -- UbuntuServer : on release
 Docker -- wiq_en3a
@@ -172,7 +172,7 @@ For now, the project contains:
 ** Web application service running on port 3000
 ** Gateway (middleware) service running on port 8000
 ** Wikidata API running on port 8001
-** Users API running on port 8002
+** Users API running on port 8003
 ** Mongo DB server running on port 27017
 ** Prometheus running on port 9090 for monitoring
 ** Grafana running on port 9091 for analytics and monitoring
@@ -181,6 +181,27 @@ For now, the project contains:
 === Infrastructure Level 3 - GitHub actions
 
 GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.
+
+=== Motivation
+
+In the deployment view of our software architecture, we delineate the physical deployment of our system components across various environments. 
+At the core of our deployment strategy is the utilization of cloud-based infrastructure, specifically leveraging Azure for its robustness and scalability. 
+Our server components, including web applications, gateway, user services, and MongoDB servers, are encapsulated within Docker containers to ensure portability and consistency across deployments. 
+Additionally, we employ Azure's built-in services for auto-scaling, and traffic management to optimize performance and reliability. 
+Continuous integration and deployment pipelines are established using tools like Jenkins or Azure DevOps, facilitating seamless updates and releases of our system components. 
+Monitoring and logging solutions, such as Prometheus and Grafana, are integrated to provide insights into system health and performance. 
+Overall, our deployment view showcases a resilient, scalable, and automated deployment architecture tailored to meet the demands of our system's evolving requirements.
+
+=== Mapping of Building Blocks into Infrastructure
+
+[cols="1,2" options="header"]
+|===
+| **Name** | **Responsibility**
+| Frontend  | Web App container opened in port 80.
+| User Management | User service container.
+| Wikidata Service | Wikidata service container.
+| Gateway | API Gateway service opened in port 8000.
+|===
 
 
 [role="arc42help"]
