@@ -20,6 +20,32 @@ const AddUser = (props: props)  => {
 
 
   const registerUser = async () => {
+
+    // validate username
+    if(username.trim().length < 4){
+      setError('The username must be at least 4 characters long');
+      return;
+    }
+
+    // validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setError('Invalid email address');
+      return;
+    }
+
+    // validate password
+    if (password.trim().length < 8) {
+      setError('The password must be at least 8 characters long');
+    }
+    if (!/\d/.test(password)) {
+      setError('The password must contain at least one numeric character');
+    }
+    if (!/[A-Z]/.test(password)) {
+      setError('The password must contain at least one uppercase letter');
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -34,6 +60,10 @@ const AddUser = (props: props)  => {
 
     
   }
+
+
+
+
 
 
   return (

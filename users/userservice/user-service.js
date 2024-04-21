@@ -46,14 +46,14 @@ function validateRequiredFields(req, requiredFields) {
 
 function validateUsername(username){
   
-  if (!username.trim()) {
-      throw new Error('The username cannot be empty or contain only spaces');
-  }
+  //if (!username.trim()) {
+  //    throw new Error('The username cannot be empty or contain only spaces');
+  //}
 
   if (username.trim().length < 4) {
     throw new Error('The username must be at least 4 characters long');
-}
-}
+  }
+} 
 
 function validateEmail(email){
     // regular expression to validate the email
@@ -80,7 +80,7 @@ function validatePassword(password){
 
 router.post('/adduser', async (req, res) => {
     try {
-
+        console.log('Register /userservice')
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
 
