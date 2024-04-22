@@ -50,7 +50,7 @@ export const SimpleNav = () => {
         <Link className={getLinkStyle()} to={`/`}>Home</Link>
         <Link className={getLinkStyle()} to={`/leaderboard`}>Leaderboard</Link>
         <Link className={getLinkStyle()} to={`/stats`}>Statistics</Link>
-        <Link className={getLinkStyle()} to={`/logout`}>Logout</Link>    
+        <Link id="logout" className={getLinkStyle()} to={`/logout`}>Logout</Link>    
         <button onClick={togglePlay} style={{ color: 'white' } }>
           {isPlaying ? '🔊' :  '🔇'}
         </button>

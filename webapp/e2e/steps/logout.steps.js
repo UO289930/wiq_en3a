@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature }=require('jest-cucumber');
 const setDefaultOptions = require('expect-puppeteer').setDefaultOptions
 const feature = loadFeature('./features/logout.feature');
+const { registerUser } = require('../utils.js');
 
 let page;
 let browser;
@@ -21,6 +22,8 @@ defineFeature(feature, test => {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
+
+      await registerUser('test3', 'test3@gmail.com', 'test3', page);
   });
 
   test('Logging out of the app', ({given,when,then}) => {
@@ -29,8 +32,8 @@ defineFeature(feature, test => {
     let password;
 
     given('An just logged in user', async () => {
-      username = "trogui"
-      password = "0000"
+      username = "test3";
+      password = "test3";
 
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
@@ -38,14 +41,22 @@ defineFeature(feature, test => {
     });
 
     when('I click the logout button', async () => {
-      await expect(page).toMatchElement("button", { id: "Logout" });
-      await expect(page).toClick('button', { text: 'Logout' })
+      await expect(page).toMatchElement("#normalGame", { text: "Normal Game" });
+      await expect(page).toMatchElement("#triviaGame", { text: "Trivia Game" });
+      await expect(page).toMatchElement("#logout", { text: "Logout" });
+      await expect(page).toClick('#logout');
     });
 
     then('The login page appears on screen', async () => {
         await expect(page).toMatchElement("button", { text: "Log in" });
     });
   })
+
+  afterEach(async () => {
+    await page.evaluate(() => {
+      localStorage.clear();
+    });
+  });
 
   afterAll(async ()=>{
     browser.close()
