@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
     correctly_answered_questions: {
       type: Number,
       required: false,
+    },
+    cheeseCount: {
+      type: Number,
+      required: false
     }
 
  
