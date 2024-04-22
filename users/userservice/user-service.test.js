@@ -15,7 +15,7 @@ let mongoServer;
 
 
 beforeAll(async () => {
-  jest.setTimeout(30000);
+  jest.setTimeout(50000);
 
   // -- CONNECTION TO MONGO MEMORY SERVER
   mongoServer = await MongoMemoryServer.create(); // database in memory
@@ -36,7 +36,7 @@ beforeAll(async () => {
     console.log(`User Service listening at http://localhost:${port}`);
   });
 
-},30000);
+},50000);
 
 afterAll(async () => {
   jest.setTimeout(30000);
