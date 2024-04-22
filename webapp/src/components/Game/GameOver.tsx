@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { Question } from "../../services/question-service";
 
@@ -8,6 +7,7 @@ import { Question } from "../../services/question-service";
 type props = {
   questions: Question[],
   answers : string[];
+  finalMessage: string;
 };
 
 
@@ -29,7 +29,7 @@ const GameOver = (props: props) => {
       <div className="flex">
       <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl mt-6"} to={`/home`}>Home</Link>
       </div>
-      <h1 className="text-6xl font-bold ">Game Over</h1>
+      <h1 className="text-6xl font-bold ">{props.finalMessage}</h1>
       <div>
         <div>
           <table className="table-auto">

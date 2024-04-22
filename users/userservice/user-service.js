@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 const User = require('./user-model')
 
 
-
-
-
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
   for (const field of requiredFields) {
@@ -19,7 +16,6 @@ function validateRequiredFields(req, requiredFields) {
 
 
 // GET route to retrieve an specific user by username
-// 'http://localhost:8002/getOneUser?username=nombre_de_usuario'
 
 router.get('/getUser', async (req, res) => {
   try {
@@ -34,9 +30,8 @@ router.get('/getUser', async (req, res) => {
         if (err) {
           console.error('Error finding user:', err);
         } else {
+          res.status(200).json(result);
           console.log('User:', result);
-          // Cerrar la conexión después de terminar la consulta
-          mongoose.connection.close();
         }
       });
       
@@ -47,6 +42,22 @@ router.get('/getUser', async (req, res) => {
 
 
 /**
+ * This method checks if the user already exists in the database
+ */
+async function checkUsername(req) {
+  // access to the database and its collection
+  const db = mongoose.connection.useDb("UsersDB");
+  const userCollection = db.collection('User');
+
+  const user = await userCollection.findOne({username: req.body.username});
+  if(user !== null){
+    throw new Error('The username already exists in the database')
+  }
+}
+
+
+
+/**
  * POST route to add a new user to the database
  */
 router.post('/adduser', async (req, res) => {
@@ -54,6 +65,9 @@ router.post('/adduser', async (req, res) => {
 
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password', 'email']);
+
+        // check if the username is already in the database
+        await checkUsername(req);
 
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -128,8 +142,5 @@ router.get('/getAllUsers', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-
 
 module.exports = router;
