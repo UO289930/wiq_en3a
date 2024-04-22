@@ -30,11 +30,6 @@ router.post('/login', async (req, res) => {
     const username = req.body.username.toString();
     const password = req.body.password.toString();
 
-    // Access to the database 
-    const db = mongoose.connection.useDb("UsersDB");
-      
-    // Access to the collection of the database
-    const userCollection = db.collection('User');
 
     // access to the database 
     const db = mongoose.connection.useDb("UsersDB");
