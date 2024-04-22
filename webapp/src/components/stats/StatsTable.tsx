@@ -1,21 +1,31 @@
-import React from "react";
- 
+import React, { useEffect, useState } from "react";
+import { getUser } from "../../services/auth-service";
+import { useUserStore } from '../../stores/user-store';
+
 export default function StatsTable() {
     // Function to generate a random integer within a range
     const getRandomInt = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // Fake getUsername function
-    const getUsername = (): string => {
-        return "name 1";
-    }
+    const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
+    const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
+    const [username, setUsername] = useState<string>();
 
-    // Fake data generation
-    const correctAnswers: number = getRandomInt(0, 100);
-    const wrongAnswers: number = getRandomInt(0, 100);
-    const totalQuestions: number = correctAnswers + wrongAnswers;
-    const percentageCorrect: number = totalQuestions === 0 ? 0 : Math.round((correctAnswers / totalQuestions) * 100);
+    useEffect(() => {
+        let username = useUserStore.getState().user?.username!;
+        getUser(username).then((user) => {
+            setQuestionAnswered(user.questions_answered);
+            setQuestionCorrect(user.correctly_answered_questions);
+            setUsername(user.username);
+        }).catch((error) => {
+            console.error('Error during retrieving the user', error);
+        });
+    } , []);
+    
+
+    // Data generation
+    const percentageCorrect: number = questionsAnswered === 0 ? 0 : Math.round((questionsCorrect / questionsAnswered) * 100);
 
     return (
         <table className="stats-table">
@@ -28,16 +38,16 @@ export default function StatsTable() {
             <tbody>
                 <tr className="body-row">
                     <td className="row-header">Username</td>
-                    <td className="row-value">{getUsername()}</td>
+                    <td className="row-value">{username}</td>
                 </tr>
 
                 <tr className="body-row"> 
                     <td className="row-header">Correct Answers</td>
-                    <td>{correctAnswers}</td>
+                    <td>{questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header">Wrong Answers</td>
-                    <td>{wrongAnswers}</td>
+                    <td>{questionsAnswered - questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header">Percentage Correct</td>
