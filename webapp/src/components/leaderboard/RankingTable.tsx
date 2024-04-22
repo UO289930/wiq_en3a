@@ -56,7 +56,7 @@ export default function RankingTable() {
                 {
                     users.map((user, index) => {
                         return (
-                            <tr className="body-row">
+                            <tr key={index} className="body-row">
                                 <td className="avatar">
                                 <Avatar.Root className="AvatarRoot">
                                 <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
