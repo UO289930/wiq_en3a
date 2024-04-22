@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 const User = require('./user-model')
 
 
-
-
-
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
   for (const field of requiredFields) {
@@ -33,9 +30,8 @@ router.get('/getUser', async (req, res) => {
         if (err) {
           console.error('Error finding user:', err);
         } else {
+          res.status(200).json(result);
           console.log('User:', result);
-          // Cerrar la conexión después de terminar la consulta
-          mongoose.connection.close();
         }
       });
       
@@ -146,8 +142,5 @@ router.get('/getAllUsers', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-
 
 module.exports = router;
