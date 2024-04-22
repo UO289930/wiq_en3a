@@ -3,12 +3,11 @@ import { Cheese } from "./Cheese";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
-import { Question as questionType } from "../../../services/question-service";
+import { getHardString, Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import GameOver from "../GameOver";
-import Counter from "../Counter";
 
 type Props = {
   difficulty: string;
@@ -29,14 +28,21 @@ export const TriviaGame = (props : Props) => {
   const [questions, setQuestions] = useState<questionType[]>([]);
 
   const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
+  
 
-  const [lifes, setLifes] = useState(3);
-
-
+  const easyLifesNumber = 6;
+  const hardLifesNumber = 3;
+  const [lifes, setLifes] = useState(easyLifesNumber);
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
 
   type SetColorFunction = (bool: boolean) => void; 
+
+
+
+  useEffect(() => {
+    props.difficulty === getHardString() ? setLifes( hardLifesNumber) : setLifes(easyLifesNumber);
+  }, [props.difficulty]);
 
 const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   let category = getCategoryWithNumber(n);
@@ -153,7 +159,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   //GAME FINISHED
   if((showBlue && showGreen && showYellow && showPink && showOrange)){
     return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !! "/>;
-  }else if(props.difficulty==='hard' && lifes === 0){
+  }else if(lifes === 0){
     return <GameOver answers={answerSelected} questions={questions} finalMessage="You Lose !! :( "/>;
   }
 
@@ -167,11 +173,11 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
-        {props.difficulty==='hard' && <div className="h-full flex items-center" data-testid="lifes">
+        <div className="h-full flex items-center" data-testid="lifes">
           {Array.from({ length: lifes }, (_, index) => (
             <span className="text-4xl " key={index}>&#x2764;</span>
           ))}
-        </div>}
+        </div>
         
         <div className="bg-transparent p-4">
           <h1 style={{color: getCategoryColor("Sports")}}> 1 - Sports</h1>

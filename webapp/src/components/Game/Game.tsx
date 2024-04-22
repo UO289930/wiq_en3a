@@ -5,7 +5,7 @@ import GameOver from "./GameOver";
 import Counter from "./Counter";
 import { updateStats } from "../../services/auth-service";
 import Countdown from "./Countdown";
-import {Question as questionType} from "../../services/question-service";
+import {getHardString, Question as questionType} from "../../services/question-service";
 import { getQuestionsFromApi } from "../../services/question-service";
 
 type Props = {
@@ -20,7 +20,7 @@ export default function Game(props: Props) {
     const [correctSelected, setCorrectSelected] = useState(false);
 
     var questionTime = 100;
-    if(props.difficulty === 'hard') 
+    if(props.difficulty === getHardString()) 
       questionTime = 40; 
     
     const [count, setCount] = useState(questionTime);  

@@ -10,10 +10,12 @@ export const Home = () => {
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelectedOption(event.target.value);
     }
+
+    
   
-    return (<div className="flex flex-col h-full border-red-300">
-        <div className="flex gap-12 h-full self-center mt-4">
-            <label className="inline-flex items-center text-text bg-primary rounded w-48 h-24 text-lg font-bold justify-center">
+    return (<div className="flex flex-col justify-center h-full border-red-300">
+        <div className="flex flex-col gap-12 h-full self-center mt-4">
+            <label className="inline-flex items-center text-text  w-48 h-24 text-lg font-bold justify-center">
                 <input
                 type="radio"
                 value=""
@@ -23,7 +25,7 @@ export const Home = () => {
                 <span className="ml-2">Easy</span>
             </label>
 
-            <label className="inline-flex items-center text-text bg-primary rounded w-48 h-24 text-lg font-bold justify-center">
+            <label className="inline-flex items-center text-text  w-48 h-24 text-lg font-bold justify-center">
                 <input
                 type="radio"
                 value="/hard"
