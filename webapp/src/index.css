@@ -173,6 +173,72 @@
   }
 }
 
+.ranking-table-trivial {
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding-bottom: 1rem;
+
+    th {
+      padding-inline: 1rem;
+    }
+
+    .avatar {
+      grid-column: 1/1;    
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .quesitos{
+      grid-column: 3/3;
+    }
+
+    
+
+  }
+
+  .body-row {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    border-top: .1rem solid white;
+    padding: .8rem 0rem .8rem 0rem;
+
+    .avatar {
+      grid-column: 1/1;    
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      justify-self: flex-start;
+      padding-left: 2.5rem;
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .cheeseCount{
+      grid-column: 3/3;
+    }
+
+  }
+}
+
+
+
+
+
 
 .stats-table {
   font-size: 1rem;

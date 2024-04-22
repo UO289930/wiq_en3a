@@ -51,13 +51,12 @@ export default function TrivialRankingTable() {
     
 
     return (
-        <table className="ranking-table">
+        <table className="ranking-table-trivial">
             <thead >
                 <tr className="header">
                     <th className="avatar"></th>
                     <th className="ranking">RANKING</th>
-                    <th className="correct-answers">QUESITOS</th>
-                    <th className="progress">% CORRECT ANSWERS</th>
+                    <th className="cheeseCount">CHEESES</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,7 +73,7 @@ export default function TrivialRankingTable() {
                                 <td className="ranking">
                                     {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
                                 </td>
-                                <td className="correct-answers">{user.cheeseCount}</td>
+                                <td className="cheeseCount">{user.cheeseCount}</td>
                                 
                             </tr>
                         )
