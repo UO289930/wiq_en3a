@@ -141,7 +141,7 @@ describe('User Service', () => {
   // --- TESTS FOR /editUser  ---
 
   // TEST TO EDIT A USER THAT EXISTS
-  it('should update user information on POST /editUser', async () => {
+  it('should update user information on POST /sumNormalStats', async () => {
     const updateUser = {
       username: 'testuser',
       questions_answered: 1,
@@ -149,7 +149,7 @@ describe('User Service', () => {
     };
 
     const response = await request(app)
-      .post('/user/editUser')
+      .post('/user/sumNormalStats')
       .send(updateUser);
 
     expect(response.status).toBe(200);
@@ -157,7 +157,7 @@ describe('User Service', () => {
   });
 
   // TEST TO EDIT A USER THAT DOESN'T EXIST
-  it('should return 404 if user is not found on POST /editUser', async () => {
+  it('should return 404 if user is not found on POST /sumNormalStats', async () => {
     const nonExistentUser = {
       username: 'nonexistentuser',
       questions_answered: 1,
@@ -165,7 +165,7 @@ describe('User Service', () => {
     };
 
     const response = await request(app)
-      .post('/user/editUser')
+      .post('/user/sumNormalStats')
       .send(nonExistentUser);
 
     expect(response.status).toBe(404);
