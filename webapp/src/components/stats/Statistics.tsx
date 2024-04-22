@@ -7,9 +7,9 @@ export default function Statistics () {
 
     return (
         <>
-            <h1 className="text-text">Statistics page</h1>
+            <h1 className="h1-statistics">Statistics page</h1>
 
             <StatsTable />
         </>
     )
-}
+} 

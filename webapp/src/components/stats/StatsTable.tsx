@@ -1,5 +1,5 @@
 import React from "react";
-
+ 
 export default function StatsTable() {
     // Function to generate a random integer within a range
     const getRandomInt = (min: number, max: number): number => {
@@ -18,31 +18,33 @@ export default function StatsTable() {
     const percentageCorrect: number = totalQuestions === 0 ? 0 : Math.round((correctAnswers / totalQuestions) * 100);
 
     return (
-        <table>
+        <table className="stats-table">
             <thead>
-                <tr>
-                    <th>Statistics</th>
-                    <th>Value</th>
+                <tr className="header">
+                    <th className="statistics">Statistics</th>
+                    <th className="value">Value</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Username</td>
-                    <td>{getUsername()}</td>
+                <tr className="body-row">
+                    <td className="row-header">Username</td>
+                    <td className="row-value">{getUsername()}</td>
                 </tr>
-                <tr>
-                    <td>Correct Answers</td>
+
+                <tr className="body-row"> 
+                    <td className="row-header">Correct Answers</td>
                     <td>{correctAnswers}</td>
                 </tr>
-                <tr>
-                    <td>Wrong Answers</td>
+                <tr className="body-row">
+                    <td className="row-header">Wrong Answers</td>
                     <td>{wrongAnswers}</td>
                 </tr>
-                <tr>
-                    <td>Percentage Correct</td>
+                <tr className="body-row">
+                    <td className="row-header">Percentage Correct</td>
                     <td>{percentageCorrect}%</td>
                 </tr>
             </tbody>
         </table>
+
     );
 }
