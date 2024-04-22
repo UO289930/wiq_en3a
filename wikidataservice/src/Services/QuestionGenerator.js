@@ -1,6 +1,5 @@
 function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
     const questions = [];
-
     const ids = new Set();
 
     // Generate a set of unique random indices
@@ -13,6 +12,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
     // Generate the questions
     for (let j = 0; j < idsList.length; j++) {
         const name = dataSet[idsList[j]].themeLabel.value;
+        const url = dataSet[idsList[j]].entityUrl.value;
         const questionText = questionMessage + name;
         const answers = [];
 
@@ -26,7 +26,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
         const wrongIds = new Set();
         for (let w = 1; w < 4; w++) {
             let wrongId = Math.floor(Math.random()*dataSet.length);
-            while (idsList[j] === wrongId || wrongIds.has(wrongId)) {
+            while (idsList[j] === wrongId || wrongIds.has(wrongId) || answers.includes(dataSet[wrongId].attributeLabel.value)) {
                 wrongId = Math.floor(Math.random()*dataSet.length);
             }
             // Add the id of the incorrect answer to the set
@@ -41,7 +41,7 @@ function generateQuestions(questionMessage, dataSet, numberQuestions = 10){
             text:questionText, 
             answers: shuffled.answers, 
             correctAnswer: shuffled.correctAnswer,
-            wikiLink: 'https://www.google.com/search?client=opera-gx&q=pinguinos+de+madagascar+personajes&sourceid=opera&ie=UTF-8&oe=UTF-8',
+            wikiLink: url,
         };
     }
     return questions;

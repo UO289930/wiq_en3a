@@ -56,6 +56,18 @@ app.post('/edituser', async (req, res) => {
   }
 });
 
+
+app.get('/getAllUsers', async (req, res) => {
+  try {
+    // Forward the get all users request to the user service
+    const usersResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
+    res.json(usersResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
 app.get('/GetQuestions', async (_req, res) => {
   try {
     const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 10000 });
@@ -85,6 +97,27 @@ app.get('/GetElementSymbolsQuestions', async (_req, res) => {
 app.get('/GetMovieDirectorsQuestions', async (_req, res) => {
   getQuestions('/getMovieDirectorsQuestions', res);
 });
+
+app.get('/GetHistoryQuestions', async (_req, res) => {
+  getQuestions('/getHistoryQuestions', res);
+});
+
+app.get('/GetSportQuestions', async (_req, res) => {
+  getQuestions('/getSportQuestions', res);
+});
+
+app.get('/GetGeographyQuestions', async (_req, res) => {
+  getQuestions('/getGeographyQuestions', res);
+});
+
+app.get('/GetEntertainmentQuestions', async (_req, res) => {
+  getQuestions('/getEntertainmentQuestions', res);
+});
+
+app.get('/GetChemistryQuestions', async (_req, res) => {
+  getQuestions('/getChemistryQuestions', res);
+});
+
 
 async function getQuestions(specificPath, res){
   try {

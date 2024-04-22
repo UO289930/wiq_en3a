@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const User = require('./auth-model');
 
 
 // Function to validate required fields in the request body
@@ -26,25 +27,24 @@ router.post('/login', async (req, res) => {
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
-    const { username, password } = req.body;
+    const username = req.body.username.toString();
+    const password = req.body.password.toString();
 
-    // access to the database 
+    // Access to the database 
     const db = mongoose.connection.useDb("UsersDB");
       
-    // access to the collection of the database
+    // Access to the collection of the database
     const userCollection = db.collection('User');
 
     let user;
     
     await userCollection.findOne({ username }, function(err, result) {
       if (err) {
-        console.error('Error finding user:', err);
+        console.error('Error finding user. There is not user with that username:', err);
       } else {
         user = result;
       }
     });
-
-    console.log(user);
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
