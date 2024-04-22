@@ -7,11 +7,12 @@ import { getAllUsers } from "../../services/auth-service";
 export interface User {
     username: string,
     correctAnswers: number,
-    totalAnswers: number
+    totalAnswers: number,
+    cheeseCount: number
 }
 
 
-export default function RankingTable() {
+export default function TrivialRankingTable() {
 
  
     const [users, setUsers] = useState<User[]>([])
@@ -31,19 +32,21 @@ export default function RankingTable() {
             const usersArray: User[] = Object.values(users).map((user: any) => ({
                 username: user.username,
                 correctAnswers: user.correctly_answered_questions,
-                totalAnswers: user.questions_answered
+                totalAnswers: user.questions_answered,
+                cheeseCount: user.cheeseCount
             }));
 
             const filteredUsers = filterUsers(usersArray)
 
-            setUsers(filteredUsers.sort((a, b) => b.correctAnswers - a.correctAnswers));
+            setUsers(filteredUsers.sort((a, b) => b.cheeseCount - a.cheeseCount));
+        
         }).catch((error) => {
             console.error('Error during retrieving all the users', error);
         });
     }, [])
 
     const filterUsers = (usersArray: User[]) => {
-        return usersArray.filter(user => user.totalAnswers > 0);
+        return usersArray.filter(user => user.cheeseCount > 0);
     }
     
 
@@ -53,7 +56,7 @@ export default function RankingTable() {
                 <tr className="header">
                     <th className="avatar"></th>
                     <th className="ranking">RANKING</th>
-                    <th className="correct-answers">CORRECT ANSWERS</th>
+                    <th className="correct-answers">QUESITOS</th>
                     <th className="progress">% CORRECT ANSWERS</th>
                 </tr>
             </thead>
@@ -71,15 +74,8 @@ export default function RankingTable() {
                                 <td className="ranking">
                                     {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
                                 </td>
-                                <td className="correct-answers">{user.correctAnswers}</td>
-                                <td className="progress">
-                                    <CircularProgress 
-                                        value={ user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100) : 0} 
-                                        color='#00A078' thickness='.4rem'
-                                        size={"3.6rem"}>
-                                        <CircularProgressLabel>{user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100).toFixed(0) : 0}%</CircularProgressLabel>
-                                    </CircularProgress>
-                                </td>
+                                <td className="correct-answers">{user.cheeseCount}</td>
+                                
                             </tr>
                         )
                     })
