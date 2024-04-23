@@ -26,10 +26,13 @@ const GameOver = (props: props) => {
 
   return (
     <div className="flex flex-col items-center justify-center text-text gap-16">
-      <div className="flex">
-      <Link className={"bg-primary text-text rounded-md text-center justify-center w-2/5 h-24 text-4xl mt-6"} to={`/home`}>Home</Link>
+      <div className="w-full flex mt-5 justify-center gap-7 items-center">
+    
+      <h1 className="text-4xl font-bold self-center ">{props.finalMessage}</h1>
+      <Link className={" text-text hover:text-primary text-4xl "} to={`/home`}>
+      🏠︎
+     </Link>
       </div>
-      <h1 className="text-6xl font-bold ">{props.finalMessage}</h1>
       <div>
         <div>
           <table className="table-auto">
