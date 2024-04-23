@@ -11,7 +11,7 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 100 });
+      : await puppeteer.launch({ headless: false, slowMo: 40 });
     page = await browser.newPage();
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 })
@@ -30,9 +30,9 @@ defineFeature(feature, test => {
     let password;
 
     given('An unregistered user', async () => {
-      username = "test3"
-      email = "test3@gmail.com"
-      password = "test3"
+      username = "test"
+      email = "test@gmail.com"
+      password = "test"
       await expect(page).toClick("button", { text: "Register" });
     });
 
@@ -48,6 +48,12 @@ defineFeature(feature, test => {
         await expect(page).toMatchElement('label', { text: "has been registered" });
     });
   })
+
+  afterEach(async () => {
+    await page.evaluate(() => {
+      localStorage.clear();
+    });
+  });
 
   afterAll(async ()=>{
     browser.close()
