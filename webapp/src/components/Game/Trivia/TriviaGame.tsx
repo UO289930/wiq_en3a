@@ -89,10 +89,6 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   }, [diceResult]);
 
 
-  // const textStyle = {
-  //   color: getCategoryColorWithNumber(diceResult),
-  // };
-
   const getQuestion = async (category: string): Promise<questionType> => {
     try {
       let question: questionType;
@@ -138,7 +134,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
   function formatNumberWithDots(str : string) : string {
     
-    if (str.length < 4) {
+    if (str.length < 5 || str.includes('.')) {
       return str;
     }
     let result = '';

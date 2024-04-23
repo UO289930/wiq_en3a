@@ -8,7 +8,7 @@ export type Question = {
 }
 
 
-let url = 'http://localhost:8000/';
+let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000/';
 
 
 

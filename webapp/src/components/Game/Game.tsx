@@ -38,11 +38,30 @@ export default function Game(props: Props) {
       })
     }, []);
 
+    function formatNumberWithDots(str : string) : string {
+    
+      if (str.length < 5 || str.includes('.')) {
+        return str;
+      }
+      let result = '';
+      for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+        result = str[i] + result;
+        if (count % 3 === 2 && i !== 0) {
+          result = '.' + result;
+        }
+      }
+    
+      return result;
+    }
+
   const goToNextQuestion = () => {
       setCount(questionTime);  
       setCorrectSelected(false);
       setQuestionCount(questionCount+1);
       setLoading(true); 
+
+      if(!isNaN(Number((questions[questionCount].answers[0]))))
+        questions[questionCount].answers = questions[questionCount].answers.map((a) => formatNumberWithDots(a));
 
       setTimeout(() => {
         setLoading(false); 
@@ -53,6 +72,7 @@ export default function Game(props: Props) {
   const handleNextQuestion = () => {
     if(count===0) saveAnswer(' ');
     var q = questionCount;
+    
 
     setTimeout(() => {
       if(q === questionCount)

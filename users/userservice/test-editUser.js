@@ -2,10 +2,9 @@ const axios = require('axios');
 
 async function testEditUser() {
   try {
-    const response = await axios.post('http://localhost:8002/user/editUser', {
+    const response = await axios.post('http://localhost:8003/user/sumTrivialStats', {
       username: 'rita',
-      questions_answered: 5, 
-      correctly_answered_questions: 3
+      cheeseCount: 2
     });
 
     console.log('Response:', response.data);
