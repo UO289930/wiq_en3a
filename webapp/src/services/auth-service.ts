@@ -77,8 +77,19 @@ export const getUser = async (username: string) => {
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {
-    await axios.post(`${API_URL}/edituser`, { username, questions_answered, correctly_answered_questions });
+    await axios.post(`${API_URL}/sumNormalStats`, { username, questions_answered, correctly_answered_questions });
     //updateStatsState(questions_answered, correctly_answered_questions);
+    return true;
+  } catch (error) {
+    console.error('Error during retrieving data:', error);
+    return false;
+  }
+}
+
+export const updateTrivialStats = async (cheeseCount: number) => {
+  const username = getUsername();
+  try {
+    await axios.post(`${API_URL}/sumTrivialStats`, { username, cheeseCount });
     return true;
   } catch (error) {
     console.error('Error during retrieving data:', error);

@@ -77,7 +77,8 @@ router.post('/adduser', async (req, res) => {
             password: hashedPassword,
             email: req.body.email,
             questions_answered: 0,
-            correctly_answered_questions: 0
+            correctly_answered_questions: 0,
+            cheeseCount: 0,
         });
 
         // access to the database 
@@ -97,7 +98,7 @@ router.post('/adduser', async (req, res) => {
 /**
  * POST route to edit a user to update the total and correct question answered
  */
-router.post('/editUser', async (req, res) => {
+router.post('/sumNormalStats', async (req, res) => {
   try {
 
       // --- find the user to be updated
@@ -112,6 +113,31 @@ router.post('/editUser', async (req, res) => {
       // --- update the fields 
       userToUpdate.questions_answered = userToUpdate.questions_answered + req.body.questions_answered;
       userToUpdate.correctly_answered_questions = userToUpdate.correctly_answered_questions + req.body.correctly_answered_questions;
+
+      // --- update the user in the database
+      await userCollection.updateOne({ username: userToUpdate.username }, { $set: userToUpdate });
+      return res.json({ message: 'User updated' });
+
+  } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+/**
+ * POST route to edit a user to update the number of cheeses of the trivial
+ */
+router.post('/sumTrivialStats', async (req, res) => {
+  try {
+      // --- find the user to be updated
+      const db = mongoose.connection.useDb("UsersDB"); // database
+      const userCollection = db.collection('User');    // collection
+      let userToUpdate = await userCollection.findOne({ username: req.body.username });
+      if (!userToUpdate) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      // --- update the field 
+      userToUpdate.cheeseCount = userToUpdate.cheeseCount + req.body.cheeseCount;
 
       // --- update the user in the database
       await userCollection.updateOne({ username: userToUpdate.username }, { $set: userToUpdate });

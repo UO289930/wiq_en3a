@@ -50,6 +50,12 @@
     "topic":"Entertainment"
   },
   {
+    "question": "Where was created: ",
+    "themeId": "Q4830453",
+    "attributeId": "P17",
+    "topic":"Entertainment"
+  },
+  {
     "question": "Who wrote the song: ",
     "themeId": "Q7366",
     "attributeId": "P86",
@@ -57,8 +63,14 @@
   },
   {
     "question": "Who is the author of the book: ",
-    "themeId": "Q571",
+    "themeId": "Q7725634",
     "attributeId": "P50",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Which is one of the extensions used by the programming language: ",
+    "themeId": "Q9143",
+    "attributeId": "P1195",
     "topic":"Entertainment"
   },
   {
@@ -71,6 +83,12 @@
     "question": "Who is the chemical formula for: ",
     "themeId": "Q11173",
     "attributeId": "P274",
+    "topic":"Chemistry"
+  },
+  {
+    "question": "Which is the density of: ",
+    "themeId": "Q11344",
+    "attributeId": "P2054",
     "topic":"Chemistry"
   }
 ]
