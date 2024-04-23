@@ -107,6 +107,7 @@
 }
 
 .ranking-table {
+  margin-top: 3rem;
   font-size: 1rem;
   color: white;
   display: flex;
@@ -174,6 +175,7 @@
 }
 
 .ranking-table-trivial {
+  margin-top: 3rem;
   font-size: 1rem;
   color: white;
   display: flex;
@@ -329,3 +331,35 @@ html {
 }
 
   
+.chakra-tabs-container {
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  .chakra-tabs {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+
+
+    .chakra-tabs-tab, .chakra-tabs-tab-selected {
+      display: flex;
+      padding: 1rem;
+      width: 100%;
+      font-weight: bolder;
+    }
+
+    .chakra-tabs-tab {
+      border-bottom: .1rem solid white;
+    }
+
+    .chakra-tabs-tab-selected {
+      border-top: .1rem solid white;
+      border-left: .1rem solid white;
+      border-right: .1rem solid white;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+    }
+  }
+}
