@@ -12,7 +12,7 @@ export default function LeaderBoard() {
 
     return (
         <>
-            <h1 className="h1-leaderboard"> LEADERBOARD </h1>
+            <h1 id="leaderboardHeader" className="h1-leaderboard"> LEADERBOARD </h1>
             
             <Tabs isFitted className="chakra-tabs-container">
                 <TabList className="chakra-tabs" mb='1em'>
