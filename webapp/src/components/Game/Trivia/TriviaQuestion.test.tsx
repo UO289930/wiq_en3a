@@ -7,7 +7,8 @@ const mockProps: props = {
   questionShowed: {
     text: 'Test question',
     correctAnswer: 0,
-    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4'],
+    wikiLink: 'aaaaaaaaaaaa.com'
   },
   setIsShowingQuestion: jest.fn(),
   setColor: jest.fn(),
