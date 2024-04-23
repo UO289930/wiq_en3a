@@ -60,25 +60,25 @@ export default function TrivialRankingTable() {
                 </tr>
             </thead>
             <tbody>
-                {
-                    users.map((user, index) => {
-                        return (
-                            <tr className="body-row">
-                                <td className="avatar">
-                                <Avatar.Root className="AvatarRoot">
-                                <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
-                                </Avatar.Root>
-                                {user.username.toLowerCase()}
-                                </td>
-                                <td className="ranking">
-                                    {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
-                                </td>
-                                <td className="cheeseCount">{user.cheeseCount}</td>
-                                
-                            </tr>
-                        )
-                    })
-                }
+            {
+                users.map((user, index) => {
+                    return (
+                        <tr key={index} className="body-row" data-testid="user-row">
+                            <td className="avatar">
+                            <Avatar.Root className="AvatarRoot">
+                            <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
+                            </Avatar.Root>
+                            {user.username.toLowerCase()}
+                            </td>
+                            <td className="ranking">
+                                {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
+                            </td>
+                            <td className="cheeseCount">{user.cheeseCount}</td>
+                            
+                        </tr>
+                    )
+                })
+            }
             </tbody>
         </table>
     )

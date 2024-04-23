@@ -58,32 +58,34 @@ export default function RankingTable() {
                 </tr>
             </thead>
             <tbody>
-                {
-                    users.map((user, index) => {
-                        return (
-                            <tr key={index} className="body-row">
-                                <td className="avatar">
+            {
+                users.map((user, index) => {
+                    return (
+                        <tr key={index} className="body-row">
+                            <td className="avatar">
                                 <Avatar.Root className="AvatarRoot">
-                                <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
+                                    <Avatar.Fallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)}</Avatar.Fallback>
                                 </Avatar.Root>
                                 {user.username.toLowerCase()}
-                                </td>
-                                <td className="ranking">
-                                    {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
-                                </td>
-                                <td className="correct-answers">{user.correctAnswers}</td>
-                                <td className="progress">
-                                    <CircularProgress 
-                                        value={ user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100) : 0} 
-                                        color='#00A078' thickness='.4rem'
-                                        size={"3.6rem"}>
-                                        <CircularProgressLabel>{user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100).toFixed(0) : 0}%</CircularProgressLabel>
-                                    </CircularProgress>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
+                            </td>
+                            <td className="ranking" data-testid="ranking-cell">
+                                {index === 0 || index === 1 || index === 2 ? podium[index] : index + 1}
+                            </td>
+                            <td className="correct-answers" data-testid={`user-${index}-correct-answers`}>{user.correctAnswers}</td>
+                            <td className="progress">
+                                <CircularProgress 
+                                    value={ user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100) : 0} 
+                                    color='#00A078' thickness='.4rem'
+                                    size={"3.6rem"}>
+                                    <CircularProgressLabel data-testid={`user-${index}-percentage`}>
+                                        {user.totalAnswers > 0 ? (Math.round(((user.correctAnswers / user.totalAnswers) * 100) * 100) / 100).toFixed(0) : 0}%
+                                    </CircularProgressLabel>
+                                </CircularProgress>
+                            </td>
+                        </tr>
+                    )
+                })
+            }
             </tbody>
         </table>
     )
