@@ -11,7 +11,7 @@ export type props = {
 export const Cheese = (props : props) => {
     
   return (
-      <div className="caja-quesitos ">
+      <div id="cajaQuesitos" className="caja-quesitos ">
 
         <div className="caja">
         {props.showBlue && <div data-testid="quesito-azul" className="quesito-azul"></div>}
