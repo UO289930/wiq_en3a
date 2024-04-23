@@ -138,10 +138,10 @@ describe('User Service', () => {
   });
 
 
-  // --- TESTS FOR /editUser  ---
+  // --- TESTS FOR /sumNormalStats  ---
 
   // TEST TO EDIT A USER THAT EXISTS
-  it('should update user information on POST /editUser', async () => {
+  it('should update user information on POST /sumNormalStats', async () => {
     const updateUser = {
       username: 'testuser',
       questions_answered: 1,
@@ -149,7 +149,7 @@ describe('User Service', () => {
     };
 
     const response = await request(app)
-      .post('/user/editUser')
+      .post('/user/sumNormalStats')
       .send(updateUser);
 
     expect(response.status).toBe(200);
@@ -157,7 +157,7 @@ describe('User Service', () => {
   });
 
   // TEST TO EDIT A USER THAT DOESN'T EXIST
-  it('should return 404 if user is not found on POST /editUser', async () => {
+  it('should return 404 if user is not found on POST /sumNormalStats', async () => {
     const nonExistentUser = {
       username: 'nonexistentuser',
       questions_answered: 1,
@@ -165,7 +165,40 @@ describe('User Service', () => {
     };
 
     const response = await request(app)
-      .post('/user/editUser')
+      .post('/user/sumNormalStats')
+      .send(nonExistentUser);
+
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error');
+  });
+
+
+  // --- TESTS FOR /sumTrivialStats  ---
+
+  // TEST TO ADD 3 CHEESES TO A USER THAT EXISTS
+  it('should update user information on POST /sumTrivialStats', async () => {
+    const updateUser = {
+      username: 'testuser',
+      cheeseCount: 5,
+    };
+
+    const response = await request(app)
+      .post('/user/sumTrivialStats')
+      .send(updateUser);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('message', 'User updated');
+  });
+
+  // TEST TO EDIT A USER ADDING CHEESES TO A USER THAT DOESN'T EXIST
+  it('should return 404 if user is not found on POST /sumTrivialStats', async () => {
+    const nonExistentUser = {
+      username: 'nonexistentuser',
+      cheeseCount: 5,
+    };
+
+    const response = await request(app)
+      .post('/user/sumTrivialStats')
       .send(nonExistentUser);
 
     expect(response.status).toBe(404);
