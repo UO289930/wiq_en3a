@@ -79,7 +79,8 @@ app.get('/getAllUsers', async (req, res) => {
 
 app.post('/getUser', async (req, res) => {
   try {
-    const usersResponse = await axios.get(userServiceUrl + '/user/getUser', req.body);
+    const usersResponse = await axios.get(userServiceUrl + '/user/getUser', {params:req.body});
+    
     res.json(usersResponse.data);
   } catch (error) {
     console.error(error);

@@ -71,9 +71,6 @@ export const getUser = async (username: string) => {
 };
  
 
- 
-
-
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {

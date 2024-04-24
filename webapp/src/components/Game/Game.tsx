@@ -3,10 +3,10 @@ import Question from "./Question";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
 import Counter from "./Counter";
-import { updateStats } from "../../services/auth-service";
 import Countdown from "./Countdown";
 import {getHardString, Question as questionType} from "../../services/question-service";
 import { getQuestionsFromApi } from "../../services/question-service";
+import { updateStats } from "../../services/auth-service";
 
 type Props = {
   difficulty: string;

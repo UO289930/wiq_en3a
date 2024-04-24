@@ -19,14 +19,13 @@ function validateRequiredFields(req, requiredFields) {
 
 router.get('/getUser', async (req, res) => {
   try {
-      
       // access to the database 
       const db = mongoose.connection.useDb("UsersDB");
       
       // access to the collection of the database
       const userCollection = db.collection('User');
       
-      userCollection.findOne({ username: req.body.username }, function(err, result) {
+      userCollection.findOne({ username: req.query.username }, function(err, result) {
         if (err) {
           console.error('Error finding user:', err);
         } else {
