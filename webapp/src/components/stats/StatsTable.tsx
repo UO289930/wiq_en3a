@@ -22,14 +22,7 @@ export default function StatsTable() {
             });
         }   
 
-        // let user = useUserStore.getState().user;
-        // console.log('user: ', useUserStore.getState().user);
-
-        // if(user != null){
-        //     setQuestionAnswered(user.questions_answered);
-        //     setQuestionCorrect(user.correctly_answered_questions);
-        //     setUsername(user.username);
-        // }
+       
     } , []);
     
 

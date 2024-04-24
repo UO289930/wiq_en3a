@@ -62,7 +62,6 @@ export const getAllUsers = async () => {
 export const getUser = async (username: string) => {
   try {
     const response = await axios.post(`${API_URL}/getUser`, {username});
-    console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error during retrieving the users', error);
