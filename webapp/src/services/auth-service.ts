@@ -82,10 +82,10 @@ export const updateStats = async (questions_answered: number, correctly_answered
   }
 }
 
-export const updateTrivialStats = async (cheeseCount: number) => {
+ export const updateTrivialStats = async (questions_answered: number,cheeseCount: number) => {
   const username = getUsername();
   try {
-    await axios.post(`${API_URL}/sumTrivialStats`, { username, cheeseCount });
+    await axios.post(`${API_URL}/sumTrivialStats`, { username, questions_answered, cheeseCount });
     return true;
   } catch (error) {
     console.error('Error during retrieving data:', error);

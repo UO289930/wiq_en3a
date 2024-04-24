@@ -164,10 +164,10 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
   //GAME FINISHED
   if((showBlue && showGreen && showYellow && showPink && showOrange)){
-    updateTrivialStats(5);
+    updateTrivialStats(questions.length,5);
     return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !!"/>;
   }else if(lifes === 0){
-    updateTrivialStats(getCheeseCount());
+    updateTrivialStats(questions.length, getCheeseCount());
     return <GameOver answers={answerSelected} questions={questions} finalMessage="You Loose !! :("/>;
   }
 

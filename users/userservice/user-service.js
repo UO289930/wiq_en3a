@@ -137,6 +137,7 @@ router.post('/sumTrivialStats', async (req, res) => {
       }
       // --- update the field 
       userToUpdate.cheeseCount = userToUpdate.cheeseCount + req.body.cheeseCount;
+      userToUpdate.questions_answered = userToUpdate.questions_answered + req.body.questions_answered;
 
       // --- update the user in the database
       await userCollection.updateOne({ username: userToUpdate.username }, { $set: userToUpdate });
