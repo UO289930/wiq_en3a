@@ -3,23 +3,18 @@ import { getUser } from "../../services/auth-service";
 import { useUserStore } from '../../stores/user-store';
 
 export default function StatsTable() {
-    
-
     const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
     const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
     const [username, setUsername] = useState<string>();
 
     useEffect(() => {
-        let username = useUserStore.getState().user?.username!;
-        console.log('username: ', username);
-        getUser(username).then((user) => {
-            console.log('LDKFLKDJF: ', user);
+        let user = useUserStore.getState().user;
+
+        if(user != null){
             setQuestionAnswered(user.questions_answered);
             setQuestionCorrect(user.correctly_answered_questions);
             setUsername(user.username);
-        }).catch((error) => {
-            console.error('Error during retrieving the user', error);
-        });
+        }
     } , []);
     
 
