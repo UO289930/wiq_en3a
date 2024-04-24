@@ -19,6 +19,11 @@ function validateRequiredFields(req, requiredFields) {
 router.post('/login', async (req, res) => {
   try {
     // Check if required fields are present in the request body
+    if (!req.body.username || !req.body.password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+
+    // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
     const username = req.body.username.toString();
@@ -31,16 +36,16 @@ router.post('/login', async (req, res) => {
     const userCollection = db.collection('User');
 
     let user;
-    
+
     await userCollection.findOne({ username }, function(err, result) {
       if (err) {
         console.error('Error finding user:', err);
+        throw new Error('Error finding the user');
       } else {
         user = result;
       }
     });
 
-    
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
       // Generate a JWT token
