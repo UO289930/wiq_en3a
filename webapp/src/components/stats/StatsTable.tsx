@@ -3,8 +3,6 @@ import { getUser } from "../../services/auth-service";
 import { useUserStore } from '../../stores/user-store';
 
 export default function StatsTable() {
-    
-
     const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
     const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
     const [username, setUsername] = useState<string>();

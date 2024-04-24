@@ -1,12 +1,12 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import React, { useState, useRef } from 'react';
-import { useUserStore } from "../../stores/user-store";
 import { Link } from "react-router-dom";
+import { useUserStore } from '../../stores/user-store';
 
 
 export const SimpleNav = () => {
-  let username : string = useUserStore(state => state.user?.username!);
+  let user = useUserStore(state => state.user!);
 
   const getLinkStyle = ():string => {
     return "text-text text-sm font-bold hover:text-primary transition-colors duration-300 ease-in-out"
@@ -38,11 +38,10 @@ export const SimpleNav = () => {
     <div className="aspect-square h-12 px-5 py-3 flex items-center w-full justify-between border-b ">
       <div className="flex items-center gap-5 ">
       <Avatar className="w-9 h-9 rounded-full">
-        <AvatarImage src="https://pbs.twimg.com/media/Frq7CQ-WwAEnXzh?format=jpg&name=large" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarFallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)} </AvatarFallback>
       </Avatar>
       <div className="flex items-center gap-2 text-text text-sm font-thin ">
-      <h2 className="font-bold">{username}</h2>
+      <h2 className="font-bold">{user.username}</h2>
       
       </div>
       </div>
