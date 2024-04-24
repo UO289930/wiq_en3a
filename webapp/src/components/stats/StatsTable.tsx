@@ -9,12 +9,18 @@ export default function StatsTable() {
 
     useEffect(() => {
         let user = useUserStore.getState().user;
-
         if(user != null){
-            setQuestionAnswered(user.questions_answered);
-            setQuestionCorrect(user.correctly_answered_questions);
-            setUsername(user.username);
-        }
+            getUser(user.username).then((u) => {
+                console.log('user: ',u);
+                setQuestionAnswered(u.questions_answered);
+                setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
+                setUsername(u.username);
+            }).catch((error) => {
+                console.error('Error during retrieving the user', error);
+            });
+        }   
+
+       
     } , []);
     
 

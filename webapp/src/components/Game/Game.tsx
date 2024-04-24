@@ -3,10 +3,10 @@ import Question from "./Question";
 import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
 import Counter from "./Counter";
-import { updateStats } from "../../services/auth-service";
 import Countdown from "./Countdown";
 import {getHardString, Question as questionType} from "../../services/question-service";
 import { getQuestionsFromApi } from "../../services/question-service";
+import { updateStats } from "../../services/auth-service";
 
 type Props = {
   difficulty: string;
@@ -73,11 +73,14 @@ export default function Game(props: Props) {
     if(count===0) saveAnswer(' ');
     var q = questionCount;
     
-
-    setTimeout(() => {
-      if(q === questionCount)
-        goToNextQuestion();
-    }, 3000);
+    if(questionCount < 9){
+      setTimeout(() => {
+        if(q === questionCount)
+          goToNextQuestion();
+      }, 3000);
+    }else{
+      goToNextQuestion();
+    }
   };
 
   const saveAnswer = (answer: string) => {
@@ -108,7 +111,7 @@ export default function Game(props: Props) {
           </div>
           <Question questionText={questions[questionCount].text} />
           {answered && (<span className='flex justify-center text-3xl '> {count===0?'You ran out of time':(correctSelected?'CORRECT!':'WRONG! correct answer : ' + questions[questionCount].answers[questions[questionCount].correctAnswer])} </span>)}
-          {answered && (<Countdown duration={3}/>)}
+          {answered && questionCount < 9 && (<Countdown duration={3}/>)}
           
         </div>
           {!loading && <AnswerPanel score={score}

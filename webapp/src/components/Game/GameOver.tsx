@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Question } from "../../services/question-service";
+import { updateStats } from "../../services/auth-service";
 
 
 
@@ -13,6 +14,8 @@ type props = {
 
 
 const GameOver = (props: props) => {
+
+
 
   const getScore = () => {
     let score = 0;

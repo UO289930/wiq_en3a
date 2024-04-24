@@ -6,8 +6,8 @@ import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } f
 import { getHardString, Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import GameOver from "../GameOver";
+import { updateTrivialStats } from "../../../services/auth-service";
 
 type Props = {
   difficulty: string;
@@ -152,11 +152,23 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     return !isNaN(Number(str));
   }
 
+  const getCheeseCount = () => {
+    let count = 0;
+    if(showBlue) count++;
+    if(showGreen) count++;
+    if(showYellow) count++;
+    if(showPink) count++;
+    if(showOrange) count++;
+    return count;
+  }
+
   //GAME FINISHED
   if((showBlue && showGreen && showYellow && showPink && showOrange)){
-    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !! "/>;
+    updateTrivialStats(questions.length,5);
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !!"/>;
   }else if(lifes === 0){
-    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Lose !! :( "/>;
+    updateTrivialStats(questions.length, getCheeseCount());
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Loose !! :("/>;
   }
 
   return (

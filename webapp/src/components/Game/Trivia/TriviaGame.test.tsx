@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { TriviaGame } from './TriviaGame';
-import { getEasyString, getHardString } from '@/src/services/question-service';
+import { getEasyString, getHardString } from '../../../services/question-service';
 
 jest.mock('./trivia_service', () => ({
     getSportQuestions: jest.fn().mockResolvedValue({
