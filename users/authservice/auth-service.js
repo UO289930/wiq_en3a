@@ -27,25 +27,13 @@ router.post('/login', async (req, res) => {
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
-    const username = req.body.username.toString();
-    const password = req.body.password.toString();
-
-
-    // access to the database 
-    const db = mongoose.connection.useDb("UsersDB");
-        
-    // access to the collection of the database
-    const userCollection = db.collection('User');
-
+    const { username, password } = req.body;
     let user;
-    
-    await userCollection.findOne({ username }, function(err, result) {
-      if (err) {
-        console.error('Error finding user. There is not user with that username:', err);
-      } else {
-        user = result;
-      }
-    });
+    try {
+      user = await User.findOne({ username });
+    } catch (err) { 
+      throw new Error('Error finding the user')
+    }
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
