@@ -3,13 +3,17 @@ import { Cheese } from "./Cheese";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
-import { Question as questionType } from "../../../services/question-service";
+import { getHardString, Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import GameOver from "../GameOver";
 
-export const TriviaGame = () => {
+type Props = {
+  difficulty: string;
+};
+
+export const TriviaGame = (props : Props) => {
   const [showBlue, setShowBlue] = useState(false);
   const [showGreen, setShowGreen] = useState(false);
   const [showYellow, setShowYellow] = useState(false);
@@ -24,12 +28,21 @@ export const TriviaGame = () => {
   const [questions, setQuestions] = useState<questionType[]>([]);
 
   const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
+  
 
-  const [lifes, setLifes] = useState(3);
+  const easyLifesNumber = 6;
+  const hardLifesNumber = 3;
+  const [lifes, setLifes] = useState(easyLifesNumber);
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
 
   type SetColorFunction = (bool: boolean) => void; 
+
+
+
+  useEffect(() => {
+    props.difficulty === getHardString() ? setLifes( hardLifesNumber) : setLifes(easyLifesNumber);
+  }, [props.difficulty]);
 
 const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   let category = getCategoryWithNumber(n);
@@ -69,15 +82,12 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
           setQuestionShowed(question);
           setIsShowingQuestion(true);
+          
         });
       });
     }
   }, [diceResult]);
 
-
-  const textStyle = {
-    color: getCategoryColorWithNumber(diceResult),
-  };
 
   const getQuestion = async (category: string): Promise<questionType> => {
     try {
@@ -124,7 +134,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
   function formatNumberWithDots(str : string) : string {
     
-    if (str.length < 4) {
+    if (str.length < 5 || str.includes('.')) {
       return str;
     }
     let result = '';
@@ -159,7 +169,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
-        <div className="h-full flex items-center">
+        <div className="h-full flex items-center" data-testid="lifes">
           {Array.from({ length: lifes }, (_, index) => (
             <span className="text-4xl " key={index}>&#x2764;</span>
           ))}

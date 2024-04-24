@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { TriviaGame } from './TriviaGame';
+import { getEasyString, getHardString } from '@/src/services/question-service';
 
 jest.mock('./trivia_service', () => ({
     getSportQuestions: jest.fn().mockResolvedValue({
@@ -41,12 +42,12 @@ jest.mock('../GameOver', () => () => <div>GameOver</div>);
 
 describe('TriviaGame', () => {
   it('renders without crashing', () => {
-    render(<TriviaGame />);
+    render(<TriviaGame difficulty={getEasyString()}/>);
     expect(screen.getByTestId('trivia-game-component')).toBeInTheDocument();
   });
 
   it('rolls the dice when the roll button is clicked', async () => {
-    render(<TriviaGame />);
+    render(<TriviaGame difficulty={getHardString()}/>);
     const rollButton = screen.getByText('Roll');
     fireEvent.click(rollButton);
     await waitFor(() => expect(screen.getByText(/Category:/)).toBeInTheDocument());

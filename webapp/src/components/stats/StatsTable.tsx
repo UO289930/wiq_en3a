@@ -3,10 +3,7 @@ import { getUser } from "../../services/auth-service";
 import { useUserStore } from '../../stores/user-store';
 
 export default function StatsTable() {
-    // Function to generate a random integer within a range
-    const getRandomInt = (min: number, max: number): number => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    
 
     const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
     const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
@@ -14,7 +11,9 @@ export default function StatsTable() {
 
     useEffect(() => {
         let username = useUserStore.getState().user?.username!;
+        console.log('username: ', username);
         getUser(username).then((user) => {
+            console.log('LDKFLKDJF: ', user);
             setQuestionAnswered(user.questions_answered);
             setQuestionCorrect(user.correctly_answered_questions);
             setUsername(user.username);
