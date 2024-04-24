@@ -14,7 +14,7 @@ RUN npm install --no-cache
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 8002
+EXPOSE 8003
 
 # Define the command to run your app
 CMD ["node", "index.js"]

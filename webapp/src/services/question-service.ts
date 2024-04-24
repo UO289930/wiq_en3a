@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 
 export type Question = {
   text: string,
@@ -10,14 +10,11 @@ export type Question = {
 
 let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000/';
 
-
-
 export const getQuestionsFromApi = async (): Promise<Question[]> => {
-    const response = await fetch(url + "GetQuestions");
-    const data = await response.json();
-    
-    return data;
-  };
+    const response = await axios.get(url + "GetQuestions");
+    console.log('response:', response);
+    return response.data;
+};
 
 export const getEasyString = ():string => {
   return "easy";
