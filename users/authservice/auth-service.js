@@ -18,23 +18,29 @@ function validateRequiredFields(req, requiredFields) {
 // Route for user login
 router.post('/login', async (req, res) => {
   try {
-
-    // Check if required fields are present in the request body
-    if (!req.body.username || !req.body.password) {
-      return res.status(400).json({ error: 'Username and password are required' });
-    }
-
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
-    const { username, password } = req.body;
-    let user;
-    try {
-      user = await User.findOne({ username });
-    } catch (err) { 
-      throw new Error('Error finding the user')
-    }
+    const username = req.body.username.toString();
+    const password = req.body.password.toString();
 
+    // access to the database 
+    const db = mongoose.connection.useDb("UsersDB");
+      
+    // access to the collection of the database
+    const userCollection = db.collection('User');
+
+    let user;
+    
+    await userCollection.findOne({ username }, function(err, result) {
+      if (err) {
+        console.error('Error finding user:', err);
+      } else {
+        user = result;
+      }
+    });
+
+    
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
       // Generate a JWT token
