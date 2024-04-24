@@ -1,7 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiPodiumSecond, GiPodiumThird, GiPodiumWinner } from "react-icons/gi";
 import * as Avatar from '@radix-ui/react-avatar';
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import { getAllUsers } from "../../services/auth-service";
 
 export interface User {
@@ -16,8 +15,7 @@ export default function TrivialRankingTable() {
 
  
     const [users, setUsers] = useState<User[]>([])
-    const [podium, setPodium] = useState<ReactNode[]>
-        ([<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />])
+    const podium = [<GiPodiumWinner size={"2.5rem"}/>,<GiPodiumSecond size={"2.5rem"} /> , <GiPodiumThird size={"2.5rem"} />]
     
 
         

@@ -6,7 +6,7 @@ import { TabList, Tab, TabPanels, TabPanel, Tabs } from "@chakra-ui/react"
 
 export default function LeaderBoard() {
 
-    const [tabs, setTabs] = useState<string[]>(["NORMAL", "TRIVIAL"]);
+    const tabs = ["NORMAL", "TRIVIAL"];
     const [selectedIndex, setSelectedIndex] = useState(0);
 
 

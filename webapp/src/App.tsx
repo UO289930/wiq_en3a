@@ -11,13 +11,14 @@ import LeaderBoard from './components/leaderboard/LeaderBoard';
 import Game from './components/Game/Game';
 import { Logout } from './components/auth/Logout';
 import Statistics from './components/stats/Statistics';
+import { getEasyString, getHardString } from './services/question-service';
 
 function App() {
   
   const user = useUserStore(state => state.user);
-  
+    
   useEffect(() => {
-    //loginWithToken();
+    loginWithToken();
   }, []);
 
   if (!user) {
@@ -30,8 +31,10 @@ function App() {
         <SimpleNav />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="game" element={<Game/>} /> 
-          <Route path="trivia" element={<TriviaGame/>} /> 
+          <Route path="game" element={<Game difficulty={getEasyString()}/>} /> 
+          <Route path="game/hard" element={<Game difficulty={getHardString()}/>} /> 
+          <Route path="trivia" element={<TriviaGame difficulty={getEasyString()}/>} /> 
+          <Route path="trivia/hard" element={<TriviaGame difficulty={getHardString()}/>} /> 
           <Route path="/leaderboard" element={<LeaderBoard />}/>
           <Route path="/stats" element={<Statistics />}/>
           <Route path="logout" element={<Logout/>} />

@@ -5,7 +5,9 @@ import Game from './Game';
 
 describe('Game component', () => {
   it('should render the game', () => {
-    render( <Game/> );
+    render( <Game difficulty='easy'/> );
     expect(screen.getByTestId('game-component')).toBeInTheDocument();
   });
+
+ 
 });
