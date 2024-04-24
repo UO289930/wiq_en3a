@@ -1,9 +1,9 @@
 import { Question } from "@/src/services/question-service";
 
-let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000/';
+let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 const getString = (string : string) : string => {
-    return "Get" + string + "Questions";
+    return "/Get" + string + "Questions";
 }
 
 export const getSportQuestions = async (): Promise<Question> => {
