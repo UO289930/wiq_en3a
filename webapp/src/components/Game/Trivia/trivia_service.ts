@@ -1,8 +1,6 @@
 import { Question } from "@/src/services/question-service";
 
-
-
-let url = 'http://localhost:8000/';
+let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000/';
 
 const getString = (string : string) : string => {
     return "Get" + string + "Questions";
