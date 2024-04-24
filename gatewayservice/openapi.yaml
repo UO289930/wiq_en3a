@@ -9,6 +9,148 @@ servers:
     description: Development server
 
 paths:
+  
+
+  /getUser:
+    get:
+      summary: Get a user from the database
+      tags:
+        - User
+      description: Retrieves a user from the database by their username.
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the user to retrieve.
+      responses:
+        '200':
+          description: User found successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: The username of the user.
+                  password:
+                    type: string
+                    description: The hashed password of the user.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time the user was created.
+                  email:
+                    type: string
+                    description: The email address of the user.
+                  questions_answered:
+                    type: integer
+                    description: The number of questions answered by the user.
+                  correctly_answered_questions:
+                    type: integer
+                    description: The number of questions correctly answered by the user.
+                  cheeseCount:
+                    type: integer
+                    description: The number of cheeses won in the trivial game.
+                example:
+                  username: "exampleusername"
+                  password: "hashed_password"
+                  createdAt: "2024-04-24T12:00:00Z"
+                  email: "example@example.com"
+                  questions_answered: 20
+                  correctly_answered_questions: 18
+                  cheeseCount: 3
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+  
+  /getAllUsers:
+    get:
+      summary: Get all users in the database
+      tags:
+        - User
+      description: Retrieves all users from the database.
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      description: The username of the user.
+                    password:
+                      type: string
+                      description: The hashed password of the user.
+                    createdAt:
+                      type: string
+                      format: date-time
+                      description: The date and time the user was created.
+                    email:
+                      type: string
+                      description: The email address of the user.
+                    questions_answered:
+                      type: integer
+                      description: The number of questions answered by the user.
+                    correctly_answered_questions:
+                      type: integer
+                      description: The number of questions correctly answered by the user.
+                    cheeseCount:
+                      type: integer
+                      description: The number of cheeses won in the trivial game.
+                  example:
+                  - username: "exampleuser1"
+                    password: "hashed_password1"
+                    createdAt: "2024-04-24T12:00:00Z"
+                    email: "example1@example.com"
+                    questions_answered: 10
+                    correctly_answered_questions: 8
+                    cheeseCount: 5
+                  - username: "exampleuser2"
+                    password: "hashed_password2"
+                    createdAt: "2024-04-23T08:00:00Z"
+                    email: "example2@example.com"
+                    questions_answered: 15
+                    correctly_answered_questions: 12
+                    cheeseCount: 3
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+
+
+
   /adduser:
     post:
       summary: Add a new user to the database
@@ -60,9 +202,10 @@ paths:
                     example: "Error message generated by the server"
 
 
-  /editUser:
+
+  /sumNormalStats:
     post:
-      summary: Update the stats of a user
+      summary: Update the stats of a user in normal game
       tags:
         - User
       description: Edit a user in the system to update the total and correct questions answered.
@@ -86,6 +229,61 @@ paths:
                 - username
                 - questions_answered
                 - correctly_answered_questions
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User updated
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+
+  /sumTrivialStats:
+    post:
+      summary: Update the stats of a user in trivial game
+      tags:
+        - User
+      description: Edit a user in the system to update the number of cheeses.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The username of the user to be updated.
+                cheeseCount:
+                  type: integer
+                  description: The number of cheeses to be added to the user's total.
+              required:
+                - username
+                - cheeseCount
       responses:
         '200':
           description: User updated successfully
