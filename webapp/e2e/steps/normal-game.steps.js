@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature }=require('jest-cucumber');
 const setDefaultOptions = require('expect-puppeteer').setDefaultOptions
-const feature = loadFeature('./features/statistics.feature');
+const feature = loadFeature('./features/normal-game.feature');
 const { registerUser } = require('../utils.js');
 
 let page;
@@ -23,31 +23,30 @@ defineFeature(feature, test => {
       })
       .catch(() => {});
 
-    await registerUser('test4', 'test4@gmail.com', 'test4', page);
+    await registerUser('test6', 'test6@gmail.com', 'test6', page);
   });
 
-  test('Entering the statistics page', ({given,when,then}) => {
+  test('Playing a normal game', ({given,when,then}) => {
     
     let username;
     let password;
 
     given('A registered user', async () => {
-      username = "test4"
-      password = "test4"
+      username = "test6"
+      password = "test6"
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
       await expect(page).toClick('button', { text: 'Log in' });
     });
 
-    when('I click the link to the statistics page', async () => {
+    when('I click the link to the normal game', async () => {
       await expect(page).toMatchElement("#normalGame", { text: "Normal Game" });
       await expect(page).toMatchElement("#triviaGame", { text: "Trivia Game" });
-      await expect(page).toMatchElement("#stats", { text: "Statistics" });
-      await expect(page).toClick('#stats');
+      await expect(page).toClick('#normalGame');
     });
 
-    then('The app shows the statistics page', async () => {
-      await expect(page).toMatchElement("#statsHeader", { text: "Statistics page" });
+    then('The app enters a normal game', async () => {
+      await expect(page).toMatchElement("text", { text: "1/10" });
     });
   })
 

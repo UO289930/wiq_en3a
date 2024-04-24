@@ -30,12 +30,10 @@ defineFeature(feature, test => {
     
     let username;
     let password;
-    let id;
 
     given('A registered user', async () => {
       username = "test5"
       password = "test5"
-      id = "normalGame"
       await expect(page).toFill('input[id="Username"]', username);
       await expect(page).toFill('input[id="password"]', password);
       await expect(page).toClick('button', { text: 'Log in' });
