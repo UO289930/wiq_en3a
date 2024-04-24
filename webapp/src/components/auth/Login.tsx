@@ -1,7 +1,7 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import {login} from '../../services/auth-service';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -17,11 +17,18 @@ const Login = (props:props) => {
   const [error, setError] = useState('');
 
   const loginUser = async () => {
-    const response = await login(username, password);
+
+    // Check if required fields are present in the request body
+    if(username === "" || password === "") {
+      setError("'Username and password are required'");
+      return;
+    }
+
+    const response = login(username, password);
+    console.log(response);
     if (!response) {
       setError("Invalid Credentials");
     }
-    
   }
 
 

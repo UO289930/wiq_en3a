@@ -1,5 +1,5 @@
 
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useUserStore } from '../../stores/user-store';
