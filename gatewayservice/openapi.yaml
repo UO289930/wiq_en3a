@@ -5,11 +5,153 @@ info:
   description: Gateway Service OpenAPI specification.
 
 servers:
-  - url: http://localhost:8080
-    description: Local server
+  - url: http://localhost:8000
+    description: Development server
 
 paths:
-  /user/adduser:
+  
+
+  /getUser:
+    get:
+      summary: Get a user from the database
+      tags:
+        - User
+      description: Retrieves a user from the database by their username.
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the user to retrieve.
+      responses:
+        '200':
+          description: User found successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: The username of the user.
+                  password:
+                    type: string
+                    description: The hashed password of the user.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time the user was created.
+                  email:
+                    type: string
+                    description: The email address of the user.
+                  questions_answered:
+                    type: integer
+                    description: The number of questions answered by the user.
+                  correctly_answered_questions:
+                    type: integer
+                    description: The number of questions correctly answered by the user.
+                  cheeseCount:
+                    type: integer
+                    description: The number of cheeses won in the trivial game.
+                example:
+                  username: "exampleusername"
+                  password: "hashed_password"
+                  createdAt: "2024-04-24T12:00:00Z"
+                  email: "example@example.com"
+                  questions_answered: 20
+                  correctly_answered_questions: 18
+                  cheeseCount: 3
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+  
+  /getAllUsers:
+    get:
+      summary: Get all users in the database
+      tags:
+        - User
+      description: Retrieves all users from the database.
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      description: The username of the user.
+                    password:
+                      type: string
+                      description: The hashed password of the user.
+                    createdAt:
+                      type: string
+                      format: date-time
+                      description: The date and time the user was created.
+                    email:
+                      type: string
+                      description: The email address of the user.
+                    questions_answered:
+                      type: integer
+                      description: The number of questions answered by the user.
+                    correctly_answered_questions:
+                      type: integer
+                      description: The number of questions correctly answered by the user.
+                    cheeseCount:
+                      type: integer
+                      description: The number of cheeses won in the trivial game.
+                  example:
+                  - username: "exampleuser1"
+                    password: "hashed_password1"
+                    createdAt: "2024-04-24T12:00:00Z"
+                    email: "example1@example.com"
+                    questions_answered: 10
+                    correctly_answered_questions: 8
+                    cheeseCount: 5
+                  - username: "exampleuser2"
+                    password: "hashed_password2"
+                    createdAt: "2024-04-23T08:00:00Z"
+                    email: "example2@example.com"
+                    questions_answered: 15
+                    correctly_answered_questions: 12
+                    cheeseCount: 3
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+
+
+
+  /adduser:
     post:
       summary: Add a new user to the database
       tags:
@@ -60,9 +202,10 @@ paths:
                     example: "Error message generated by the server"
 
 
-  /user/editUser:
+
+  /sumNormalStats:
     post:
-      summary: Update the stats of a user
+      summary: Update the stats of a user in normal game
       tags:
         - User
       description: Edit a user in the system to update the total and correct questions answered.
@@ -118,7 +261,62 @@ paths:
                     type: string
                     example: Internal Server Error
 
-  /auth/login:
+
+  /sumTrivialStats:
+    post:
+      summary: Update the stats of a user in trivial game
+      tags:
+        - User
+      description: Edit a user in the system to update the number of cheeses.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The username of the user to be updated.
+                cheeseCount:
+                  type: integer
+                  description: The number of cheeses to be added to the user's total.
+              required:
+                - username
+                - cheeseCount
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User updated
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+  /login:
     post:
       summary: Authenticate a user by providing username and password.
       tags:
@@ -191,21 +389,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the capital of Spain?
+                      answers: [Madrid, Lisbon, Paris, Rome]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetCapitalsQuestions:
     get:
@@ -218,21 +420,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the capital of Spain?
+                      answers: [Madrid, Lisbon, Paris, Rome]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetElementSymbolsQuestions:
     get:
@@ -245,21 +451,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: What is the symbol of Calcium?
+                      answers: [Ca, H, Na, Cl]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /GetMovieDirectorsQuestions:
     get:
@@ -272,21 +482,183 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  questions:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/Questions'
+              examples: 
+                - Get questions:
+                    summary: Example of a retrieved question
+                    value:
+                      text: Who is the director of Avatar?
+                      answers: [James Cameron, Martin Scorsese, Quentin Tarantino, Steven Spielberg]
+                      correctAnswer: 0
         '500':
-          description: Error response
+          description: An internal server error has occurred.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
+
+  /GetHistoryQuestions:
+    get:
+      summary: Get history-related questions from Wikidata service
+      tags:
+        - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questions'
+              examples:
+                GetHistoryQuestionsExample:
+                  summary: Example of retrieved history questions
+                  value:
+                    - text: In which year did World War II end?
+                      answers: [1943, 1945, 1947, 1950]
+                      correctAnswer: 1
+                    - text: Who was the first president of the United States?
+                      answers: [George Washington, Thomas Jefferson, Abraham Lincoln, John Adams]
+                      correctAnswer: 0
+        '500':
+          description: An internal server error has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
+
+  /GetSportQuestions:
+    get:
+      summary: Get sports-related questions from Wikidata service
+      tags:
+        - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questions'
+              examples:
+                GetSportQuestionsExample:
+                  summary: Example of retrieved sports questions
+                  value:
+                      text: Which country won the FIFA World Cup in 2018?
+                      answers: [Germany, Brazil, France, Argentina]
+                      correctAnswer: 2
+        '500':
+          description: An internal server error has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
+
+  /GetGeographyQuestions:
+    get:
+      summary: Get geography-related questions from Wikidata service
+      tags:
+        - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questions'
+              examples:
+                GetGeographyQuestionsExample:
+                  summary: Example of retrieved geography questions
+                  value:
+                      text: What is the largest desert in the world?
+                      answers: [Sahara, Gobi, Antarctica, Kalahari]
+                      correctAnswer: 0
+        '500':
+          description: An internal server error has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
+
+  /GetEntertainmentQuestions:
+    get:
+      summary: Get entertainment-related questions from Wikidata service
+      tags:
+        - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questions'
+              examples:
+                GetEntertainmentQuestionsExample:
+                  summary: Example of retrieved entertainment questions
+                  value:
+                      text: Who played the role of Iron Man in the Marvel Cinematic Universe?
+                      answers: [Robert Downey Jr., Chris Evans, Chris Hemsworth, Scarlett Johansson]
+                      correctAnswer: 0
+        '500':
+          description: An internal server error has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
+
+  /GetChemistryQuestions:
+    get:
+      summary: Get chemistry-related questions from Wikidata service
+      tags:
+        - Wikidata
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questions'
+              examples:
+                GetChemistryQuestionsExample:
+                  summary: Example of retrieved chemistry questions
+                  value:
+                      text: What is the chemical formula for water?
+                      answers: [H2O, CO2, NaCl, O2]
+                      correctAnswer: 0
+        '500':
+          description: An internal server error has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+              examples:
+                - Error on wikidata:
+                    summary: Error when retrieving questions
+                    value:
+                      error: An error has occurred when retrieving the questions
 
   /:
     get:
@@ -304,6 +676,34 @@ paths:
                   error:
                     type: string
                     example: Endpoint not found
+components:
+  schemas:
+    Questions:
+      type: array
+      description: An array with questions
+      items: 
+        $ref: '#/components/schemas/OneQuestion'
+    OneQuestion: 
+      type: object
+      properties: 
+        text: 
+          type: string
+          description: The question itself
+        answers:
+          type: array
+          description: The four answers for the question
+        correctAnswer: 
+          type: integer
+          description: Index of the correct answer 
+    Error500Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: WikidataService status response
+        message:
+          type: string
+          description: Error
 tags:
   - name: User
     description: Endpoints related to user management.

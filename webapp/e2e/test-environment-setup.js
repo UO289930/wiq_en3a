@@ -1,6 +1,5 @@
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
-
 let mongoserver;
 let users;
 let wikidataservice;

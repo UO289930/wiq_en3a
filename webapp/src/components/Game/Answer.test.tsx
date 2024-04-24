@@ -11,6 +11,7 @@ describe('Answer component', () => {
     setAnswered: jest.fn(),
     setScore: jest.fn(),
     setCorrectSelected: jest.fn(),
+    setAnswerSelected: jest.fn(),
   };
 
   test('renders the answer', () => {

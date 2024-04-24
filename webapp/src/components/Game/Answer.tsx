@@ -4,10 +4,11 @@ export type props = {
     answered: boolean,
     correctAnswer: boolean,
     answer: string,
-    score: number,
+    score: number | undefined,
     setAnswered: (answered: boolean) => void,
-    setScore: (score: number) => void,
+    setScore: (score: number) => void | undefined,
     setCorrectSelected: (correctSelected: boolean) => void,
+    setAnswerSelected: (answerSelected: string) => void,
 }
 
 const Answer = (props: props) => {
@@ -21,7 +22,10 @@ const Answer = (props: props) => {
         setClickedAnswer(props.answer);
         props.setAnswered(true);
         props.setCorrectSelected(props.correctAnswer);
-        if (props.correctAnswer) props.setScore(props.score + 10);
+        props.setAnswerSelected(props.answer);
+        if (props.correctAnswer ){
+             props.setScore(props.score! + 10);
+        }
     };
 
     useEffect(() => {

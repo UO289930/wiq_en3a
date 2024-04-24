@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode"; 
 import { useUserStore } from '../stores/user-store';
-import { useStats } from '../stores/playing-store';
+// import { useStats } from '../stores/playing-store';
 
 const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -16,7 +16,7 @@ export const loginWithToken = () => {
   const tokenInfo = getTokenInfo();
   if(tokenInfo) {
     useUserStore.getState().setUser(tokenInfo);
-    updateStatsState(0, 0);
+    // updateStatsState(0, 0);
   }
 }
 
@@ -46,12 +46,46 @@ export const register = async (email:string, username: string, password: string)
     throw error;
   }
 };
+ 
+
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/getAllUsers`, {});
+    return response.data;
+  } catch (error) {
+    console.error('Error during retrieving all the users', error);
+    throw error;
+  }
+};
+
+export const getUser = async (username: string) => {
+  try {
+    const response = await axios.post(`${API_URL}/getUser`, {username});
+    return response.data;
+  } catch (error) {
+    console.error('Error during retrieving the users', error);
+    throw error;
+  }
+};
+ 
 
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {
-    await axios.post(`${API_URL}/edituser`, { username, questions_answered, correctly_answered_questions });
-    updateStatsState(questions_answered, correctly_answered_questions);
+    await axios.post(`${API_URL}/sumNormalStats`, { username, questions_answered, correctly_answered_questions });
+    //updateStatsState(questions_answered, correctly_answered_questions);
+    return true;
+  } catch (error) {
+    console.error('Error during retrieving data:', error);
+    return false;
+  }
+}
+
+ export const updateTrivialStats = async (questions_answered: number,cheeseCount: number) => {
+  const username = getUsername();
+  try {
+    await axios.post(`${API_URL}/sumTrivialStats`, { username, questions_answered, cheeseCount });
     return true;
   } catch (error) {
     console.error('Error during retrieving data:', error);
@@ -108,8 +142,8 @@ export const getTokenInfo = (): JwtPayload | null => {
     return tokenInfo ? tokenInfo.correctly_answered_questions : 0;
   };
 
-  export const updateStatsState = (questions_answered : number, correctly_answered_questions : number) => {
+  /* export const updateStatsState = (questions_answered : number, correctly_answered_questions : number) => {
     useStats.getState().sumQuestionsAnswered(questions_answered);
     useStats.getState().sumCorrectlyAnsweredQuestions(correctly_answered_questions);
-  };
+  }; */
 

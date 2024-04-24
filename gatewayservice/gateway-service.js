@@ -46,15 +46,47 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-app.post('/edituser', async (req, res) => {
+app.post('/sumNormalStats', async (req, res) => {
   try {
-    // Forward the edit user request to the user service
-    const userResponse = await axios.post(userServiceUrl + '/user/edituser', req.body);
+    // Forward the edit user with normal stats request to the user service
+    const userResponse = await axios.post(userServiceUrl + '/user/sumNormalStats', req.body);
     res.json(userResponse.data);
   } catch (error) {
     console.error(error);
   }
 });
+
+app.post('/sumTrivialStats', async (req, res) => {
+  try {
+    // Forward the edit user with trivial stats request to the user service
+    const userResponse = await axios.post(userServiceUrl + '/user/sumTrivialStats', req.body);
+    res.json(userResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
+app.get('/getAllUsers', async (req, res) => {
+  try {
+    // Forward the get all users request to the user service
+    const usersResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
+    res.json(usersResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/getUser', async (req, res) => {
+  try {
+    const usersResponse = await axios.get(userServiceUrl + '/user/getUser', {params:req.body});
+    
+    res.json(usersResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 
 app.get('/GetQuestions', async (_req, res) => {
   try {
@@ -85,6 +117,27 @@ app.get('/GetElementSymbolsQuestions', async (_req, res) => {
 app.get('/GetMovieDirectorsQuestions', async (_req, res) => {
   getQuestions('/getMovieDirectorsQuestions', res);
 });
+
+app.get('/GetHistoryQuestions', async (_req, res) => {
+  getQuestions('/getHistoryQuestions', res);
+});
+
+app.get('/GetSportQuestions', async (_req, res) => {
+  getQuestions('/getSportQuestions', res);
+});
+
+app.get('/GetGeographyQuestions', async (_req, res) => {
+  getQuestions('/getGeographyQuestions', res);
+});
+
+app.get('/GetEntertainmentQuestions', async (_req, res) => {
+  getQuestions('/getEntertainmentQuestions', res);
+});
+
+app.get('/GetChemistryQuestions', async (_req, res) => {
+  getQuestions('/getChemistryQuestions', res);
+});
+
 
 async function getQuestions(specificPath, res){
   try {

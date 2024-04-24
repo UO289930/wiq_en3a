@@ -36,6 +36,7 @@ describe('Wikidata Service - Question Retrieval', () => {
       }
 
       expect(response.status).toBe(200);
+      console.log(response._body);
       expect(response._body.length).toBe(retrieved);
       expect(response._body[0]).toHaveProperty("text");
       expect(response._body[0]).toHaveProperty("correctAnswer");
@@ -60,6 +61,31 @@ describe('Wikidata Service - Question Retrieval', () => {
     it('should retrieve 10 movie directors questions with their corresponding answers', async () => {
     
       await checkCorrectQuestionsResponse('/getDirectorsQuestions', 10);
+    }, 60000);
+
+    it('should retrieve 1 history question with its corresponding answer', async () => {
+    
+      await checkCorrectQuestionsResponse('/getHistoryQuestions', 1);
+    }, 60000);
+
+    it('should retrieve 1 sports-related question with its corresponding answer', async () => {
+    
+      await checkCorrectQuestionsResponse('/getSportQuestions', 1);
+    }, 60000);
+
+    it('should retrieve 1 geography question with its corresponding answer', async () => {
+    
+      await checkCorrectQuestionsResponse('/getGeographyQuestions', 1);
+    }, 60000);
+
+    it('should retrieve 1 geography question with its corresponding answer', async () => {
+    
+      await checkCorrectQuestionsResponse('/getEntertainmentQuestions', 1);
+    }, 60000);
+
+    it('should retrieve 1 geography question with its corresponding answer', async () => {
+    
+      await checkCorrectQuestionsResponse('/getChemistryQuestions', 1);
     }, 60000);
 
     it('should respond with an error message', async () => {
