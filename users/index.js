@@ -10,7 +10,7 @@ const port = process.env.PORT || 8003;
 
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoUri = process.env.MONGODB_URI;
 
 mongoose.connect(mongoUri).then(
   console.log('Succesfully connected to MongoDB')
