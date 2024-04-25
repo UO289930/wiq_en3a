@@ -54,6 +54,7 @@ router.post('/login', async (req, res) => {
       // Respond with the token that has all the user information
       res.json({ token: token });
     } else {
+      console.log("invalid")
       res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
