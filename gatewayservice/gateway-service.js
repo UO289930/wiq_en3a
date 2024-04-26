@@ -33,6 +33,7 @@ app.post('/login', async (req, res) => {
     res.json(authResponse.data);
   } catch (error) {
     console.error(error);
+    res.status(401).json({error:error});
   }
 });
 
@@ -43,6 +44,7 @@ app.post('/adduser', async (req, res) => {
     res.json(userResponse.data);
   } catch (error) {
     console.error(error);
+    res.status(401).json({error:error.response.data.error});
   }
 });
 
