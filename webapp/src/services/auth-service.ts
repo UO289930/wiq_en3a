@@ -39,10 +39,10 @@ export const register = async (email:string, username: string, password: string)
     const response = await axios.post(`${API_URL}/adduser`, { username, password, email });
     console.log('response:', response);
     const name = response.data;
-    return name;
-  } catch (error) {
-    console.error('Error during registration:', error);
-    throw error;
+    return {error:false,message:name};
+  } catch (error: any) {
+    console.log('Error during registration:', error);
+    return {error:true,message:error.response.data.error};
   }
 };
  

@@ -44,6 +44,7 @@ app.post('/adduser', async (req, res) => {
     res.json(userResponse.data);
   } catch (error) {
     console.error(error);
+    res.status(401).json({error:error.response.data.error});
   }
 });
 
