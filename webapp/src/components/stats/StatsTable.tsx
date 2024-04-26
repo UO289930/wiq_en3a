@@ -28,7 +28,7 @@ export default function StatsTable() {
     const percentageCorrect: number = questionsAnswered === 0 ? 0 : Math.round((questionsCorrect / questionsAnswered) * 100);
 
     return (
-        <table className="stats-table">
+        <table className="stats-table text-text text-4xl  ">
             <thead>
                 <tr className="header">
                     <th className="statistics">Statistics</th>
