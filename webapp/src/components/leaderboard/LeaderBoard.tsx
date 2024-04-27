@@ -39,26 +39,6 @@ export default function LeaderBoard() {
                 </TabPanels>
             </Tabs>
 
-            
-            
-
         </>
-        //<RankingTable />
-
-        /*
-        <Tabs isFitted variant='enclosed'>
-                <TabList mb='1em'>
-                    <Tab>One</Tab>
-                    <Tab>Two</Tab>
-                </TabList>
-                <TabPanels>
-                    <TabPanel>
-                    <p>one!</p>
-                    </TabPanel>
-                    <TabPanel>
-                    <p>two!</p>
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>*/
     )
 }
