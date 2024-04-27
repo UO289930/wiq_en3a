@@ -2,11 +2,11 @@
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useUserStore } from '../../stores/user-store';
+import { useUserStore, getUsername } from '../../stores/user-store';
 
 
 export const SimpleNav = () => {
-  let user = useUserStore(state => state.user!);
+  //let user = useUserStore(state => state.user!);
 
   const getLinkStyle = ():string => {
     return "text-text text-sm font-bold hover:text-primary transition-colors duration-300 ease-in-out"
@@ -23,13 +23,9 @@ export const SimpleNav = () => {
       if (isPlaying) {
         audioRef.current.pause();
         let randomSong;
-        do {
-          randomSong = Math.floor(Math.random() * songs.length);
-        } while (randomSong === currentSong);
+        do { randomSong = Math.floor(Math.random() * songs.length);} while (randomSong === currentSong);
         setCurrentSong(randomSong);
-      } else {
-        audioRef.current.play();
-      }
+      } else {audioRef.current.play();}
     }
     setIsPlaying(!isPlaying);
   };
@@ -38,10 +34,10 @@ export const SimpleNav = () => {
     <div className="aspect-square h-12 px-5 py-3 flex items-center w-full justify-between border-b ">
       <div className="flex items-center gap-5 ">
       <Avatar className="w-9 h-9 rounded-full">
-        <AvatarFallback className="AvatarFallback">{user.username.toUpperCase().charAt(0)}{user.username.toUpperCase().charAt(1)} </AvatarFallback>
+        <AvatarFallback className="AvatarFallback">{getUsername().toUpperCase().charAt(0)}{getUsername().toUpperCase().charAt(1)} </AvatarFallback>
       </Avatar>
       <div className="flex items-center gap-2 text-text text-sm font-thin ">
-      <h2 className="font-bold">{user.username}</h2>
+      <h2 className="font-bold">{getUsername()}</h2>
       
       </div>
       </div>
@@ -50,7 +46,7 @@ export const SimpleNav = () => {
         <Link id="leaderboard" className={getLinkStyle()} to={`/leaderboard`}>Leaderboard</Link>
         <Link id="stats" className={getLinkStyle()} to={`/stats`}>Statistics</Link>
         <Link id="logout" className={getLinkStyle()} to={`/logout`}>Logout</Link>    
-        <button onClick={togglePlay} style={{ color: 'white' } }>
+        <button data-testid="audio-button" id="audio-button" onClick={togglePlay} style={{ color: 'white' } }>
           {isPlaying ? '🔊' :  '🔇'}
         </button>
       </div>
