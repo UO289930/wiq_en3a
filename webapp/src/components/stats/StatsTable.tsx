@@ -29,8 +29,8 @@ export default function StatsTable() {
         <table className="stats-table text-text text-4xl" data-testid="stats-table">
             <thead>
                 <tr className="header">
-                    <th className="statistics" style={{ padding: '10px' , fontSize:'1.5em' }}>Statistics</th>
-                    <th className="value" style={{ padding: '10px', fontSize:'1.5em'}}>Value</th>
+                    <th className="statistics" style={{ padding: '5px' , fontSize:'1.5em' }}>Statistics</th>
+                    <th className="value" style={{ padding: '5px', fontSize:'1.5em'}}>Value</th>
                 </tr>
             </thead>
             <tbody>
