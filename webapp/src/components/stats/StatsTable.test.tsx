@@ -31,7 +31,7 @@ describe('Statistics component', () => {
     await (() => {
       expect(getUser).toHaveBeenCalledTimes(1);
       expect(getUser).toHaveBeenCalledWith('rita');
-      expect(getByTestId('username')).toHaveTextContent('rita');
+      expect(getByTestId('chesses-gained')).toHaveTextContent('2');
       expect(getByTestId('correct-answers')).toHaveTextContent('10');
       expect(getByTestId('wrong-answers')).toHaveTextContent('2'); 
       expect(getByTestId('percentage-correct')).toHaveTextContent('80%');
