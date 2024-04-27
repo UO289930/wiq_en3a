@@ -18,7 +18,7 @@ export default function StatsTable() {
             getUser(user.username).then((u) => {
                 setQuestionAnswered(u.questions_answered);
                 setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
-                setUsername(u.username);
+                setChesses(u.cheeseCount);
             }).catch((error) => {
                 console.error('Error during retrieving the user', error);
             });
@@ -36,15 +36,15 @@ export default function StatsTable() {
             <tbody>
                 <tr className="body-row"> 
                     <td className="row-header" style={{ padding: '5px' }}>Correct Answers</td>
-                    <td style={{ padding: '5px' }}>{questionsCorrect}</td>
+                    <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
-                    <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
+                    <td data-testid="wrong-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
-                    <td data-testid="wrong-answers" style={{ padding: '5px' }}>{chesses}</td>
+                    <td data-testid="chesses-gained" style={{ padding: '5px' }}>{chesses}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
