@@ -1,40 +1,37 @@
 import { Question } from "@/src/services/question-service";
+import axios from 'axios';
 
 let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+
+
 
 const getString = (string : string) : string => {
     return "/Get" + string + "Questions";
 }
 
 export const getSportQuestions = async (): Promise<Question> => {
-    const response = await fetch(url + getString("Sport"));
-    const data = await response.json();
-    console.log(data);
-    return data[0];
+    const response = await axios.get(url + getString("Sport"));
+    return response.data[0];
   };
 
 export const getScienceQuestions = async (): Promise<Question> => {
-    const response = await fetch(url + getString("Chemistry"));
-    const data = await response.json();
-    return data[0];
+    const response = await axios.get(url + getString("Chemistry"));
+    return response.data[0];
   };
 
 export const getHistoryQuestions = async (): Promise<Question> => {
-    const response = await fetch(url + getString("History"));
-    const data = await response.json();
-    return data[0];
+    const response = await axios.get(url + getString("History"));
+    return response.data[0];
   };
 
 export const getGeographyQuestions = async (): Promise<Question> => {
-    const response = await fetch(url + getString("Geography"));
-    const data = await response.json();
-    return data[0];
+    const response = await axios.get(url + getString("Geography"));
+    return response.data[0];
   };
 
   export const getEntertainmentQuestions = async (): Promise<Question> => {
-    const response = await fetch(url + getString("Entertainment"));
-    const data = await response.json();
-    return data[0];
+    const response = await axios.get(url + getString("Entertainment"));
+    return response.data[0];
   }
     
 
