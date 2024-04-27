@@ -9,21 +9,24 @@ export default function StatsTable() {
     const [chesses, setChesses] = useState<number>(0);
 
     useEffect(() => {
+        getUserFromSession();
+    } , []);
+
+    const getUserFromSession = () => {
         let user = useUserStore.getState().user;
         if(user != null){
             getUser(user.username).then((u) => {
-                console.log('user: ',u);
                 setQuestionAnswered(u.questions_answered);
                 setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
-                setChesses(u.cheeseCount);
+                setUsername(u.username);
             }).catch((error) => {
                 console.error('Error during retrieving the user', error);
             });
         }   
-    } , []);
-
+    };
+    
     return (
-        <table className="stats-table">
+        <table className="stats-table text-text text-4xl" data-testid="stats-table">
             <thead>
                 <tr className="header">
                     <th className="statistics" style={{ padding: '10px' , fontSize:'1.5em' }}>Statistics</th>
@@ -37,11 +40,11 @@ export default function StatsTable() {
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
-                    <td style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
+                    <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
-                    <td style={{ padding: '5px' }}>{chesses}</td>
+                    <td data-testid="wrong-answers" style={{ padding: '5px' }}>{chesses}</td>
                 </tr>
                 <tr className="body-row">
                     <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
