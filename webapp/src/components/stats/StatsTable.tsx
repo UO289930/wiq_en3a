@@ -6,7 +6,7 @@ import { useUserStore } from '../../stores/user-store';
 export default function StatsTable() {
     const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
     const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
-    const [username, setUsername] = useState<string>();
+    const [chesses, setChesses] = useState<number>(0);
 
     useEffect(() => {
         let user = useUserStore.getState().user;
@@ -15,16 +15,12 @@ export default function StatsTable() {
                 console.log('user: ',u);
                 setQuestionAnswered(u.questions_answered);
                 setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
-                setUsername(u.username);
+                setChesses(u.cheeseCount);
             }).catch((error) => {
                 console.error('Error during retrieving the user', error);
             });
         }   
     } , []);
-    
-
-    // Data generation
-    const percentageCorrect: number = questionsAnswered === 0 ? 0 : Math.round((questionsCorrect / questionsAnswered) * 100);
 
     return (
         <table className="stats-table">
@@ -36,16 +32,20 @@ export default function StatsTable() {
             </thead>
             <tbody>
                 <tr className="body-row"> 
-                    <td className="row-header" style={{ padding: '10px' }}>Correct Answers</td>
-                    <td style={{ padding: '10px' }}>{questionsCorrect}</td>
+                    <td className="row-header" style={{ padding: '5px' }}>Correct Answers</td>
+                    <td style={{ padding: '5px' }}>{questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
-                    <td className="row-header" style={{ padding: '10px' }}>Wrong Answers</td>
-                    <td style={{ padding: '10px' }}>{questionsAnswered - questionsCorrect}</td>
+                    <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
+                    <td style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
-                    <td className="row-header" style={{ padding: '10px' }}>Percentage Correct</td>
-                    <td style={{ padding: '10px' }}>
+                    <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
+                    <td style={{ padding: '5px' }}>{chesses}</td>
+                </tr>
+                <tr className="body-row">
+                    <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
+                    <td style={{ padding: '5px' }}>
                         <CircularProgress 
                             value={ questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100) : 0} 
                             color='#00A078' thickness='.3rem'
