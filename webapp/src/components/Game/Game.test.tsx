@@ -11,7 +11,6 @@ const wait = (milliseconds: number) => {
 
 jest.mock("../../services/question-service", () => {
   return {
-      handleNextQuestion: jest.fn(),
       getHardString : () => 'hard',
       getQuestionsFromApi: () => {
         return Promise.resolve([
@@ -35,8 +34,17 @@ jest.mock("../../services/question-service", () => {
 describe('Game component', () => { 
     
   
-  it('should render the game', () => {
-    render( <Game difficulty='easy'/> );
+  it('should render the game',async () => {
+    await act( async () => {
+      render(<Game difficulty='easy'/>);
+    });
+    expect(screen.getByTestId('game-component')).toBeInTheDocument();
+  });
+
+  it('should render the game in hard mode',async () => {
+    await act( async () => {
+      render(<Game difficulty='hard'/>);
+    });
     expect(screen.getByTestId('game-component')).toBeInTheDocument();
   });
 
@@ -56,6 +64,9 @@ describe('Game component', () => {
   });
 
   it('format a number with the dots', () => {
+    const shortNumber = '700';
+    expect(formatNumberWithDots(shortNumber)).toBe('700');
+
     const number = '100000';
     expect(formatNumberWithDots(number)).toBe('100.000');
   });
@@ -67,7 +78,6 @@ describe('Game component', () => {
       render(<Game difficulty='easy'/>);
     });
 
-    
     expect(screen.getByText('Madrid')).toBeInTheDocument();
   });
 
