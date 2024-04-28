@@ -6,7 +6,13 @@ const promBundle = require('express-prom-bundle');
 //libraries required for OpenAPI-Swagger
 const swaggerUi = require('swagger-ui-express'); 
 const fs = require("fs");
+const https = require('https');
 const YAML = require('yaml');
+
+const options = {
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+};
 
 const app = express();
 const port = 8000;
@@ -183,8 +189,8 @@ app.get('/*', (_req,res) =>{
 });
 
 // Start the gateway service
-const server = app.listen(port, () => {
-  console.log(`Gateway Service listening at http://localhost:${port}`);
+https.createServer(options, app).listen(443, () => {
+  console.log('HTTPS Gateway server running on port 443');
 });
 
 module.exports = server

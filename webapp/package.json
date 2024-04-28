@@ -33,11 +33,11 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "set PORT=80 && set HTTP=true && react-scripts start",
-    "build": "set PORT=80 && set HTTP=true && react-scripts build",
-    "prod": "serve -s build",
+    "start": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/certificate.crt && set export SSL_KEY_FILE=certificate/certificatekey.key && react-scripts start",
+    "build": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/certificate.crt && set export SSL_KEY_FILE=certificate/certificatekey.key && react-scripts build",
+    "prod": "serve -s build -l 443 --ssl-cert certificate/certificate.crt --ssl-key certificate/certificatekey.key",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
-    "test:e2e": "start-server-and-test 'node e2e/test-environment-setup.js' http://localhost:8000/health prod https://localhost:80  \"cd e2e && jest\"",
+    "test:e2e": "start-server-and-test 'node e2e/test-environment-setup.js' https://localhost:8000/health prod https://localhost:443  \"cd e2e && jest\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

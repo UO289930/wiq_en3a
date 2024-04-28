@@ -56,10 +56,15 @@ jobs:
     needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
+    - name: Setup certificate
+      run: |
+        mkdir -p webapp/certificate
+        echo -e "${{ secrets.CERTIFICATE }}" > webapp/certificate/certificate.crt
+        echo -e "${{ secrets.CERTIFICATE_KEY }}" > webapp/certificate/certificatekey.key
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
-        API_URI: http://${{ secrets.DEPLOY_HOST }}:8000
+        API_URI: https://${{ secrets.DEPLOY_HOST }}:8000
       with:
           name: arquisoft/wiq_en3a/webapp
           username: ${{ github.actor }}
@@ -102,17 +107,23 @@ jobs:
     needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
+    - name: Setup certificate
+      run: |
+        mkdir -p gatewayservice/certificate
+        echo -e "${{ secrets.CERTIFICATE }}" > gatewayservice/certificate/certificate.crt
+        echo -e "${{ secrets.CERTIFICATE_KEY }}" > gatewayservice/certificate/certificatekey.key
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
-        WEBAPP_URI: https://${{ secrets.DEPLOY_HOST }}:80
+        WEBAPP_URI: https://${{ secrets.DEPLOY_HOST }}:443
+        GATEWAY_URI: https://${{ secrets.DEPLOY_HOST }}:8000
       with:
         name: arquisoft/wiq_en3a/gatewayservice
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         workdir: gatewayservice
-        buildargs: WEBAPP_URI
+        buildargs: WEBAPP_URI, GATEWAY_URI
 
   deploy:
     name: Deploy over SSH
