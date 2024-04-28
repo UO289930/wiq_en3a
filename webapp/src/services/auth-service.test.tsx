@@ -22,6 +22,9 @@ describe('AuthService functions', () => {
     jest.clearAllMocks();
   });
 
+
+  
+
   it('register function', async () => {
     // Configura el comportamiento simulado de axios.post
     const responseData = { data: 'invented' };
@@ -37,29 +40,36 @@ describe('AuthService functions', () => {
     expect(result.message).toBe(responseData.data);
    });
 
-   it('register with invalid credentials', async () => {
+  it('register with invalid credentials', async () => {
     // Configurar el comportamiento simulado de axios.post para que devuelva un error
-    const errorMessage = 'Request failed';
-    axios.post = jest.fn().mockResolvedValueOnce((new Error(errorMessage)));
-
+    const errorMessage = 'Error: Username already exists';
+    axios.post = jest.fn().mockRejectedValueOnce({ response: { data: { error: errorMessage } } });
+  
     // Llamar a la función que quieres probar
-    expect(await register('a', 'invalid', 'credentials')).toStrictEqual({'error': false, 'message': undefined}); //undefined bc it doesn't register
+    const result = await register('test@email.com', 'testuser', 'password123');
+  
+    // Verificar que axios.post haya sido llamado con la URL y los datos correctos
+    expect(axios.post).toHaveBeenCalledWith('http://localhost:8000/adduser', { email: 'test@email.com', username: 'testuser', password: 'password123' });
+  
+    // Verificar que la función devuelva un objeto con error: true y el mensaje de error correspondiente
+    expect(result).toEqual({ error: true, message: errorMessage });
   });
 
-    it('login with correct credentials', async () => {
-        // Configura el comportamiento simulado de axios.post
-        const responseData = { data: 'Mocked data response' };
-        axios.post = jest.fn().mockResolvedValueOnce(responseData);
 
-        // Llama a la función que quieres probar
-        const result = await login('tomas', '0000');
+  it('login with correct credentials', async () => {
+      // Configura el comportamiento simulado de axios.post
+      const responseData = { data: 'Mocked data response' };
+      axios.post = jest.fn().mockResolvedValueOnce(responseData);
 
-        // Verifica que axios.post haya sido llamado con la URL y los datos correctos
-        expect(axios.post).toHaveBeenCalledWith('http://localhost:8000/login', { username: 'tomas', password: '0000' });
+      // Llama a la función que quieres probar
+      const result = await login('tomas', '0000');
 
-        // Verifica que la función devuelva los datos simulados
-        expect(result).toBe(true);
-    });
+      // Verifica que axios.post haya sido llamado con la URL y los datos correctos
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:8000/login', { username: 'tomas', password: '0000' });
+
+      // Verifica que la función devuelva los datos simulados
+      expect(result).toBe(true);
+  });
 
   it('login with invalid credentials', async () => {
     // Configurar el comportamiento simulado de axios.post para que devuelva un error
@@ -86,7 +96,26 @@ describe('AuthService functions', () => {
     expect(result).toEqual(responseData.data);
   });
 
-  it('get user by username', async () => {
+  it('get all users with error', async () => {
+    // Mock axios.get para simular una respuesta de error
+    const errorMessage = 'Request failed';
+    axios.get = jest.fn().mockRejectedValueOnce(new Error(errorMessage));
+  
+    // Llama a la función que quieres probar
+    try {
+      await getAllUsers();
+      // Si la función no lanza una excepción, la prueba falla
+      fail('Expected an error to be thrown');
+    } catch (error: any) {
+      // Verifica que axios.get haya sido llamado con la URL correcta
+      expect(axios.get).toHaveBeenCalledWith('http://localhost:8000/getAllUsers', {});
+  
+      // Verifica que la función maneje correctamente el error
+      expect(error.message).toBe(errorMessage);
+    }
+  });
+
+  it('getUser() -> get user by username', async () => {
     // Definir un nombre de usuario para buscar
     const username = 'testuser';
   
@@ -103,13 +132,36 @@ describe('AuthService functions', () => {
     // Verifica que la función devuelva los datos simulados
     expect(result).toEqual(responseData.data);
   });
+
+  it('should throw an error on failed request', async () => {
+    // Spy on the console.error function
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  
+    // Configure the mocked behavior of axios.post to return an error
+    const errorMessage = 'Request failed';
+    axios.post = jest.fn().mockRejectedValueOnce(new Error(errorMessage));
+  
+    
+    try {
+      await getUser('nonexistentuser');
+    } catch (error:any) {
+      // Verify that the error is caught and printed to the console
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Error during retrieving the users', error);
+  
+      // Verify that the exception is thrown
+      expect(error.message).toBe(errorMessage);
+    }
+  
+    // Restore the original implementation of console.error
+    consoleErrorSpy.mockRestore();
+  });
   
   
   it('update stats with incorrect data', async () => {
     // Mock axios.post para simular una respuesta de error
     axios.post = jest.fn().mockRejectedValueOnce(new Error('Request failed'));
   
-    // Llama a la función que quieres probar
+    
     const result = await updateStats(10, 8);
   
     // Verifica que axios.post haya sido llamado con la URL correcta y los datos de usuario correctos
@@ -124,7 +176,7 @@ describe('AuthService functions', () => {
     // Simula que hay un token en el almacenamiento local
     localStorage.setItem('token', 'mockedToken');
 
-    // Llama a la función que quieres probar
+    
     const result = isLogged();
 
     // Verifica que la función devuelva true
@@ -135,16 +187,13 @@ describe('AuthService functions', () => {
   });
 
   it('isLogged() -> should return false if there is no token in local storage', () => {
-    // Asegúrate de que no haya ningún token en el almacenamiento local
     localStorage.removeItem('token');
 
-    // Llama a la función que quieres probar
     const result = isLogged();
 
     // Verifica que la función devuelva false
     expect(result).toBe(false);
   });
-  
   
 
 });
