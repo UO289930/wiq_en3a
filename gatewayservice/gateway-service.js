@@ -8,18 +8,11 @@ const swaggerUi = require('swagger-ui-express');
 const fs = require("fs");
 const YAML = require('yaml');
 
-// Getting the private key and certificate for httpscd
-const https = require('https');
-let privateKey = fs.readFileSync(__dirname + '/../certificate/server.key', 'utf8');
-let certificate = fs.readFileSync(__dirname+ '/../certificate/server.cert', 'utf8');
-let credentials = {key: privateKey, cert: certificate};
-let httpsServer = https.createServer(credentials, app);
-
 const app = express();
 const port = 8000;
 
-const userServiceUrl = process.env.USERS_SERVICE_URL || 'https://localhost:8003';
-const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'https://localhost:8001';
+const userServiceUrl = process.env.USERS_SERVICE_URL || 'http://localhost:8003';
+const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'http://localhost:8001';
 
 app.use(cors());
 app.use(express.json());
@@ -37,6 +30,7 @@ app.post('/login', async (req, res) => {
   try {
     // Forward the login request to the authentication service
     const authResponse = await axios.post(userServiceUrl + '/auth/login', req.body);
+
     res.json(authResponse.data);
   } catch (error) {
     console.error(error);
@@ -189,8 +183,15 @@ app.get('/*', (_req,res) =>{
   });
 });
 
+// Getting the private key and certificate for httpscd
+const https = require('https');
+let privateKey = fs.readFileSync(__dirname + '/certificate/server.key', 'utf8');
+let certificate = fs.readFileSync(__dirname+ '/certificate/server.crt', 'utf8');
+let credentials = {key: privateKey, cert: certificate};
+let httpsServer = https.createServer(credentials, app);
+
 httpsServer.listen(port, () => {
   console.log(`Gateway Service listening at https://localhost:${port}`);
 });
 
-module.exports = server
+module.exports = httpsServer;

@@ -33,11 +33,12 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/certificate.crt && set export SSL_KEY_FILE=certificate/certificatekey.key && react-scripts start",
-    "build": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/certificate.crt && set export SSL_KEY_FILE=certificate/certificatekey.key && react-scripts build",
-    "prod": "serve -s build -l 443 --ssl-cert certificate/certificate.crt --ssl-key certificate/certificatekey.key",
+    "start": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/server.crt && set export SSL_KEY_FILE=certificate/server.key && react-scripts start",
+    "build": "set PORT=443 && set HTTPS=true && set SSL_CRT_FILE=certificate/server.crt && set export SSL_KEY_FILE=certificate/server.key && react-scripts build",
+    "prod": "serve -s build -l 443 --ssl-cert certificate/server.crt --ssl-key certificate/server.key",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
-    "test:e2e": "start-server-and-test 'node e2e/test-environment-setup.js' https://localhost:8000/health prod https://localhost:443  \"cd e2e && jest\"",
+    "test:e2e": "cross-env START_SERVER_AND_TEST_INSECURE=1 NODE_TLS_REJECT_UNAUTHORIZED=0 PORT=443 npm run rune2e",
+    "rune2e": "start-server-and-test 'node e2e/test-environment-setup.js' https://localhost:8000/health prod https://localhost:443  \"cd e2e && jest\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -17,6 +17,7 @@ function validateRequiredFields(req, requiredFields) {
  
 // Route for user login
 router.post('/login', async (req, res) => {
+  console.log("Llega");
   try {
     // Check if required fields are present in the request body
     if (!req.body.username || !req.body.password) {

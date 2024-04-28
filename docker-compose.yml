@@ -49,8 +49,8 @@ services:
     networks:
       - mynetwork
     environment:
-      USERS_SERVICE_URL: http://users:8003
-      WIKIDATA_SERVICE_URL: http://wikidataservice:8001
+      USERS_SERVICE_URL: https://users:8003
+      WIKIDATA_SERVICE_URL: https://wikidataservice:8001
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
