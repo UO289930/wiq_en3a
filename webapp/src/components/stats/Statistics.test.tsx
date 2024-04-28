@@ -1,17 +1,26 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, act, screen} from '@testing-library/react';
+import { useUserStore } from '../../stores/user-store';
+import { getUser } from "../../services/auth-service";
 import Statistics from './Statistics';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-jest.mock('./StatsTable', () => () => <div>Mock StatsTable</div>);
+jest.mock('../../stores/user-store');
+jest.mock('../../services/auth-service');
 
 describe('Statistics component', () => {
-  it('renders without crashing', () => {
-    render(<Statistics />);
-    expect(screen.getByText('Statistics page')).toBeInTheDocument();
-  });
+  it('renders user information correctly', async () => {
+    const mockUser = { username: 'testuser', email: 'testuser@example.com' };
+    (useUserStore.getState as jest.Mock).mockReturnValue({ user: mockUser });
+    (getUser as jest.Mock).mockResolvedValue(mockUser);
 
-  it('renders the StatsTable component', () => {
-    render(<Statistics />);
-    expect(screen.getByText('Mock StatsTable')).toBeInTheDocument();
+    await act(async () => {
+      render(<Router>
+        <Statistics />
+      </Router>);
+    });
+
+    expect(screen.getByText(mockUser.username)).toBeInTheDocument();
+    expect(screen.getByText(mockUser.email)).toBeInTheDocument();
   });
 });

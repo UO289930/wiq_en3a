@@ -5,7 +5,7 @@
 # wiq_en3a
 Thank you for checking out wiq_en3a! Below are some useful links to get started:
 
-- **[Application](http://51.103.210.249:3000/)**: Click this link to start playing!
+- **[Application](http://51.103.210.249/)**: Click this link to start playing!
   
 - **[Documentation](https://arquisoft.github.io/wiq_en3a/)**: Explore detailed documentation to learn more about the game and its features.
 

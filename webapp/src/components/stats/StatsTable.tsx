@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getUser } from "../../services/auth-service";
+import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import { useUserStore } from '../../stores/user-store';
 
 export default function StatsTable() {
     const [questionsAnswered ,setQuestionAnswered ] = useState<number>(0);
     const [questionsCorrect, setQuestionCorrect] = useState<number>(0);
-    const [username, setUsername] = useState<string>();
+    const [chesses, setChesses] = useState<number>(0);
 
     useEffect(() => {
         getUserFromSession();
@@ -17,45 +18,48 @@ export default function StatsTable() {
             getUser(user.username).then((u) => {
                 setQuestionAnswered(u.questions_answered);
                 setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
-                setUsername(u.username);
+                setChesses(u.cheeseCount);
             }).catch((error) => {
                 console.error('Error during retrieving the user', error);
             });
         }   
     };
     
-
-    // Data generation
-    const percentageCorrect: number = questionsAnswered === 0 ? 0 : Math.round((questionsCorrect / questionsAnswered) * 100);
-
     return (
         <table className="stats-table text-text text-4xl" data-testid="stats-table">
             <thead>
                 <tr className="header">
-                    <th className="statistics">Statistics</th>
-                    <th className="value">Value</th>
+                    <th className="statistics" style={{ padding: '5px' , fontSize:'1.5em' }}>Statistics</th>
+                    <th className="value" style={{ padding: '5px', fontSize:'1.5em'}}>Value</th>
                 </tr>
             </thead>
             <tbody>
-                <tr className="body-row">
-                    <td className="row-header">Username</td>
-                    <td className="row-value" data-testid="username">{username}</td>
-                </tr>
-
                 <tr className="body-row"> 
-                    <td className="row-header">Correct Answers</td>
-                    <td data-testid="correct-answers">{questionsCorrect}</td>
+                    <td className="row-header" style={{ padding: '5px' }}>Correct Answers</td>
+                    <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
-                    <td className="row-header">Wrong Answers</td>
-                    <td data-testid="wrong-answers">{questionsAnswered - questionsCorrect}</td>
+                    <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
+                    <td data-testid="wrong-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
                 </tr>
                 <tr className="body-row">
-                    <td className="row-header">Percentage Correct</td>
-                    <td data-testid="percentage-correct">{percentageCorrect}%</td>
+                    <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
+                    <td data-testid="chesses-gained" style={{ padding: '5px' }}>{chesses}</td>
+                </tr>
+                <tr className="body-row">
+                    <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
+                    <td style={{ padding: '5px' }}>
+                        <CircularProgress 
+                            value={ questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100) : 0} 
+                            color='#00A078' thickness='.3rem'
+                            size={"3rem"}>
+                            <CircularProgressLabel >
+                                {questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100).toFixed(0) : 0}%
+                            </CircularProgressLabel>
+                        </CircularProgress>
+                    </td>
                 </tr>
             </tbody>
         </table>
-
     );
 }

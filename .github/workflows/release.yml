@@ -46,6 +46,7 @@ jobs:
     - run: npm --prefix webapp install
     - run: CI=false npm --prefix webapp run build CI=true
     - run: npm --prefix webapp run test:e2e
+
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
@@ -103,12 +104,16 @@ jobs:
     - uses: actions/checkout@v4
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
+      env:
+        WEBAPP_URI: https://${{ secrets.DEPLOY_HOST }}:80
       with:
         name: arquisoft/wiq_en3a/gatewayservice
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         workdir: gatewayservice
+        buildargs: WEBAPP_URI
+
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest
@@ -116,8 +121,6 @@ jobs:
     steps:
     - name: Deploy over SSH
       uses: fifsky/ssh-action@master
-      env:
-        API_URI: ${{ secrets.DEPLOY_HOST }}
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         user: ${{ secrets.DEPLOY_USER }}

@@ -18,7 +18,7 @@ defineFeature(feature, test => {
     setDefaultOptions({ timeout: 10000 })
 
     await page
-      .goto("http://localhost:3000", {
+      .goto("http://localhost:80", {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
@@ -47,7 +47,8 @@ defineFeature(feature, test => {
     });
 
     then('The app shows the statistics page', async () => {
-      await expect(page).toMatchElement("#statsHeader", { text: "Statistics page" });
+      await expect(page).toMatchElement(".h1-statistics", { text: "test4" });
+      await expect(page).toMatchElement(".h2-statistics", { text: "test4@gmail.com" });
     });
   })
 
