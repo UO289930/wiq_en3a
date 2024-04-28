@@ -4,13 +4,29 @@ import AnswerPanel from "./AnswerPanel";
 import GameOver from "./GameOver";
 import Counter from "./Counter";
 import Countdown from "./Countdown";
-import {getHardString, Question as questionType} from "../../services/question-service";
-import { getQuestionsFromApi } from "../../services/question-service";
+import {getHardString, getQuestionsFromApi, Question as questionType} from "../../services/question-service";
 import { updateStats } from "../../services/auth-service";
 
 type Props = {
   difficulty: string;
 };
+
+export const formatNumberWithDots = (str : string) => {
+    
+  if (str.length < 5 || str.includes('.')) {
+    return str;
+  }
+  let result = '';
+  for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+    result = str[i] + result;
+    if (count % 3 === 2 && i !== 0) {
+      result = '.' + result;
+    }
+  }
+
+  return result;
+};
+
 
 export default function Game(props: Props) {
     const [answered, setAnswered] = useState(false);
@@ -32,27 +48,10 @@ export default function Game(props: Props) {
 
     useEffect(() => {
       getQuestionsFromApi().then((questions : questionType[]) => {
-
           setQuestions(questions)
           setLoadingData(false);
       })
     }, []);
-
-    function formatNumberWithDots(str : string) : string {
-    
-      if (str.length < 5 || str.includes('.')) {
-        return str;
-      }
-      let result = '';
-      for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
-        result = str[i] + result;
-        if (count % 3 === 2 && i !== 0) {
-          result = '.' + result;
-        }
-      }
-    
-      return result;
-    }
 
   const goToNextQuestion = () => {
       setCount(questionTime);  
@@ -95,7 +94,7 @@ export default function Game(props: Props) {
  
   if (questionCount === 10) {
     updateStats(questionCount, score/10); 
-    return <GameOver answers={answerSelected} questions={questions} finalMessage="Game Over" />;
+    return <GameOver data-testid="game-over-component" answers={answerSelected} questions={questions} finalMessage="Game Over" />;
   } 
 
   
@@ -103,7 +102,7 @@ export default function Game(props: Props) {
   return (
     <div className="h-4/5" data-testid="game-component">
       {loadingdata ? <h1>Loading...</h1> :
-      <div id='mainContainer' className='flex flex-col h-full text-text'>
+      <div data-testid="game-container" id='mainContainer' className='flex flex-col h-full text-text'>
         <div id='pregunta' className='h-1/2 flex-1'>
           <div className="flex justify-between">
             <text className='text-white text-xl font-bold p-4'> {questionCount+1}/{questions.length} </text>
