@@ -34,6 +34,37 @@ describe('SimpleNav', () => {
     expect(getByTestId('audio-button')).toBeInTheDocument();
   });
 
+  test('renders audio button', () => {
+    const { getByTestId } = render(
+      <Router>
+        <SimpleNav />
+      </Router>
+    );
+  
+    // Check if audio button is rendered
+    expect(getByTestId('audio-button')).toBeInTheDocument();
+  });
+
+  test('toggle audio playback', () => {
+    // Mock useRef hook
+    jest.spyOn(React, 'useRef').mockReturnValueOnce({
+      current: {
+        play: jest.fn(),
+        pause: jest.fn()
+      }
+    });
+  
+    // Render SimpleNav component
+    const { getByTestId } = render(<Router> <SimpleNav /> </Router>);
+  
+    // Click on audio button
+    fireEvent.click(getByTestId('audio-button'));
+  
+    // Click on audio button again
+    fireEvent.click(getByTestId('audio-button'));
+  });
+
+  
   /*test('toggles audio playback when button is clicked', () => {
     const { getByTestId } = render(<Router> <SimpleNav /> </Router>);
 

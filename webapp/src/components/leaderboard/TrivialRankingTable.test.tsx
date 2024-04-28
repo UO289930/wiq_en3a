@@ -22,7 +22,7 @@ describe('TrivialRankingTable', () => {
     await act(async () => {
       render(<TrivialRankingTable />);
     });
-  });  
+  });   
 
   it('displays users with cheeseCount greater than 0', async () => {
     await act(async () => {
@@ -44,5 +44,32 @@ describe('TrivialRankingTable', () => {
     const users = screen.getAllByTestId('user-row');
     expect(users[0]).toHaveTextContent('user2');
     expect(users[1]).toHaveTextContent('user1');
+  });
+
+  it('logs error message when getAllUsers fails', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    const errorMessage = 'Error during retrieving all the users';
+    const error = new Error('Test error');
+    (getAllUsers as jest.Mock).mockRejectedValue(error);
+
+    await act(async () => {
+      render(<TrivialRankingTable />);
+    });
+    await waitFor(() => expect(getAllUsers).toHaveBeenCalled());
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(errorMessage, error);
+  });
+
+  it('does not render table when getAllUsers fails', async () => {
+    const errorMessage = 'Error during retrieving all the users';
+    const error = new Error('Test error');
+    (getAllUsers as jest.Mock).mockRejectedValue(error);
+
+    await act(async () => {
+      render(<TrivialRankingTable />);
+    });
+
+    expect(screen.queryByTestId('user-row')).not.toBeInTheDocument();
+    expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
   });
 });

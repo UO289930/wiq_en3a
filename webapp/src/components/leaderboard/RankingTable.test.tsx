@@ -62,4 +62,23 @@ describe('RankingTable', () => {
     expect(percentageUser1).toHaveTextContent('50%');
     expect(percentageUser2).toHaveTextContent('30%');
   });
+
+  it('handles error during user retrieval', async () => {
+    // Mock the getAllUsers function to simulate an error
+    (getAllUsers as jest.Mock).mockRejectedValue(new Error('Failed to retrieve users'));
+  
+    // Spy on console.error to check if it's called with the expected error message
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  
+    await act(async () => {
+      render(<RankingTable />);
+    });
+  
+    // Check if console.error was called with the expected error message
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Error during retrieving all the users', expect.any(Error));
+  
+    // Restore the original console.error implementation
+    consoleErrorSpy.mockRestore();
+  });
+  
 });
