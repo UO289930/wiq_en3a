@@ -6,7 +6,7 @@ const cors = require('cors')
 const { generateQuestions } = require('./src/Services/QuestionGenerator');
 
 const app = express();
-const port = process.env.PORT || 8001;
+const port = 8001;
 const NUMBER_QUESTIONS = 10;
 
 // Middleware to parse JSON in request body

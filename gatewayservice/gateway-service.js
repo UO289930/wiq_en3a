@@ -6,19 +6,20 @@ const promBundle = require('express-prom-bundle');
 //libraries required for OpenAPI-Swagger
 const swaggerUi = require('swagger-ui-express'); 
 const fs = require("fs");
-const https = require('https');
 const YAML = require('yaml');
 
-const options = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-};
+// Getting the private key and certificate for https
+const https = require('https');
+let privateKey = fs.readFileSync(__dirname + '/../certificate/certificatekey.key', 'utf8');
+let certificate = fs.readFileSync(__dirname+ '/../certificate/certificate.crt', 'utf8');
+let credentials = {key: privateKey, cert: certificate};
+let httpsServer = https.createServer(credentials, app);
 
 const app = express();
 const port = 8000;
 
-const userServiceUrl = process.env.USERS_SERVICE_URL || 'http://localhost:8003';
-const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'http://localhost:8001';
+const userServiceUrl = process.env.USERS_SERVICE_URL || 'https://localhost:8003';
+const wikidataServiceUrl = process.env.WIKIDATA_SERVICE_URL || 'https://localhost:8001';
 
 app.use(cors());
 app.use(express.json());
@@ -188,9 +189,8 @@ app.get('/*', (_req,res) =>{
   });
 });
 
-// Start the gateway service
-https.createServer(options, app).listen(443, () => {
-  console.log('HTTPS Gateway server running on port 443');
+httpsServer.listen(port, () => {
+  console.log(`Gateway Service listening at https://localhost:${port}`);
 });
 
 module.exports = server
