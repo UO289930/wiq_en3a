@@ -35,9 +35,9 @@
   "scripts": {
     "start": "set PORT=80 && set HTTP=true && react-scripts start",
     "build": "set PORT=80 && set HTTP=true && react-scripts build",
-    "prod": "serve -s build",
+    "prod": "serve -s build -l 80",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
-    "test:e2e": "start-server-and-test 'node e2e/test-environment-setup.js' http://localhost:8000/health prod https://localhost:80  \"cd e2e && jest\"",
+    "test:e2e": "start-server-and-test 'node e2e/test-environment-setup.js' http://localhost:8000/health prod 80 \"cd e2e && jest\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
