@@ -33,11 +33,11 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "set PORT=80 && set HTTP=true && react-scripts start",
-    "build": "set PORT=80 && set HTTP=true && react-scripts build",
+    "start": "set PORT=3000 && set HTTP=true && react-scripts start",
+    "build": "set PORT=3000 && set HTTP=true && react-scripts build",
     "prod": "serve -s build -l 3000",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
-    "test:e2e": "cross-env START_SERVER_AND_TEST_INSECURE=1 PORT=80 npm run rune2etests",
+    "test:e2e": "cross-env START_SERVER_AND_TEST_INSECURE=1 PORT=3000 npm run rune2etests",
     "rune2etests": "start-server-and-test 'node e2e/test-environment-setup.js' http://localhost:8000/health prod 3000 \"cd e2e && jest\"",
     "eject": "react-scripts eject"
   },
