@@ -18,6 +18,21 @@ describe('AddUser', () => {
     render(<AddUser onRegistrationCompleted={mockOnRegistrationCompleted} />);
   });
 
+  test('displays error message when registration fails', async () => {
+    const errorMessage = 'Registration failed: Email already exists';
+    mockRegister.mockResolvedValueOnce({ error: true, message: errorMessage });
+
+    render(<AddUser onRegistrationCompleted={mockOnRegistrationCompleted} />);
+
+    const registerButton = screen.getByRole('button', { name: 'Create account' });
+    fireEvent.click(registerButton);
+
+    // Wait for the error message to be displayed
+    await screen.findByText(`Error: ${errorMessage}`);
+
+    expect(mockOnRegistrationCompleted).not.toHaveBeenCalled();
+  });
+
   test('updates input fields correctly', () => {
     render(<AddUser onRegistrationCompleted={mockOnRegistrationCompleted} />);
     const usernameInput = screen.getByLabelText('Username') as HTMLInputElement;

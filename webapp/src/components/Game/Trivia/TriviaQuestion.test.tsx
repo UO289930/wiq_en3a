@@ -19,7 +19,7 @@ const mockProps: props = {
   category: 1,
   setLifesNumber: jest.fn(),
   lifes: 3,
-};
+}; 
 
 describe('TriviaQuestion', () => {
   it('renders correctly', () => {
@@ -37,5 +37,26 @@ describe('TriviaQuestion', () => {
     const { getByText } = render(<TriviaQuestion {...mockProps} />);
     fireEvent.click(getByText('Answer 2'));
     await waitFor(() => expect(mockProps.setLifesNumber).toHaveBeenCalledWith(2));
+  });
+
+  it('calls setIsShowingQuestion(false) after 2 seconds when answered', async () => {
+    jest.useFakeTimers(); // Activar el uso de temporizadores falsos
+
+    const { getByText } = render(<TriviaQuestion {...mockProps} />);
+    fireEvent.click(getByText('Answer 1'));
+
+    // Avanzar en el tiempo en 2000ms
+    jest.advanceTimersByTime(2000);
+
+    await waitFor(() => {
+      expect(mockProps.setIsShowingQuestion).toHaveBeenCalledWith(false);
+    });
+
+    jest.useRealTimers(); // Restaurar temporizadores reales
+  });
+
+  it('returns "No question available" when question is null', () => {
+    const { getByText } = render(<TriviaQuestion {...mockProps} questionShowed={null} />);
+    expect(getByText('No question available')).toBeInTheDocument();
   });
 });
