@@ -8,10 +8,10 @@ const swaggerUi = require('swagger-ui-express');
 const fs = require("fs");
 const YAML = require('yaml');
 
-// Getting the private key and certificate for https
+// Getting the private key and certificate for httpscd
 const https = require('https');
-let privateKey = fs.readFileSync(__dirname + '/../certificate/certificatekey.key', 'utf8');
-let certificate = fs.readFileSync(__dirname+ '/../certificate/certificate.crt', 'utf8');
+let privateKey = fs.readFileSync(__dirname + '/../certificate/server.key', 'utf8');
+let certificate = fs.readFileSync(__dirname+ '/../certificate/server.cert', 'utf8');
 let credentials = {key: privateKey, cert: certificate};
 let httpsServer = https.createServer(credentials, app);
 
