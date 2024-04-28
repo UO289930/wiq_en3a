@@ -62,8 +62,6 @@ services:
       context: ./webapp
     environment:
       - REACT_APP_API_ENDPOINT=${API_URI}
-    depends_on:
-      - gatewayservice
     ports:
       - "3000:3000"
 
