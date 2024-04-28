@@ -33,20 +33,7 @@ describe('Statistics component', () => {
     expect(screen.getByText(mockUser.email)).toBeInTheDocument();
   });
 
-  it('renders user information correctly', async () => {
-    const mockUser = { username: 'testuser', email: 'testuser@example.com' };
-    (useUserStore.getState as jest.Mock).mockReturnValue({ user: mockUser });
-    (getUser as jest.Mock).mockResolvedValue(mockUser);
-
-    await act(async () => {
-      render(<Router>
-        <Statistics />
-      </Router>);
-    });
-
-    expect(screen.getByText(mockUser.username)).toBeInTheDocument();
-    expect(screen.getByText(mockUser.email)).toBeInTheDocument();
-  });
+  
 
   it('handles error during user retrieval', async () => {
     const errorMessage = 'Failed to retrieve user';
