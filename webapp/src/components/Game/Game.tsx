@@ -59,8 +59,10 @@ export default function Game(props: Props) {
       setQuestionCount(questionCount+1);
       setLoading(true); 
 
-      if(!isNaN(Number((questions[questionCount].answers[0]))))
-        questions[questionCount].answers = questions[questionCount].answers.map((a) => formatNumberWithDots(a));
+      if(!isNaN(Number((questions[questionCount].answers[0])))){
+        const newAnswers = questions[questionCount].answers.map((a) => formatNumberWithDots(a));
+        questions[questionCount].answers = newAnswers;
+      }
 
       setTimeout(() => {
         setLoading(false); 
