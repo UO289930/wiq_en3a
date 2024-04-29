@@ -5,6 +5,44 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Deployment View
 
+[role="arc42help"]
+****
+.Content
+The deployment view describes:
+
+ 1. technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and
+
+2. mapping of (software) building blocks to that infrastructure elements.
+
+Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.
+
+Especially document a deployment view if your software is executed as distributed system with more than one computer, processor, server or container or when you design and construct your own hardware processors and chips.
+
+From a software perspective it is sufficient to capture only those elements of an infrastructure that are needed to show a deployment of your building blocks. Hardware architects can go beyond that and describe an infrastructure to any level of detail they need to capture.
+
+.Motivation
+Software does not run without hardware.
+This underlying infrastructure can and will influence a system and/or some
+cross-cutting concepts. Therefore, there is a need to know the infrastructure.
+
+.Form
+
+Maybe a highest level deployment diagram is already contained in section 3.2. as
+technical context with your own infrastructure as ONE black box. In this section one can
+zoom into this black box using additional deployment diagrams:
+
+* UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
+when your infrastructure is more complex.
+* When your (hardware) stakeholders prefer other kinds of diagrams rather than a deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.
+
+
+.Further Information
+
+See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentation.
+
+****
+
+
 Our project is configurated using GitHub actions in such a way that every release that is made will trigger some unitary and end to end test, and an attempt to deploy the application over a server.
 This will allow our team to achieve continuous deployment and delivery.
 
@@ -24,9 +62,9 @@ Using your Azure account:
 ** `DEPLOY_USER` does not need to be changed
 
 * Once the virtual machine is created and the repository is configured, go to Network Settings and add extra rules:
-** Open port number 3000 for user services
-** Open port number 8000 for accessing the web application
-*** More services will be available in the future, so discussions will be made for additional ports supporting our services.
+** Open port number 80 for accesing the web application, or 443 in case HTTPS is used
+** Open port number 8000 for giving access to the API gateway
+** Open port number 9091 for giving access to monitoring the application checking some Grafana data
 
 * Configure the virtual machine connecting through SSH for using Docker:
 ** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
@@ -130,6 +168,10 @@ frame Azure {
     }
 }
 
+cloud WikidataDB{
+    
+}
+
 frame GitHub{
 
         frame GitHubActions{
@@ -145,7 +187,8 @@ frame GitHub{
 
 WebAPP -- APIGateway : port 8000
 Wikidata -- WikidataAPI: port 8001
-Users -- UsersAPI : port 8002
+WikidataAPI -- WikidataDB: query.wikidata.org/sparql
+Users -- UsersAPI : port 8003
 UsersAPI -- UsersDatabase : MongoDB (port 27017)
 client -- WebAPP : Web Browser (port 3000)
 
@@ -155,72 +198,6 @@ Docker -- wiq_en3a
 
 
 === Infrastructure Level 1 - Azure Ubuntu Server
-
-The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
-Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.
-
-
-=== Infrastructure Level 2 - Docker
-
-Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
-Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
-Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.
-
-The virtual machine will contain as many containers as services in the application.
-
-For now, the project contains:
-** Web application service running on port 3000
-** Gateway (middleware) service running on port 8000
-** Wikidata API running on port 8001
-** Users API running on port 8002
-** Mongo DB server running on port 27017
-** Prometheus running on port 9090 for monitoring
-** Grafana running on port 9091 for analytics and monitoring
-
-
-=== Infrastructure Level 3 - GitHub actions
-
-GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.
-
-
-[role="arc42help"]
-****
-.Content
-The deployment view describes:
-
- 1. technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and
-
-2. mapping of (software) building blocks to that infrastructure elements.
-
-Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.
-
-Especially document a deployment view if your software is executed as distributed system with more than one computer, processor, server or container or when you design and construct your own hardware processors and chips.
-
-From a software perspective it is sufficient to capture only those elements of an infrastructure that are needed to show a deployment of your building blocks. Hardware architects can go beyond that and describe an infrastructure to any level of detail they need to capture.
-
-.Motivation
-Software does not run without hardware.
-This underlying infrastructure can and will influence a system and/or some
-cross-cutting concepts. Therefore, there is a need to know the infrastructure.
-
-.Form
-
-Maybe a highest level deployment diagram is already contained in section 3.2. as
-technical context with your own infrastructure as ONE black box. In this section one can
-zoom into this black box using additional deployment diagrams:
-
-* UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
-when your infrastructure is more complex.
-* When your (hardware) stakeholders prefer other kinds of diagrams rather than a deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentation.
-
-****
-
-=== Infrastructure Level 1
 
 [role="arc42help"]
 ****
@@ -232,7 +209,6 @@ Describe (usually in a combination of diagrams, tables, and text):
 * mapping of software artifacts to elements of this infrastructure
 
 For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.
-****
 
 _**<Overview Diagram>**_
 
@@ -246,16 +222,20 @@ _<explanation in text form>_
 
 Mapping of Building Blocks to Infrastructure::
 _<description of the mapping>_
+****
+
+The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
+Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.
 
 
-=== Infrastructure Level 2
+=== Infrastructure Level 2 - Docker
 
 [role="arc42help"]
 ****
 Here you can include the internal structure of (some) infrastructure elements from level 1.
 
 Please copy the structure from level 1 for each selected element.
-****
+
 
 ==== _<Infrastructure Element 1>_
 
@@ -270,5 +250,45 @@ _<diagram + explanation>_
 ==== _<Infrastructure Element n>_
 
 _<diagram + explanation>_
+****
+
+Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
+Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
+Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.
+
+The virtual machine will contain as many containers as services in the application.
+
+For now, the project contains:
+** Web application service running on port 3000
+** Gateway (middleware) service running on port 8000
+** Wikidata API running on port 8001
+** Users API running on port 8003
+** Mongo DB server running on port 27017
+** Prometheus running on port 9090 for monitoring
+** Grafana running on port 9091 for analytics and monitoring
 
 
+=== Infrastructure Level 3 - GitHub actions
+
+GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.
+
+=== Motivation
+
+In the deployment view of our software architecture, we delineate the physical deployment of our system components across various environments. 
+At the core of our deployment strategy is the utilization of cloud-based infrastructure, specifically leveraging Azure for its robustness and scalability. 
+Our server components, including web applications, gateway, user services, and MongoDB servers, are encapsulated within Docker containers to ensure portability and consistency across deployments. 
+Additionally, we employ Azure's built-in services for auto-scaling, and traffic management to optimize performance and reliability. 
+Continuous integration and deployment pipelines are established using tools like Jenkins or Azure DevOps, facilitating seamless updates and releases of our system components. 
+Monitoring and logging solutions, such as Prometheus and Grafana, are integrated to provide insights into system health and performance. 
+Overall, our deployment view showcases a resilient, scalable, and automated deployment architecture tailored to meet the demands of our system's evolving requirements.
+
+=== Mapping of Building Blocks into Infrastructure
+
+[cols="1,2" options="header"]
+|===
+| **Name** | **Responsibility**
+| Frontend  | Web App container opened in port 3000.
+| User Management | User service container.
+| Wikidata Service | Wikidata service container.
+| Gateway | API Gateway service opened in port 8000.
+|===
