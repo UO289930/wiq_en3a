@@ -2,12 +2,10 @@
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useUserStore, getUsername } from '../../stores/user-store';
-
+import { getUsername } from '../../stores/user-store';
+import { FaInfoCircle, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 
 export const SimpleNav = () => {
-  //let user = useUserStore(state => state.user!);
-
   const getLinkStyle = ():string => {
     return "text-text text-sm font-bold hover:text-primary transition-colors duration-300 ease-in-out"
   } 
@@ -41,14 +39,17 @@ export const SimpleNav = () => {
       
       </div>
       </div>
-      <div className="flex gap-5">
+      <div className="flex items-center gap-5">
         <Link className={getLinkStyle()} to={`/`}>Home</Link>
         <Link id="leaderboard" className={getLinkStyle()} to={`/leaderboard`}>Leaderboard</Link>
         <Link id="stats" className={getLinkStyle()} to={`/stats`}>Statistics</Link>
-        <Link id="logout" className={getLinkStyle()} to={`/logout`}>Logout</Link>    
+        <Link id="logout" className={getLinkStyle()} to={`/logout`}>Logout</Link> 
         <button data-testid="audio-button" id="audio-button" onClick={togglePlay} style={{ color: 'white' } }>
-          {isPlaying ? '🔊' :  '🔇'}
-        </button>
+          { isPlaying ? <FaVolumeUp /> :  <FaVolumeMute />}
+        </button> 
+        <Link id="info" className={getLinkStyle()} to={`/info`}>
+           <FaInfoCircle />
+        </Link>
       </div>
       <audio ref={audioRef} src={songs[currentSong]} />
     </div>

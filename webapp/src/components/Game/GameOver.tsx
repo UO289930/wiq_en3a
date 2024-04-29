@@ -38,7 +38,7 @@ const GameOver = (props: props) => {
   ) {
     imageToShow = images.lowScore;
     message = "You are NOT smarter than a penguin";
-  } else if (scorePercentage < 75) {
+  } else if (scorePercentage < 100) {
     imageToShow = images.mediumScore;
     message = "You ARE smarter than a penguin";
   } else {
