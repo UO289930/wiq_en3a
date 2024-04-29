@@ -494,8 +494,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_infrastructure_level_1_azure_ubuntu_server">7.3. Infrastructure Level 1 - Azure Ubuntu Server</a></li>
 <li><a href="#_infrastructure_level_2_docker">7.4. Infrastructure Level 2 - Docker</a></li>
 <li><a href="#_infrastructure_level_3_github_actions">7.5. Infrastructure Level 3 - GitHub actions</a></li>
-<li><a href="#_infrastructure_level_1">7.6. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.7. Infrastructure Level 2</a></li>
+<li><a href="#_motivation">7.6. Motivation</a></li>
+<li><a href="#_mapping_of_building_blocks_into_infrastructure">7.7. Mapping of Building Blocks into Infrastructure</a></li>
 </ul>
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
@@ -674,6 +674,22 @@ If requirements documents exist this overview should refer to these documents.</
 <td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implement robust security measures to protect user data and prevent unauthorized access.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide an intuitive and user-friendly interface to enhance user experience.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Portability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable seamless deployment and operation across different environments and platforms.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Facilitate comprehensive testing to ensure software correctness and identify potential issues early.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Availability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure system uptime and accessibility to meet user demands and minimize downtime.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="sidebarblock arc42help">
@@ -746,9 +762,9 @@ These stakeholders determine the extent and the level of detail of your work and
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
+<col style="width: 16.6666%;">
+<col style="width: 50%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <thead>
 <tr>
@@ -765,18 +781,18 @@ These stakeholders determine the extent and the level of detail of your work and
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Professors</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pablo Gonzalez, Jose Labra</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pablo González (<a href="mailto:gonzalezgpablo@uniovi.es">gonzalezgpablo@uniovi.es</a>), Jose Emilio Labra (<a href="mailto:labra@uniovi.es">labra@uniovi.es</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The well-designed web application that fulfills the requirements</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RTVE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Project Manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">www.rtve.es</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reliable and engaging platform for users</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HappySw Team</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Development Team</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear documentation and reliable system performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sergio Truébano Robles (<a href="mailto:uo289930@uniovi.es">uo289930@uniovi.es</a>), Pedro Limeres Granado (<a href="mailto:uo282763@uniovi.es">uo282763@uniovi.es</a>), Alberto Guerra Rodas (<a href="mailto:uo282421@uniovi.es">uo282421@uniovi.es</a>), Ángel Macías Rodríguez (<a href="mailto:uo289362@uniovi.es">uo289362@uniovi.es</a>), Rita Fernández-Catuxo Ortiz (<a href="mailto:uo284185@uniovi.es">uo284185@uniovi.es</a>), Vira Terletska (<a href="mailto:uo305097@uniovi.es">uo305097@uniovi.es</a>), Sergio Llenderrozos Piñera (<a href="mailto:uo283367@uniovi.es">uo283367@uniovi.es</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear documentation and reliable, performant and available system</p></td>
 </tr>
 </tbody>
 </table>
@@ -797,11 +813,13 @@ These stakeholders determine the extent and the level of detail of your work and
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WikiData</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Our application must generate questions automatically getting data from WikiData</p></td>
@@ -828,11 +846,13 @@ These stakeholders determine the extent and the level of detail of your work and
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Team</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project will be done in a team composed of 7 students, so work must be assigned accordingly.</p></td>
@@ -859,11 +879,13 @@ These stakeholders determine the extent and the level of detail of your work and
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Constraint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Explanation</p></td>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We are going to use AsciiDoc and follow the Arc42 template.</p></td>
@@ -1029,11 +1051,13 @@ together with a mapping table showing the relationships between channels and inp
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Component</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Technologies Used</strong></p></td>
+<th class="tableblock halign-left valign-top"><strong>Component</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Technologies Used</strong></th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Front-end</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTML, CSS (Tailwind), JavaScript (React)</p></td>
@@ -1068,11 +1092,13 @@ together with a mapping table showing the relationships between channels and inp
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Component</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Functionality</strong></p></td>
+<th class="tableblock halign-left valign-top"><strong>Component</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Functionality</strong></th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Front-end</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User interaction and results display.</p></td>
@@ -1181,6 +1207,15 @@ Refer to details in the following sections.</p>
 <li>
 <p><strong>GitHub Actions</strong>: built-in automation tool on GitHub that allows us to automate some workflows that are triggered after some specific github branches actions at development. It provides as continuous integration of the game functionality.</p>
 </li>
+<li>
+<p><strong>Gatling</strong>: Load test tool that allows us to record some user interaction from our application and simulate it as if various differnet users were accessing the application.</p>
+</li>
+<li>
+<p><strong>Prometheus</strong>: monitoring and alerting toolkit designed for reliability and scalability. It collects metrics from configured targets at specified intervals, stores them efficiently, and provides a powerful query language for analyzing and alerting on these metrics. It&#8217;s particularly well-suited for dynamic environments like cloud-native applications and microservices architectures.</p>
+</li>
+<li>
+<p><strong>Grafana</strong>: open-source platform for monitoring and observability, providing customizable dashboards and visualization tools for analyzing metrics, logs, and other data sources. It allows users to create dynamic, interactive dashboards to monitor the health and performance of their systems and applications.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1202,7 +1237,10 @@ As a conclusion, it was worth spending time making the migration for reducing th
 In a microservices architecture, each service typically represents a specific business function or capability and communicates with other services through well-defined APIs. This enables teams to work independently on different parts of the application, allowing us to divide the work into different teams avoiding bottlenecks during production.</p>
 </li>
 <li>
-<p><strong>APIs</strong>: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services independance, but also team members independecance since nobody will need to wait for others for starting working themselves.</p>
+<p><strong>API Gateway</strong>: centralized service that acts as an intermediary between clients and microservices. It serves as a single entry point for all client requests, providing various functionalities by means of routing and redirecting to the specific service in charge of that request They play a crucial role in building scalable and efficient distributed systems by abstracting away complexities and providing a unified interface for clients to interact with all available services.</p>
+</li>
+<li>
+<p><strong>API</strong>: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services' independance, but also team members independecance since nobody will need to wait for others for starting working themselves.</p>
 </li>
 </ul>
 </div>
@@ -1327,7 +1365,7 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="319" height="126">
+<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="1021" height="578">
 </div>
 </div>
 <div class="dlist">
@@ -1378,7 +1416,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="372" height="522">
+<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="1096" height="578">
 </div>
 </div>
 <div class="dlist">
@@ -1584,7 +1622,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="209" height="167">
+<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="1028" height="578">
 </div>
 </div>
 </div>
@@ -1599,7 +1637,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="162" height="159">
+<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="1043" height="578">
 </div>
 </div>
 </div>
@@ -1617,7 +1655,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
+<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="1040" height="578">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1667,6 +1705,60 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 <div class="sect1">
 <h2 id="section-deployment-view">7. Deployment View</h2>
 <div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>The deployment view describes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and</p>
+</li>
+<li>
+<p>mapping of (software) building blocks to that infrastructure elements.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.</p>
+</div>
+<div class="paragraph">
+<p>Especially document a deployment view if your software is executed as distributed system with more than one computer, processor, server or container or when you design and construct your own hardware processors and chips.</p>
+</div>
+<div class="paragraph">
+<p>From a software perspective it is sufficient to capture only those elements of an infrastructure that are needed to show a deployment of your building blocks. Hardware architects can go beyond that and describe an infrastructure to any level of detail they need to capture.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Software does not run without hardware.
+This underlying infrastructure can and will influence a system and/or some
+cross-cutting concepts. Therefore, there is a need to know the infrastructure.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>Maybe a highest level deployment diagram is already contained in section 3.2. as
+technical context with your own infrastructure as ONE black box. In this section one can
+zoom into this black box using additional deployment diagrams:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
+when your infrastructure is more complex.</p>
+</li>
+<li>
+<p>When your (hardware) stakeholders prefer other kinds of diagrams rather than a deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Further Information</div>
+<p>See <a href="https://docs.arc42.org/section-7/">Deployment View</a> in the arc42 documentation.</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Our project is configurated using GitHub actions in such a way that every release that is made will trigger some unitary and end to end test, and an attempt to deploy the application over a server.
 This will allow our team to achieve continuous deployment and delivery.</p>
@@ -1718,17 +1810,13 @@ This will allow our team to achieve continuous deployment and delivery.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Open port number 3000 for user services</p>
+<p>Open port number 80 for accesing the web application, or 443 in case HTTPS is used</p>
 </li>
 <li>
-<p>Open port number 8000 for accessing the web application</p>
-<div class="ulist">
-<ul>
-<li>
-<p>More services will be available in the future, so discussions will be made for additional ports supporting our services.</p>
+<p>Open port number 8000 for giving access to the API gateway</p>
 </li>
-</ul>
-</div>
+<li>
+<p>Open port number 9091 for giving access to monitoring the application checking some Grafana data</p>
 </li>
 </ul>
 </div>
@@ -1820,100 +1908,12 @@ This will allow our team to achieve continuous deployment and delivery.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1462" height="1149">
+<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1016" height="578">
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_infrastructure_level_1_azure_ubuntu_server">7.3. Infrastructure Level 1 - Azure Ubuntu Server</h3>
-<div class="paragraph">
-<p>The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
-Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_2_docker">7.4. Infrastructure Level 2 - Docker</h3>
-<div class="paragraph">
-<p>Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
-Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
-Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.</p>
-</div>
-<div class="paragraph">
-<p>The virtual machine will contain as many containers as services in the application.</p>
-</div>
-<div class="paragraph">
-<p>For now, the project contains:
-<strong> Web application service running on port 3000
-</strong> Gateway (middleware) service running on port 8000
-<strong> Wikidata API running on port 8001
-</strong> Users API running on port 8002
-<strong> Mongo DB server running on port 27017
-</strong> Prometheus running on port 9090 for monitoring
-** Grafana running on port 9091 for analytics and monitoring</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_3_github_actions">7.5. Infrastructure Level 3 - GitHub actions</h3>
-<div class="paragraph">
-<p>GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.</p>
-</div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Content</div>
-<p>The deployment view describes:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and</p>
-</li>
-<li>
-<p>mapping of (software) building blocks to that infrastructure elements.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.</p>
-</div>
-<div class="paragraph">
-<p>Especially document a deployment view if your software is executed as distributed system with more than one computer, processor, server or container or when you design and construct your own hardware processors and chips.</p>
-</div>
-<div class="paragraph">
-<p>From a software perspective it is sufficient to capture only those elements of an infrastructure that are needed to show a deployment of your building blocks. Hardware architects can go beyond that and describe an infrastructure to any level of detail they need to capture.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Software does not run without hardware.
-This underlying infrastructure can and will influence a system and/or some
-cross-cutting concepts. Therefore, there is a need to know the infrastructure.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Maybe a highest level deployment diagram is already contained in section 3.2. as
-technical context with your own infrastructure as ONE black box. In this section one can
-zoom into this black box using additional deployment diagrams:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
-when your infrastructure is more complex.</p>
-</li>
-<li>
-<p>When your (hardware) stakeholders prefer other kinds of diagrams rather than a deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-7/">Deployment View</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_1">7.6. Infrastructure Level 1</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1938,8 +1938,6 @@ when your infrastructure is more complex.</p>
 <div class="paragraph">
 <p>For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</p>
 </div>
-</div>
-</div>
 <div class="paragraph">
 <p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
 </div>
@@ -1960,8 +1958,14 @@ when your infrastructure is more complex.</p>
 </dl>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
+Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.</p>
+</div>
+</div>
 <div class="sect2">
-<h3 id="_infrastructure_level_2">7.7. Infrastructure Level 2</h3>
+<h3 id="_infrastructure_level_2_docker">7.4. Infrastructure Level 2 - Docker</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1970,30 +1974,99 @@ when your infrastructure is more complex.</p>
 <div class="paragraph">
 <p>Please copy the structure from level 1 for each selected element.</p>
 </div>
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element 1&gt;</em></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_1">7.7.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element 2&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_infrastructure_element_2">7.7.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
+<div class="paragraph">
+<p>==== <em>&lt;Infrastructure Element n&gt;</em></p>
 </div>
-<div class="sect3">
-<h4 id="_infrastructure_element_n">7.7.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
+</div>
+<div class="paragraph">
+<p>Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
+Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
+Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.</p>
+</div>
+<div class="paragraph">
+<p>The virtual machine will contain as many containers as services in the application.</p>
+</div>
+<div class="paragraph">
+<p>For now, the project contains:
+<strong> Web application service running on port 3000
+</strong> Gateway (middleware) service running on port 8000
+<strong> Wikidata API running on port 8001
+</strong> Users API running on port 8003
+<strong> Mongo DB server running on port 27017
+</strong> Prometheus running on port 9090 for monitoring
+** Grafana running on port 9091 for analytics and monitoring</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_3_github_actions">7.5. Infrastructure Level 3 - GitHub actions</h3>
+<div class="paragraph">
+<p>GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_motivation">7.6. Motivation</h3>
+<div class="paragraph">
+<p>In the deployment view of our software architecture, we delineate the physical deployment of our system components across various environments.
+At the core of our deployment strategy is the utilization of cloud-based infrastructure, specifically leveraging Azure for its robustness and scalability.
+Our server components, including web applications, gateway, user services, and MongoDB servers, are encapsulated within Docker containers to ensure portability and consistency across deployments.
+Additionally, we employ Azure&#8217;s built-in services for auto-scaling, and traffic management to optimize performance and reliability.
+Continuous integration and deployment pipelines are established using tools like Jenkins or Azure DevOps, facilitating seamless updates and releases of our system components.
+Monitoring and logging solutions, such as Prometheus and Grafana, are integrated to provide insights into system health and performance.
+Overall, our deployment view showcases a resilient, scalable, and automated deployment architecture tailored to meet the demands of our system&#8217;s evolving requirements.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mapping_of_building_blocks_into_infrastructure">7.7. Mapping of Building Blocks into Infrastructure</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Web App container opened in port 3000.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Management</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> User service container.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Wikidata service container.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gateway</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API Gateway service opened in port 8000.</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -2145,11 +2218,13 @@ on this list.</p>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Color</p></td>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Color</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Background</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #191919; font-weight:bold">#191919</span></p></td>
@@ -2195,12 +2270,162 @@ on this list.</p>
 <div class="sect2">
 <h3 id="_development_concepts">8.3. Development concepts</h3>
 <div class="sect3">
-<h4 id="_testing">8.3.1. Testing</h4>
-<div class="paragraph">
-<p>We test the application with these different tests:
- - Unit Testing: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.
- - Load Testing: We used Gattling for measuring the performance of the application when many users are using it.
- - E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.</p>
+<h4 id="_testing_and_monitoring">8.3.1. Testing and Monitoring</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit Testing: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.</p>
+</li>
+<li>
+<p>Load Testing and Monitoring: We used Gattling for recording user simulations that consist on login into the application, playing the existing game modes and checking the statistics and leaderboards. Then, Gatling allowed us to also measure the performance of the application and the average response times when creating 2, 5, 10 and 25 users per second during 60 seconds performing the previously mentioned simulations, using 2 different Azure machines.
+Particularly, load testing has been performed using a 1-cpu machine with almost 1GB of RAM memory and also, using a 2-cpu machine with 8GB of RAM memory.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1-cpu machine</p>
+<div class="literalblock">
+<div class="content">
+<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.6 seconds.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is a huge amount of time for a web application.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Unfortunately, when creating a load of 10 user per second (600 users in total) 41% of the responses were failling and around 70% of the responses where failing or taking more than a second to be answered. For sure, when creating even more load, almost all response were going to fail.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>With this 1-cpu and 1GB of RAM azure machine we could afford around 200 hundred users making constant resquests without having a denial of service and providing reasonable requests' response times.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2-cpu machine</p>
+<div class="literalblock">
+<div class="content">
+<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.8 seconds.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is exactly the same time we obtained with the other machine and a similar mean response time.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating a load of 10 user per second (600 users in total), no response failed although the maximum response time was 58 seconds with a mean response time of 2 seconds, which meant that almost every respone took less than a second.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Finally, when creating a load of 25 user per second (1500 users in total), just a 7% of the total amount of response failed and the maximum response time was 60 seconds with a mean response time of 5 seconds.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secA.png" alt="25 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secB.png" alt="25 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Using this 2-cpu and 8GB machine, response times are not enhaced when using more powerfull hardware and most of the work should be done programatically by improving our software.
+But better hardware allows us to support much more load on the application, which means more users playing at the same time. This time, we could support more 400, but less than 800 simultaneous users.
+Taking a look at the specific graph results of each of thesimulations performed, most of load is always provoked at the beggining of the simulation when the users have to login.
+Then, when users are playing some games the amount of response is reduced a lot since all the information for playing the game is asked at the beggining.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>As a general conclusion, following the azure payment plan for virtual machines: With low load requirements and just paying around 35$ each month we could afford a 1-cpu and 1GB RAM memory web server supporting around 200 simultaneous users using the application at the same time.
+On the contrary, if higher load requirements are needed and paying around 100$ for a 2-cpu and 8GB of RAM memory server, the amount of supported users is more than duplicated supporting more than 400 simultaneous users.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -2212,11 +2437,18 @@ on this list.</p>
 <div class="sect3">
 <h4 id="_configurability">8.3.3. Configurability</h4>
 <div class="paragraph">
-<p>The application will not have configurable features. An early idea was to include a "dark mode".
-Through the development we decided to postpone these ideas in order to focus on a better application in general.</p>
+<p>The application has simple configurable game features for selecting between two game modes (normal/usual and trivia game mode) and two difficulty levels (easy and hard difficulties).
+ - Normal mode game consists of 10 random questions with an amount of time to answer the question before losing the possibility to answer. Easy and hard modes differ on the amount of time that the user has to answer the question.
+ - Trivia mode game consists of 10 questions, which are generated based on the resulting category of rolling a dice. There are 6 possible categories: sports, science, history, geography and entertainment.
+Additionally, there is an option at the main application view where random music can be played.</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_data_access">8.3.4. Data access</h4>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>The development team has followed two different approaches for supporting data access from the running application for development and production.
+While developing the application, teh development team decided to create a shared database located in the cloud which allowed us to work locally with the same data by means of a key string.
+In order to move our application into production by means of deploying it into an Azure virtual machine running with Docker containers, the development team created a mongodb container with an associated volumen for making the data persistent.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -2235,18 +2467,20 @@ The following table contains the most interesting the design decisions that we h
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Architectural Records</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3335%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Decision</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Advantages</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Disadvantages</p></td>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Advantages</th>
+<th class="tableblock halign-left valign-top">Disadvantages</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ADR1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">React.js</p></td>
@@ -2445,10 +2679,10 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
 </colgroup>
 <thead>
 <tr>
@@ -2508,10 +2742,10 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
 </colgroup>
 <thead>
 <tr>
@@ -2526,12 +2760,6 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maintainability</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">When developers must introduce a new feature to the web, they should be able to do it without changing the software architecture.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maintainability</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When fixing errors and bugs on the system, developers should be able to do it without major consequences on the system.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 </tbody>
@@ -2749,7 +2977,7 @@ self-explanatory description, the probability of its occurrence, its impact on t
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-13 13:04:17 +0100
+Last updated 2024-04-21 17:29:02 +0200
 </div>
 </div>
 </body>
