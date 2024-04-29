@@ -35,6 +35,12 @@ const AddUser = (props: props)  => {
     
   }
 
+  const handleKeyPress = (event: { key: string; }) => {
+    if (event.key === 'Enter') {
+      registerUser();
+    }
+  };
+
 
   return (
     <Card className="">
@@ -45,22 +51,22 @@ const AddUser = (props: props)  => {
             <div className="space-y-1">
               <Label htmlFor="Username">Username</Label>
               <Input value={username}
-          onChange={(e) => setUsername(e.target.value)} id="Username"  />
+          onChange={(e) => setUsername(e.target.value)} onKeyDown={handleKeyPress} id="Username"  />
             </div>
             <div className="space-y-1">
               <Label htmlFor="Email">Email</Label>
               <Input value={email}
-          onChange={(e) => setEmail(e.target.value)} id="Email"  />
+          onChange={(e) => setEmail(e.target.value)} onKeyDown={handleKeyPress} id="Email"  />
             </div>
             <div className="space-y-1">
               <Label htmlFor="password">Password</Label>
               <Input value={password}
-          onChange={(e) => setPassword(e.target.value)} type="password" id="password" />
+          onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyPress} type="password" id="password" />
             </div>
             <div className="space-y-1">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)} type="password" id="confirmPassword" />
+          onChange={(e) => setConfirmPassword(e.target.value)} onKeyDown={handleKeyPress} type="password" id="confirmPassword" />
             </div>
             {error && (
             <Label className="text-danger">

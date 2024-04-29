@@ -32,7 +32,6 @@ const Login = (props:props) => {
 
   const handleKeyPress = (event: { key: string; }) => {
     if (event.key === 'Enter') {
-      // Al presionar Enter, iniciar sesión
       loginUser();
     }
   };
@@ -48,12 +47,12 @@ const Login = (props:props) => {
             <div className="space-y-1">
               <Label htmlFor="Username">Username</Label>
               <Input value={username}
-          onChange={(e) => setUsername(e.target.value)} onKeyPress={handleKeyPress} id="Username"  />
+          onChange={(e) => setUsername(e.target.value)} onKeyDown={handleKeyPress} id="Username"  />
             </div>
             <div className="space-y-1">
               <Label htmlFor="password">Password</Label>
               <Input value={password}
-          onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} type="password" id="password" />
+          onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyPress} type="password" id="password" />
             </div>
             {error && (
             <Label className="text-danger">
