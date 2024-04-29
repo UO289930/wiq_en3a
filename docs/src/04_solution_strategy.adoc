@@ -42,6 +42,9 @@ See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentat
 * *npm*: default package manager for Node.js, providing a command-line interface to install, manage, and publish JavaScript packages. With over a million packages available in its registry, npm simplifies adding functionality to Node.js projects by handling dependencies and providing tools for versioning and publishing packages.
 * *Docker*: platform that will be used for deploying our services inside containers. Containers are lightweight, portable, and self-sufficient units that contain everything needed to run an application, including the code, runtime, system tools, libraries, and settings. Docker enables developers to package their applications along with all dependencies into containers, ensuring consistency across different environments, such as development, testing, and production.
 * *GitHub Actions*: built-in automation tool on GitHub that allows us to automate some workflows that are triggered after some specific github branches actions at development. It provides as continuous integration of the game functionality.
+* *Gatling*: Load test tool that allows us to record some user interaction from our application and simulate it as if various differnet users were accessing the application.
+* *Prometheus*: monitoring and alerting toolkit designed for reliability and scalability. It collects metrics from configured targets at specified intervals, stores them efficiently, and provides a powerful query language for analyzing and alerting on these metrics. It's particularly well-suited for dynamic environments like cloud-native applications and microservices architectures.
+* *Grafana*: open-source platform for monitoring and observability, providing customizable dashboards and visualization tools for analyzing metrics, logs, and other data sources. It allows users to create dynamic, interactive dashboards to monitor the health and performance of their systems and applications.
 
 === Technological decisions
 
@@ -54,7 +57,9 @@ As a conclusion, it was worth spending time making the migration for reducing th
 
 * *Microservices*: is an architectural style that structures an application as a collection of loosely coupled services. Each service is independently deployable, scalable, and can be developed using different programming languages, frameworks, or databases.
 In a microservices architecture, each service typically represents a specific business function or capability and communicates with other services through well-defined APIs. This enables teams to work independently on different parts of the application, allowing us to divide the work into different teams avoiding bottlenecks during production.
-* *APIs*: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services independance, but also team members independecance since nobody will need to wait for others for starting working themselves.  
+* *API Gateway*: centralized service that acts as an intermediary between clients and microservices. It serves as a single entry point for all client requests, providing various functionalities by means of routing and redirecting to the specific service in charge of that request They play a crucial role in building scalable and efficient distributed systems by abstracting away complexities and providing a unified interface for clients to interact with all available services.
+* *API*: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services' independance, but also team members independecance since nobody will need to wait for others for starting working themselves.  
+
 
 === Team Organization
 

@@ -86,7 +86,7 @@ In our app, the question is always represent as a data structure with the next f
 We decided to use a color palette of 4 colors:
 
 
-[cols="1,1"]
+[cols="1,1", options="header"]
 |===
 | Name | Color
 | Background | +++<span style="color: #191919; font-weight:bold">#191919</span>+++
@@ -123,6 +123,8 @@ The application is deployed using Docker.
 The application will not have configurable features. An early idea was to include a "dark mode".
 Through the development we decided to postpone these ideas in order to focus on a better application in general.
 
-
-...
+==== Data access
+The development team has followed two different approaches for supporting data access from the running application for development and production.
+While developing the application, teh development team decided to create a shared database located in the cloud which allowed us to work locally with the same data by means of a key string.
+In order to move our application into production by means of deploying it into an Azure virtual machine running with Docker containers, the development team created a mongodb container with an associated volumen for making the data persistent.
 
