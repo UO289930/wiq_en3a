@@ -63,14 +63,6 @@ export default function Game(props: Props) {
       setCorrectSelected(false);
       setQuestionCount(questionCount+1);
       setLoading(true); 
-/* 
-      if(!isNaN(Number((questions[questionCount].answers[0])))){
-        const newAnswers = questions[questionCount].answers.map((a) => formatNumberWithDots(a));
-        let questionsCopy = [...questions];
-        console.log(newAnswers);
-        questionsCopy[questionCount].answers = newAnswers; 
-        setQuestions(questionsCopy);
-      } */
 
       setTimeout(() => {
         setLoading(false); 

@@ -50,7 +50,7 @@ The title of the table is the name of your system, the three columns contain the
 
 image::03_business_context.png["Business Context Diagram"]
 
-[cols="1,1,1" options="header"]
+[cols="1,1,1", options="header"]
 |===
 | **Partner** | **Input** | **Output**
 | User  | The user interacts with the WIQ web application using the front-end of the application. | The display of a page of the application with the questions and statistics.
@@ -77,7 +77,7 @@ together with a mapping table showing the relationships between channels and inp
 ****
 
 .Table of the Technical Context
-[cols="2,2"]
+[cols="2,2", options="header"]
 |===
 | **Component** | **Technologies Used**
 | Front-end      | HTML, CSS (Tailwind), JavaScript (React)
@@ -93,7 +93,7 @@ image::3_2-Technical-Context-Diagram-EN.png["Technical Context"]
 
 
 .Mapping Input/Output to Channels
-[cols="2,2"]
+[cols="2,2", options="header"]
 |===
 | **Component** | **Functionality**
 | Front-end | User interaction and results display.

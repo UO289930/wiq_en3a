@@ -9,6 +9,7 @@ If you want a description about each of the technologies we have chosen, go to t
 The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:
 
 .Architectural Records
+[cols="1,1,2,2", options="header"]
 |===
 |Code|Decision|Advantages|Disadvantages
 |ADR1| React.js | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.| Not all of us know about its usage
