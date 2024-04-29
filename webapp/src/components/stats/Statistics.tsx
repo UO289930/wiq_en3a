@@ -31,8 +31,8 @@ export default function Statistics () {
                         <Avatar.Fallback className="AvatarFallback" style={{fontSize:'2em'}}>{username.toUpperCase().charAt(0)}{username.toUpperCase().charAt(1)}</Avatar.Fallback>
                     </Avatar.Root>
                 </div>
-                <h1 className="text-text text-2xl" >{username}</h1> 
-                <h1 className="text-text text-2xl" >{email}</h1> 
+                <h1 id="h1-statistics" className="text-text text-2xl" >{username}</h1> 
+                <h1 id="h2-statistics" className="text-text text-2xl" >{email}</h1> 
             </div>
             <StatsTable />
             <div className="flex flex-col gap-5 justify-start items-center p-5"> 
