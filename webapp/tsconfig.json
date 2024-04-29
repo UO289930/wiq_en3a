@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",                        /* Specify ECMAScript target version */
+    "module": "commonjs",
+    "moduleResolution": "node",                   /* Specify module code generation */
+    "lib": ["es6", "dom"],                  /* Specify library files to be included */
+    "jsx": "react",                         /* Specify JSX as the input language */
+    "strict": true,                         /* Enable all strict type-checking options */
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }                 /* Enable interoperability between CommonJS and ES Modules */
+  },
+  "include": ["src"]                        /* Specify files to be included in compilation */
+}

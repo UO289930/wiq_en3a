@@ -11,33 +11,29 @@ services:
     networks:
       - mynetwork
 
-  authservice:
-    container_name: authservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_en3a/authservice:latest
+  users:
+    container_name: users-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3a/users:latest
     profiles: ["dev", "prod"]
-    build: ./users/authservice
+    build: ./users
     depends_on:
       - mongodb
     ports:
-      - "8002:8002"
+      - "8003:8003"
     networks:
       - mynetwork
     environment:
       MONGODB_URI: mongodb://mongodb:27017/userdb
 
-  userservice:
-    container_name: userservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_en3a/userservice:latest
+  wikidataservice:
+    container_name: wikidataservice-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_en3a/wikidataservice:latest
     profiles: ["dev", "prod"]
-    build: ./users/userservice
-    depends_on:
-      - mongodb
+    build: ./wikidataservice
     ports:
       - "8001:8001"
     networks:
       - mynetwork
-    environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}
@@ -46,30 +42,33 @@ services:
     build: ./gatewayservice
     depends_on:
       - mongodb
-      - userservice
-      - authservice
+      - users
+      - wikidataservice
     ports:
       - "8000:8000"
     networks:
       - mynetwork
     environment:
-      AUTH_SERVICE_URL: http://authservice:8002
-      USER_SERVICE_URL: http://userservice:8001
+      USERS_SERVICE_URL: http://users:8003
+      WIKIDATA_SERVICE_URL: http://wikidataservice:8001
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_en3a/webapp:latest
     profiles: ["dev", "prod"]
-    build: ./webapp
-    depends_on:
-      - gatewayservice
+    build:
+      args:
+        REACT_APP_API_ENDPOINT: ${API_URI}
+      context: ./webapp
+    environment:
+      - REACT_APP_API_ENDPOINT=${API_URI}
     ports:
-      - "3000:3000" 
+      - "3000:3000"
 
   prometheus:
     image: prom/prometheus
     container_name: prometheus-${teamname:-defaultASW}
-    profiles: ["dev"]
+    profiles: ["dev", "prod"]
     networks:
       - mynetwork
     volumes:
@@ -83,7 +82,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana-${teamname:-defaultASW}
-    profiles: ["dev"]
+    profiles: ["dev", "prod"]
     networks:
       - mynetwork
     volumes:

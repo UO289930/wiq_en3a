@@ -64,6 +64,10 @@ See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 docum
 | Reliability  | Ensure consistent and accurate question generation and user data management.
 | Performance  | Optimize system response times and capacity to handle multiple user interactions simultaneously.
 | Security     | Implement robust security measures to protect user data and prevent unauthorized access.
+| Usability    | Provide an intuitive and user-friendly interface to enhance user experience.
+| Portability  | Enable seamless deployment and operation across different environments and platforms.
+| Testability  | Facilitate comprehensive testing to ensure software correctness and identify potential issues early.
+| Availability | Ensure system uptime and accessibility to meet user demands and minimize downtime.
 |===
 
 
@@ -109,15 +113,15 @@ These stakeholders determine the extent and the level of detail of your work and
 Table with role names, person names, and their expectations with respect to the architecture and its documentation.
 ****
 
-[options="header",cols="1,2,2"]
+[options="header",cols="1,3,2"]
 
 
 |===
 | Role/Name     | Contact          | Expectations
 | Users         | N/A              | Intuitive and enjoyable quiz experience
-| Professors    | Pablo Gonzalez, Jose Labra  | The well-designed web application that fulfills the requirements
-| RTVE          | Project Manager  | Reliable and engaging platform for users
-| HappySw Team  | Development Team | Clear documentation and reliable system performance
+| Professors    | Pablo González (gonzalezgpablo@uniovi.es), Jose Emilio Labra (labra@uniovi.es) | The well-designed web application that fulfills the requirements
+| RTVE          | www.rtve.es  | Reliable and engaging platform for users
+| Development   | Sergio Truébano Robles (uo289930@uniovi.es), Pedro Limeres Granado (uo282763@uniovi.es), Alberto Guerra Rodas (uo282421@uniovi.es), Ángel Macías Rodríguez (uo289362@uniovi.es), Rita Fernández-Catuxo Ortiz (uo284185@uniovi.es), Vira Terletska (uo305097@uniovi.es), Sergio Llenderrozos Piñera (uo283367@uniovi.es) | Clear documentation and reliable, performant and available system
 |===
 
 

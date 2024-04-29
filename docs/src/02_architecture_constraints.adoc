@@ -3,6 +3,38 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+When designing the WIQ application, there are several constraints that must be taken into consideration, as they will have a significant impact on the overall design of the application and the architectural decisions. These constraints must be considered in order to ensure that the final product meets the needs and expectations of the users and stakeholders. The following table summarizes these constraints and provides a brief explanation for each one divided into technical, organizational and political constraints.
+
+=== Technical constraints
+
+[options="header"]
+|===
+|Constraint|Explanation
+| WikiData | Our application must generate questions automatically getting data from WikiData 
+| Version control and monitoring (GitHub) | For the WIQ application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member. 
+| User Experience | The design of the application must make its use friendly and easy 
+| Test coverage | Code must meet a good test quality and coverage to ensure the expected outcome.
+|===
+
+=== Organizational constraints
+
+[options="header"]
+|===
+|Constraint|Explanation
+| Team | The project will be done in a team composed of 7 students, so work must be assigned accordingly.
+| Git-based development | The project will be built around the Git workflow, so all tools used must be able to closely interact with this system. 
+| Meetings |  The project’s development process must be reflected in the minutes of each meeting that happens. 
+| Delivery deadlines | There are 4 deliverables every 3 weeks that should be followed accordingly before the deployment of the application 
+|===
+
+=== Political constraints
+
+[options="header"]
+|===
+|Constraint|Explanation
+| Documentation | We are going to use AsciiDoc and follow the Arc42 template. 
+| Language | The documentation and application will be developed in English. 
+|===
 
 [role="arc42help"]
 ****

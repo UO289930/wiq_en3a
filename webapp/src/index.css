@@ -1,13 +1,409 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* This makes the children of the container the same height */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.container .table-container {
+  flex: 0 0 90%;
+}
+
+.container .image-container {
+  flex: 0 0 10%;
+}
+
+.caja-quesitos {
+    width: 120px;
+    height: 120px;
+    
+}
+
+.caja{
+  width:100%;
+  height:100%;
+  border-radius: 50%;
+  background-color: #ededed;
+  position:relative;
+  overflow: hidden;
+  border: 7px solid #ededed;
+  > div {
+    width:100%;
+    outline: 0px;
+    height:100%;
+    position: absolute;
+    border: 3px solid #ededed;
+  }
+
+    border-radius: 50%;
+    background-color: #ededed;
+    position:relative;
+    overflow: hidden;
+    border: 7px solid #ededed;
+    > div {
+      width:100%;
+      outline: 0px;
+      height:100%;
+      position: absolute;
+      border: 3px solid #ededed;
+    }
+      
+    .quesito-amarillo {
+      background-color: #ffcc00;
+      top: -65%;
+      right: 50%;
+      transform: rotate(90deg) skew(-15deg);
+    }
+      
+    .quesito-naranja {
+      background-color: #ec811c;
+      transform: rotate(15deg) skew(-20deg);
+      left: -80%;
+      top: 29%;
+    }
+    .quesito-verde {
+      background-color: #61a33a;
+      left: 50%;
+      top: -65%;
+      transform: rotate(90deg) skew(15deg);
+    }
+ 
+    
+  .quesito-amarillo {
+    background-color: #ffcc00;
+    top: -65%;
+    right: 50%;
+    transform: rotate(90deg) skew(-15deg);
+  }
+    
+  .quesito-cian {
+    background-color: #88cfed;
+    transform: rotate(15deg) skew(-20deg);
+    left: -80%;
+    top: 29%;
+  }
+  .quesito-verde {
+    background-color: #61a33a;
+    left: 50%;
+    top: -65%;
+    transform: rotate(90deg) skew(15deg);
+  }
+  
+  .quesito-azul{
+    background-color: #1f71b3;
+    transform: rotate(-16deg) skew(20deg);
+    right:-80%;
+    top: 27%;
+  }
+  
+  .quesito-rosa {
+    background-color: #db3d78;
+    transform: rotate(53deg) skew(20deg);
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -82%;
+  }
+}
+
+.h1-leaderboard, .h1-statistics{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  color: white;
+  font-size: 2.8rem;
+}
+
+.h2-statistics{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.ranking-table {
+  margin-top: 3rem;
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    padding-bottom: 1rem;
+
+    th {
+      padding-inline: 1rem;
+    }
+
+    .avatar {
+      grid-column: 1/1;    
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .correct-answers{
+      grid-column: 3/3;
+    }
+
+    .progress{
+      grid-column: 4/4;
+    }
+
+  }
+
+  .body-row {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    border-top: .1rem solid white;
+    padding: .8rem 0rem .8rem 0rem;
+
+    .avatar {
+      grid-column: 1/1;    
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      justify-self: flex-start;
+      padding-left: 2.5rem;
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .correct-answers{
+      grid-column: 3/3;
+    }
+
+    .progress{
+      grid-column: 4/4;
+    }
+  }
+}
+
+.ranking-table-trivial {
+  margin-top: 3rem;
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding-bottom: 1rem;
+
+    th {
+      padding-inline: 1rem;
+    }
+
+    .avatar {
+      grid-column: 1/1;    
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .quesitos{
+      grid-column: 3/3;
+    }
+
+    
+
+  }
+
+  .body-row {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    border-top: .1rem solid white;
+    padding: .8rem 0rem .8rem 0rem;
+
+    .avatar {
+      grid-column: 1/1;    
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      justify-self: flex-start;
+      padding-left: 2.5rem;
+    }
+
+    .ranking{
+      grid-column: 2/2;
+    }
+
+    .cheeseCount{
+      grid-column: 3/3;
+    }
+
+  }
+}
+
+
+
+
+
+
+.stats-table {
+  font-size: 1rem;
+  color: #f2ecff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+  border: 1px solid #f2ecff;
+
+ 
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: .1rem solid #f2ecff;
+
+    th {
+      padding-inline: 1rem;
+    }
+
+    .statistics {
+      grid-column: 1/1;    
+    }
+
+    .value{
+      grid-column: 2/2;
+    }
+
+
+  }
+
+
+  .body-row {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding: .8rem 0rem .8rem 0rem;
+    border-bottom: .1rem solid white;
+
+    .row-header{
+      grid-column: 1/1;
+      justify-self: flex-start;
+      padding-left: 4rem;
+    }
+
+    .row-value{
+      grid-column: 2/2;
+    }
+  }
+
+}
+
+:root {
+  --tw-bg-opacity: 1; 
+}
+
+html {
+  background-color: rgb(25 25 25 / var(--tw-bg-opacity));
+}
+
+.AvatarFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: var(--violet-11);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 700;
+  color: black;
+}
+
+.AvatarRoot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: hidden;
+  user-select: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  background-color: var(--black-a3);
+}
+
+  
+.chakra-tabs-container {
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  .chakra-tabs {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+
+
+    .chakra-tabs-tab, .chakra-tabs-tab-selected {
+      display: flex;
+      padding: 1rem;
+      width: 100%;
+      font-weight: bolder;
+      
+    }
+    .chakra-tabs-tab:hover {
+      background-color: #444444;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+    }
+
+    .chakra-tabs-tab {
+      border-bottom: .1rem solid white;
+    }
+
+    .chakra-tabs-tab-selected {
+      border-top: .1rem solid white;
+      border-left: .1rem solid white;
+      border-right: .1rem solid white;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+    }
+  }
 }

@@ -3,6 +3,24 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-design-decisions]]
 == Architecture Decisions
 
+Along the process of developing the application, decisions had to be taken as problems arise.
+These are the final decicision that we have made according to their advantages.
+If you want a description about each of the technologies we have chosen, go to the xref:#section-glossary[Glossary] of the documentation.
+The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:
+
+.Architectural Records
+[cols="1,1,2,2", options="header"]
+|===
+|Code|Decision|Advantages|Disadvantages
+|ADR1| React.js | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.| Not all of us know about its usage
+|ADR2| Tailwind CSS | Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework | Quite new for most of us
+|ADR3| MongoDB | It does not need to be started manually. Free and easy to understand| We are quite new with MongoDB.
+|ADR4| Docker | Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example| We do not have much experience using Docker
+|ADR5| PlantUML | Allows drawing diagrams very easily, with a simple syntax.| Does not allow as much control over the exact layout of the elements in the diagram as other tools.
+|ADR6| Node.js | For small applications it's a very fast techonology. It's easy to learn and we already know a bit about it| Its performance is reduced with heavy computational tasks
+|ADR7| Wikidata API also in Node.js | Better project structure. Same language as users API. Easier for us to deploy it| Its performance is reduced with heavy computational tasks
+|===
+
 
 [role="arc42help"]
 ****
