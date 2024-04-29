@@ -64,31 +64,4 @@ describe('SimpleNav', () => {
     fireEvent.click(getByTestId('audio-button'));
   });
 
-  
-  /*test('toggles audio playback when button is clicked', () => {
-    const { getByTestId } = render(<Router> <SimpleNav /> </Router>);
-
-    // Mock HTML audio element
-    const playMock = jest.fn();
-    const pauseMock = jest.fn();
-    const audioMock = {
-      current: {
-        play: playMock,
-        pause: pauseMock
-      }
-    };
-    jest.spyOn(React, 'useRef').mockReturnValue(audioMock);
-
-    // Click on audio button
-    fireEvent.click(getByTestId('audio-button'));
-
-    // Check if audio play function is called
-    expect(playMock).toHaveBeenCalled();
-
-    // Click on audio button again
-    fireEvent.click(getByTestId('audio-button'));
-
-    // Check if audio pause function is called
-    expect(pauseMock).toHaveBeenCalled();
-  });*/
 }); 

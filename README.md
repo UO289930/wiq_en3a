@@ -2,8 +2,8 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_en3a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_en3a)
 
-# wiq_en3a
-Thank you for checking out wiq_en3a! Below are some useful links to get started:
+# Are you smarter than a penguin? 🐧
+Thank you for checking out our game! Below are some useful links to get started:
 
 - **[Application](http://51.103.210.249:3000/)**: Click this link to start playing!
   
@@ -11,20 +11,19 @@ Thank you for checking out wiq_en3a! Below are some useful links to get started:
 
 - **[OpenAPI](http://51.103.210.249:8000/api-doc/)**: Explore detailed documentation of our API.
 
-Feel free to explore the application and documentation, and don't hesitate to reach out if you have any questions or feedback. Enjoy playing wiq_en3a!
+Feel free to explore the application and documentation, and don't hesitate to reach out if you have any questions or feedback. Enjoy playing STAP!
 
-## Welcome to WIQ👩‍🎓👨‍🎓 
+## Introduction
 
-The WIQ is a web application where you can show off your knowledge.
+This is a web application where you can show off your knowledge.🧠
+Experience the best of both worlds in "Are You Smarter Than a Penguin?🐧" with two exciting game modes: Normal and Trivia. 
+ 
+ In the Normal Game, answer general knowledge questions within a time limit🕐. If you choose Easy mode, you have more time to think through your answers, while Hard mode speeds things up with shorter time limits, adding an extra challenge. 
+ 
+ The Trivia Game tests your skills across five categories—Sports, Science, History, Geography, and Entertainment. Earn a "cheese🧀" for every correct answer, and collect all five to win. But watch out—you start with 6 hearts in Easy mode and only 3 in Hard mode, and if you lose them all, it's game over💕.
 
-Creat an account or log in if you are already a member and start the engaging quiz!
-Enjoy the variaty of questions, which are automatically generated from a vast pool of data available in Wikidata🌎. Each question offers multiple-choice options, including correct answer and several distractors🔍. Choose a right answer and win the prize🏆. Stay sharp and focused, there are also the time limits, --> the clock is ticking🕐 ⏳. 
-
-
-The more you know the more you win 🥇!
-Play with your friends and compare the scores. Who is the smartest❓
-
-🤓Let the game begin!👀🧠
+Create an account or log in to play with friends and find out who knows the most. Enjoy the variaty of questions, which are automatically generated from a vast pool of data available in Wikidata🌎. 
+Let's get started!
 
   
 

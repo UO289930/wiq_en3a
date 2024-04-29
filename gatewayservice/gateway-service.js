@@ -91,21 +91,7 @@ app.post('/getUser', async (req, res) => {
 
 
 app.get('/GetQuestions', async (_req, res) => {
-  try {
-    const wikiResponse = await axios.get(wikidataServiceUrl + '/getQuestions', { timeout: 10000 });
-    if (wikiResponse.status !== 200) {
-      let statusCode = wikiResponse.status ? wikiResponse.status : 500;
-
-      console.error('Error with the wikidata service:', statusCode);
-      res.status(statusCode).json({ error: 'Error with the wikidata service' });
-
-    } else {
-      res.json(wikiResponse.data);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error });
-  }
+  getQuestions('/getQuestions', res);
 });
 
 app.get('/GetCapitalsQuestions', async (_req, res) => {
