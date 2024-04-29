@@ -25,11 +25,11 @@ const AddUser = (props: props)  => {
       return;
     }
     const response = await register(email,username, password);
-    if (!response) {
-      setError("Error while registering");
+    if (response.error) {
+      setError(response.message);
     }
     else {
-      props.onRegistrationCompleted(response);
+      props.onRegistrationCompleted(response.message);
     }
 
     

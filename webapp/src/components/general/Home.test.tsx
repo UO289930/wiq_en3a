@@ -4,6 +4,26 @@ import { Home } from './Home';
 import { BrowserRouter as Router } from 'react-router-dom'; // Importa BrowserRouter
 
 describe('Home component', () => {
+
+  it('should update selectedOption state when radio button is clicked', () => {
+    render(
+      <Router> 
+        <Home />
+      </Router>
+    );
+
+    const radioButton = screen.getByLabelText('Easy'); // Obtén el radio button por su etiqueta
+    fireEvent.click(radioButton); // Simula un clic en el radio button
+
+    expect(screen.getByLabelText('Easy')).toBeChecked(); // Verifica que el radio button esté marcado
+    expect(screen.queryByLabelText('Hard')).not.toBeChecked(); // Verifica que el otro radio button no esté marcado
+
+    fireEvent.click(screen.getByLabelText('Hard')); // Simula un clic en el otro radio button
+
+    expect(screen.getByLabelText('Hard')).toBeChecked(); // Verifica que el otro radio button esté marcado
+    expect(screen.queryByLabelText('Easy')).not.toBeChecked(); // Verifica que el primer radio button no esté marcado
+  });
+
   it('should render the "Start Game!" button when not playing', () => {
     render(
       <Router> 

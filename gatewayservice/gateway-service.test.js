@@ -11,7 +11,8 @@ afterAll(() => {
 describe('Gateway Service', () => {
 
   axios.get.mockImplementation((url) => {
-    if (url.endsWith('Questions')) {
+    if (url.endsWith('getQuestions') || url.endsWith('getCapitalsQuestions') 
+    || url.endsWith('getMovieDirectorsQuestions') || url.endsWith('getElementSymbolsQuestions')) {
       return Promise.resolve({
         status: 200,
         data: {
@@ -68,7 +69,51 @@ describe('Gateway Service', () => {
               }],
         }
       });
-    } 
+    } else if(url.endsWith('Questions')){
+      return Promise.resolve({
+        status: 200,
+        data: {
+          questions: [
+            {
+            "text": "What is the capital of France?",
+            "answers": ["London", "Berlin", "Paris", "Madrid"],
+            "correctAnswer": 2
+            }
+          ],
+        }
+      });
+    } else if(url.endsWith('getAllUsers')) {
+      return Promise.resolve({
+        status: 200, 
+        data: {
+          users:
+            [{
+              "_id":"65e604d6b9b58650687ee809",
+              "username":"tomas",
+              "password":"$2b$10$cD6x4mUOP9Q16SfMpbWXGugPczuYcV/HMaJbVTWJ.guZoy.LmEe6e",
+              "email":"tomas@gmail.com",
+              "questions_answered":500,
+              "correctly_answered_questions":200,
+              "createdAt":"2024-03-03T17:30:54.385Z",
+              "cheeseCount":1
+            }]
+        }
+      });
+    } else if(url.endsWith('/getUser')){
+      return Promise.resolve({
+        status: 200, 
+        data: {
+          "_id":"65e604d6b9b58650687ee809",
+          "username":"tomas",
+          "password":"$2b$10$cD6x4mUOP9Q16SfMpbWXGugPczuYcV/HMaJbVTWJ.guZoy.LmEe6e",
+          "email":"tomas@gmail.com",
+          "questions_answered":500,
+          "correctly_answered_questions":200,
+          "createdAt":"2024-03-03T17:30:54.385Z",
+          "cheeseCount":1
+        }
+      });
+    }
     
 
     return Promise.resolve({
@@ -85,9 +130,11 @@ describe('Gateway Service', () => {
       return Promise.resolve({ data: { token: 'mockedToken' } });
     } else if (url.endsWith('/adduser')) {
       return Promise.resolve({ data: { userId: 'mockedUserId' } });
-    } else if(url.endsWith('/edituser')){
+    } else if(url.endsWith('/sumNormalStats')){
       return Promise.resolve({ data: { message: 'User updated' } });
-    }
+    } else if(url.endsWith('/sumTrivialStats')){
+      return Promise.resolve({ data: { message: 'User updated' } });
+    } 
   });
 
   // Test health
@@ -141,8 +188,33 @@ describe('Gateway Service', () => {
   });
 
   it('should retrieve 10 movie directors questions with their corresponding answers', async () => {
-    await checkCorrectQuestionsResponse('/getMovieDirectorsQuestions', 10);
+    await checkCorrectQuestionsResponse('/GetMovieDirectorsQuestions', 10);
   });
+
+  it('should retrieve 1 history question with its corresponding answer', async () => {
+    
+    await checkCorrectQuestionsResponse('/GetHistoryQuestions', 1);
+  }, 60000);
+
+  it('should retrieve 1 sports-related question with its corresponding answer', async () => {
+  
+    await checkCorrectQuestionsResponse('/GetSportQuestions', 1);
+  }, 60000);
+
+  it('should retrieve 1 geography question with its corresponding answer', async () => {
+  
+    await checkCorrectQuestionsResponse('/GetGeographyQuestions', 1);
+  }, 60000);
+
+  it('should retrieve 1 geography question with its corresponding answer', async () => {
+  
+    await checkCorrectQuestionsResponse('/GetEntertainmentQuestions', 1);
+  }, 60000);
+
+  it('should retrieve 1 geography question with its corresponding answer', async () => {
+  
+    await checkCorrectQuestionsResponse('/GetChemistryQuestions', 1);
+  }, 60000);
 
 
   async function checkCorrectQuestionsResponse(endpoint, retrieved){
@@ -159,5 +231,61 @@ describe('Gateway Service', () => {
     const response = await request(app).get("/api-doc");
     expect(response.status).toBe(301);
   });
+
+  // Test /sumStats
+  it('should respond with a successful update operation of normal game mode stats', async () => {
+
+    await sumStats('/sumNormalStats', { 
+      username: 'newuser',
+      questions_answered:500,
+      correctly_answered_questions:200
+    });
+  }, 6000);
+
+  it('should respond with a successful update operation of trivial game mode stats', async () => {
+    await sumStats('/sumTrivialStats', { 
+      username: 'newuser', 
+      cheeseCount:10
+    });
+  }, 6000);
+
+
+  async function sumStats(endpoint, user){
+    const response = await request(app)
+      .post(endpoint)
+      .send(user);
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe("User updated");
+  }
+
+  // Test getUser(s)
+
+  it('should retrieve the specified user', async () => {
+    const response = await request(app).post('/getUser').send({username: "tomas"});
+    expect(response.status).toBe(200);
+    console.log(response.body);
+    checkCorrectUserFields(response.body);
+
+  }, 6000);
+
+  it('should retrieve all the users', async () => {
+    const response = await request(app).get('/getAllUsers');
+    expect(response.status).toBe(200);
+    expect(response.body.users.length).toBe(1);
+    console.log(response.body);
+    await checkCorrectUserFields(response.body.users[0]);
+
+  }, 6000);
+
+  async function checkCorrectUserFields(user){
+    expect(user).toHaveProperty("_id");
+    expect(user).toHaveProperty("username");
+    expect(user).toHaveProperty("password");
+    expect(user).toHaveProperty("createdAt");
+    expect(user).toHaveProperty("email");
+    expect(user).toHaveProperty("questions_answered");
+    expect(user).toHaveProperty("correctly_answered_questions");
+    expect(user).toHaveProperty("cheeseCount");
+  }
   
 });

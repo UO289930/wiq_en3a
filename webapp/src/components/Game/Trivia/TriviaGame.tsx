@@ -3,13 +3,74 @@ import { Cheese } from "./Cheese";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import { getCategoryColor, getCategoryColorWithNumber, getCategoryWithNumber } from "./categories";
-import { Question as questionType } from "../../../services/question-service";
+import { getHardString, Question as questionType } from "../../../services/question-service";
 import { getEntertainmentQuestions, getGeographyQuestions, getHistoryQuestions, getScienceQuestions, getSportQuestions } from "./trivia_service";
 import { TriviaQuestion } from "./TriviaQuestion";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import GameOver from "../GameOver";
+import { updateTrivialStats } from "../../../services/auth-service";
 
-export const TriviaGame = () => {
+type Props = {
+  difficulty: string;
+};
+
+export const getCategory = (diceResult: number) => {
+  return getCategoryWithNumber(diceResult);
+};
+
+export const formatNumberWithDots = (str : string)=> {
+    
+  if (str.length < 5 || str.includes('.')) {
+    return str;
+  }
+  let result = '';
+  for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
+    result = str[i] + result;
+    if (count % 3 === 2 && i !== 0) {
+      result = '.' + result;
+    }
+  }
+
+  return result;
+}
+
+export const isNumber = (str : string) => {
+  return !isNaN(Number(str));
+}
+
+export const generateDiceRandomNumber = () => {
+  return Math.floor(Math.random() * 5) + 1;
+}
+
+export const getQuestion = async (category: string): Promise<questionType> => {
+  try {
+    let question: questionType;
+    switch (category) {
+      case "Sport":
+        question = await getSportQuestions();
+        break;
+      case "Science":
+        question = await getScienceQuestions();
+        break;
+      case "History":
+        question = await getHistoryQuestions();
+        break;
+      case "Geography":
+        question = await getGeographyQuestions();
+        break;
+      case "Entertainment":
+        question = await getEntertainmentQuestions();
+        break;
+      default:
+        question = await getSportQuestions();
+    }
+    return question;
+  } catch (error) {
+    console.error("Error getting question:", error);
+    throw error;
+  }
+};
+
+export const TriviaGame = (props : Props) => {
   const [showBlue, setShowBlue] = useState(false);
   const [showGreen, setShowGreen] = useState(false);
   const [showYellow, setShowYellow] = useState(false);
@@ -24,12 +85,21 @@ export const TriviaGame = () => {
   const [questions, setQuestions] = useState<questionType[]>([]);
 
   const [categoriesPassed, setCategoriesPassed] = useState(new Array<number>());
+  
 
-  const [lifes, setLifes] = useState(3);
+  const easyLifesNumber = 6;
+  const hardLifesNumber = 3;
+  const [lifes, setLifes] = useState(easyLifesNumber);
  
   const sleep = (ms : number) => new Promise(r => setTimeout(r, ms))
 
   type SetColorFunction = (bool: boolean) => void; 
+
+
+
+  useEffect(() => {
+    props.difficulty === getHardString() ? setLifes( hardLifesNumber) : setLifes(easyLifesNumber);
+  }, [props.difficulty]);
 
 const getSetColor: (n: number) => SetColorFunction = (n: number) => {
   let category = getCategoryWithNumber(n);
@@ -46,20 +116,15 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
       return setShowPink;
     default:
       return setShowBlue;
-
   }
-   
 };
 
-  const generateDiceRandomNumber = () => {
-    return Math.floor(Math.random() * 5) + 1;
-  }
+  
 
   useEffect(() => {
     if(isShowingQuestion || diceResult === 0){
       return 
     }
-
     else {
       sleep(1000).then(() => {
         getQuestion(getCategory(diceResult)).then((question) => {
@@ -69,48 +134,16 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
           setQuestionShowed(question);
           setIsShowingQuestion(true);
+          
         });
       });
     }
   }, [diceResult]);
 
 
-  const textStyle = {
-    color: getCategoryColorWithNumber(diceResult),
-  };
-
-  const getQuestion = async (category: string): Promise<questionType> => {
-    try {
-      let question: questionType;
-      switch (category) {
-        case "Sport":
-          question = await getSportQuestions();
-          break;
-        case "Science":
-          question = await getScienceQuestions();
-          break;
-        case "History":
-          question = await getHistoryQuestions();
-          break;
-        case "Geography":
-          question = await getGeographyQuestions();
-          break;
-        case "Entertainment":
-          question = await getEntertainmentQuestions();
-          break;
-        default:
-          question = await getSportQuestions();
-      }
-      return question;
-    } catch (error) {
-      console.error("Error getting question:", error);
-      throw error;
-    }
-  };
   
-  const getCategory = (diceResult: number) => {
-    return getCategoryWithNumber(diceResult);
-  };
+  
+  
 
   const saveAnswer = (answer: string) => {
     answerSelected.push(answer);
@@ -122,31 +155,25 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
     setQuestions(questions);    
   }
 
-  function formatNumberWithDots(str : string) : string {
-    
-    if (str.length < 4) {
-      return str;
-    }
-    let result = '';
-    for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
-      result = str[i] + result;
-      if (count % 3 === 2 && i !== 0) {
-        result = '.' + result;
-      }
-    }
   
-    return result;
-  }
-  
-  function isNumber(str : string) : boolean {
-    return !isNaN(Number(str));
+
+  const getCheeseCount = () => {
+    let count = 0;
+    if(showBlue) count++;
+    if(showGreen) count++;
+    if(showYellow) count++;
+    if(showPink) count++;
+    if(showOrange) count++;
+    return count;
   }
 
   //GAME FINISHED
   if((showBlue && showGreen && showYellow && showPink && showOrange)){
-    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !! "/>;
+    updateTrivialStats(questions.length,5);
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Win !!"/>;
   }else if(lifes === 0){
-    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Lose !! :( "/>;
+    updateTrivialStats(questions.length, getCheeseCount());
+    return <GameOver answers={answerSelected} questions={questions} finalMessage="You Loose !! :("/>;
   }
 
   return (
@@ -159,7 +186,7 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
           showPink={showPink}
           showOrange={showOrange}
         />
-        <div className="h-full flex items-center">
+        <div className="h-full flex items-center" data-testid="lifes">
           {Array.from({ length: lifes }, (_, index) => (
             <span className="text-4xl " key={index}>&#x2764;</span>
           ))}

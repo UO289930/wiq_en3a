@@ -14,7 +14,9 @@ describe('GameOver component', () => {
     
     render(
       <Router>
+
         <GameOver questions={questions} answers={answers} finalMessage='Game Over'/>
+
       </Router>
     );
 

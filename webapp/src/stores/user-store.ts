@@ -14,3 +14,11 @@ export const useUserStore = create<UserState>((set) => ({
     setUser: (user) => set({user}),
     logout: () => set({user:null})
   }));
+
+export const getUsername = () => {
+  let user = useUserStore.getState().user;
+  if (!user) {
+    return "Default";
+  }
+  return user.username;
+}

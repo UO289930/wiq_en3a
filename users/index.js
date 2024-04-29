@@ -2,15 +2,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 // app and port definition
 const app = express();
-const port = process.env.PORT || 8003;
-
+const port = 8003;
 
 // Connect to MongoDB
-const mongoUri = 'mongodb+srv://prueba:prueba@cluster0.kjzbhst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoUri = process.env.MONGODB_URI;
 
 mongoose.connect(mongoUri).then(
   console.log('Succesfully connected to MongoDB')
@@ -28,8 +29,6 @@ app.use(bodyParser.json());
 // Routes middlewares to be used
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
-
-
 
 
 // Start the server

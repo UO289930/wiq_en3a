@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode"; 
 import { useUserStore } from '../stores/user-store';
-// import { useStats } from '../stores/playing-store';
 
 const API_URL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -40,10 +39,10 @@ export const register = async (email:string, username: string, password: string)
     const response = await axios.post(`${API_URL}/adduser`, { username, password, email });
     console.log('response:', response);
     const name = response.data;
-    return name;
-  } catch (error) {
-    console.error('Error during registration:', error);
-    throw error;
+    return {error:false,message:name};
+  } catch (error: any) {
+    console.log('Error during registration:', error);
+    return {error:true,message:error.response.data.error};
   }
 };
  
@@ -62,7 +61,6 @@ export const getAllUsers = async () => {
 export const getUser = async (username: string) => {
   try {
     const response = await axios.post(`${API_URL}/getUser`, {username});
-    console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error during retrieving the users', error);
@@ -71,14 +69,22 @@ export const getUser = async (username: string) => {
 };
  
 
- 
-
-
 export const updateStats = async (questions_answered: number, correctly_answered_questions: number) => {
   const username = getUsername();
   try {
-    await axios.post(`${API_URL}/edituser`, { username, questions_answered, correctly_answered_questions });
+    await axios.post(`${API_URL}/sumNormalStats`, { username, questions_answered, correctly_answered_questions });
     //updateStatsState(questions_answered, correctly_answered_questions);
+    return true;
+  } catch (error) {
+    console.error('Error during retrieving data:', error);
+    return false;
+  }
+}
+
+ export const updateTrivialStats = async (questions_answered: number,cheeseCount: number) => {
+  const username = getUsername();
+  try {
+    await axios.post(`${API_URL}/sumTrivialStats`, { username, questions_answered, cheeseCount });
     return true;
   } catch (error) {
     console.error('Error during retrieving data:', error);

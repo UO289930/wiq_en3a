@@ -33,6 +33,7 @@ app.post('/login', async (req, res) => {
     res.json(authResponse.data);
   } catch (error) {
     console.error(error);
+    res.status(401).json({error:error});
   }
 });
 
@@ -43,13 +44,24 @@ app.post('/adduser', async (req, res) => {
     res.json(userResponse.data);
   } catch (error) {
     console.error(error);
+    res.status(401).json({error:error.response.data.error});
   }
 });
 
-app.post('/edituser', async (req, res) => {
+app.post('/sumNormalStats', async (req, res) => {
   try {
-    // Forward the edit user request to the user service
-    const userResponse = await axios.post(userServiceUrl + '/user/edituser', req.body);
+    // Forward the edit user with normal stats request to the user service
+    const userResponse = await axios.post(userServiceUrl + '/user/sumNormalStats', req.body);
+    res.json(userResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/sumTrivialStats', async (req, res) => {
+  try {
+    // Forward the edit user with trivial stats request to the user service
+    const userResponse = await axios.post(userServiceUrl + '/user/sumTrivialStats', req.body);
     res.json(userResponse.data);
   } catch (error) {
     console.error(error);
@@ -61,6 +73,16 @@ app.get('/getAllUsers', async (req, res) => {
   try {
     // Forward the get all users request to the user service
     const usersResponse = await axios.get(userServiceUrl + '/user/getAllUsers');
+    res.json(usersResponse.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/getUser', async (req, res) => {
+  try {
+    const usersResponse = await axios.get(userServiceUrl + '/user/getUser', {params:req.body});
+    
     res.json(usersResponse.data);
   } catch (error) {
     console.error(error);
