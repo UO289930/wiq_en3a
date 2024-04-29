@@ -147,12 +147,14 @@ const getSetColor: (n: number) => SetColorFunction = (n: number) => {
 
   const saveAnswer = (answer: string) => {
     answerSelected.push(answer);
-    setAnswerSelected(answerSelected);
+    const newAnswers = [...answerSelected];
+    setAnswerSelected(newAnswers);
 
     setDiceResult(0);
 
     questions.push(questionShowed as questionType);
-    setQuestions(questions);    
+    const newQuestions = [...questions];
+    setQuestions(newQuestions);    
   }
 
   

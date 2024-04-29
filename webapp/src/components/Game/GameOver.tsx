@@ -13,7 +13,11 @@ type props = {
 
 const GameOver = (props: props) => {
 
-
+ const images = {
+  lowScore: '/julien.png',
+  mediumScore: '/rico.webp',
+  highScore: '/kowalski.webp',
+};
 
   const getScore = () => {
     let score = 0;
@@ -25,14 +29,31 @@ const GameOver = (props: props) => {
     return score;
   };
 
+  // Set the image according to the score
+  let score = getScore();
+  let imageToShow;
+  let message;
+  let scorePercentage = (score / props.questions.length) * 100;
+  if (scorePercentage < 50
+  ) {
+    imageToShow = images.lowScore;
+    message = "You are NOT smarter than a penguin";
+  } else if (scorePercentage < 75) {
+    imageToShow = images.mediumScore;
+    message = "You ARE smarter than a penguin";
+  } else {
+    imageToShow = images.highScore;
+    message = "You ARE smarter than the SMARTEST penguin";
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center text-text gap-16">
-      <div className="w-full flex mt-5 justify-center gap-7 items-center">
-    
-      <h1 className="text-4xl font-bold self-center ">{props.finalMessage}</h1>
-      <Link className={" text-text hover:text-primary text-4xl "} to={`/home`}>
-      🏠︎
-     </Link>
+    <div className="flex flex-col items-center justify-center text-text gap-5">
+      <div className="w-full flex mt-5 justify-center gap-7 items-center ">
+      <div className="flex flex-col justify-center items-center gap-8 ">
+      <h1 className="text-3xl font-bold text-center w-96">{message}</h1>
+      
+      </div>
+      <img src={imageToShow} alt="Score image" className="w-32" /> 
       </div>
       <div>
         <div>
@@ -57,10 +78,12 @@ const GameOver = (props: props) => {
             </tbody>
           </table>
         </div>
+        <div className="flex justify-between items-center gap-6 mt-4">
+        <p className="text-2xl">Score: {getScore()} / {props.questions.length}</p>
+        <Link className="text-text border text-center border-text hover:bg-background2 p-3 rounded-xl text-xl" to={"/home"}>Back to home</Link>
+        </div>
         
-        <p className="text-2xl mt-4">Score: {getScore()} / {props.questions.length}</p>
       </div>
-      
     </div>
   );
 };

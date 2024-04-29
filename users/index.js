@@ -11,7 +11,7 @@ const app = express();
 const port = 8003;
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI;
+const mongoUri = process.env.MONGODB_URI
 
 mongoose.connect(mongoUri).then(
   console.log('Succesfully connected to MongoDB')

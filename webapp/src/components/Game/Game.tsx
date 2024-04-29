@@ -48,6 +48,11 @@ export default function Game(props: Props) {
 
     useEffect(() => {
       getQuestionsFromApi().then((questions : questionType[]) => {
+          questions.map((q) => {
+            if(!isNaN(Number(q.answers[0]))){
+              q.answers = q.answers.map((a) => formatNumberWithDots(a));
+            }
+          });
           setQuestions(questions)
           setLoadingData(false);
       })
@@ -58,9 +63,6 @@ export default function Game(props: Props) {
       setCorrectSelected(false);
       setQuestionCount(questionCount+1);
       setLoading(true); 
-
-      if(!isNaN(Number((questions[questionCount].answers[0]))))
-        questions[questionCount].answers = questions[questionCount].answers.map((a) => formatNumberWithDots(a));
 
       setTimeout(() => {
         setLoading(false); 

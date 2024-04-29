@@ -12,7 +12,6 @@ let url = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 export const getQuestionsFromApi = async (): Promise<Question[]> => {
     const response = await axios.get(url + "/GetQuestions");
-    console.log('response:', response);
     return response.data;
 };
 

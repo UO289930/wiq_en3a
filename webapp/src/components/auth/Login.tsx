@@ -24,8 +24,7 @@ const Login = (props:props) => {
       return;
     }
 
-    const response = login(username, password);
-    console.log(response);
+    const response = await login(username, password);
     if (!response) {
       setError("Invalid Credentials");
     }
