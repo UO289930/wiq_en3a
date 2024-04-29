@@ -26,40 +26,47 @@ export default function StatsTable() {
     };
     
     return (
-        <table className="stats-table text-text text-4xl" data-testid="stats-table">
-            <thead>
-                <tr className="header">
-                    <th className="statistics" style={{ padding: '5px' , fontSize:'1.5em' }}>Statistics</th>
-                    <th className="value" style={{ padding: '5px', fontSize:'1.5em'}}>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr className="body-row"> 
-                    <td className="row-header" style={{ padding: '5px' }}>Correct Answers</td>
-                    <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsCorrect}</td>
-                </tr>
-                <tr className="body-row">
-                    <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
-                    <td data-testid="wrong-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
-                </tr>
-                <tr className="body-row">
-                    <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
-                    <td data-testid="chesses-gained" style={{ padding: '5px' }}>{chesses}</td>
-                </tr>
-                <tr className="body-row">
-                    <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
-                    <td style={{ padding: '5px' }}>
-                        <CircularProgress 
-                            value={ questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100) : 0} 
-                            color='#00A078' thickness='.3rem'
-                            size={"3rem"}>
-                            <CircularProgressLabel >
-                                {questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100).toFixed(0) : 0}%
-                            </CircularProgressLabel>
-                        </CircularProgress>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="container"> 
+                <div className="image-container">
+                    <img src="/pLeft.webp" alt="Left" />
+                </div>            <table className="stats-table text-text text-4xl" data-testid="stats-table">
+                <thead>
+                    <tr className="header">
+                        <th className="statistics" style={{ padding: '5px' , fontSize:'1.5em' }}>Statistics</th>
+                        <th className="value" style={{ padding: '5px', fontSize:'1.5em'}}>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className="body-row"> 
+                        <td className="row-header" style={{ padding: '5px' }}>Correct Answers</td>
+                        <td data-testid="correct-answers" style={{ padding: '5px' }}>{questionsCorrect}</td>
+                    </tr>
+                    <tr className="body-row">
+                        <td className="row-header" style={{ padding: '5px' }}>Wrong Answers</td>
+                        <td data-testid="wrong-answers" style={{ padding: '5px' }}>{questionsAnswered - questionsCorrect}</td>
+                    </tr>
+                    <tr className="body-row">
+                        <td className="row-header" style={{ padding: '5px' }}>Gained chesses</td>
+                        <td data-testid="chesses-gained" style={{ padding: '5px' }}>{chesses}</td>
+                    </tr>
+                    <tr className="body-row">
+                        <td className="row-header" style={{ padding: '5px' }}>Percentage Correct</td>
+                        <td style={{ padding: '5px' }}>
+                            <CircularProgress 
+                                value={ questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100) : 0} 
+                                color='#00A078' thickness='.3rem'
+                                size={"3rem"}>
+                                <CircularProgressLabel >
+                                    {questionsAnswered > 0 ? (Math.round(((questionsCorrect / questionsAnswered) * 100) * 100) / 100).toFixed(0) : 0}%
+                                </CircularProgressLabel>
+                            </CircularProgress>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div className="image-container">
+                <img src="/pRight.webp" alt="Right" />
+            </div>
+          </div>
     );
 }

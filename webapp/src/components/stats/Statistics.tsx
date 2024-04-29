@@ -36,7 +36,7 @@ export default function Statistics () {
             </div>
             <StatsTable />
             <div className="flex flex-col gap-5 justify-start items-center p-5"> 
-                <Link id="normalGame" className={" text-text border w-70 text-center border-text hover:bg-background2 p-5 rounded-xl font-bold text-3xl"} to={`/Home}`}>Continue Improving </Link>
+                <Link id="normalGame" className={" text-text border w-70 text-center border-text hover:bg-background2 p-5 rounded-xl font-bold text-3xl"} to={`/}`}>Keep Improving </Link>
             </div>
         </>
     )
