@@ -65,18 +65,19 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
     
     // Route for getting questions about mixed topics
     app.get('/getQuestions', async (req, res, next) => {
-        try {
-    
-            // Generate the questions
-            const questions1 = generateQuestions("What is the capital of: ", jsonCountryQuestions.results.bindings);
-            const questions2 = generateQuestions("What is the element of: ", jsonElementsQuestions.results.bindings);
-            const questions3 = generateQuestions("What is the director of: ", jsonMovieQuestions.results.bindings);
-    
-            // Combine the questions
-            const allQuestions = [...questions1, ...questions2, ...questions3];
-    
+        try {   
+            // Generate the questions       
+            let questions = []
+            for(let i = 0; i < 2; i++){     
+                questions.push(generateQuestions(jsonHistoryQuestions[i].questionText, jsonHistoryQuestions[i].jsonResult.results.bindings, 1));
+                questions.push(generateQuestions(jsonSportsQuestions[i].questionText, jsonSportsQuestions[i].jsonResult.results.bindings, 1));
+                questions.push(generateQuestions(jsonGeographyQuestion[i].questionText, jsonGeographyQuestion[i].jsonResult.results.bindings, 1));
+                questions.push(generateQuestions(jsonEntertainmentQuestion[i].questionText, jsonEntertainmentQuestion[i].jsonResult.results.bindings, 1));
+                questions.push(generateQuestions(jsonChemistryQuestion[i].questionText, jsonChemistryQuestion[i].jsonResult.results.bindings, 1));
+            }
+   
             // Shuffle the questions
-            let shuffled = allQuestions
+            let shuffled = questions
                 .map(value => ({ value, sort: Math.random() }))
                 .sort((a, b) => a.sort - b.sort)
                 .map(({ value }) => value)
