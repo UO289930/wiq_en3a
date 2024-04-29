@@ -575,12 +575,12 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The WIQ web application is developed by HappySw for RTVE to create an experimental version of the Saber y Ganar quiz show.
-The primary goal of WIQ is to provide users with an engaging platform where they can participate in quiz games,
+<p>The STAP (are you Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show.
+The primary goal of STAP is to provide users with an engaging platform where they can participate in quiz games,
 answer questions generated from Wikidata, and win prizes.</p>
 </div>
 <div class="paragraph">
-<p>This document outlines the essential requirements guiding the software architects and development team in creating WIQ.</p>
+<p>This document outlines the essential requirements guiding the software architects and development team in creating STAP.</p>
 </div>
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -781,17 +781,26 @@ These stakeholders determine the extent and the level of detail of your work and
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Professors</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pablo González (<a href="mailto:gonzalezgpablo@uniovi.es">gonzalezgpablo@uniovi.es</a>), Jose Emilio Labra (<a href="mailto:labra@uniovi.es">labra@uniovi.es</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pablo González (<a href="mailto:gonzalezgpablo@uniovi.es">gonzalezgpablo@uniovi.es</a>)<br>
+Jose Emilio Labra (<a href="mailto:labra@uniovi.es">labra@uniovi.es</a>)<br>
+Cristian Augusto Alonso (<a href="mailto:augustocristian@uniovi.es">augustocristian@uniovi.es</a>)<br>
+Jorge Álvarez Fidalgo (<a href="mailto:galvarezfidalgo@uniovi.es">galvarezfidalgo@uniovi.es</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The well-designed web application that fulfills the requirements</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RTVE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">www.rtve.es</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.rtve.es" class="bare">https://www.rtve.es</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reliable and engaging platform for users</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sergio Truébano Robles (<a href="mailto:uo289930@uniovi.es">uo289930@uniovi.es</a>), Pedro Limeres Granado (<a href="mailto:uo282763@uniovi.es">uo282763@uniovi.es</a>), Alberto Guerra Rodas (<a href="mailto:uo282421@uniovi.es">uo282421@uniovi.es</a>), Ángel Macías Rodríguez (<a href="mailto:uo289362@uniovi.es">uo289362@uniovi.es</a>), Rita Fernández-Catuxo Ortiz (<a href="mailto:uo284185@uniovi.es">uo284185@uniovi.es</a>), Vira Terletska (<a href="mailto:uo305097@uniovi.es">uo305097@uniovi.es</a>), Sergio Llenderrozos Piñera (<a href="mailto:uo283367@uniovi.es">uo283367@uniovi.es</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sergio Truébano Robles (<a href="mailto:uo289930@uniovi.es">uo289930@uniovi.es</a>)<br>
+Pedro Limeres Granado (<a href="mailto:uo282763@uniovi.es">uo282763@uniovi.es</a>)<br>
+ Alberto Guerra Rodas (<a href="mailto:uo282421@uniovi.es">uo282421@uniovi.es</a>)<br>
+ Ángel Macías Rodríguez (<a href="mailto:uo289362@uniovi.es">uo289362@uniovi.es</a>)<br>
+ Rita Fernández-Catuxo Ortiz (<a href="mailto:uo284185@uniovi.es">uo284185@uniovi.es</a>)<br>
+ Vira Terletska (<a href="mailto:uo305097@uniovi.es">uo305097@uniovi.es</a>)<br>
+ Sergio Llenderrozos Piñera (<a href="mailto:uo283367@uniovi.es">uo283367@uniovi.es</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clear documentation and reliable, performant and available system</p></td>
 </tr>
 </tbody>
@@ -1365,7 +1374,7 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="1021" height="578">
+<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="1014" height="578">
 </div>
 </div>
 <div class="dlist">
@@ -1416,7 +1425,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="1096" height="578">
+<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="1016" height="578">
 </div>
 </div>
 <div class="dlist">
@@ -1622,7 +1631,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="1028" height="578">
+<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="1057" height="578">
 </div>
 </div>
 </div>
@@ -1637,7 +1646,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="1043" height="578">
+<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="1008" height="578">
 </div>
 </div>
 </div>
@@ -1655,7 +1664,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="1040" height="578">
+<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="1022" height="578">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1908,7 +1917,7 @@ This will allow our team to achieve continuous deployment and delivery.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1016" height="578">
+<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1043" height="578">
 </div>
 </div>
 </div>
