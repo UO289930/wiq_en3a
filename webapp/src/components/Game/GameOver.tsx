@@ -13,7 +13,11 @@ type props = {
 
 const GameOver = (props: props) => {
 
-
+ const images = {
+  lowScore: '/julien.png',
+  mediumScore: '/rico.webp',
+  highScore: '/kowalski.webp',
+};
 
   const getScore = () => {
     let score = 0;
@@ -24,6 +28,17 @@ const GameOver = (props: props) => {
     }
     return score;
   };
+
+  // Set the image according to the score
+  let score = getScore();
+  let imageToShow;
+  if (score < 3) {
+    imageToShow = images.lowScore;
+  } else if (score < 8) {
+    imageToShow = images.mediumScore;
+  } else {
+    imageToShow = images.highScore;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center text-text gap-16">
@@ -59,8 +74,10 @@ const GameOver = (props: props) => {
         </div>
         
         <p className="text-2xl mt-4">Score: {getScore()} / {props.questions.length}</p>
+
+        <img src={imageToShow} alt="Score image" style={{paddingTop: '20px', display: 'block', marginLeft: 'auto', marginRight: 'auto'}} /> 
+        
       </div>
-      
     </div>
   );
 };
