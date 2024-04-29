@@ -76,7 +76,7 @@ Tabular or free form text.
 
 *Usage scenarios*
 
-[options="header", cols="1,1,1,1"]
+[options="header", cols="1,2,2,2"]
 |===
 | Quality goal | Motivation | Usage scenario | Priority
 
@@ -120,17 +120,12 @@ Tabular or free form text.
 
 *Change scenarios*
 
-[options="header", cols="1,1,1,1"]
+[options="header", cols="1,2,2,2"]
 |===
 | Quality goal | Motivation | Change scenario | Priority
 | *Maintainability*
 | An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.
 | When developers must introduce a new feature to the web, they should be able to do it without changing the software architecture.
-| High
-
-| *Maintainability*
-| An application should be maintainable to remain usable over the years and to be able to improve functionalities and to fix misfunctionalities.
-| When fixing errors and bugs on the system, developers should be able to do it without major consequences on the system.
 | High
 
 |===

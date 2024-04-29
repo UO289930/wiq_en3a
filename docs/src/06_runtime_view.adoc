@@ -55,11 +55,12 @@ collections FrontEnd
 collections WikidataService
 database Wikidata
 
-User -> FrontEnd: Start Game
-FrontEnd -> WikidataService: "/GetQuestions"
+
 WikidataService-> Wikidata: Sparql query
 Wikidata-> WikidataService : entitites data
 WikidataService-> WikidataService: createQuestions()
+User -> FrontEnd: Start Game
+FrontEnd -> WikidataService: "/GetQuestions"
 WikidataService-> FrontEnd: Send 10 questions
 FrontEnd -> User: Question 1
 User-> FrontEnd: Answer 1
