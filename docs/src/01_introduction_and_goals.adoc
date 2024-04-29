@@ -3,11 +3,11 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-The WIQ web application is developed by HappySw for RTVE to create an experimental version of the Saber y Ganar quiz show. 
-The primary goal of WIQ is to provide users with an engaging platform where they can participate in quiz games,
+The STAP (are you Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show. 
+The primary goal of STAP is to provide users with an engaging platform where they can participate in quiz games,
 answer questions generated from Wikidata, and win prizes.
 
-This document outlines the essential requirements guiding the software architects and development team in creating WIQ.
+This document outlines the essential requirements guiding the software architects and development team in creating STAP.
 
 [role="arc42help"]
 ****
@@ -119,9 +119,18 @@ Table with role names, person names, and their expectations with respect to the 
 |===
 | Role/Name     | Contact          | Expectations
 | Users         | N/A              | Intuitive and enjoyable quiz experience
-| Professors    | Pablo González (gonzalezgpablo@uniovi.es), Jose Emilio Labra (labra@uniovi.es) | The well-designed web application that fulfills the requirements
-| RTVE          | www.rtve.es  | Reliable and engaging platform for users
-| Development   | Sergio Truébano Robles (uo289930@uniovi.es), Pedro Limeres Granado (uo282763@uniovi.es), Alberto Guerra Rodas (uo282421@uniovi.es), Ángel Macías Rodríguez (uo289362@uniovi.es), Rita Fernández-Catuxo Ortiz (uo284185@uniovi.es), Vira Terletska (uo305097@uniovi.es), Sergio Llenderrozos Piñera (uo283367@uniovi.es) | Clear documentation and reliable, performant and available system
+| Professors    | Pablo González (gonzalezgpablo@uniovi.es) +
+Jose Emilio Labra (labra@uniovi.es) +
+Cristian Augusto Alonso (augustocristian@uniovi.es) +
+Jorge Álvarez Fidalgo (galvarezfidalgo@uniovi.es)  | The well-designed web application that fulfills the requirements
+| RTVE          | https://www.rtve.es  | Reliable and engaging platform for users
+| Development   | Sergio Truébano Robles (uo289930@uniovi.es) +
+Pedro Limeres Granado (uo282763@uniovi.es) +
+ Alberto Guerra Rodas (uo282421@uniovi.es) +
+ Ángel Macías Rodríguez (uo289362@uniovi.es) +
+ Rita Fernández-Catuxo Ortiz (uo284185@uniovi.es) +
+ Vira Terletska (uo305097@uniovi.es) +
+ Sergio Llenderrozos Piñera (uo283367@uniovi.es) | Clear documentation and reliable, performant and available system
 |===
 
 
