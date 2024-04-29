@@ -30,7 +30,6 @@ router.get('/getUser', async (req, res) => {
           console.error('Error finding user:', err);
         } else {
           res.status(200).json(result);
-          console.log('User:', result);
         }
       });
       

@@ -263,7 +263,6 @@ describe('Gateway Service', () => {
   it('should retrieve the specified user', async () => {
     const response = await request(app).post('/getUser').send({username: "tomas"});
     expect(response.status).toBe(200);
-    console.log(response.body);
     checkCorrectUserFields(response.body);
 
   }, 6000);

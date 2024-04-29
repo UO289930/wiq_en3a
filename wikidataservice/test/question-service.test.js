@@ -36,7 +36,6 @@ describe('Wikidata Service - Question Retrieval', () => {
       }
 
       expect(response.status).toBe(200);
-      console.log(response._body);
       expect(response._body.length).toBe(retrieved);
       expect(response._body[0]).toHaveProperty("text");
       expect(response._body[0]).toHaveProperty("correctAnswer");

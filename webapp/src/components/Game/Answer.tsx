@@ -18,7 +18,6 @@ const Answer = (props: props) => {
     const [clickedAnswer, setClickedAnswer] = useState('');
 
     const handleClick = () => {
-        console.log('clicked answer');
         setClickedAnswer(props.answer);
         props.setAnswered(true);
         props.setCorrectSelected(props.correctAnswer);

@@ -86,7 +86,8 @@ export default function Game(props: Props) {
 
   const saveAnswer = (answer: string) => {
     answerSelected.push(answer);
-    setAnswerSelected(answerSelected);
+    const newAnswerSelected = [...answerSelected];
+    setAnswerSelected(newAnswerSelected);
   }
 
   useEffect(() => {
