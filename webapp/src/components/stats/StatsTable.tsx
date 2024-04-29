@@ -28,8 +28,9 @@ export default function StatsTable() {
     return (
         <div className="container"> 
                 <div className="image-container">
-                    <img src="/pLeft.webp" alt="Left" />
-                </div>            <table className="stats-table text-text text-4xl" data-testid="stats-table">
+                    <img src="/penguinsLeft.webp" alt="Left" />
+                </div>            
+                <table className="stats-table text-text text-4xl " data-testid="stats-table">
                 <thead>
                     <tr className="header">
                         <th className="statistics" style={{ padding: '5px' , fontSize:'1.5em' }}>Statistics</th>
@@ -65,7 +66,7 @@ export default function StatsTable() {
                 </tbody>
             </table>
             <div className="image-container">
-                <img src="/pRight.webp" alt="Right" />
+                <img src="/penguinsRight.webp" alt="Right" />
             </div>
           </div>
     );

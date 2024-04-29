@@ -25,18 +25,18 @@ export default function Statistics () {
 
     return (
         <>
-            <div id="statsHeader" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' , marginTop:'30px'}}>
+            <div id="statsHeader" className="flex flex-col items-center gap-3 mt-3">
                 <div className="avatar"> 
                 <Avatar.Root className="AvatarRoot" style={{ width: '100px', height: '100px' }}>
                         <Avatar.Fallback className="AvatarFallback" style={{fontSize:'2em'}}>{username.toUpperCase().charAt(0)}{username.toUpperCase().charAt(1)}</Avatar.Fallback>
                     </Avatar.Root>
                 </div>
-                <h1 className="h1-statistics" style={{ marginTop: '0.5em', marginBottom:'0.1em', fontSize:'3.1em'}}>{username}</h1> 
-                <h1 className="h2-statistics" >{email}</h1> 
+                <h1 className="text-text text-2xl" >{username}</h1> 
+                <h1 className="text-text text-2xl" >{email}</h1> 
             </div>
             <StatsTable />
             <div className="flex flex-col gap-5 justify-start items-center p-5"> 
-                <Link id="normalGame" className={" text-text border w-70 text-center border-text hover:bg-background2 p-5 rounded-xl font-bold text-3xl"} to={`/}`}>Keep Improving </Link>
+                <Link id="normalGame" className={" text-text border w-70 text-center border-text hover:bg-background2 p-4 rounded-xl font-bold text-2xl"} to={`/}`}>Keep Improving </Link>
             </div>
         </>
     )

@@ -278,20 +278,21 @@
 
 .stats-table {
   font-size: 1rem;
-  color: white;
+  color: #f2ecff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 80%;
   margin: auto;
   border-bottom: 1rem;
+ 
 
   .header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     padding-bottom: 1rem;
-    border-bottom: .1rem solid white;
+    border-bottom: .1rem solid #f2ecff;
 
     th {
       padding-inline: 1rem;
