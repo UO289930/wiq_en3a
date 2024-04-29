@@ -69,19 +69,19 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
             // Generate the questions       
             let questions = []
             for(let i = 0; i < 2; i++){     
-                questions.push(generateQuestions(jsonHistoryQuestions[i].questionText, jsonHistoryQuestions[i].jsonResult.results.bindings, 1));
-                questions.push(generateQuestions(jsonSportsQuestions[i].questionText, jsonSportsQuestions[i].jsonResult.results.bindings, 1));
-                questions.push(generateQuestions(jsonGeographyQuestion[i].questionText, jsonGeographyQuestion[i].jsonResult.results.bindings, 1));
-                questions.push(generateQuestions(jsonEntertainmentQuestion[i].questionText, jsonEntertainmentQuestion[i].jsonResult.results.bindings, 1));
-                questions.push(generateQuestions(jsonChemistryQuestion[i].questionText, jsonChemistryQuestion[i].jsonResult.results.bindings, 1));
+                questions.push(generateQuestions(jsonHistoryQuestions[i].questionText, jsonHistoryQuestions[i].jsonResult.results.bindings, 1)[0]);
+                questions.push(generateQuestions(jsonSportsQuestions[i].questionText, jsonSportsQuestions[i].jsonResult.results.bindings, 1)[0]);
+                questions.push(generateQuestions(jsonGeographyQuestion[i].questionText, jsonGeographyQuestion[i].jsonResult.results.bindings, 1)[0]);
+                questions.push(generateQuestions(jsonEntertainmentQuestion[i].questionText, jsonEntertainmentQuestion[i].jsonResult.results.bindings, 1)[0]);
+                questions.push(generateQuestions(jsonChemistryQuestion[i].questionText, jsonChemistryQuestion[i].jsonResult.results.bindings, 1)[0]);
             }
-   
+            
+            console.log(questions)
             // Shuffle the questions
             let shuffled = questions
                 .map(value => ({ value, sort: Math.random() }))
                 .sort((a, b) => a.sort - b.sort)
                 .map(({ value }) => value)
-            
              res.status(200).json(shuffled.slice(0,10));
         } catch (error) {
             next(error);
@@ -95,7 +95,7 @@ init().then(([jsonCountryQuestions, jsonElementsQuestions, jsonMovieQuestions,
             const randomIndex = Math.floor(Math.random() * jsonHistoryQuestions.length);
             let itemData = jsonHistoryQuestions[randomIndex];
             const questions = generateQuestions(itemData.questionText, itemData.jsonResult.results.bindings, 1);
-    
+            console.log(questions)
             res.status(200).json(questions);
         } catch (error) {
             next(error);
