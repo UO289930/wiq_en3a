@@ -26,7 +26,7 @@ export default function StatsTable() {
     };
     
     return (
-        <div className="container"> 
+        <div className="container mt-6"> 
                 <div className="image-container">
                     <img src="/penguinsLeft.webp" alt="Left" />
                 </div>            
