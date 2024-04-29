@@ -8,7 +8,7 @@ dotenv.config();
 
 // app and port definition
 const app = express();
-const port = process.env.PORT || 8003;
+const port = 8003;
 
 // Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI;
