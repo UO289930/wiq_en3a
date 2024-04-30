@@ -29,10 +29,11 @@ This is a base repo for the [Software Architecture course](http://arquisoft.gith
 
 ➡This repo is a basic application composed of several components.
 
-- **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
-- **User service**. Express service that handles the insertion of new users in the system.
-- **Auth service**. Express service that handles the authentication of users.
 - **Webapp**. React web application that uses the gateway service to allow basic login and new user features.
+- **Wikidata service**.Express service for the question generation.
+- **User service**. Express service that is responsible for managing all user-related operations
+- **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
+
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
 
