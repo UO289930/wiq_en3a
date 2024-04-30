@@ -35,7 +35,7 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 |===
 |Term |Definition
 
-|WIQ
+|STAP
 |A web application where users can register and login in order to play. The game consists on answering a number of questions with different types and subjects obtaining a prize for each question well answered.
 
 |Wikidata

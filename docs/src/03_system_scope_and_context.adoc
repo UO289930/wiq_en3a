@@ -53,7 +53,7 @@ image::03_business_context.png["Business Context Diagram"]
 [cols="1,1,1", options="header"]
 |===
 | **Partner** | **Input** | **Output**
-| User  | The user interacts with the WIQ web application using the front-end of the application. | The display of a page of the application with the questions and statistics.
+| User  | The user interacts with the STAP web application using the front-end of the application. | The display of a page of the application with the questions and statistics.
 | Database | Stores relevant information of the application (users, number of games, questions passed/failed, times…). | Retrieves the information that the application requires.
 | Question generation | Questions generated from Wikidata. | These generated questions are sent to the application.
 | Wikidata API | Receives a query linked to the question to be asked. | Returns the necessary information to formulate the question.
