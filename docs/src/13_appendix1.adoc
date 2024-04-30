@@ -22,6 +22,10 @@ image::webapp-coverage1.png["Code coverage for the web application code"]
 
 image::webapp-coverage2.png["Time results for the web application code test"]
 
+    Results for gateway service:
+
+image::gateway-coverage.png["Code coverage for the gateway service code"]
+
     Results for users service:
 
 image::users-coverage.png["Code coverage for the users service code"]
@@ -84,3 +88,7 @@ image::2-10users-secB.png["25 users per second in 60 seconds user-simulation spe
 
 
  - E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.
+    We developed seven e2e tests that check the main paths for our application, making sure everything works fine when integrated together. We test every endpoint on the app up until the information may depend in each execution of the petition.
+
+image::e2e-tests.png["e2e tests developed, running on our local machine"]
+image::e2e-results.png["e2e tests results, running on our local machine"]

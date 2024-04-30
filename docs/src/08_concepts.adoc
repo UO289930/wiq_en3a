@@ -112,11 +112,8 @@ The chosen color palette strikes a balance between functionality, aesthetics, an
 === Development concepts
 
 ==== Testing and Monitoring
-    We performed Load Testing, Unit Testing, End-to-end testing and Code Analysis with SonarCloud.
-    The results obtained can be checked here : <<section-appendix1>>
-
-==== Deployment
-The application is deployed using Docker.
+We performed Load Testing, Unit Testing, End-to-end testing and Code Analysis with SonarCloud.
+The results obtained can be checked here: <<section-appendix1>>
 
 ==== Configurability
 The application has simple configurable game features for selecting between two game modes (normal/usual and trivia game mode) and two difficulty levels (easy and hard difficulties).
