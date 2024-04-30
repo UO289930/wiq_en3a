@@ -26,7 +26,49 @@ See https://docs.arc42.org/section-10/[Quality Requirements] in the arc42 docume
 ****
 
 === Quality Tree
-image::10-Quality-Tree-EN.png["Quality Tree"]
+[plantuml, format="png"]
+----
+@startuml
+title Scope & Context
+left to right direction
+' Define custom style for components
+skinparam componentStyle uml2
+
+' Define components as rectangles without default stereotypes
+cloud "Quality Requirements" as Quality
+rectangle "Reliability" as Reliability
+rectangle "Security" as Security
+rectangle "Performance" as Performance
+rectangle "Portability" as Portability
+rectangle "Usability" as Usability
+rectangle "Testability" as Testability
+rectangle "Maintainability" as Maintainability
+note "The system is consistent" as N1
+note "The data for each user is private" as N2
+note "Fast response time" as N3
+note "The application works in different infrastructures" as N4
+note "The system has a good interface" as N5
+note "The system is easily testable" as N6
+note "The system is easy to maintain and evolve" as N7
+
+' Define connections
+Quality -- Reliability
+Quality -- Security
+Quality -- Performance
+Quality -- Portability
+Quality -- Usability
+Quality -- Testability
+Quality -- Maintainability
+Reliability --> N1
+Security --> N2
+Performance --> N3
+Portability --> N4
+Usability --> N5
+Testability --> N6
+Maintainability --> N7
+
+@enduml
+----
 
 [role="arc42help"]
 ****
