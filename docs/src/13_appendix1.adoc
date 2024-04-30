@@ -12,23 +12,23 @@ Showing the results of all testing results
 
 ****
 
-==== Testing and Monitoring
+=== Testing and Monitoring
  - Unit Testing: Unit testing plays a crucial role in our development workflow, providing confidence in the stability and functionality of our application. By utilizing .test.tsx files for our React components and .test.js files for our Node.js backend, we ensure that our code behaves as expected, regardless of the environment. This comprehensive approach to testing allows us to catch and address issues early in the development cycle, leading to higher-quality software and smoother deployment processes.
  - Code Analysis: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.
 
     Results for web application:
 
-    image::webapp-coverage1.png["Code coverage for the web application code"]
+image::webapp-coverage1.png["Code coverage for the web application code"]
 
-    image::webapp-coverage2.png["Time results for the web application code test"]
+image::webapp-coverage2.png["Time results for the web application code test"]
 
     Results for users service:
 
-    image::users-coverage.png["Code coverage for the users service code"]
+image::users-coverage.png["Code coverage for the users service code"]
 
     Results for wikidata service:
 
-    image::wikidata-coverage.png["Code coverage for the wikidata service code"]
+image::wikidata-coverage.png["Code coverage for the wikidata service code"]
 
  - Load Testing and Monitoring: We used Gattling for recording user simulations that consist on login into the application, playing the existing game modes and checking the statistics and leaderboards. Then, Gatling allowed us to also measure the performance of the application and the average response times when creating 2, 5, 10 and 25 users per second during 60 seconds performing the previously mentioned simulations, using 2 different Azure machines. 
  Particularly, load testing has been performed using a 1-cpu machine with almost 1GB of RAM memory and also, using a 2-cpu machine with 8GB of RAM memory.
