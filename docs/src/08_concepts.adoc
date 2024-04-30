@@ -67,7 +67,8 @@ In our app, the question is always represent as a data structure with the next f
 {
     text: "What is the capital of Asturias?"
     answers: [Gijón,Oviedo,Cangas de Onís]
-    correctIndex: 1
+    correctAnswer: 1
+    wikiLink: "https://www.wikidata.org/wiki/Q14317"
 }
 ----
 
@@ -89,10 +90,10 @@ We decided to use a color palette of 4 colors:
 [cols="1,1", options="header"]
 |===
 | Name | Color
-| Background | +++<span style="color: #191919; font-weight:bold">#191919</span>+++
-| Text| +++<span style="background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span>+++
-| Primary | +++<span style="color: #00c896; font-weight:bold">#00c896</span>+++
-| Danger | +++<span style="color: #e35a2a; font-weight:bold">#e35a2a</span>+++
+| Background | +++<span style="padding: 5px;background-color: #191919;color: #f2ecff; font-weight:bold">#191919</span>+++
+| Text| +++<span style="padding: 5px; background-color: #191919;color: #f2ecff; font-weight:bold"></span>+++
+| Primary | +++<span style="padding: 5px; background-color: #191919; color: #00c896; font-weight:bold">#00c896</span>+++
+| Danger | +++<span style="padding: 5px; background-color: #191919; color: #e35a2a; font-weight:bold">#e35a2a</span>+++
 |===
 
 *Benefits:*

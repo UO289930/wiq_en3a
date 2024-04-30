@@ -69,8 +69,6 @@ In the best case you will get away with examples or simple signatures.
 @startuml
 title Scope & Context
 left to right direction
-' Define custom style for components
-skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
 rectangle "STAP" as STAP
