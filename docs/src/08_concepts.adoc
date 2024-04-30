@@ -91,7 +91,7 @@ We decided to use a color palette of 4 colors:
 |===
 | Name | Color
 | Background | +++<span style="padding: 5px;background-color: #191919;color: #f2ecff; font-weight:bold">#191919</span>+++
-| Text| +++<span style="padding: 5px; background-color: #191919;color: #f2ecff; font-weight:bold"></span>+++
+| Text| +++<span style="padding: 5px; background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span>+++
 | Primary | +++<span style="padding: 5px; background-color: #191919; color: #00c896; font-weight:bold">#00c896</span>+++
 | Danger | +++<span style="padding: 5px; background-color: #191919; color: #e35a2a; font-weight:bold">#e35a2a</span>+++
 |===
