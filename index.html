@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Template</title>
+<title>STAP Project Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -433,15 +433,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1><span class="image"><img src="./images/arc42-logo.png" alt="arc42"></span> Template</h1>
+<h1><span class="image"><img src="./images/penguin.ico" alt="arc42"></span> STAP Project Documentation</h1>
 <div class="details">
 <span id="revnumber">version 8.2 EN,</span>
-<span id="revdate">January 2023</span>
+<span id="revdate">April 2024</span>
 <br><span id="revremark">(based upon AsciiDoc version)</span>
 </div>
-<div id="toc" class="toc">
+<div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#section-introduction-and-goals">1. Introduction and Goals</a>
@@ -468,8 +468,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_technologies">4.1. Technologies</a></li>
 <li><a href="#_technological_decisions">4.2. Technological decisions</a></li>
-<li><a href="#_architecture_design">4.3. Architecture &amp; Design</a></li>
-<li><a href="#_team_organization">4.4. Team Organization</a></li>
+<li><a href="#_solution_strategy_in_context_with_quality_attributes">4.3. Solution strategy in context with quality attributes</a></li>
+<li><a href="#_architecture_design">4.4. Architecture &amp; Design</a></li>
+<li><a href="#_team_organization">4.5. Team Organization</a></li>
 </ul>
 </li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
@@ -477,7 +478,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
 <li><a href="#_level_1">5.2. Level 1</a></li>
 <li><a href="#_level_2">5.3. Level 2</a></li>
-<li><a href="#_level_3">5.4. Level 3</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
@@ -505,7 +505,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_development_concepts">8.3. Development concepts</a></li>
 </ul>
 </li>
-<li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
+<li><a href="#section-design-decisions">9. Architecture Decisions</a>
+<ul class="sectlevel2">
+<li><a href="#_microservices_architecture">9.1. Microservices architecture</a></li>
+<li><a href="#_api_gateway">9.2. API Gateway</a></li>
+<li><a href="#_docker_containers">9.3. Docker containers</a></li>
+<li><a href="#_react_tailwind_css">9.4. React &amp; Tailwind CSS</a></li>
+<li><a href="#_node_js">9.5. Node.js</a></li>
+</ul>
+</li>
 <li><a href="#section-quality-scenarios">10. Quality Requirements</a>
 <ul class="sectlevel2">
 <li><a href="#_quality_tree">10.1. Quality Tree</a></li>
@@ -519,6 +527,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#section-glossary">12. Glossary</a></li>
+<li><a href="#section-appendix1">13. Appendix I - Testing results</a>
+<ul class="sectlevel2">
+<li><a href="#_testing_and_monitoring_2">13.1. Testing and Monitoring</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -534,40 +547,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 	.arc42help {display:none;}
 }
 </style>
-<div class="paragraph">
-<p><strong>About arc42</strong></p>
-</div>
-<div class="paragraph lead">
-<p>arc42, the template for documentation of software and system architecture.</p>
-</div>
-<div class="paragraph">
-<p>Template Version 8.2 EN. (based upon AsciiDoc version), January 2023</p>
-</div>
-<div class="paragraph">
-<p>Created, maintained and &#169; by Dr. Peter Hruschka, Dr. Gernot Starke and contributors.
-See <a href="https://arc42.org" class="bare">https://arc42.org</a>.</p>
-</div>
-<hr>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This version of the template contains some help and explanations.
-It is used for familiarization with arc42 and the understanding of the concepts.
-For documentation of your own system you use better the <em>plain</em> version.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -575,7 +554,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The STAP (are you Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show.
+<p>The STAP (Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show.
 The primary goal of STAP is to provide users with an engaging platform where they can participate in quiz games,
 answer questions generated from Wikidata, and win prizes.</p>
 </div>
@@ -813,7 +792,7 @@ Pedro Limeres Granado (<a href="mailto:uo282763@uniovi.es">uo282763@uniovi.es</a
 <h2 id="section-architecture-constraints">2. Architecture Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When designing the WIQ application, there are several constraints that must be taken into consideration, as they will have a significant impact on the overall design of the application and the architectural decisions. These constraints must be considered in order to ensure that the final product meets the needs and expectations of the users and stakeholders. The following table summarizes these constraints and provides a brief explanation for each one divided into technical, organizational and political constraints.</p>
+<p>When designing the STAP application, there are several constraints that must be taken into consideration, as they will have a significant impact on the overall design of the application and the architectural decisions. These constraints must be considered in order to ensure that the final product meets the needs and expectations of the users and stakeholders. The following table summarizes these constraints and provides a brief explanation for each one divided into technical, organizational and political constraints.</p>
 </div>
 <div class="sect2">
 <h3 id="_technical_constraints">2.1. Technical constraints</h3>
@@ -835,7 +814,7 @@ Pedro Limeres Granado (<a href="mailto:uo282763@uniovi.es">uo282763@uniovi.es</a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Version control and monitoring (GitHub)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For the WIQ application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For the STAP application, GitHub is a useful tool for version control and collaboration among the team members working on the project. It allows easier coordination and organization of the development process, as well as keeping track of changes and contributions made by each team member.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User Experience</p></td>
@@ -995,45 +974,22 @@ The title of the table is the name of your system, the three columns contain the
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/03_business_context.png" alt="Business Context Diagram">
+<img src="./images/diag-f0d8a3581ee7bcf25cd710b093602373.png" alt="Diagram" width="389" height="126">
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong>Partner</strong></th>
-<th class="tableblock halign-left valign-top"><strong>Input</strong></th>
-<th class="tableblock halign-left valign-top"><strong>Output</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> The user interacts with the WIQ web application using the front-end of the application.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The display of a page of the application with the questions and statistics.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Stores relevant information of the application (users, number of games, questions passed/failed, times…).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the information that the application requires.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Question generation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Questions generated from Wikidata.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">These generated questions are sent to the application.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Receives a query linked to the question to be asked.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the necessary information to formulate the question.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Player</strong> (user): The user interacts with the STAP web application using the front-end of the application.</p>
+</li>
+<li>
+<p><strong>STAP System</strong> (core system): System that allows the players to play question games based on information from the wikidata api</p>
+</li>
+<li>
+<p><strong>Wikidata API</strong> (external system): Api which exposes the information stored in wikidata database</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_technical_context">3.2. Technical Context</h3>
@@ -1072,7 +1028,7 @@ together with a mapping table showing the relationships between channels and inp
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTML, CSS (Tailwind), JavaScript (React)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">node.js (Express), Wikidata&#8217;s API</p></td>
 </tr>
 <tr>
@@ -1091,7 +1047,7 @@ together with a mapping table showing the relationships between channels and inp
 </table>
 <div class="imageblock">
 <div class="content">
-<img src="./images/3_2-Technical-Context-Diagram-EN.png" alt="Technical Context">
+<img src="./images/diag-9078cbec6f4fc90c065fe711f064c491.png" alt="Diagram" width="767" height="181">
 </div>
 <div class="title">Figure 1. Diagram of the Technical Context</div>
 </div>
@@ -1113,7 +1069,7 @@ together with a mapping table showing the relationships between channels and inp
 <td class="tableblock halign-left valign-top"><p class="tableblock">User interaction and results display.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Logical processing, communication with external API and database.</p></td>
 </tr>
 <tr>
@@ -1129,7 +1085,7 @@ together with a mapping table showing the relationships between channels and inp
 <div class="paragraph">
 <p>In this flow:
 - The user interacts with the user interface (front-end) through clicks and responses.
-- The back-end processes the requests, consults the Wikidata API, and updates the screen.
+- The Backend processes the requests, consults the Wikidata API, and updates the screen.
 - The channels are the HTTP connections between the components.
 - The mapping evaluates the user’s responses in real time to provide an appropriate response.</p>
 </div>
@@ -1192,8 +1148,14 @@ Refer to details in the following sections.</p>
 <p><strong>React</strong>: JavaScript library for web and native user interfaces. It allows developers to create interactive web applications by breaking down the UI into reusable components. React uses a declarative approach to efficiently update and render components, resulting in faster and more maintainable code. It&#8217;s widely adopted in the industry due to its simplicity, performance, and robustness.</p>
 </li>
 <li>
-<p><strong>Node.js</strong>: JavaScript runtime that enables running JavaScript code outside of web browsers. It&#8217;s renowned for its event-driven architecture and extensive collection of packages, making it ideal for building scalable server-side applications.
-+ <strong>Express.js</strong>: Express.js, often simply called Express, is a minimalist web application framework for Node.js. It simplifies the process of building web applications by providing a robust set of features, including middleware support, routing, and templating engines. Express is known for its flexibility, simplicity, and performance, making it a popular choice for developing web applications and APIs in Node.js.</p>
+<p><strong>Node.js</strong>: JavaScript runtime that enables running JavaScript code outside of web browsers. It&#8217;s renowned for its event-driven architecture and extensive collection of packages, making it ideal for building scalable server-side applications.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Express.js</strong>: Express.js, often simply called Express, is a minimalist web application framework for Node.js. It simplifies the process of building web applications by providing a robust set of features, including middleware support, routing, and templating engines. Express is known for its flexibility, simplicity, and performance, making it a popular choice for developing web applications and APIs in Node.js.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Wikidata</strong>: Wikidata provides a REST API for retrieving information related to any topic. It helps us to dynamically generate questions for our game using it from any programming language.</p>
@@ -1225,6 +1187,15 @@ Refer to details in the following sections.</p>
 <li>
 <p><strong>Grafana</strong>: open-source platform for monitoring and observability, providing customizable dashboards and visualization tools for analyzing metrics, logs, and other data sources. It allows users to create dynamic, interactive dashboards to monitor the health and performance of their systems and applications.</p>
 </li>
+<li>
+<p><strong>Azure</strong>: Cloud computing service used for creating virtual machines and running Docker containers. Azure provides a scalable and flexible infrastructure for hosting our microservices-based application, ensuring high availability and reliability.</p>
+</li>
+<li>
+<p><strong>GitHub</strong>: Version control and project management platform used for managing our game project. GitHub provides features for collaboration, issue tracking, and code review, facilitating efficient development workflows and team communication.</p>
+</li>
+<li>
+<p><strong>Tailwind CSS</strong>: Utility-first CSS framework for creating custom designs without having to write CSS from scratch. Tailwind CSS offers a set of pre-defined utility classes that can be applied directly in HTML markup, enabling rapid development and consistent styling across the application.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1238,24 +1209,92 @@ As a conclusion, it was worth spending time making the migration for reducing th
 </div>
 </div>
 <div class="sect2">
-<h3 id="_architecture_design">4.3. Architecture &amp; Design</h3>
+<h3 id="_solution_strategy_in_context_with_quality_attributes">4.3. Solution strategy in context with quality attributes</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 16.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Quality goal</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Scenario</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Solution approach</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Link to Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reliability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure system stability even under high loads or failure scenarios</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perform load test and asses the system reliability as well as providing the user with correct and consistent error messages when needed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development concepts section inside <a href="#section-concepts">Cross-cutting Concepts</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintain fast response times even under heavy usage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieve wikidata information before hand for giving quick response times and perform load test and asses the system reliability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&gt;&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Protect sensitive data and prevent unauthorized access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementing encryption and a logging system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User&#8217;s login inside <a href="#section-runtime-view">Runtime View</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure the system is intuitive and easy to use</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conducting user testing, improving user interface design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability tests inside <a href="#section-concepts">Cross-cutting Concepts</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Portability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable the system to run across different platforms</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using docker containerization, adhering to standards</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#section-deployment-view">Deployment View</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Facilitate thorough testing and validation of system functionality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementing automated testing frameworks, ensuring code coverage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing inside <a href="#section-concepts">Cross-cutting Concepts</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Availability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure the system is accessible and operational when needed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementing monitoring, proactive maintenance, and disaster recovery plans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Monitoring with Grafana inside <a href="#section-concepts">Cross-cutting Concepts</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_architecture_design">4.4. Architecture &amp; Design</h3>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Microservices</strong>: is an architectural style that structures an application as a collection of loosely coupled services. Each service is independently deployable, scalable, and can be developed using different programming languages, frameworks, or databases.
-In a microservices architecture, each service typically represents a specific business function or capability and communicates with other services through well-defined APIs. This enables teams to work independently on different parts of the application, allowing us to divide the work into different teams avoiding bottlenecks during production.</p>
+<p><strong>Microservices</strong>: Our game is built using a microservices architecture, which structures the application as a collection of loosely coupled services. Each service encapsulates a specific functionality or business capability, allowing for independent development, deployment, and scaling. By adopting microservices, we promote modularity and flexibility, enabling rapid iteration and innovation.</p>
 </li>
 <li>
-<p><strong>API Gateway</strong>: centralized service that acts as an intermediary between clients and microservices. It serves as a single entry point for all client requests, providing various functionalities by means of routing and redirecting to the specific service in charge of that request They play a crucial role in building scalable and efficient distributed systems by abstracting away complexities and providing a unified interface for clients to interact with all available services.</p>
+<p><strong>Containerization with Docker</strong>: We leverage Docker containerization to package each microservice and its dependencies into lightweight, portable containers. Docker provides a consistent environment across different stages of the development lifecycle, ensuring seamless deployment and scalability. With Docker, we can easily spin up new instances of services, manage dependencies, and streamline our development and deployment workflows.</p>
 </li>
 <li>
-<p><strong>API</strong>: using microservices architecture enforces us to isolate each of the microservices and create well-defined interfaces for accesing those microservices from common gateway, reducing dependencies between services and allowing them to evolve independently. Well-defined interfaces imply not only services' independance, but also team members independecance since nobody will need to wait for others for starting working themselves.</p>
+<p><strong>API Gateway</strong>: We employ an API gateway as a centralized entry point for all client requests to our microservices. The API gateway serves as a reverse proxy, routing incoming requests to the appropriate microservice based on predefined rules and policies. It provides a unified interface for clients to interact with our system, abstracting away the complexities of the underlying microservices architecture. By consolidating access through the API gateway, we enhance security, governance, and performance while simplifying client interactions.</p>
+</li>
+<li>
+<p><strong>Scalability and Elasticity</strong>: With our microservices architecture orchestrated with Docker, we achieve horizontal scalability and elasticity to handle fluctuations in traffic and workload. Docker&#8217;s container-based approach enables us to dynamically scale individual services based on demand, ensuring optimal resource utilization and cost efficiency. Combined with automated scaling policies and monitoring, we maintain responsiveness and availability during peak usage periods.</p>
+</li>
+<li>
+<p><strong>Observability and Monitoring</strong>: We prioritize observability and monitoring in our architecture to gain insights into the performance, health, and behavior of our microservices. Leveraging tools such as Prometheus, Grafana, and ELK stack, we collect metrics, logs, and traces from across our infrastructure, allowing us to detect anomalies, troubleshoot issues, and optimize system performance. With comprehensive observability, we ensure reliability, maintainability, and continuous improvement of our game platform.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_team_organization">4.4. Team Organization</h3>
+<h3 id="_team_organization">4.5. Team Organization</h3>
 <div class="paragraph">
 <p>For developing this project we are using Github as the control version systems.
 The master branch contains the final version of the product, so that every accepted pull request to master branch will be considered as a new release.
@@ -1374,7 +1413,7 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-078acaf1ab3e3014bad5c17411c6342b.png" alt="Diagram" width="319" height="126">
+<img src="./images/diag-69e2643e5c4a7d9eaf287b56448bf83a.png" alt="Diagram" width="328" height="126">
 </div>
 </div>
 <div class="dlist">
@@ -1399,7 +1438,7 @@ In the best case you will get away with examples or simple signatures.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WIQ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STAP</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> It’s the main application, currently represented as a whitebox. The following sections will break it down in detail.</p></td>
 </tr>
 <tr>
@@ -1425,7 +1464,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-c5aa1dbbd71cf5b72b971770dbf43c0f.png" alt="Diagram" width="370" height="520">
+<img src="./images/diag-3eb74de1a90fa7c5f98f61064066a476.png" alt="Diagram" width="372" height="522">
 </div>
 </div>
 <div class="dlist">
@@ -1621,7 +1660,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_user_management_service">5.3.1. White Box User Management Service</h4>
+<h4 id="_user_management_service">5.3.1. User Management Service</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1631,12 +1670,70 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-0e8bfb684f7bb7c0471b562d05a02391.png" alt="Diagram" width="209" height="167">
+<img src="./images/diag-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
 </div>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Contained Building Blocks</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authservice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manages the authentication of the application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UserService</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manages the creation of users and everything related with statistics</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores the information of the users</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Important Interfaces</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authservice &#8594; MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks if the user who is trying to login is registered in the system and if so, generates a JWT Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UserService &#8594; MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Saves the user in the database if creating one or retrieves/updates the desired statistics</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
-<h4 id="_white_box_wikidata_service">5.3.2. White Box Wikidata Service</h4>
+<h4 id="_wikidata_service">5.3.2. Wikidata Service</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1646,27 +1743,67 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diag-plantuml-md5-334a9f33b2daa99634916417fa49a24e.png" alt="Diagram" width="162" height="159">
+<img src="./images/diag-4475ad37d1429b6a82aab1bdcdb4f7d9.png" alt="Diagram" width="312" height="159">
 </div>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Contained Building Blocks</dt>
+</dl>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gets information from wikidata api and stores the questions generated by the question generation service.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question Generation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recieves the data and builds questions based on that</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the information stored in the wikidata database</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Important Interfaces</dt>
+</dl>
 </div>
-<div class="sect2">
-<h3 id="_level_3">5.4. Level 3</h3>
-<div class="sect3">
-<h4 id="_white_box_user_management_api">5.4.1. White Box User Management API</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>&#8230;&#8203;describes the internal structure of the User Management API.</p>
-</div>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/diag-plantuml-md5-fd82f4380fed86926d43eccfe5a1a2b5.png" alt="Diagram" width="311" height="213">
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service &#8594; Wikidata API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The service asks wikidata for info by means of a sparql query</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata Service &#8592;&#8594; Question Generation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> The services pass the data to the question generator and the generator returns the questions well formed</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1917,7 +2054,7 @@ This will allow our team to achieve continuous deployment and delivery.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1460" height="1147">
+<img src="./images/deployment-diagram.png" alt="deployment diagram" width="1462" height="1149">
 </div>
 </div>
 </div>
@@ -2193,7 +2330,8 @@ on this list.</p>
 <pre>{
     text: "What is the capital of Asturias?"
     answers: [Gijón,Oviedo,Cangas de Onís]
-    correctIndex: 1
+    correctAnswer: 1
+    wikiLink: "https://www.wikidata.org/wiki/Q14317"
 }</pre>
 </div>
 </div>
@@ -2236,19 +2374,19 @@ on this list.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Background</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #191919; font-weight:bold">#191919</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="padding: 5px;background-color: #191919;color: #f2ecff; font-weight:bold">#191919</span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="padding: 5px; background-color: #191919;color: #f2ecff; font-weight:bold">#f2ecff</span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Primary</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #00c896; font-weight:bold">#00c896</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="padding: 5px; background-color: #191919; color: #00c896; font-weight:bold">#00c896</span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Danger</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="color: #e35a2a; font-weight:bold">#e35a2a</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span style="padding: 5px; background-color: #191919; color: #e35a2a; font-weight:bold">#e35a2a</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -2280,171 +2418,13 @@ on this list.</p>
 <h3 id="_development_concepts">8.3. Development concepts</h3>
 <div class="sect3">
 <h4 id="_testing_and_monitoring">8.3.1. Testing and Monitoring</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Unit Testing: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.</p>
-</li>
-<li>
-<p>Load Testing and Monitoring: We used Gattling for recording user simulations that consist on login into the application, playing the existing game modes and checking the statistics and leaderboards. Then, Gatling allowed us to also measure the performance of the application and the average response times when creating 2, 5, 10 and 25 users per second during 60 seconds performing the previously mentioned simulations, using 2 different Azure machines.
-Particularly, load testing has been performed using a 1-cpu machine with almost 1GB of RAM memory and also, using a 2-cpu machine with 8GB of RAM memory.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1-cpu machine</p>
-<div class="literalblock">
-<div class="content">
-<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.6 seconds.</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is a huge amount of time for a web application.</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Unfortunately, when creating a load of 10 user per second (600 users in total) 41% of the responses were failling and around 70% of the responses where failing or taking more than a second to be answered. For sure, when creating even more load, almost all response were going to fail.</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>With this 1-cpu and 1GB of RAM azure machine we could afford around 200 hundred users making constant resquests without having a denial of service and providing reasonable requests' response times.</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>2-cpu machine</p>
-<div class="literalblock">
-<div class="content">
-<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.8 seconds.</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is exactly the same time we obtained with the other machine and a similar mean response time.</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>When creating a load of 10 user per second (600 users in total), no response failed although the maximum response time was 58 seconds with a mean response time of 2 seconds, which meant that almost every respone took less than a second.</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Finally, when creating a load of 25 user per second (1500 users in total), just a 7% of the total amount of response failed and the maximum response time was 60 seconds with a mean response time of 5 seconds.</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-10users-secA.png" alt="25 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/2-10users-secB.png" alt="25 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Using this 2-cpu and 8GB machine, response times are not enhaced when using more powerfull hardware and most of the work should be done programatically by improving our software.
-But better hardware allows us to support much more load on the application, which means more users playing at the same time. This time, we could support more 400, but less than 800 simultaneous users.
-Taking a look at the specific graph results of each of thesimulations performed, most of load is always provoked at the beggining of the simulation when the users have to login.
-Then, when users are playing some games the amount of response is reduced a lot since all the information for playing the game is asked at the beggining.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>As a general conclusion, following the azure payment plan for virtual machines: With low load requirements and just paying around 35$ each month we could afford a 1-cpu and 1GB RAM memory web server supporting around 200 simultaneous users using the application at the same time.
-On the contrary, if higher load requirements are needed and paying around 100$ for a 2-cpu and 8GB of RAM memory server, the amount of supported users is more than duplicated supporting more than 400 simultaneous users.</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_deployment">8.3.2. Deployment</h4>
 <div class="paragraph">
-<p>The application is deployed using Docker.</p>
+<p>We performed Load Testing, Unit Testing, End-to-end testing and Code Analysis with SonarCloud.
+The results obtained can be checked here: <a href="#section-appendix1">Appendix I - Testing results</a></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_configurability">8.3.3. Configurability</h4>
+<h4 id="_configurability">8.3.2. Configurability</h4>
 <div class="paragraph">
 <p>The application has simple configurable game features for selecting between two game modes (normal/usual and trivia game mode) and two difficulty levels (easy and hard difficulties).
  - Normal mode game consists of 10 random questions with an amount of time to answer the question before losing the possibility to answer. Easy and hard modes differ on the amount of time that the user has to answer the question.
@@ -2453,7 +2433,7 @@ Additionally, there is an option at the main application view where random music
 </div>
 </div>
 <div class="sect3">
-<h4 id="_data_access">8.3.4. Data access</h4>
+<h4 id="_data_access">8.3.3. Data access</h4>
 <div class="paragraph">
 <p>The development team has followed two different approaches for supporting data access from the running application for development and production.
 While developing the application, teh development team decided to create a shared database located in the cloud which allowed us to work locally with the same data by means of a key string.
@@ -2470,8 +2450,61 @@ In order to move our application into production by means of deploying it into a
 <div class="paragraph">
 <p>Along the process of developing the application, decisions had to be taken as problems arise.
 These are the final decicision that we have made according to their advantages.
-If you want a description about each of the technologies we have chosen, go to the <a href="#section-glossary">Glossary</a> of the documentation.
-The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:</p>
+If you want a description about each of the technologies we have chosen, go to the <a href="#section-glossary">Glossary</a> of the documentation.</p>
+</div>
+<div class="sect2">
+<h3 id="_microservices_architecture">9.1. Microservices architecture</h3>
+<div class="paragraph">
+<p>The team opted for a microservices architecture as the foundation of our system due to the advantages it provides.
+By breaking down our application into smaller, independently deployable services, we gain scalability and flexibility.
+Each microservice operates autonomously, allowing us to develop, deploy, and update components without affecting the entire system.
+Furthermore, microservices promote technology diversity, enabling us to choose the best tools for each service&#8217;s specific needs.
+By means of an API Gateway, all the services can comunicate to server all the services as only one.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_gateway">9.2. API Gateway</h3>
+<div class="paragraph">
+<p>To streamline communication between our backend services, we&#8217;ve implemented an API gateway.
+This gateway acts as a central hub, providing a unified entry point for all client requests.
+By consolidating communication through the API gateway, we simplify access control, load balancing, and monitoring across our system.
+This approach enhances scalability and maintainability while enabling us to implement cross-cutting concerns such as authentication and rate limiting in a centralized manner.
+The API gateway plays a pivotal role in orchestrating interactions between services, optimizing performance, and ensuring a cohesive and reliable architecture.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_docker_containers">9.3. Docker containers</h3>
+<div class="paragraph">
+<p>Docker containers are used for our web application and an API gateway for inter-service communication, driven by their portability, scalability, and maintainability advantages.
+Docker ensures consistent deployment across environments, facilitating independent scaling of services.
+By routing communication through the API gateway, we centralize access control and monitoring, simplifying management and promoting modularity and flexibility.
+This approach optimizes system management, scalability, and interoperability, aligning with our project&#8217;s architectural goals while enhancing monitoring capabilities for streamlined performance tracking and issue resolution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_react_tailwind_css">9.4. React &amp; Tailwind CSS</h3>
+<div class="paragraph">
+<p>We&#8217;re building our web application with React and Tailwind CSS for their efficiency and modern development approach.
+React&#8217;s component-based architecture simplifies UI creation and updates, while Tailwind CSS&#8217;s utility-first framework streamlines styling for rapid prototyping and consistent design.
+This combination allows us to create a visually appealing and highly responsive web application efficiently, aligning with our goal of delivering a modern, user-friendly interface while maintaining flexibility and scalability in our frontend development process.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_node_js">9.5. Node.js</h3>
+<div class="paragraph">
+<p>Initially the Wikidata service for generating game questions was developed using .NET.
+However, encountering deployment issues with Docker in Azure prompted us to migrate all backend services to Node.js and Express.
+This strategic move ensures a smoother, more reliable and even more comfortable deployment process, enhancing system reliability and maintainability.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ve chosen Node.js with Express for developing all backend services due to its lightweight, efficient, and scalable nature thanks to modularity.
+Node.js offers non-blocking I/O operations, enabling high concurrency and responsiveness, which is crucial for handling asynchronous tasks common in web applications.
+Express, a minimalist web framework for Node.js, simplifies the development of robust and RESTful APIs, providing essential features like routing, middleware support, and error handling.
+Additionally, the vibrant ecosystem of Node.js libraries and modules enhances productivity and enables seamless integration with other technologies and services.
+Overall, Node.js with Express empowers us to build performant, scalable, and maintainable backend services that align with our project&#8217;s requirements and architectural goals.</p>
+</div>
+<div class="paragraph">
+<p>The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Architectural Records</caption>
@@ -2483,51 +2516,39 @@ The following table contains the most interesting the design decisions that we h
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Code</th>
 <th class="tableblock halign-left valign-top">Decision</th>
 <th class="tableblock halign-left valign-top">Advantages</th>
 <th class="tableblock halign-left valign-top">Disadvantages</th>
+<th class="tableblock halign-left valign-top">React.js</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">React.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not all of us know about its usage</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tailwind CSS</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quite new for most of us</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quite new for most of us</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">It does not need to be started manually. Free and easy to understand</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We are quite new with MongoDB.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We do not have much experience using Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Allows drawing diagrams very easily, with a simple syntax.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Does not allow as much control over the exact layout of the elements in the diagram as other tools.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Node.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For small applications it&#8217;s a very fast techonology. It&#8217;s easy to learn and we already know a bit about it</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Its performance is reduced with heavy computational tasks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADR7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Its performance is reduced with heavy computational tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata API also in Node.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Better project structure. Same language as users API. Easier for us to deploy it</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Its performance is reduced with heavy computational tasks</p></td>
@@ -2581,6 +2602,7 @@ There you will find links and examples about ADR.</p>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="section-quality-scenarios">10. Quality Requirements</h2>
 <div class="sectionbody">
@@ -2610,7 +2632,7 @@ concrete and measurable.</p>
 <h3 id="_quality_tree">10.1. Quality Tree</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/10-Quality-Tree-EN.png" alt="Quality Tree">
+<img src="./images/diag-038298b49bb9e7ce3102d8a2f986614d.png" alt="Diagram" width="707" height="526">
 </div>
 </div>
 <div class="sidebarblock arc42help">
@@ -2931,7 +2953,7 @@ self-explanatory description, the probability of its occurrence, its impact on t
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>WIQ</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>STAP</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>A web application where users can register and login in order to play. The game consists on answering a number of questions with different types and subjects obtaining a prize for each question well answered.</em></p></td>
 </tr>
 <tr>
@@ -2980,13 +3002,249 @@ self-explanatory description, the probability of its occurrence, its impact on t
 </tr>
 </tbody>
 </table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-appendix1">13. Appendix I - Testing results</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Contents</div>
+<p>Showing the results of all testing results</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing_and_monitoring_2">13.1. Testing and Monitoring</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Unit Testing: Unit testing plays a crucial role in our development workflow, providing confidence in the stability and functionality of our application. By utilizing .test.tsx files for our React components and .test.js files for our Node.js backend, we ensure that our code behaves as expected, regardless of the environment. This comprehensive approach to testing allows us to catch and address issues early in the development cycle, leading to higher-quality software and smoother deployment processes.</p>
+</li>
+<li>
+<p>Code Analysis: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.</p>
+<div class="literalblock">
+<div class="content">
+<pre>Results for web application:</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/webapp-coverage1.png" alt="Code coverage for the web application code">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/webapp-coverage2.png" alt="Time results for the web application code test">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Results for gateway service:</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/gateway-coverage.png" alt="Code coverage for the gateway service code">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Results for users service:</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/users-coverage.png" alt="Code coverage for the users service code">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Results for wikidata service:</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/wikidata-coverage.png" alt="Code coverage for the wikidata service code">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Load Testing and Monitoring: We used Gattling for recording user simulations that consist on login into the application, playing the existing game modes and checking the statistics and leaderboards. Then, Gatling allowed us to also measure the performance of the application and the average response times when creating 2, 5, 10 and 25 users per second during 60 seconds performing the previously mentioned simulations, using 2 different Azure machines.
+Particularly, load testing has been performed using a 1-cpu machine with almost 1GB of RAM memory and also, using a 2-cpu machine with 8GB of RAM memory.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1-cpu machine</p>
+<div class="literalblock">
+<div class="content">
+<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.6 seconds.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is a huge amount of time for a web application.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Unfortunately, when creating a load of 10 user per second (600 users in total) 41% of the responses were failling and around 70% of the responses where failing or taking more than a second to be answered. For sure, when creating even more load, almost all response were going to fail.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 1-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>With this 1-cpu and 1GB of RAM azure machine we could afford around 200 hundred users making constant resquests without having a denial of service and providing reasonable requests' response times.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2-cpu machine</p>
+<div class="literalblock">
+<div class="content">
+<pre>With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.8 seconds.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-2users-secA.png" alt="2 users per second in 60 seconds user-simulation overall results">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-2users-secB.png" alt="2 users per second in 60 seconds user-simulation specific graph results">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is exactly the same time we obtained with the other machine and a similar mean response time.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-5users-secA.png" alt="5 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-5users-secB.png" alt="5 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When creating a load of 10 user per second (600 users in total), no response failed although the maximum response time was 58 seconds with a mean response time of 2 seconds, which meant that almost every respone took less than a second.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secA.png" alt="10 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secB.png" alt="10 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Finally, when creating a load of 25 user per second (1500 users in total), just a 7% of the total amount of response failed and the maximum response time was 60 seconds with a mean response time of 5 seconds.</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secA.png" alt="25 users per second in 60 seconds user-simulation overall results with 2-cpu machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/2-10users-secB.png" alt="25 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Using this 2-cpu and 8GB machine, response times are not enhaced when using more powerfull hardware and most of the work should be done programatically by improving our software.
+But better hardware allows us to support much more load on the application, which means more users playing at the same time. This time, we could support more 400, but less than 800 simultaneous users.
+Taking a look at the specific graph results of each of thesimulations performed, most of load is always provoked at the beggining of the simulation when the users have to login.
+Then, when users are playing some games the amount of response is reduced a lot since all the information for playing the game is asked at the beggining.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>As a general conclusion, following the azure payment plan for virtual machines: With low load requirements and just paying around 35$ each month we could afford a 1-cpu and 1GB RAM memory web server supporting around 200 simultaneous users using the application at the same time.
+On the contrary, if higher load requirements are needed and paying around 100$ for a 2-cpu and 8GB of RAM memory server, the amount of supported users is more than duplicated supporting more than 400 simultaneous users.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.
+We developed seven e2e tests that check the main paths for our application, making sure everything works fine when integrated together. We test every endpoint on the app up until the information may depend in each execution of the petition.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/e2e-tests.png" alt="e2e tests developed, running on our local machine">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/e2e-results.png" alt="e2e tests results, running on our local machine">
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-22 15:52:53 +0200
+Last updated 2024-04-30 20:07:33 +0200
 </div>
 </div>
 </body>
