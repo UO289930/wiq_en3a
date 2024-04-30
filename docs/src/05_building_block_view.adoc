@@ -69,17 +69,15 @@ In the best case you will get away with examples or simple signatures.
 @startuml
 title Scope & Context
 left to right direction
-' Define custom style for components
-skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
-rectangle "WIQ" as WIQ
+rectangle "STAP" as STAP
 cloud "Wikidata API" as WikidataAPI
 actor "User" as User
 
 ' Define connections
-User --> WIQ
-WIQ --> WikidataAPI
+User --> STAP
+STAP --> WikidataAPI
 @enduml
 ----
 
@@ -94,7 +92,7 @@ Contained Building Blocks::
 [cols="1,2" options="header"]
 |===
 | **Name** | **Responsibility**
-| WIQ  | It’s the main application, currently represented as a whitebox. The following sections will break it down in detail.
+| STAP  | It’s the main application, currently represented as a whitebox. The following sections will break it down in detail.
 | WikidataAPI | External API used as the knowledge hub.
 |===
 
@@ -114,7 +112,7 @@ Leave out normal, simple, boring or standardized parts of your system
 [plantuml, format=png]
 ....
 actor user as "User browser"
-frame WIQ {
+frame STAP {
     node Frontend
     node UserManagement
     node WikidataService
