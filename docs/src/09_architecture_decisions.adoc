@@ -6,19 +6,61 @@ ifndef::imagesdir[:imagesdir: ../images]
 Along the process of developing the application, decisions had to be taken as problems arise.
 These are the final decicision that we have made according to their advantages.
 If you want a description about each of the technologies we have chosen, go to the xref:#section-glossary[Glossary] of the documentation.
+
+=== Microservices architecture
+
+The team opted for a microservices architecture as the foundation of our system due to the advantages it provides. 
+By breaking down our application into smaller, independently deployable services, we gain scalability and flexibility.
+Each microservice operates autonomously, allowing us to develop, deploy, and update components without affecting the entire system. 
+Furthermore, microservices promote technology diversity, enabling us to choose the best tools for each service's specific needs.
+By means of an API Gateway, all the services can comunicate to server all the services as only one.
+
+=== API Gateway
+
+To streamline communication between our backend services, we've implemented an API gateway. 
+This gateway acts as a central hub, providing a unified entry point for all client requests. 
+By consolidating communication through the API gateway, we simplify access control, load balancing, and monitoring across our system. 
+This approach enhances scalability and maintainability while enabling us to implement cross-cutting concerns such as authentication and rate limiting in a centralized manner. 
+The API gateway plays a pivotal role in orchestrating interactions between services, optimizing performance, and ensuring a cohesive and reliable architecture.
+
+=== Docker containers
+
+Docker containers are used for our web application and an API gateway for inter-service communication, driven by their portability, scalability, and maintainability advantages. 
+Docker ensures consistent deployment across environments, facilitating independent scaling of services. 
+By routing communication through the API gateway, we centralize access control and monitoring, simplifying management and promoting modularity and flexibility. 
+This approach optimizes system management, scalability, and interoperability, aligning with our project's architectural goals while enhancing monitoring capabilities for streamlined performance tracking and issue resolution.
+
+=== React & Tailwind CSS
+
+We're building our web application with React and Tailwind CSS for their efficiency and modern development approach. 
+React's component-based architecture simplifies UI creation and updates, while Tailwind CSS's utility-first framework streamlines styling for rapid prototyping and consistent design.
+This combination allows us to create a visually appealing and highly responsive web application efficiently, aligning with our goal of delivering a modern, user-friendly interface while maintaining flexibility and scalability in our frontend development process.
+
+=== Node.js
+
+Initially the Wikidata service for generating game questions was developed using .NET. 
+However, encountering deployment issues with Docker in Azure prompted us to migrate all backend services to Node.js and Express. 
+This strategic move ensures a smoother, more reliable and even more comfortable deployment process, enhancing system reliability and maintainability.
+
+We've chosen Node.js with Express for developing all backend services due to its lightweight, efficient, and scalable nature thanks to modularity. 
+Node.js offers non-blocking I/O operations, enabling high concurrency and responsiveness, which is crucial for handling asynchronous tasks common in web applications. 
+Express, a minimalist web framework for Node.js, simplifies the development of robust and RESTful APIs, providing essential features like routing, middleware support, and error handling. 
+Additionally, the vibrant ecosystem of Node.js libraries and modules enhances productivity and enables seamless integration with other technologies and services.
+Overall, Node.js with Express empowers us to build performant, scalable, and maintainable backend services that align with our project's requirements and architectural goals.
+
 The following table contains the most interesting the design decisions that we have taken with their advantages and disadvantages:
 
 .Architectural Records
 [cols="1,1,2,2", options="header"]
 |===
-|Code|Decision|Advantages|Disadvantages
-|ADR1| React.js | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.| Not all of us know about its usage
-|ADR2| Tailwind CSS | Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework | Quite new for most of us
-|ADR3| MongoDB | It does not need to be started manually. Free and easy to understand| We are quite new with MongoDB.
-|ADR4| Docker | Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example| We do not have much experience using Docker
-|ADR5| PlantUML | Allows drawing diagrams very easily, with a simple syntax.| Does not allow as much control over the exact layout of the elements in the diagram as other tools.
-|ADR6| Node.js | For small applications it's a very fast techonology. It's easy to learn and we already know a bit about it| Its performance is reduced with heavy computational tasks
-|ADR7| Wikidata API also in Node.js | Better project structure. Same language as users API. Easier for us to deploy it| Its performance is reduced with heavy computational tasks
+|Decision|Advantages|Disadvantages
+| React.js | Quite easy to learn in comparison to other front-end libraries. Increasingly popular in the web.| Not all of us know about its usage
+| Tailwind CSS | Consistent and unified design system and its ability to speed up the development process. Rapidly growing utility-first CSS framework | Quite new for most of us
+| MongoDB | It does not need to be started manually. Free and easy to understand| We are quite new with MongoDB.
+| Docker | Fast deployment, ease of moving/maintaining your applications. Easy as we already have DockerFiles example| We do not have much experience using Docker
+| PlantUML | Allows drawing diagrams very easily, with a simple syntax.| Does not allow as much control over the exact layout of the elements in the diagram as other tools.
+| Node.js | For small applications it's a very fast techonology. It's easy to learn and we already know a bit about it| Its performance is reduced with heavy computational tasks
+| Wikidata API also in Node.js | Better project structure. Same language as users API. Easier for us to deploy it| Its performance is reduced with heavy computational tasks
 |===
 
 

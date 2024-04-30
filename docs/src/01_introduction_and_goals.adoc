@@ -3,7 +3,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-The STAP (are you Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show. 
+The STAP (Smarter Than A Penguin) web application is developed for RTVE to create an experimental version of the 'Saber y Ganar' quiz show. 
 The primary goal of STAP is to provide users with an engaging platform where they can participate in quiz games,
 answer questions generated from Wikidata, and win prizes.
 

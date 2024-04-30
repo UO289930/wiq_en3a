@@ -4,38 +4,6 @@ import '@testing-library/jest-dom/extend-expect';
 import { TriviaGame, formatNumberWithDots,  isNumber, generateDiceRandomNumber, getQuestion} from './TriviaGame';
 import { getEasyString, getHardString } from '../../../services/question-service';
 
-// jest.mock('./trivia_service', () => ({
-//     getSportQuestions: jest.fn().mockResolvedValue({
-//       text: 'Sports question',
-//       answers: ['answer1', 'answer2', 'answer3', 'answer4'],
-//       correctAnswer: 0,
-//       wikiLink: ''
-//     }),
-//     getScienceQuestions: jest.fn().mockResolvedValue({
-//       question: 'Science question',
-//       answers: ['answer1', 'answer2', 'answer3', 'answer4'],
-//       correctAnswer: 0,
-//       wikiLink: ''
-//     }),
-//     getHistoryQuestions: jest.fn().mockResolvedValue({
-//       question: 'History question',
-//       answers: ['answer1', 'answer2', 'answer3', 'answer4'],
-//       correctAnswer: 0,
-//       wikiLink: ''
-//     }),
-//     getGeographyQuestions: jest.fn().mockResolvedValue({
-//       question: 'Geography question',
-//       answers: ['answer1', 'answer2', 'answer3', 'answer4'],
-//       correctAnswer: 0,
-//       wikiLink: ''
-//     }),
-//     getEntertainmentQuestions: jest.fn().mockResolvedValue({
-//       question: 'Entertainment question',
-//       answers: ['answer1', 'answer2', 'answer3', 'answer4'],
-//       correctAnswer: 0,
-//       wikiLink: ''
-//     }),
-//   }));
 
 jest.mock('./trivia_service', () => ({
   getSportQuestions: () => {

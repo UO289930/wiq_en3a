@@ -1,0 +1,94 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-appendix1]]
+== Appendix I - Testing results
+
+[role="arc42help"]
+
+****
+.Contents
+
+Showing the results of all testing results
+
+****
+
+=== Testing and Monitoring
+ - Unit Testing: Unit testing plays a crucial role in our development workflow, providing confidence in the stability and functionality of our application. By utilizing .test.tsx files for our React components and .test.js files for our Node.js backend, we ensure that our code behaves as expected, regardless of the environment. This comprehensive approach to testing allows us to catch and address issues early in the development cycle, leading to higher-quality software and smoother deployment processes.
+ - Code Analysis: We employed the SonarCloud tool to monitor the code covered by these tests, while Continuous Integration practices were implemented using GitHub Actions.
+
+    Results for web application:
+
+image::webapp-coverage1.png["Code coverage for the web application code"]
+
+image::webapp-coverage2.png["Time results for the web application code test"]
+
+    Results for gateway service:
+
+image::gateway-coverage.png["Code coverage for the gateway service code"]
+
+    Results for users service:
+
+image::users-coverage.png["Code coverage for the users service code"]
+
+    Results for wikidata service:
+
+image::wikidata-coverage.png["Code coverage for the wikidata service code"]
+
+ - Load Testing and Monitoring: We used Gattling for recording user simulations that consist on login into the application, playing the existing game modes and checking the statistics and leaderboards. Then, Gatling allowed us to also measure the performance of the application and the average response times when creating 2, 5, 10 and 25 users per second during 60 seconds performing the previously mentioned simulations, using 2 different Azure machines. 
+ Particularly, load testing has been performed using a 1-cpu machine with almost 1GB of RAM memory and also, using a 2-cpu machine with 8GB of RAM memory.
+  
+  ** 1-cpu machine 
+  
+  With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.6 seconds.
+    
+image::2users-secA.png["2 users per second in 60 seconds user-simulation overall results with 1-cpu machine"]
+image::2users-secB.png["2 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine"]
+
+    When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is a huge amount of time for a web application.
+   
+image::5users-secA.png["5 users per second in 60 seconds user-simulation overall results with 1-cpu machine"]
+image::5users-secB.png["5 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine"]
+
+    Unfortunately, when creating a load of 10 user per second (600 users in total) 41% of the responses were failling and around 70% of the responses where failing or taking more than a second to be answered. For sure, when creating even more load, almost all response were going to fail.
+
+image::10users-secA.png["10 users per second in 60 seconds user-simulation overall results with 1-cpu machine"]
+image::10users-secB.png["10 users per second in 60 seconds user-simulation specific graph results with 1-cpu machine"]
+
+    With this 1-cpu and 1GB of RAM azure machine we could afford around 200 hundred users making constant resquests without having a denial of service and providing reasonable requests' response times.
+
+ ** 2-cpu machine 
+
+    With this machine all requests were answered quickly when 2 users per second where created (120 users in total) with almost all requests responding in less than 1 second with a minimum response time of just 24 milliseconds and a maximum reponse time of 1.8 seconds.
+    
+image::2-2users-secA.png["2 users per second in 60 seconds user-simulation overall results"]
+image::2-2users-secB.png["2 users per second in 60 seconds user-simulation specific graph results"]
+
+    When creating 5 users per second (350 users in total), the responses took almost all of them (around 80%) less than a second with a minimum response time of 24 milliseconds, but with a maximum response time of 10 seconds which is exactly the same time we obtained with the other machine and a similar mean response time.
+   
+image::2-5users-secA.png["5 users per second in 60 seconds user-simulation overall results with 2-cpu machine"]
+image::2-5users-secB.png["5 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine"]
+
+    When creating a load of 10 user per second (600 users in total), no response failed although the maximum response time was 58 seconds with a mean response time of 2 seconds, which meant that almost every respone took less than a second.
+
+image::2-10users-secA.png["10 users per second in 60 seconds user-simulation overall results with 2-cpu machine"]
+image::2-10users-secB.png["10 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine"]
+
+    Finally, when creating a load of 25 user per second (1500 users in total), just a 7% of the total amount of response failed and the maximum response time was 60 seconds with a mean response time of 5 seconds.
+
+image::2-10users-secA.png["25 users per second in 60 seconds user-simulation overall results with 2-cpu machine"]
+image::2-10users-secB.png["25 users per second in 60 seconds user-simulation specific graph results with 2-cpu machine"]
+
+    Using this 2-cpu and 8GB machine, response times are not enhaced when using more powerfull hardware and most of the work should be done programatically by improving our software. 
+    But better hardware allows us to support much more load on the application, which means more users playing at the same time. This time, we could support more 400, but less than 800 simultaneous users.
+    Taking a look at the specific graph results of each of thesimulations performed, most of load is always provoked at the beggining of the simulation when the users have to login. 
+    Then, when users are playing some games the amount of response is reduced a lot since all the information for playing the game is asked at the beggining.
+
+    As a general conclusion, following the azure payment plan for virtual machines: With low load requirements and just paying around 35$ each month we could afford a 1-cpu and 1GB RAM memory web server supporting around 200 simultaneous users using the application at the same time.
+    On the contrary, if higher load requirements are needed and paying around 100$ for a 2-cpu and 8GB of RAM memory server, the amount of supported users is more than duplicated supporting more than 400 simultaneous users. 
+
+
+ - E2e Testing: We used behavior-driven development scenarios written in the Gherking language as a basis for our end-to-end tests.
+    We developed seven e2e tests that check the main paths for our application, making sure everything works fine when integrated together. We test every endpoint on the app up until the information may depend in each execution of the petition.
+
+image::e2e-tests.png["e2e tests developed, running on our local machine"]
+image::e2e-results.png["e2e tests results, running on our local machine"]

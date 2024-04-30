@@ -164,6 +164,12 @@ frame Azure {
             frame WikidataAPI {
                 node QuestionGeneratorService
             }
+
+            frame Prometheus {
+            }
+
+            frame Grafana {
+            }
         }
     }
 }
@@ -185,12 +191,14 @@ frame GitHub{
     }
 
 
+Grafana -- Prometheus: port 9090 
 WebAPP -- APIGateway : port 8000
 Wikidata -- WikidataAPI: port 8001
-WikidataAPI -- WikidataDB: query.wikidata.org/sparql
+WikidataAPI -- WikidataDB: https://query.wikidata.org/sparql
 Users -- UsersAPI : port 8003
 UsersAPI -- UsersDatabase : MongoDB (port 27017)
 client -- WebAPP : Web Browser (port 3000)
+client -- Grafana : Web Browser (port 9091)
 
 GitHubActions -- UbuntuServer : on release
 Docker -- wiq_en3a
