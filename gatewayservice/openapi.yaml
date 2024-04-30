@@ -7,6 +7,8 @@ info:
 servers:
   - url: http://localhost:8000
     description: Development server
+  - url: http://51.103.210.249:8000
+    description: Production server
 
 paths:
   
