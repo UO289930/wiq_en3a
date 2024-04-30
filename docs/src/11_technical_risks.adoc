@@ -3,6 +3,53 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-technical-risks]]
 == Risks and Technical Debts
 
+This section contains a list of identified risks that the project will face during its lifetime. In addition to it, each particular risk comes with a brief 
+self-explanatory description, the probability of its occurrence, its impact on the project and a solution on how to minimize it or mitigate it.
+
+=== Risks
+[options="header", cols="2, 3, 1, 1, 3"]
+|===
+| Risk | Description | Probability | Impact | Solution
+
+|*Complications with the project characteristics*
+| Almost everyone on the team has never done a project of such a size, and there may be some trouble.
+| Medium 
+| High
+| Each member will try to maximize its knowledge on some aspect of the project in the first weeks, in order to be able to be something similar to a leader in each one of the posible key aspects of the project.
+
+|*Problems with wikidata*
+| The team only used wikidata once before and not even everyone of us.
+| High
+| Very high
+| We must read some documentation and try out some basic features to familiarize with wikidata.
+
+|*Teamwork issues*
+| The members of the team have never worked together. This may cause problems such as lack of communication or trust in each other's work.
+| Medium
+| Medium
+| We will try to keep in touch a few times a week, to see each ones progress on our tasks and we will try to build some confidence with each other throughout the development of the project as most of us met on this subject. 
+
+|*Differences with technologies*
+| There are some members that don't know as much in some aspects of the development
+| Medium
+| Low
+| The members that know more on each of the aspects will help the others understand the things they could find difficult.
+
+|*Deadlines*
+| The project is based on some deadline days when our work is presented
+| Very high
+| High
+| The team will follow the planification of the project to avoid problems on each one of the deadlines.
+
+|===
+
+=== Technical Debts
+
+.Wikidata
+The day when wikidata is outdated could come, and the app could still be working. It's quite difficult but it could happen.
+
+.Availability
+The fact of using wikidata for retrieving the questions could mean that if the service of wikidata fails for some reason, the app would be failing as well.
 
 [role="arc42help"]
 ****
@@ -23,3 +70,4 @@ List of risks and/or technical debts, probably including suggested measures to m
 See https://docs.arc42.org/section-11/[Risks and Technical Debt] in the arc42 documentation.
 
 ****
+

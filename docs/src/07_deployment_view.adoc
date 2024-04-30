@@ -42,7 +42,162 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 
 ****
 
-=== Infrastructure Level 1
+
+Our project is configurated using GitHub actions in such a way that every release that is made will trigger some unitary and end to end test, and an attempt to deploy the application over a server.
+This will allow our team to achieve continuous deployment and delivery.
+
+=== Quick deployment guide
+
+Using your Azure account:
+
+* Create an Ubuntu-20.04 virtual machine from Azure link:https://www.portal.azure.com[www.portal.azure.com]
+** Select an available location (usually Switzerland North, Zone 1, is available)
+** Select the virtual machine "Standard B1s (1 vcpu, 1GiB of memory)"
+** Set the username to `azureuser`
+** Allow SSH on port 22
+
+* Configure GitHub repository secrets with the server's information:
+** Download the private key (.pem file) and paste all of its textual content over `DEPLOY_KEY`. Save the file for later configurations over SSH at the virtual machine.
+** Check the public IP at Azure and paste it over `DEPLOY_HOST`.
+** `DEPLOY_USER` does not need to be changed
+
+* Once the virtual machine is created and the repository is configured, go to Network Settings and add extra rules:
+** Open port number 80 for accesing the web application, or 443 in case HTTPS is used
+** Open port number 8000 for giving access to the API gateway
+** Open port number 9091 for giving access to monitoring the application checking some Grafana data
+
+* Configure the virtual machine connecting through SSH for using Docker:
+** Use some tool for connecting to the server using SSH (PuTTY, MobaXterm...)
+** Use the public IP address and the local .pem file for making the connection.
+** Run the following commands for preparing the virtual machine:
+
++
+[listing]
+----
+sudo apt update
+----
+
++
+[listing]
+----
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+----
+
++
+[listing]
+----
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+----
+
++
+[listing]
+----
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+----
+
++
+[listing]
+----
+sudo apt update
+----
+
++
+[listing]
+----
+sudo apt install docker-ce
+----
+
++
+[listing]
+----
+sudo usermod -aG docker ${USER}
+----
+
++
+[listing]
+----
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+----
+
++
+[listing]
+----
+sudo chmod +x /usr/local/bin/docker-compose
+----
+
+* Make a release in GitHub:
+** On the right-hand side of the main Code section of our repository, there is a section called Releases. It will be needed to add a new version following the version naming convention.
+** Once the release is made, some GitHub actions will be triggered, and the containers will be tested and running once everything finishes.
+** If some test fails during the process, deployment will be automatically aborted.
+
+
+=== Infrastructure
+General view of system's infrastructure
+[plantuml, target=deployment-diagram, format=png]
+....
+actor client as "Client"
+frame Azure {
+    frame UbuntuServer {
+        frame Docker {
+
+
+            frame WebAPP {
+                node React
+            }
+
+            frame APIGateway {
+                node Users
+
+                node Wikidata
+            }
+
+            database MongoDB {
+                node UsersDatabase
+            }
+
+            frame UsersAPI {
+                node AuthenticationService
+
+                node UsersService
+            }
+
+            frame WikidataAPI {
+                node QuestionGeneratorService
+            }
+        }
+    }
+}
+
+cloud WikidataDB{
+    
+}
+
+frame GitHub{
+
+        frame GitHubActions{
+            node dockerCompose
+        }
+
+        frame wiq_en3a{
+            node project
+        }
+
+    }
+
+
+WebAPP -- APIGateway : port 8000
+Wikidata -- WikidataAPI: port 8001
+WikidataAPI -- WikidataDB: query.wikidata.org/sparql
+Users -- UsersAPI : port 8003
+UsersAPI -- UsersDatabase : MongoDB (port 27017)
+client -- WebAPP : Web Browser (port 3000)
+
+GitHubActions -- UbuntuServer : on release
+Docker -- wiq_en3a
+....
+
+
+=== Infrastructure Level 1 - Azure Ubuntu Server
 
 [role="arc42help"]
 ****
@@ -54,7 +209,6 @@ Describe (usually in a combination of diagrams, tables, and text):
 * mapping of software artifacts to elements of this infrastructure
 
 For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.
-****
 
 _**<Overview Diagram>**_
 
@@ -68,16 +222,20 @@ _<explanation in text form>_
 
 Mapping of Building Blocks to Infrastructure::
 _<description of the mapping>_
+****
+
+The Ubuntu server allows us to have a isolated machine with the minimal required configuration and installations for running our services.
+Having our server on Azure, allows us to minimize the costs of having that machine running, as well as to avoid taking care of some responsabilities such as security, availability or maintainance.
 
 
-=== Infrastructure Level 2
+=== Infrastructure Level 2 - Docker
 
 [role="arc42help"]
 ****
 Here you can include the internal structure of (some) infrastructure elements from level 1.
 
 Please copy the structure from level 1 for each selected element.
-****
+
 
 ==== _<Infrastructure Element 1>_
 
@@ -92,3 +250,45 @@ _<diagram + explanation>_
 ==== _<Infrastructure Element n>_
 
 _<diagram + explanation>_
+****
+
+Instead of having a virtual machine for running the whole application by itself, the application is splitted into different services that can be completely isolated.
+Docker allows us to create containers with the minimum amount of resources needed for running that specific service, such that resources are not wasted and services that could be more used do not collapse others. Each container contains the specific docker image for running the specific service.
+Each implemented service will be isolated at deploy time, so there is no need of making the services at the same programming language or following the same architectural patterns, and responses will be responded through different independent endpoints.
+
+The virtual machine will contain as many containers as services in the application.
+
+For now, the project contains:
+** Web application service running on port 3000
+** Gateway (middleware) service running on port 8000
+** Wikidata API running on port 8001
+** Users API running on port 8003
+** Mongo DB server running on port 27017
+** Prometheus running on port 9090 for monitoring
+** Grafana running on port 9091 for analytics and monitoring
+
+
+=== Infrastructure Level 3 - GitHub actions
+
+GitHub actions will provide us with continuous automatic delivery and integration, automating the deployment phase at each release.
+
+=== Motivation
+
+In the deployment view of our software architecture, we delineate the physical deployment of our system components across various environments. 
+At the core of our deployment strategy is the utilization of cloud-based infrastructure, specifically leveraging Azure for its robustness and scalability. 
+Our server components, including web applications, gateway, user services, and MongoDB servers, are encapsulated within Docker containers to ensure portability and consistency across deployments. 
+Additionally, we employ Azure's built-in services for auto-scaling, and traffic management to optimize performance and reliability. 
+Continuous integration and deployment pipelines are established using tools like Jenkins or Azure DevOps, facilitating seamless updates and releases of our system components. 
+Monitoring and logging solutions, such as Prometheus and Grafana, are integrated to provide insights into system health and performance. 
+Overall, our deployment view showcases a resilient, scalable, and automated deployment architecture tailored to meet the demands of our system's evolving requirements.
+
+=== Mapping of Building Blocks into Infrastructure
+
+[cols="1,2" options="header"]
+|===
+| **Name** | **Responsibility**
+| Frontend  | Web App container opened in port 3000.
+| User Management | User service container.
+| Wikidata Service | Wikidata service container.
+| Gateway | API Gateway service opened in port 8000.
+|===

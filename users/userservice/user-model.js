@@ -13,8 +13,28 @@ const userSchema = new mongoose.Schema({
       type: Date,
       default: Date.now, 
     },
+    email: {
+      type: String,
+      required: true
+    },
+    questions_answered: {
+      type: Number,
+      required: false,
+    },
+    correctly_answered_questions: {
+      type: Number,
+      required: false,
+    },
+    cheeseCount: {
+      type: Number,
+      required: false
+    }
+
+ 
+
+
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema); 
 
 module.exports = User

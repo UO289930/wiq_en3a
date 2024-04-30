@@ -63,24 +63,72 @@ In the best case you will get away with examples or simple signatures.
 
 ****
 
+
 [plantuml, format="png"]
 ----
 @startuml
+title Scope & Context
+left to right direction
 ' Define custom style for components
 skinparam componentStyle uml2
 
 ' Define components as rectangles without default stereotypes
-rectangle Frontend
-rectangle "User Management" as UserManagement
-rectangle "Question Generation" as QuestionGeneration
+rectangle "WIQ" as WIQ
 cloud "Wikidata API" as WikidataAPI
+actor "User" as User
 
 ' Define connections
-Frontend --> UserManagement
-Frontend --> QuestionGeneration
-QuestionGeneration --> WikidataAPI
+User --> WIQ
+WIQ --> WikidataAPI
 @enduml
 ----
+
+
+
+Motivation::
+
+This is a basic introduction to the app, highlighting the external services it uses and how they work together.
+
+Contained Building Blocks::
+
+[cols="1,2" options="header"]
+|===
+| **Name** | **Responsibility**
+| WIQ  | It’s the main application, currently represented as a whitebox. The following sections will break it down in detail.
+| WikidataAPI | External API used as the knowledge hub.
+|===
+
+
+=== Level 1
+
+[role="arc42help"]
+****
+Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.
+
+You have to decide which building blocks of your system are important enough to justify such a detailed description.
+Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
+Leave out normal, simple, boring or standardized parts of your system
+
+****
+
+[plantuml, format=png]
+....
+actor user as "User browser"
+frame WIQ {
+    node Frontend
+    node UserManagement
+    node WikidataService
+    node Gateway
+}
+cloud Wikidata as "Wikidata"
+
+user -- Frontend
+Frontend -- Gateway
+Gateway -- UserManagement
+Gateway -- WikidataService
+WikidataService -- Wikidata
+....
+
 
 
 Motivation::
@@ -95,7 +143,8 @@ Contained Building Blocks::
 | **Name** | **Responsibility**
 | Frontend  | Represents the user interface and manages the quiz logic of the application.
 | User Management | Handles everything related to user accounts.
-| Question Generator | Generates questions from Wikidata data and sends them to the frontend.
+| Wikidata Service | Generates questions from Wikidata data.
+| Gateway |Acts as a central hub for managing API traffic.
 |===
 
 Important Interfaces::
@@ -103,9 +152,9 @@ Important Interfaces::
 [cols="1,2" options="header"]
 |===
 | **Name** | **Description**
-| Frontend <-> User Management  | This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.
-| Question Generator <-> Frontend | This interface defines how the Question Generator Service delivers processed questions to the frontend for display.
-| Question Generator <-> Wikidata API | This interface represents the service fetching data from the Wikidata API.
+| Frontend -> User Management  | This interface defines how the frontend communicates with the User Management Service to log in, retrieve user data, or perform actions requiring authorization.
+| Frontend -> Wikidata Service | This interface defines how the Question Generator Service delivers processed questions to the frontend for display.
+| Wikidata Service -> Wikidata API | This interface represents the service fetching data from the Wikidata API.
 |===
 
 
@@ -130,8 +179,6 @@ Its headline is the name of the black box.
 ****
 
 
-==== <Name black box 1>
-
 [role="arc42help"]
 ****
 Here you describe <black box 1>
@@ -144,7 +191,7 @@ according the the following black box template:
 * (Optional) Fulfilled requirements (if you need traceability to requirements).
 * (Optional) Open issues/problems/risks
 
-****
+
 
 _<Purpose/Responsibility>_
 
@@ -176,7 +223,7 @@ _<black box template>_
 
 ==== <Name interface m>
 
-
+****
 
 === Level 2
 
@@ -189,57 +236,73 @@ Please prefer relevance over completeness. Specify important, surprising, risky,
 Leave out normal, simple, boring or standardized parts of your system
 ****
 
-==== White Box _<building block 1>_
+==== White Box User Management Service
 
 [role="arc42help"]
 ****
-...describes the internal structure of _building block 1_.
+...describes the internal structure of the User Management Service.
 ****
 
-_<white box template>_
+[plantuml, format="png"]
+----
+@startuml
+' Define custom style for components
+skinparam componentStyle uml2
 
-==== White Box _<building block 2>_
+' Define components as rectangles without default stereotypes
+rectangle "User Management API" as UserManagement
+database "Users MongoDB Database" as MongoDB
+
+' Define connections
+UserManagement --> MongoDB
+
+@enduml
+----
+
+==== White Box Wikidata Service
 
 
-_<white box template>_
+[role="arc42help"]
+****
+...describes the internal structure of the Question Generation Service.
+****
 
-...
+[plantuml, format="png"]
+----
+@startuml
+' Define custom style for components
+skinparam componentStyle uml2
 
-==== White Box _<building block m>_
+' Define components as rectangles without default stereotypes
+rectangle "Wikidata Service API" as WikidataService
+cloud "Wikidata API" as WikidataAPI
 
-
-_<white box template>_
-
+' Define connections
+WikidataService --> WikidataAPI
+@enduml
+----
 
 
 === Level 3
 
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.
+==== White Box User Management API
 
-When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.
-****
-
-
-==== White Box <_building block x.1_>
 
 [role="arc42help"]
 ****
-Specifies the internal structure of _building block x.1_.
+...describes the internal structure of the User Management API.
 ****
 
+[plantuml, format=png]
+....
+frame UserManagementAPI {
+    node UserService
+    node AuthService
+}
+database MongoDB as "MongoDB"
 
-_<white box template>_
+UserService -- MongoDB
+AuthService -- MongoDB
+....
 
 
-==== White Box <_building block x.2_>
-
-_<white box template>_
-
-
-
-==== White Box <_building block y.1_>
-
-_<white box template>_

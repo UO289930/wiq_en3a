@@ -1,0 +1,95 @@
+{
+  "array": [
+  {
+    "question": "Where happens the: ",
+    "themeId": "Q198",
+    "attributeId": "P17",
+    "topic":"History"
+  },
+  {
+    "question": "In which year begins the: ",
+    "themeId": "Q198",
+    "attributeId": "P580",
+    "topic":"History",
+    "year":true
+  },
+  {
+    "question": "Which is the capital of: ",
+    "themeId": "Q6256",
+    "attributeId": "P36",
+    "topic":"Geography"
+  },
+  {
+    "question": "Which is the population of:",
+    "themeId": "Q6256",
+    "attributeId": "P1082",
+    "topic":"Geography"
+  },
+  {
+    "question": "Which is the highest point in: ",
+    "themeId": "Q6256",
+    "attributeId": "P610",
+    "topic":"Geography"
+  },
+  {
+    "question": "Who is the actual coach of: ",
+    "themeId": "Q476028",
+    "attributeId": "P286",
+    "topic":"Sport"
+  },
+  {
+    "question": "Where is located the stadium called: ",
+    "themeId": "Q483110",
+    "attributeId": "P276",
+    "topic":"Sport"
+  },
+  {
+    "question": "Who is the director of: ",
+    "themeId": "Q11424",
+    "attributeId": "P57",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Where was created: ",
+    "themeId": "Q4830453",
+    "attributeId": "P17",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Who wrote the song: ",
+    "themeId": "Q7366",
+    "attributeId": "P86",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Who is the author of the book: ",
+    "themeId": "Q7725634",
+    "attributeId": "P50",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "Which is one of the extensions used by the programming language: ",
+    "themeId": "Q9143",
+    "attributeId": "P1195",
+    "topic":"Entertainment"
+  },
+  {
+    "question": "What is the chemical element for: ",
+    "themeId": "Q11344",
+    "attributeId": "P246",
+    "topic":"Chemistry"
+  },
+  {
+    "question": "Who is the chemical formula for: ",
+    "themeId": "Q11173",
+    "attributeId": "P274",
+    "topic":"Chemistry"
+  },
+  {
+    "question": "Which is the density of: ",
+    "themeId": "Q11344",
+    "attributeId": "P2054",
+    "topic":"Chemistry"
+  }
+]
+}
