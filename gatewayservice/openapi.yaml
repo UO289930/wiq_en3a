@@ -5,85 +5,12 @@ info:
   description: Gateway Service OpenAPI specification.
 
 servers:
-  - url: http://localhost:8000
-    description: Development server
   - url: http://51.103.210.249:8000
     description: Production server
+  - url: http://localhost:8000
+    description: Development server
 
 paths:
-  
-
-  /getUser:
-    get:
-      summary: Get a user from the database
-      tags:
-        - User
-      description: Retrieves a user from the database by their username.
-      parameters:
-        - in: query
-          name: username
-          schema:
-            type: string
-          required: true
-          description: The username of the user to retrieve.
-      responses:
-        '200':
-          description: User found successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                    description: The username of the user.
-                  password:
-                    type: string
-                    description: The hashed password of the user.
-                  createdAt:
-                    type: string
-                    format: date-time
-                    description: The date and time the user was created.
-                  email:
-                    type: string
-                    description: The email address of the user.
-                  questions_answered:
-                    type: integer
-                    description: The number of questions answered by the user.
-                  correctly_answered_questions:
-                    type: integer
-                    description: The number of questions correctly answered by the user.
-                  cheeseCount:
-                    type: integer
-                    description: The number of cheeses won in the trivial game.
-                example:
-                  username: "exampleusername"
-                  password: "hashed_password"
-                  createdAt: "2024-04-24T12:00:00Z"
-                  email: "example@example.com"
-                  questions_answered: 20
-                  correctly_answered_questions: 18
-                  cheeseCount: 3
-        '404':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: User not found
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: Internal Server Error
 
   
   /getAllUsers:
@@ -150,6 +77,83 @@ paths:
                     type: string
                     example: Internal Server Error
 
+  /getUser:
+    post:
+      summary: Get a user from the database
+      tags:
+        - User
+      description: Retrieves a user from the database by their username.
+      requestBody:
+        required: true
+        description: User credentials for retriving the corresponding data.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The username of the user.
+              required:
+                - username
+      responses:
+        '200':
+          description: User found successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: The username of the user.
+                  password:
+                    type: string
+                    description: The hashed password of the user.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time the user was created.
+                  email:
+                    type: string
+                    description: The email address of the user.
+                  questions_answered:
+                    type: integer
+                    description: The number of questions answered by the user.
+                  correctly_answered_questions:
+                    type: integer
+                    description: The number of questions correctly answered by the user.
+                  cheeseCount:
+                    type: integer
+                    description: The number of cheeses won in the trivial game.
+                example:
+                  username: "exampleusername"
+                  password: "hashed_password"
+                  createdAt: "2024-04-24T12:00:00Z"
+                  email: "example@example.com"
+                  questions_answered: 20
+                  correctly_answered_questions: 18
+                  cheeseCount: 3
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
 
 
 
