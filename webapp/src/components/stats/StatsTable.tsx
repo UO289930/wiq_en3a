@@ -38,19 +38,19 @@ export default function StatsTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="body-row transition-transform duration-100 transform hover:text-green-500"> 
+                    <tr className="body-row transition-transform duration-100 transform"> 
                         <td className="self-center text-2xl p-5">Correct Answers</td>
                         <td className="text-2xl p-5" data-testid="correct-answers">{questionsCorrect}</td>
                     </tr>
-                    <tr className="body-row transition-transform duration-100 transform hover:text-green-500">
+                    <tr className="body-row transition-transform duration-100 transform">
                         <td className="self-center text-2xl p-5 " >Wrong Answers</td>
                         <td className="text-2xl p-5 " data-testid="wrong-answers">{questionsAnswered - questionsCorrect}</td>
                     </tr>
-                    <tr className="body-row transition-transform duration-100 transform hover:text-green-500">
+                    <tr className="body-row transition-transform duration-100 transform">
                         <td className="self-center text-2xl p-5">Gained chesses</td>
                         <td className="text-2xl p-5" data-testid="chesses-gained">{chesses}</td>
                     </tr>
-                    <tr className="body-row transition-transform duration-100 transform hover:text-green-500">
+                    <tr className="body-row transition-transform duration-100 transform">
                         <td className="self-center text-2xl p-5 ">Percentage Correct</td>
                         <td style={{ padding: '5px' }}>
                             <CircularProgress 
