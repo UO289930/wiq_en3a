@@ -17,7 +17,7 @@ export default function StatsTable() {
         if(user != null){
             getUser(user.username).then((u) => {
                 setQuestionAnswered(u.questions_answered);
-                setQuestionCorrect(u.correctly_answered_questions + u.cheeseCount);
+                setQuestionCorrect(u.correctly_answered_questions);
                 setChesses(u.cheeseCount);
             }).catch((error) => {
                 console.error('Error during retrieving the user', error);

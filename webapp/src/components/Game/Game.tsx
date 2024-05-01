@@ -34,6 +34,7 @@ export default function Game(props: Props) {
     const [loadingdata, setLoadingData] = useState(true);
     const [score, setScore] = useState(0);
     const [correctSelected, setCorrectSelected] = useState(false);
+    const [gameNotFinished, setGameNotFinished] = useState(true);
 
     var questionTime = 100;
     if(props.difficulty === getHardString()) 
@@ -73,9 +74,9 @@ export default function Game(props: Props) {
   const handleNextQuestion = () => {
     if(count===0) saveAnswer(' ');
     
-      setTimeout(() => {
-          goToNextQuestion();
-      }, 3000);
+    setTimeout(() => {
+        goToNextQuestion();
+    }, 3000);
     
   };
 
@@ -91,7 +92,10 @@ export default function Game(props: Props) {
 
  
   if (questionCount === 10) {
-    updateStats(questionCount, score/10); 
+    if(gameNotFinished){
+      setGameNotFinished(false);
+      updateStats(questionCount, score/10); 
+    }
     return <GameOver data-testid="game-over-component" answers={answerSelected} questions={questions} finalMessage="Game Over" />;
   } 
 
