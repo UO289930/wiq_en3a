@@ -72,16 +72,11 @@ export default function Game(props: Props) {
     
   const handleNextQuestion = () => {
     if(count===0) saveAnswer(' ');
-    var q = questionCount;
     
-    if(questionCount < 9){
       setTimeout(() => {
-        if(q === questionCount)
           goToNextQuestion();
       }, 3000);
-    }else{
-      goToNextQuestion();
-    }
+    
   };
 
   const saveAnswer = (answer: string) => {
